@@ -35,6 +35,7 @@ CFLAGS += -Wall -Wextra
 CPPFLAGS += -I include/ -I lib/include/
 
 LDLIBS += -L./lib/my_printf/ -lprintf 	\
+	-L./lib/mynode/ -lnode	 			\
 	-L./lib/my_utils/ -lutils 			\
 
 TFLAGS += --corevage -lcriterion
@@ -50,6 +51,7 @@ $(NAME): $(OBJ)
 	@ echo "===> Compiling libraries..."
 	@ make -C ./lib/my_printf/ -s
 	@ make -C ./lib/my_utils/ -s
+	@ make -C ./lib/mynode/ -s
 	@ echo "===> Compiling source files..."
 	@ $(CC) $(OBJ) -o $(NAME) $(LDLIBS) && echo "===> Success!!"
 
@@ -74,6 +76,7 @@ fcleanlib: fclean
 	@ echo "===> File cleaning libraries..."
 	@ make -C ./lib/my_printf/ fclean -s
 	@ make -C ./lib/my_utils/ fclean -s
+	@ make -C ./lib/mynode/ fclean -s
 
 re: fclean all
 
