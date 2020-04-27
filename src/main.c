@@ -8,9 +8,14 @@
 #include "types/shell.h"
 #include "proto/shell.h"
 
+/*
+** @DESCRIPTION
+**   Main.
+*/
 int main(int argc, char *const *argv, char *const *envp)
 {
-    struct sh shell = sh_struct_initialise(argc, argv, envp);
+    struct sh shell = shell_struct_initialise(argc, argv, envp);
 
-    (void)shell;
+    shell_start(&shell);
+    return 0;
 }

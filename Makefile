@@ -13,7 +13,14 @@ TESTNAME = unit_tests
 
 MAIN = src/main.c \
 
-SRC = src/sh/init.c \
+SRC = src/shell/shell_init.c \
+	src/shell/shell_start.c \
+	src/prompt/prompter.c \
+	src/prompt/prompt_shell.c \
+	src/input/executer/input_execute.c \
+	src/input/parser/input_parse.c \
+	src/input/input_destroy.c \
+	src/utils/get_env.c \
 
 OBJ = $(MAIN:.c=.o) $(SRC:.c=.o)
 
@@ -40,23 +47,33 @@ endif
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	make -C ./lib/my_printf/
-	make -C ./lib/my_utils/
-	$(CC) $(OBJ) -o $(NAME) $(LDLIBS)
+	@ echo "===> Compiling libraries..."
+	@ make -C ./lib/my_printf/ -s
+	@ make -C ./lib/my_utils/ -s
+	@ echo "===> Compiling source files..."
+	@ $(CC) $(OBJ) -o $(NAME) $(LDLIBS) && echo "===> Success!!"
+
+%.o:    %.c
+	@ echo -e "." $<
+	@ $(CC) -o $@ -c $< $(CFLAGS) $(CPPFLAGS)
+
 
 debug: CFLAGS += $(DEBUGS)
 debug: fclean
 debug: $(NAME)
 
 clean:
-	$(RM) $(OBJ) *.gcno *.gcda
+	@ echo "===> Cleaning..."
+	@ $(RM) $(OBJ) *.gcno *.gcda
 
 fclean: clean
-	$(RM) $(NAME) $(TEST)
+	@ echo "===> File cleaning..."
+	@ $(RM) $(NAME) $(TEST)
 
 fcleanlib: fclean
-	make -C ./lib/my_printf/ fclean
-	make -C ./lib/my_utils/ fclean
+	@ echo "===> File cleaning libraries..."
+	@ make -C ./lib/my_printf/ fclean -s
+	@ make -C ./lib/my_utils/ fclean -s
 
 re: fclean all
 

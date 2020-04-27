@@ -2,11 +2,11 @@
 ** EPITECH PROJECT, 2019
 ** PSU_42sh_2019
 ** File description:
-** shell header file.
+** prompt header file.
 */
 
-#ifndef SH_PROTO_SHELL_H_
-#define SH_PROTO_SHELL_H_
+#ifndef SH_PROTO_PROMPT_H_
+#define SH_PROTO_PROMPT_H_
 
 /**/
 /* Includes */
@@ -26,7 +26,7 @@
 /* Function prototypes */
 /**/
 
-struct sh shell_struct_initialise(int ac, char *const *av, char *const *ep);
-void shell_start(struct sh *shell);
+void prompter(struct sh *shell);
+void prompt_shell(struct sh *shell);
 
 #endif

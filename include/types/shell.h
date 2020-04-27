@@ -12,6 +12,8 @@
 /* Includes */
 /**/
 
+#include "stdbool.h"
+
 /**/
 /* Constants */
 /**/
@@ -20,10 +22,11 @@
 /* Structures / Typedef / Enums declarations */
 /**/
 
-struct sh {
+typedef struct sh {
+    bool        active;
+    char        *rawinput;
     char *const *envp;
-};
-typedef struct sh sh_t;
+} sh_t;
 
 /**/
 /* Function prototypes */

@@ -12,12 +12,14 @@
 ** @DESCRIPTION
 **   Initialises a local `struct sh` and inits all of its members.
 */
-struct sh sh_struct_initialise(int argc, char *const *argv, char *const *envp)
+struct sh shell_struct_initialise(int ac, char *const *av, char *const *ep)
 {
     struct sh this;
 
-    (void)argc;
-    (void)argv;
-    this.envp = envp;
+    (void)ac;
+    (void)av;
+    this.envp = ep;
+    this.rawinput = 0;
+    this.active = true;
     return this;
 }
