@@ -47,12 +47,15 @@ endif
 
 all: $(NAME)
 
+compiling:
+	@echo "===> Compiling source files..."
+
 $(NAME): $(OBJ)
+$(NAME): compiling
 	@ echo "===> Compiling libraries..."
 	@ make -C ./lib/my_printf/ -s
 	@ make -C ./lib/my_utils/ -s
 	@ make -C ./lib/mynode/ -s
-	@ echo "===> Compiling source files..."
 	@ $(CC) $(OBJ) -o $(NAME) $(LDLIBS) && echo "===> Success!!"
 
 %.o:    %.c
@@ -78,7 +81,7 @@ fcleanlib: fclean
 	@ make -C ./lib/my_utils/ fclean -s
 	@ make -C ./lib/mynode/ fclean -s
 
-re: fclean all
+re:	fclean all
 
 relib: fcleanlib all
 
