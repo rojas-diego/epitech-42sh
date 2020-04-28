@@ -16,10 +16,10 @@
 void node_reverse(NODE **head)
 {
     NODE *curr = *head;
-    NODE *next = NULL;
-    NODE *prev = NULL;
+    NODE *next = 0;
+    NODE *prev = 0;
 
-    while (curr != NULL) {
+    while (curr) {
         next = curr->next;
         curr->next = prev;
         prev = curr;

@@ -14,7 +14,6 @@ SRC = src/node_append.c \
 	src/node_apply.c \
 	src/node_filter.c \
 	src/node_free.c \
-	src/node_insert_sorted.c \
 	src/node_pop.c \
 	src/node_remove.c \
 	src/node_reverse.c \
@@ -39,7 +38,7 @@ clean:
 		$(RM) $(OBJ)
 
 fclean:		clean
-		$(RM) $(NAME) $(TEST)
+	$(RM) $(NAME) $(TEST)
 
 re:		fclean all
 

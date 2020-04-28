@@ -5,6 +5,8 @@
 ** node_append
 */
 
+#include <stdlib.h>
+
 #include "mynode.h"
 
 /*

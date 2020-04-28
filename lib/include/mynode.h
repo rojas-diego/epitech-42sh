@@ -10,13 +10,10 @@
 
 /* Includes */
 
-#include <stdlib.h>
 #include <stdbool.h>
-
 /* Constant Definitions */
 
-typedef bool (*boolfptr_t)();
-typedef void (*fptr_t)();
+typedef void (*fnode_t)(void *);
 
 /* Enum Definitions */
 
@@ -36,14 +33,13 @@ typedef struct node_s {
 
 unsigned int node_size(NODE *head);
 void node_insert(NODE **head, void *data);
-void node_free(NODE **head, fptr_t function);
+void node_free(NODE **head, fnode_t function);
 void node_reverse(NODE **head);
 void node_append(NODE **head, void *data);
-void node_filter(NODE **head, bool (*filter)(), fptr_t free_func);
-void node_pop(NODE **head, fptr_t function);
+void node_filter(NODE **head, bool (*filter)(void *), fnode_t free_func);
+void node_pop(NODE **head, fnode_t function);
 void node_remove(NODE **head, void *ptr);
-void node_apply(NODE *head, fptr_t function);
-void node_insert_sorted(NODE **head, void *data, boolfptr_t compare);
+void node_apply(NODE *head, fnode_t function);
 void node_from_table(void **array, NODE **head);
 void **node_to_table(NODE *const head);
 

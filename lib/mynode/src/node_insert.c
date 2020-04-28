@@ -5,6 +5,8 @@
 ** node_list_insert
 */
 
+#include <stdlib.h>
+
 #include "mynode.h"
 
 /*

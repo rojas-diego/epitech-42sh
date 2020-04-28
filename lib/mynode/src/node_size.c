@@ -17,7 +17,7 @@ unsigned int node_size(NODE *head)
 {
     unsigned int size = 0;
 
-    while (head != NULL) {
+    while (head) {
         size++;
         head = head->next;
     }

@@ -5,6 +5,8 @@
 ** node_to_table
 */
 
+#include <stdlib.h>
+
 #include "mynode.h"
 
 /*

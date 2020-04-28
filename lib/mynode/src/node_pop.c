@@ -5,13 +5,15 @@
 ** node_pop
 */
 
+#include <stdlib.h>
+
 #include "mynode.h"
 
 /*
 ** @DESCRIPTION
 **   This function removes the first node of a linked list.
 */
-void node_pop(NODE **head, fptr_t function)
+void node_pop(NODE **head, fnode_t function)
 {
     NODE *to_free = *head;
 

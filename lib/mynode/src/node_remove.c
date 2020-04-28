@@ -5,6 +5,8 @@
 ** node_remove
 */
 
+#include <stdlib.h>
+
 #include "mynode.h"
 
 /*

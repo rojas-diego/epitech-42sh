@@ -7,7 +7,7 @@
 
 #include "mynode.h"
 
-static void node_cut(NODE **head, NODE *previous, NODE *curr, fptr_t free_func)
+static void node_cut(NODE **head, NODE *previous, NODE *curr, fnode_t free_func)
 {
     NODE *to_free = curr;
 
@@ -25,10 +25,10 @@ static void node_cut(NODE **head, NODE *previous, NODE *curr, fptr_t free_func)
 **   This function filters the list by removing the nodes for which the
 **   function returns false.
 */
-void node_filter(NODE **head, bool (*filter)(), fptr_t free_func)
+void node_filter(NODE **head, bool (*filter)(), fnode_t free_func)
 {
-    NODE *previous = NULL;
-    NODE *to_free = NULL;
+    NODE *previous = 0;
+    NODE *to_free = 0;
 
     for (NODE *curr = *head; curr;) {
         if (!filter(curr->data)) {
