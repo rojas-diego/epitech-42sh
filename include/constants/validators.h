@@ -17,6 +17,10 @@
 /**/
 /* Constants */
 /**/
+
+#define VALID_ALPHANUM validatorAlpha | validatorNum
+#define TOK_ARG_MASK VALID_ALPHANUM | validatorQuotes
+
 /*
 ** @DESCRIPTION
 **   This table is meant to be accessed using the value of the token's enum.
@@ -27,8 +31,7 @@
 **   mask | valid | maxlength | minlength
 */
 static const struct validator_s VALIDATORS[] = {
-    {0, 0, 0, 0},
-    {0, 0, 0, 0},
+    {TOK_ARG_MASK, 0, 0, 0},
     {0, "|", 1, 1},
     {0, ";", 1, 1},
     {0, "<", 1, 1},
@@ -39,7 +42,8 @@ static const struct validator_s VALIDATORS[] = {
     {0, ")", 1, 1},
     {0, "&", 2, 2},
     {0, "|", 2, 2},
-    {0, "&", 1, 1}
+    {0, "&", 1, 1},
+    {0, "\n", 1, 1}
 };
 
 /**/

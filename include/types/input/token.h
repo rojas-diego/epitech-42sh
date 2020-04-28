@@ -20,7 +20,6 @@
 **  Describes the type of shell token.
 */
 typedef enum tokent_e {
-    tokUndefined,
     tokArgument,
     tokPipe,
     tokSeparator,
@@ -32,8 +31,15 @@ typedef enum tokent_e {
     tokClosedParanth,
     tokAndConditional,
     tokOrConditional,
-    tokJobControl
+    tokJobControl,
+    tokNewline
 } tokent_t;
+
+typedef struct token_s {
+    tokent_t type;
+    unsigned int start;
+    unsigned int end;
+} token_t;
 
 /**/
 /* Function prototypes */

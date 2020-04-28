@@ -12,7 +12,9 @@
 /* Includes */
 /**/
 
-#include "stdbool.h"
+#include <stdbool.h>
+
+#include "mynode.h"
 
 /**/
 /* Constants */
@@ -25,6 +27,7 @@
 typedef struct sh {
     bool        active;
     char        *rawinput;
+    node_t      *tokens;
     char *const *envp;
 } sh_t;
 
