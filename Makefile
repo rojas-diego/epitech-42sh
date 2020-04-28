@@ -37,6 +37,7 @@ CPPFLAGS += -I include/ -I lib/include/
 LDLIBS += -L./lib/my_printf/ -lprintf 	\
 	-L./lib/mynode/ -lnode	 			\
 	-L./lib/my_utils/ -lutils 			\
+	-L./lib/myptb/ -lptb 				\
 
 TFLAGS += --corevage -lcriterion
 
@@ -56,6 +57,7 @@ $(NAME): compiling
 	@ make -C ./lib/my_printf/ -s
 	@ make -C ./lib/my_utils/ -s
 	@ make -C ./lib/mynode/ -s
+	@ make -C ./lib/myptb/ -s
 	@ $(CC) $(OBJ) -o $(NAME) $(LDLIBS) && echo "===> Success!!"
 
 %.o:    %.c
@@ -80,6 +82,7 @@ fcleanlib: fclean
 	@ make -C ./lib/my_printf/ fclean -s
 	@ make -C ./lib/my_utils/ fclean -s
 	@ make -C ./lib/mynode/ fclean -s
+	@ make -C ./lib/myptb/ fclean -s
 
 re:	fclean all
 
