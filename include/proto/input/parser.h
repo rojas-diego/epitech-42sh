@@ -27,8 +27,10 @@
 /* Function prototypes */
 /**/
 
+/* Belongs to src/input/parser/input_parser.c */
 void input_parse(struct sh *shell);
 
+/* Belongs to src/input/parser/token_validate.c */
 unsigned int token_validate(char const *string, const struct validator_s va);
 
 #endif

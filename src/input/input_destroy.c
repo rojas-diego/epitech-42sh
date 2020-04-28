@@ -8,6 +8,7 @@
 #include <stdlib.h>
 
 #include "types/shell.h"
+#include "proto/input.h"
 
 /*
 ** @DESCRIPTION
@@ -17,4 +18,5 @@
 void input_destroy(struct sh *shell)
 {
     free(shell->rawinput);
+    node_free(&(*shell).tokens, &free);
 }

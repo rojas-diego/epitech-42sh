@@ -7,8 +7,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-
-#include "my_printf.h"
+#include <sys/types.h>
 
 #include "types/shell.h"
 #include "proto/prompt.h"
@@ -22,7 +21,7 @@
 static void prompt_display(struct sh *shell)
 {
     (void)shell;
-    my_dprintf(1, "$> ");
+    printf("$> ");
 }
 
 /*

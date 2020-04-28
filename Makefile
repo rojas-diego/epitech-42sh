@@ -21,13 +21,13 @@ SRC = src/shell/shell_init.c \
 	src/input/parser/input_parse.c \
 	src/input/parser/token_validate.c \
 	src/input/input_destroy.c \
-	src/utils/get_env.c \
+	src/utilities/get_env.c \
 
 OBJ = $(MAIN:.c=.o) $(SRC:.c=.o)
 
-WARNINGS = -pedantic -Wshadow -Wpointer-arith -Wcasta-align -Wwrite-strings 		\
-	-Wmissing-prototypes -Wmissing-declarations -Wredundant-decls -Wnested-externs 	\
-	-Winline -Wno-long-long -Wconversion -Wstrict-prototypes 						\
+WARNINGS = -pedantic -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings \
+	-Wmissing-prototypes -Wmissing-declarations -Wredundant-decls -Wnested-externs \
+	-Winline -Wno-long-long -Wconversion -Wstrict-prototypes \
 
 DEBUG = -g $(WARNINGS)
 
@@ -61,9 +61,8 @@ $(NAME): compiling
 	@ echo -e "." $<
 	@ $(CC) -o $@ -c $< $(CFLAGS) $(CPPFLAGS)
 
-
-debug: CFLAGS += $(DEBUGS)
 debug: fclean
+debug: CFLAGS += $(DEBUG)
 debug: $(NAME)
 
 clean:

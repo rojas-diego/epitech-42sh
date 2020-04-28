@@ -5,9 +5,9 @@
 ** get_env
 */
 
-#include "my_utils/my_strlen.h"
-#include "my_utils/my_strncmp.h"
-#include "my_utils/my_strdup.h"
+#include <string.h>
+
+#include "proto/utilities.h"
 
 /*
 ** @DESCRIPTION
@@ -16,11 +16,11 @@
 */
 char *get_env(char const *restrict name, char *const *envp)
 {
-    unsigned int length = my_strlen(name);
+    unsigned long length = (unsigned long)strlen(name);
 
     for (unsigned int i = 0; envp[i]; i++) {
-        if (my_strncmp(name, envp[i], length) == 0) {
-            return my_strdup(envp[i] + length);
+        if (strncmp(name, envp[i], length) == 0) {
+            return strdup(envp[i] + length);
         }
     }
     return 0;
