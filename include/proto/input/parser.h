@@ -13,6 +13,7 @@
 /**/
 
 #include "types/shell.h"
+#include "types/input/validator.h"
 
 /**/
 /* Constants */
@@ -27,5 +28,7 @@
 /**/
 
 void input_parse(struct sh *shell);
+
+unsigned int token_validate(char const *string, const struct validator_s va);
 
 #endif
