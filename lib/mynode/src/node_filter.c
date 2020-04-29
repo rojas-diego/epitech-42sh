@@ -5,6 +5,8 @@
 ** node_remove
 */
 
+#include <stdlib.h>
+
 #include "mynode.h"
 
 static void node_cut(NODE **head, NODE *previous, NODE *curr, fnode_t free_func)
