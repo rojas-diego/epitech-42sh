@@ -23,7 +23,15 @@
 /**/
 /* Structures / Typedef / Enums declarations */
 /**/
-
+/*
+** @DESCRIPTION
+**   Main shell structure.
+** @MEMBERS
+**   - active: the shell will run while active is true.
+**   - rawinput: the input from the user fetched with getline.
+**   - tokens: a linked list containing the parsed tokens for the rawinput.
+**   - envp: the environement as an array of strings.
+*/
 typedef struct sh {
     bool        active;
     char        *rawinput;

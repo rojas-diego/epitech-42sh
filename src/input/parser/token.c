@@ -12,7 +12,7 @@
 
 /*
 ** @DESCRIPTION
-**   This function returns the duplicated string from a token.
+**   This function returns the malloc'ed string of a token.
 */
 char *token_get_string(const struct token_s *this, const char *rawinput)
 {

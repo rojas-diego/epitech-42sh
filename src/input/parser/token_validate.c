@@ -20,6 +20,7 @@
 **   'then'.
 **   If the valiLower flag is provided then each scanned character will be
 **   locally put to lowercase if it uppercase.
+** @RETURN
 **   If the token did not match this function returns 0.
 **   If the end of the 'valid' string was reached then its length is returned.
 */
@@ -43,7 +44,8 @@ char const *string, const struct validator_s va)
 
 /*
 ** @DESCRIPTION
-**   This function ensures certain conditions from the binary mask are met.
+**   This function ensures certain conditions from the validator's binary
+**   mask are met.
 **   It handles the valiInvalid, valiAlpha and valiNum mask flags.
 **   Check the include.s for documentation on those flags.
 */

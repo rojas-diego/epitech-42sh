@@ -21,7 +21,17 @@
 /**/
 /*
 ** @DESCRIPTION
-**   Defines check types for the struct validator's binary mask.
+**   Binary mask values.
+**   Defines additional checks that can be conducted using a validator.
+** @MEMBERS
+**   - valiAlpha: Allows alphabetical characters.
+**   - valiNum: Allows numerical characters.
+**   - valiQuotes: Allows quotation marks and their parsing.
+**   - valiInvalid: The validator_s.valid string becomes the unwanted chars.
+**   - valiMatch: The validators_s.valid string becomes the exact format of.
+**      the token and other checks are ignored.
+**   - valiLower: Allows uppercase values to be lowercased when validating,
+**      only works with the valiMatch flag.
 */
 typedef enum validator_checks_e {
     valiAlpha       = 1 << 1,
@@ -35,6 +45,13 @@ typedef enum validator_checks_e {
 /*
 ** @DESCRIPTION
 **   Defines checks to be executed on a string.
+**   These checks are executed in the token_validate function.
+** @MEMBERS
+**   - mask: A binary mask containing values from the validator_checks_e enum.
+**   - valid: a string for allowed characters although some mask values may
+**      change that.
+**   - maxlength / minlength: If non-zero then puts a length requirement on
+**      the string.
 */
 typedef struct validator_s {
     unsigned int    mask;

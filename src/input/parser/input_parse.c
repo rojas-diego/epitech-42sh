@@ -18,7 +18,14 @@
 
 /*
 ** @DESCRIPTION
-**   This function scans the next token in the input and advances the cursor.
+**   For TOKEN_COUNT, this function sends the token's validator to the
+**   token_validate function using VALIDATORS[i].
+**   The token for which the function returned the highest value becomes the
+**   new token.
+**
+**   Validators are defined in constants/validators.h
+**   Tokens are defined in types/input/token.h
+**
 */
 static struct token_s *input_scan(char const *string, unsigned int *index)
 {

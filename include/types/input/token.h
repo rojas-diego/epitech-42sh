@@ -17,7 +17,7 @@
 /**/
 /*
 ** @DESCRIPTION
-**  Describes the type of shell token.
+**  Defines all of the shell tokens.
 */
 typedef enum tokent_e {
     tokArgument,
@@ -52,6 +52,14 @@ typedef enum tokent_e {
     tokUndefined
 } tokent_t;
 
+/*
+** @DESCRIPTION
+**   Defines the structure for a token once parsed.
+** @MEMBERS
+**   - type: The type of token.
+**   - start: the beginning of the token in the sh.rawinput string.
+**   - start: the end of the token in the sh.rawinput string.
+*/
 typedef struct token_s {
     tokent_t type;
     unsigned int start;
