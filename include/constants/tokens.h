@@ -20,7 +20,7 @@
 
 static const char *WHITESPACE = " \t";
 
-static const unsigned int TOKEN_COUNT = 13;
+static const unsigned int TOKEN_COUNT = 30;
 
 /**/
 /* Structures / Typedef / Enums declarations */

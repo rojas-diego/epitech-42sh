@@ -20,6 +20,7 @@ SRC = src/shell/shell_init.c \
 	src/input/executer/input_execute.c \
 	src/input/parser/input_parse.c \
 	src/input/parser/token_validate.c \
+	src/input/parser/token.c \
 	src/input/input_destroy.c \
 	src/utilities/get_env.c \
 

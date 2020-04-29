@@ -32,14 +32,13 @@ static struct token_s *input_scan(char const *string, unsigned int *index)
     (*this).start = *index;
     for (i = 0; i < TOKEN_COUNT; i++) {
         current = token_validate(string + *index, VALIDATORS[i]);
-        if (current > record) {
+        if (current >= record) {
             record = current;
             (*this).type = i;
         }
     }
     (*this).end = *index + record;
-    printf("Validating with id (%d) and indexes (%d - %d)...\n", (*this).type, (*this).start, (*this).end);
-    *index += record;
+    *index += (record) ? record - 1 : 1;
     return this;
 }
 
@@ -60,5 +59,6 @@ void input_parse(struct sh *shell)
         if (!(*shell).rawinput[i])
             i--;
     }
+    node_reverse(&tokens);
     (*shell).tokens = tokens;
 }
