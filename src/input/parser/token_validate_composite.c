@@ -35,7 +35,7 @@ const char *string, unsigned int *i, const char token)
 bool token_validate_composite(
 char const *string, unsigned int *i, const struct validator_s va)
 {
-    if (!(va.mask & valiComposite))
+    if (!(va.mask & vali_composite))
         return false;
     if (string[*i] == '\\') {
         if (string[*i + 1])
