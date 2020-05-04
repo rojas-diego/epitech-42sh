@@ -19,7 +19,7 @@
 /**/
 
 #define VALID_ALPHANUM valiAlpha | valiNum
-#define TOK_ARG_MASK VALID_ALPHANUM | valiQuotes | valiInvalid
+#define TOK_ARG_MASK VALID_ALPHANUM | valiComposite | valiInvalid
 #define TOK_RESERVED valiMatch | valiLower
 
 /*

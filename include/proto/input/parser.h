@@ -37,4 +37,8 @@ char *token_get_string(const struct token_s *this, const char *rawinput);
 /* Belongs to src/input/parser/token_validate.c */
 unsigned int token_validate(char const *string, const struct validator_s va);
 
+/* Belongs to src/input/parser/token_validate_composite.c */
+bool token_validate_composite(
+char const *string, unsigned int *i, const struct validator_s va);
+
 #endif

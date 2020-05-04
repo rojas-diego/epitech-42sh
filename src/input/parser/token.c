@@ -16,5 +16,5 @@
 */
 char *token_get_string(const struct token_s *this, const char *rawinput)
 {
-    return strndup(rawinput + (*this).start, (*this).end - (*this).start);
+    return (strndup(rawinput + (*this).start, (*this).end - (*this).start));
 }

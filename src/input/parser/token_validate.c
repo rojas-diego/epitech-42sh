@@ -37,9 +37,9 @@ char const *string, const struct validator_s va)
         if (va.valid[i] == '\0')
             break;
         if (string[i] != va.valid[i])
-            return 0;
+            return (0);
     }
-    return i;
+    return (i);
 }
 
 /*
@@ -53,12 +53,12 @@ static bool token_validate_checks(const char c, const struct validator_s va)
 {
     if (va.mask & valiAlpha
         && (ptb_range(c, 'a', 'z') || ptb_range(c, 'A', 'Z')))
-            return true;
+            return (true);
     if (va.mask & valiNum && ptb_range(c, '0', '9'))
-        return true;
+        return (true);
     if (va.valid && ptb_includes(c, va.valid))
-        return !(va.mask & valiInvalid);
-    return false;
+        return (!(va.mask & valiInvalid));
+    return (false);
 }
 
 /*
@@ -71,17 +71,21 @@ static bool token_validate_checks(const char c, const struct validator_s va)
 */
 unsigned int token_validate(char const *string, const struct validator_s va)
 {
+    bool composite_value;
     unsigned int i;
 
     if (va.mask & valiMatch)
         return token_validate_exact_match(string, va);
     for (i = 0; string[i]; i++) {
+        composite_value = token_validate_composite(string, &i, va);
+        if (composite_value)
+            continue;
         if (token_validate_checks(string[i], va) == false)
             break;
         if (va.maxlength && va.maxlength < i)
-            return 0;
+            return (0);
     }
     if (va.minlength && va.minlength > i)
-        return 0;
-    return i;
+        return (0);
+    return (i);
 }

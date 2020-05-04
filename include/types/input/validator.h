@@ -26,7 +26,8 @@
 ** @MEMBERS
 **   - valiAlpha: Allows alphabetical characters.
 **   - valiNum: Allows numerical characters.
-**   - valiQuotes: Allows quotation marks and their parsing.
+**   - valiComposite: Allows quotation marks and their parsing as well as
+**      the '/' inhibitor.
 **   - valiInvalid: The validator_s.valid string becomes the unwanted chars.
 **   - valiMatch: The validators_s.valid string becomes the exact format of.
 **      the token and other checks are ignored.
@@ -36,7 +37,7 @@
 typedef enum validator_checks_e {
     valiAlpha       = 1 << 1,
     valiNum         = 1 << 2,
-    valiQuotes      = 1 << 3,
+    valiComposite   = 1 << 3,
     valiInvalid     = 1 << 4,
     valiMatch       = 1 << 5,
     valiLower       = 1 << 6

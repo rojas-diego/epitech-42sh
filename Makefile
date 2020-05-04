@@ -5,82 +5,84 @@
 ## Makefile
 ##
 
-CC ?= gcc
+CC ?=		gcc
 
-NAME = 42sh
+NAME =		42sh
 
-TESTNAME = unit_tests
+TESTNAME =	unit_tests
 
-MAIN = src/main.c \
+MAIN =		src/main.c 						\
 
-SRC = src/shell/shell_init.c \
-	src/shell/shell_start.c \
-	src/prompt/prompter.c \
-	src/prompt/prompt_shell.c \
-	src/input/executer/input_execute.c \
-	src/input/parser/input_parse.c \
-	src/input/parser/token_validate.c \
-	src/input/parser/token.c \
-	src/input/input_destroy.c \
-	src/utilities/get_env.c \
+SRC =		src/shell/shell_init.c					\
+		src/shell/shell_start.c					\
+		src/prompt/prompter.c					\
+		src/prompt/prompt_shell.c				\
+		src/input/executer/input_execute.c			\
+		src/input/parser/input_parse.c				\
+		src/input/parser/token_validate.c			\
+		src/input/parser/token.c				\
+		src/input/input_destroy.c				\
+		src/utilities/get_env.c					\
 
-OBJ = $(MAIN:.c=.o) $(SRC:.c=.o)
+OBJ =		$(MAIN:.c=.o) $(SRC:.c=.o)
 
-WARNINGS = -pedantic -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings \
-	-Wmissing-prototypes -Wmissing-declarations -Wredundant-decls -Wnested-externs \
-	-Winline -Wno-long-long -Wconversion -Wstrict-prototypes \
+WARNINGS =	-pedantic -Wshadow -Wpointer-arith -Wcast-align		\
+		-Wmissing-prototypes -Wmissing-declarations		\
+		-Wnested-externs -Wwrite-strings -Wredundant-decls	\
+		-Winline -Wno-long-long -Wconversion			\
+		-Wstrict-prototypes 					\
 
-DEBUG = -g $(WARNINGS)
+DEBUG = 	-g $(WARNINGS)
 
-CFLAGS += -Wall -Wextra
+CFLAGS += 	-Wall -Wextra
 
-CPPFLAGS += -I include/ -I lib/include/
+CPPFLAGS += 	-I include/ -I lib/include/
 
-LDLIBS += -L./lib/mynode/ -lnode \
-	-L./lib/myptb/ -lptb \
+LDLIBS += 	-L./lib/mynode/ -lnode 					\
+		-L./lib/myptb/ -lptb 					\
 
-TFLAGS += --corevage -lcriterion
+TFLAGS += 	--corevage -lcriterion
 
 UNAME_S := 	$(shell uname -s)
 ifeq ($(UNAME_S),Darwin)
 CFLAGS += 	-Wno-deprecated-declarations
 endif
 
-all: $(NAME)
+all:		$(NAME)
 
 compiling:
-	@echo "===> Compiling source files..."
+		@echo "===> Compiling source files..."
 
-$(NAME): $(OBJ)
-$(NAME): compiling
-	@ echo "===> Compiling libraries..."
-	@ make -C ./lib/mynode/ -s
-	@ make -C ./lib/myptb/ -s
-	@ $(CC) $(OBJ) -o $(NAME) $(LDLIBS) && echo "===> Success!!"
+$(NAME):	$(OBJ)
+$(NAME):	compiling
+		@ echo "===> Compiling libraries..."
+		@ make -C ./lib/mynode/ -s
+		@ make -C ./lib/myptb/ -s
+		@ $(CC) $(OBJ) -o $(NAME) $(LDLIBS) && echo "===> Success!!"
 
-%.o:    %.c
-	@ echo -e "." $<
-	@ $(CC) -o $@ -c $< $(CFLAGS) $(CPPFLAGS)
+%.o:		%.c
+		@ echo -e "." $<
+		@ $(CC) -o $@ -c $< $(CFLAGS) $(CPPFLAGS)
 
-debug: fclean
-debug: CFLAGS += $(DEBUG)
-debug: $(NAME)
+debug:		fclean
+debug:		CFLAGS += $(DEBUG)
+debug:		$(NAME)
 
 clean:
-	@ echo "===> Cleaning..."
-	@ $(RM) $(OBJ) *.gcno *.gcda
+		@ echo "===> Cleaning..."
+		@ $(RM) $(OBJ) *.gcno *.gcda
 
-fclean: clean
-	@ echo "===> File cleaning..."
-	@ $(RM) $(NAME) $(TEST)
+fclean:		clean
+		@ echo "===> File cleaning..."
+		@ $(RM) $(NAME) $(TEST)
 
-fcleanlib: fclean
-	@ echo "===> File cleaning libraries..."
-	@ make -C ./lib/mynode/ fclean -s
-	@ make -C ./lib/myptb/ fclean -s
+fcleanlib:	fclean
+		@ echo "===> File cleaning libraries..."
+		@ make -C ./lib/mynode/ fclean -s
+		@ make -C ./lib/myptb/ fclean -s
 
-re:	fclean all
+re:		fclean all
 
-relib: fcleanlib all
+relib:		fcleanlib all
 
-.PHONY: all debug clean fclean fcleanlib re relib
+.PHONY: all debug clean fclean fcleanlib re relib tests_run

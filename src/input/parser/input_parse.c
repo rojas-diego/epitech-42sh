@@ -35,7 +35,7 @@ static struct token_s *input_scan(char const *string, unsigned int *index)
     unsigned int i;
 
     if (!this)
-        return 0;
+        return (0);
     (*this).start = *index;
     for (i = 0; i < TOKEN_COUNT; i++) {
         current = token_validate(string + *index, VALIDATORS[i]);
@@ -46,7 +46,7 @@ static struct token_s *input_scan(char const *string, unsigned int *index)
     }
     (*this).end = *index + record;
     *index += (record) ? record - 1 : 1;
-    return this;
+    return (this);
 }
 
 /*
@@ -68,4 +68,9 @@ void input_parse(struct sh *shell)
     }
     node_reverse(&tokens);
     (*shell).tokens = tokens;
+
+    // for (node_t *curr = tokens; curr; curr = (*curr).next) {
+    //     new = curr->data;
+    //     printf("Token %d: '%s'\n", (*new).type, token_get_string(new, (*shell).rawinput));
+    // }
 }
