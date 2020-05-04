@@ -18,9 +18,9 @@
 /* Constants */
 /**/
 
-#define VALID_ALPHANUM valiAlpha | valiNum
-#define TOK_ARG_MASK VALID_ALPHANUM | valiComposite | valiInvalid
-#define TOK_RESERVED valiMatch | valiLower
+#define VALID_ALPHANUM vali_alpha | vali_num
+#define TOK_ARG_MASK VALID_ALPHANUM | vali_composite | vali_invalid
+#define TOK_RESERVED vali_match | vali_lower
 
 /*
 ** @DESCRIPTION
@@ -32,7 +32,7 @@
 **   mask | valid | maxlength | minlength*/
 static const struct validator_s VALIDATORS[] = {
     {TOK_ARG_MASK, "><|;&()!", 0, 0}, // TokArgument
-    {0, "|", 1, 1},                   // tokPipe
+    {0, "|", 1, 1},                   // tok_pipe
     {0, ";", 1, 1},                   // tokSeparator
     {0, "<", 1, 1},                   // tokInRedir
     {0, "<", 2, 2},                   // tokDInRedir
@@ -43,13 +43,13 @@ static const struct validator_s VALIDATORS[] = {
     {0, "&", 2, 2},                   // tokAndConditional
     {0, "|", 2, 2},                   // tokOrConditional
     {0, "&", 1, 1},                   // tokJobControl
-    {valiMatch, "\n", 0, 0},          // tokNewline
+    {vali_match, "\n", 0, 0},          // tokNewline
     {0, ";", 2, 2},                   // tokDSeparator
-    {valiMatch, ">&", 1, 1},          // tokGreatAnd
-    {valiMatch, "<&", 1, 1},          // tokLessAnd
-    {valiMatch, "<>", 1, 1},          // tokLessGreat
-    {valiMatch, "<<-", 1, 1},         // tokDLessDash
-    {valiMatch, ">|", 1, 1},          // tokClobber
+    {vali_match, ">&", 1, 1},          // tokGreatAnd
+    {vali_match, "<&", 1, 1},          // tokLessAnd
+    {vali_match, "<>", 1, 1},          // tokLessGreat
+    {vali_match, "<<-", 1, 1},         // tokDLessDash
+    {vali_match, ">|", 1, 1},          // tokClobber
     {TOK_RESERVED, "if", 0, 0},       // tokIf
     {TOK_RESERVED, "fi", 0, 0},       // tokFi
     {TOK_RESERVED, "then", 0, 0},     // tokThen
@@ -60,7 +60,7 @@ static const struct validator_s VALIDATORS[] = {
     {TOK_RESERVED, "for", 0, 0},      // tokFor
     {TOK_RESERVED, "do", 0, 0},       // tokDo
     {TOK_RESERVED, "done", 0, 0},     // tokDone
-    {valiMatch, "", 0, 0},                   // tokUndefined
+    {vali_match, "", 0, 0},                   // tokUndefined
 };
 
 /**/

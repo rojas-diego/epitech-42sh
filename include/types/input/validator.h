@@ -24,23 +24,23 @@
 **   Binary mask values.
 **   Defines additional checks that can be conducted using a validator.
 ** @MEMBERS
-**   - valiAlpha: Allows alphabetical characters.
-**   - valiNum: Allows numerical characters.
-**   - valiComposite: Allows quotation marks and their parsing as well as
+**   - vali_alpha: Allows alphabetical characters.
+**   - vali_num: Allows numerical characters.
+**   - vali_composite: Allows quotation marks and their parsing as well as
 **      the '/' inhibitor.
-**   - valiInvalid: The validator_s.valid string becomes the unwanted chars.
-**   - valiMatch: The validators_s.valid string becomes the exact format of.
+**   - vali_invalid: The validator_s.valid string becomes the unwanted chars.
+**   - vali_match: The validators_s.valid string becomes the exact format of.
 **      the token and other checks are ignored.
-**   - valiLower: Allows uppercase values to be lowercased when validating,
-**      only works with the valiMatch flag.
+**   - vali_lower: Allows uppercase values to be lowercased when validating,
+**      only works with the vali_match flag.
 */
 typedef enum validator_checks_e {
-    valiAlpha       = 1 << 1,
-    valiNum         = 1 << 2,
-    valiComposite   = 1 << 3,
-    valiInvalid     = 1 << 4,
-    valiMatch       = 1 << 5,
-    valiLower       = 1 << 6
+    vali_alpha       = 1 << 1,
+    vali_num         = 1 << 2,
+    vali_composite   = 1 << 3,
+    vali_invalid     = 1 << 4,
+    vali_match       = 1 << 5,
+    vali_lower       = 1 << 6
 } validator_checks_t;
 
 /*
