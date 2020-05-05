@@ -13,11 +13,11 @@
 
 #include <criterion/criterion.h>
 
-#include "change_directory.h"
+#include "builtin/change_directory.h"
 
 Test(builtin_change_directory, simple_change_directory)
 {
-    const char *path = "/bin";
+    const char *path = "/usr";
     const enum change_directory_e return_value = builtin_change_directory(path);
     char *new_dir = getcwd(NULL, 0);
 

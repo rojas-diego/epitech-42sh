@@ -5,41 +5,41 @@
 ## Makefile
 ##
 
-CC ?= gcc
+CC ?=		gcc
 
-NAME = libnode.a
+NAME =		libnode.a
 
-SRC = src/node_append.c \
-	src/node_insert.c \
-	src/node_apply.c \
-	src/node_filter.c \
-	src/node_free.c \
-	src/node_pop.c \
-	src/node_remove.c \
-	src/node_reverse.c \
-	src/node_size.c \
-	src/node_to_table.c \
+SRC =		src/node_append.c	\
+		src/node_insert.c	\
+		src/node_apply.c	\
+		src/node_filter.c	\
+		src/node_free.c		\
+		src/node_pop.c		\
+		src/node_remove.c	\
+		src/node_reverse.c	\
+		src/node_size.c		\
+		src/node_to_table.c	\
 
-OBJ = $(SRC:.c=.o)
+OBJ =		$(SRC:.c=.o)
 
-CFLAGS = -Wall -Wextra
+CFLAGS =	-Wall -Wextra
 
-CPPFLAGS = -I ../include/
+CPPFLAGS =	-I ../include/
 
-TFLAGS = --coverage -lcriterion
+TFLAGS =	--coverage -lcriterion
 
-all: $(NAME)
+all:		$(NAME)
 
-$(NAME): $(OBJ)
-	ar rc $(NAME) $(OBJ)
-	ranlib $(NAME)
+$(NAME):	$(OBJ)
+		ar rc $(NAME) $(OBJ)
+		ranlib $(NAME)
 
 clean:
-	$(RM) $(OBJ)
+		$(RM) $(OBJ)
 
-fclean:	clean
-	$(RM) $(NAME) $(TEST)
+fclean:		clean
+		$(RM) $(NAME) $(TEST)
 
-re:	fclean all
+re:		fclean all
 
 .PHONY:	all clean fclean re

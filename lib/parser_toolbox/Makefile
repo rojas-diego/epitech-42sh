@@ -9,7 +9,11 @@ CC ?= gcc
 
 NAME = libparser_toolbox.a
 
-SRC = src/ptb_characters.c \
+SRC = src/blacklist.c \
+		src/includes.c \
+		src/range.c \
+		src/whitelist.c \
+		src/argv_length.c \
 
 OBJ = $(SRC:.c=.o)
 

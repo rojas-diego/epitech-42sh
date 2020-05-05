@@ -11,22 +11,38 @@ NAME =		libbuiltins.a
 
 TESTNAME =	unit_tests
 
-SRC =		src/change_directory.c		\
-		#src/.c		\
+SRC =		src/change_directory.c					\
+		src/display_env.c					\
+		src/echo.c						\
+		src/exit.c						\
+		src/setenv.c						\
+		src/unsetenv.c						\
 
-SRCT =		tests/change_directory.c		\
-		#tests/.c		\
+SRCT =		tests/change_directory.c				\
+		tests/setenv.c						\
+		tests/unsetenv.c					\
+		tests/exit.c						\
+		tests/echo.c						\
 
 OBJ =		$(SRC:.c=.o)
 OBJT =		$(SRCT:.c=.o)
 
+WARNINGS =	-pedantic -Wshadow -Wpointer-arith -Wcast-align		\
+		-Wmissing-prototypes -Wmissing-declarations		\
+		-Wnested-externs -Wwrite-strings -Wredundant-decls	\
+		-Winline -Wno-long-long -Wconversion			\
+		-Wstrict-prototypes 					\
+
+DEBUG = 	-g $(WARNINGS)
+
 CFLAGS += 	-Wall -Wextra
 
-CPPFLAGS += 	-I include/
+CPPFLAGS += 	-I include/ -I ../../lib/parser_toolbox/include
 
 TFLAGS += 	-lcriterion
 
-LDFLAGS +=	--corevage
+LDFLAGS +=	--coverage						\
+		-L../../lib/parser_toolbox -lparser_toolbox		\
 
 all:		$(NAME)
 
@@ -34,16 +50,27 @@ $(NAME):	$(OBJ)
 		ar rc $(NAME) $(OBJ)
 		ranlib $(NAME)
 
-tests_run:	$(OBJ)
-tests_run:	$(OBJT)
-		$(CC) $(OBJ) $(OBJT) -o $(TESTNAME) $(TFLAGS) #$(LDFLAGS)
-		./$(TESTNAME)
-clean:
-		$(RM) $(OBJ) *.gcno *.gcda
+tests_run:
+		make -C ../../lib/parser_toolbox/
+		$(CC) $(SRC) $(SRCT) -o $(TESTNAME) $(TFLAGS) $(LDFLAGS) \
+			$(CPPFLAGS) $(CFLAGS)
+		./$(TESTNAME) 2>&1 | (grep -v "profiling")
 
-fclean:	clean
+debug:		fclean
+debug:		CFLAGS += $(DEBUG)
+debug:		$(NAME)
+
+clean:
+		$(RM) $(OBJ) $(OBJT) *.gcno *.gcda
+
+fclean:		clean
 		$(RM) $(NAME) $(TESTNAME)
+
+fcleanlib:	fclean
+		make -C ../../lib/parser_toolbox/ fclean
 
 re:		fclean all
 
-.PHONY: all clean fclean re tests_run
+relib:		fcleanlib all
+
+.PHONY: all clean fclean re tests_run fcleanlib relib

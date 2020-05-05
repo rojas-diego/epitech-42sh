@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2019
 ** PSU_42sh_2019
 ** File description:
-** change_directory
+** builtin_change_directory
 */
 
 #include <stdio.h>
@@ -14,7 +14,7 @@
 #include <pwd.h>
 
 /* */
-#include "change_directory.h"
+#include "builtin/change_directory.h"
 
 static const char CHANGE_DIRECTORY_GOTO_LAST_DIR[] = "-";
 
@@ -40,7 +40,7 @@ static enum change_directory_e builtin_change_directory_to_last_dir(void)
     char *pwd_save = NULL;
 
     if (old_pwd == NULL) {
-        return (CD_OLDPWD_NOT_SET); /* zsh -> builtin_change_directory_to_home() */
+        return (builtin_change_directory_to_home());
     }
     if (chdir(old_pwd) == -1) {
         return (CD_CHDIR_FAIL);

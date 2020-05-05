@@ -17,10 +17,10 @@ SRC =		src/find_file_in_path.c		\
 		src/double_array_size.c		\
 		src/find_binary_in_path_env.c	\
 
-SRCT =		tests/find_file_in_path.c		\
+SRCT =		tests/find_file_in_path.c	\
 		tests/extend_path.c		\
 		tests/path_iteration.c		\
-		tests/double_array_size.c		\
+		tests/double_array_size.c	\
 		tests/find_binary_in_path_env.c	\
 
 OBJ =		$(SRC:.c=.o)
@@ -32,7 +32,7 @@ CPPFLAGS += 	-I include/
 
 TFLAGS += 	-lcriterion
 
-LDFLAGS +=	--corevage
+LDFLAGS +=	--coverage
 
 all:		$(NAME)
 
@@ -42,10 +42,10 @@ $(NAME):	$(OBJ)
 
 tests_run:	$(OBJ)
 tests_run:	$(OBJT)
-		$(CC) $(OBJ) $(OBJT) -o $(TESTNAME) $(TFLAGS) #$(LDFLAGS)
+		$(CC) $(OBJ) $(OBJT) -o $(TESTNAME) $(TFLAGS) $(LDFLAGS)
 		./$(TESTNAME)
 clean:
-		$(RM) $(OBJ) *.gcno *.gcda
+		$(RM) $(OBJ) $(OBJT) *.gcno *.gcda
 
 fclean:	clean
 		$(RM) $(NAME) $(TESTNAME)
