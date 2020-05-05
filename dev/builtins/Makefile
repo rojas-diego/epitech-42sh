@@ -7,7 +7,7 @@
 
 CC ?=		gcc
 
-NAME =		libfind_binary.a
+NAME =		libbuiltins.a
 
 TESTNAME =	unit_tests
 
