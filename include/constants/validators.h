@@ -41,8 +41,8 @@ static const struct validator_s VALIDATORS[] = {
     {0, "(", 1, 1},                   // tokOParanth
     {0, ")", 1, 1},                   // tokCParanth
     {0, "&", 2, 2},                   // tokAndConditional
-    {0, "|", 2, 2},                   // tokOrConditional
     {0, "&", 1, 1},                   // tokJobControl
+    {0, "|", 2, 2},                   // tokOrConditional
     {VALI_MATCH, "\n", 0, 0},         // tokNewline
     {0, ";", 2, 2},                   // tokDSeparator
     {VALI_MATCH, ">&", 1, 1},         // tokGreatAnd

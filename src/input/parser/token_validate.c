@@ -82,7 +82,7 @@ unsigned int token_validate(char const *string, const struct validator_s va)
             continue;
         if (token_validate_checks(string[i], va) == false)
             break;
-        if (va.maxlength && va.maxlength < i)
+        if (va.maxlength && va.maxlength < i + 1)
             return (0);
     }
     if (va.minlength && va.minlength > i)

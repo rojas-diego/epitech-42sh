@@ -11,6 +11,7 @@
 #include "mynode.h"
 #include "parser_toolbox.h"
 
+#include "tests/input/tokens.h"
 #include "types/shell.h"
 #include "proto/input/parser.h"
 #include "constants/validators.h"
@@ -68,9 +69,4 @@ void input_parse(struct sh *shell)
     }
     node_reverse(&tokens);
     (*shell).tokens = tokens;
-
-    // for (node_t *curr = tokens; curr; curr = (*curr).next) {
-    //     new = curr->data;
-    //     printf("Token %d: '%s'\n", (*new).type, token_get_string(new, (*shell).rawinput));
-    // }
 }
