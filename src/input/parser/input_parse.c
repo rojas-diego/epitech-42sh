@@ -11,7 +11,6 @@
 #include "mynode.h"
 #include "parser_toolbox.h"
 
-#include "tests/input/tokens.h"
 #include "types/shell.h"
 #include "proto/input/parser.h"
 #include "constants/validators.h"
