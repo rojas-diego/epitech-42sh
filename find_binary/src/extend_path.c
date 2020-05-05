@@ -5,6 +5,12 @@
 ** extend_path
 */
 
+#include <stdlib.h>
+#include <string.h>
+#include <stdbool.h>
+#include <stdio.h>
+
+/* */
 #include "extend_path.h"
 
 char *extend_path(const char *path, const char *extend)

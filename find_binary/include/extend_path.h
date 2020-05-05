@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2019
 ** PSU_42sh_2019
 ** File description:
-** find_file_in_path
+** extend_path
 */
 
 #ifndef EXTEND_PATH_H_
