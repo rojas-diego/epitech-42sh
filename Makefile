@@ -43,7 +43,7 @@ CFLAGS += 	-Wall -Wextra
 CPPFLAGS += 	-I include/ -I lib/include/
 
 LDLIBS += 	-L./lib/mynode/ -lnode 					\
-		-L./lib/myptb/ -lptb 					\
+		-L./lib/parser_toolbox/ -lparser_toolbox	\
 
 TFLAGS += 	--corevage -lcriterion
 
@@ -57,7 +57,7 @@ $(NAME):	$(OBJ)
 $(NAME):	compiling
 		@ echo "===> Compiling libraries..."
 		@ make -C ./lib/mynode/ -s
-		@ make -C ./lib/myptb/ -s
+		@ make -C ./lib/parser_toolbox/ -s
 		@ $(CC) $(MAIN:.c=.o) $(OBJ) -o $(NAME) $(LDLIBS)\
 			&& echo "===> Success!!"
 
@@ -85,7 +85,7 @@ fclean:		clean
 fcleanlib:	fclean
 		@ echo "===> File cleaning libraries..."
 		@ make -C ./lib/mynode/ fclean -s
-		@ make -C ./lib/myptb/ fclean -s
+		@ make -C ./lib/parser_toolbox/ fclean -s
 
 re:		fclean all
 
