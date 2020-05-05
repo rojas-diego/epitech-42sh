@@ -28,6 +28,7 @@ SRC =		src/shell/shell_init.c					\
 SRCT =		tests/input/parser/input_parse.c	\
 
 OBJ =		$(SRC:.c=.o)
+OBJM =		$(MAIN:.c=.o)
 OBJT =		$(SRCT:.c=.o)
 
 WARNINGS =	-pedantic -Wshadow -Wpointer-arith -Wcast-align		\
@@ -65,10 +66,9 @@ $(NAME):	compiling
 		@ echo -e "." $<
 		@ $(CC) -o $@ -c $< $(CFLAGS) $(CPPFLAGS)
 
-tests_run:	$(OBJ)
 tests_run: 	compiling
 		@ echo -e "===> Compiling unit_tests"
-		@ $(CC) $(OBJ) $(SRCT) -o $(TESTNAME) $(LDFLAGS) $(TFLAGS) $(LDLIBS) $(CPPFLAGS)
+		@ $(CC) $(SRC) $(SRCT) -o $(TESTNAME) $(LDFLAGS) $(TFLAGS) $(LDLIBS) $(CPPFLAGS)
 		@ ./$(TESTNAME)
 
 debug:		fclean
@@ -77,7 +77,7 @@ debug:		$(NAME)
 
 clean:
 		@ echo "===> Cleaning..."
-		@ $(RM) $(OBJ) *.gcno *.gcda
+		@ $(RM) $(OBJ) $(OBJM) *.gcno *.gcda
 
 fclean:		clean
 		@ echo "===> File cleaning..."
