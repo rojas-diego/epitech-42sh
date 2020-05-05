@@ -1,6 +1,6 @@
 ##
 ## EPITECH PROJECT, 2020
-## CPE_corewar_2019
+## PSU_42sh_2019
 ## File description:
 ## Makefile
 ##
@@ -20,12 +20,15 @@ SRC =		src/shell/shell_init.c					\
 		src/input/executer/input_execute.c			\
 		src/input/parser/input_parse.c				\
 		src/input/parser/token_validate.c			\
-		src/input/parser/token_validate_composite.c			\
+		src/input/parser/token_validate_composite.c		\
 		src/input/parser/token.c				\
 		src/input/input_destroy.c				\
 		src/utilities/get_env.c					\
 
-OBJ =		$(MAIN:.c=.o) $(SRC:.c=.o)
+SRCT =		tests/							\
+
+OBJ =		$(SRC:.c=.o)
+OBJT =		$(SRCT:.c=.o)
 
 WARNINGS =	-pedantic -Wshadow -Wpointer-arith -Wcast-align		\
 		-Wmissing-prototypes -Wmissing-declarations		\
@@ -40,30 +43,32 @@ CFLAGS += 	-Wall -Wextra
 CPPFLAGS += 	-I include/ -I lib/include/
 
 LDLIBS += 	-L./lib/mynode/ -lnode 					\
-		-L./lib/myptb/ -lptb 					\
+		-L./lib/parser_toolbox/ -lparser_toolbox	\
 
 TFLAGS += 	--corevage -lcriterion
-
-UNAME_S := 	$(shell uname -s)
-ifeq ($(UNAME_S),Darwin)
-CFLAGS += 	-Wno-deprecated-declarations
-endif
 
 all:		$(NAME)
 
 compiling:
 		@echo "===> Compiling source files..."
 
+$(NAME):	$(MAIN:.c=.o)
 $(NAME):	$(OBJ)
 $(NAME):	compiling
 		@ echo "===> Compiling libraries..."
 		@ make -C ./lib/mynode/ -s
-		@ make -C ./lib/myptb/ -s
-		@ $(CC) $(OBJ) -o $(NAME) $(LDLIBS) && echo "===> Success!!"
+		@ make -C ./lib/parser_toolbox/ -s
+		@ $(CC) $(MAIN:.c=.o) $(OBJ) -o $(NAME) $(LDLIBS)\
+			&& echo "===> Success!!"
 
 %.o:		%.c
 		@ echo -e "." $<
 		@ $(CC) -o $@ -c $< $(CFLAGS) $(CPPFLAGS)
+
+tests_run:	$(OBJ)
+tests_run:	$(OBJT)
+		$(CC) $(OBJ) $(OBJT) -o $(TESTNAME) $(LDFLAGS) $(TFLAGS)
+		./$(NAME)
 
 debug:		fclean
 debug:		CFLAGS += $(DEBUG)
@@ -80,7 +85,7 @@ fclean:		clean
 fcleanlib:	fclean
 		@ echo "===> File cleaning libraries..."
 		@ make -C ./lib/mynode/ fclean -s
-		@ make -C ./lib/myptb/ fclean -s
+		@ make -C ./lib/parser_toolbox/ fclean -s
 
 re:		fclean all
 

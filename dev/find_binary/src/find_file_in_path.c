@@ -2,17 +2,18 @@
 ** EPITECH PROJECT, 2019
 ** PSU_42sh_2019
 ** File description:
-** get_env
+** find_file_in_path
 */
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 #include <dirent.h>
 #include <string.h>
 #include <sys/stat.h>
 
 #include "extend_path.h"
+
+/* */
 #include "find_file_in_path.h"
 
 /* Cannot make diff between error and not found because of recurs */
@@ -38,7 +39,7 @@ static enum find_file_in_path_e find_file_in_path_handling(
         return (FFIP_ERROR);
     }
     free(current_path);
-    return (*full_path ? FFIP_FOUND : FFIP_NOT_FOUND);
+    return (FFIP_NOT_FOUND);
 }
 
 char *find_file_in_path(const char *path, const char *bin)

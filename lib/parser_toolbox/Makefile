@@ -7,7 +7,7 @@
 
 CC ?= gcc
 
-NAME = libptb.a
+NAME = libparser_toolbox.a
 
 SRC = src/ptb_characters.c \
 
