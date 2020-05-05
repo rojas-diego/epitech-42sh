@@ -58,7 +58,7 @@ $(NAME):	compiling
 		@ echo "===> Compiling libraries..."
 		@ make -C ./lib/mynode/ -s
 		@ make -C ./lib/myptb/ -s
-		@ $(CC) $(MAIN:.c=.o) $(OBJ) -o $(NAME) $(LDLIBS)
+		@ $(CC) $(MAIN:.c=.o) $(OBJ) -o $(NAME) $(LDLIBS)\
 			&& echo "===> Success!!"
 
 %.o:		%.c
