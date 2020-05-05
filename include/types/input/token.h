@@ -30,8 +30,8 @@ typedef enum tokent_e {
     TOK_OPARANTH,
     TOK_CPARANTH,
     TOK_AND_CONDITIONAL,
-    TOK_OR_CONDITIONAL,
     TOK_JOB_CONTROL,
+    TOK_OR_CONDITIONAL,
     TOK_NEWLINE,
     TOK_DSEPARATOR,
     TOK_GREAT_AND,
@@ -49,6 +49,7 @@ typedef enum tokent_e {
     TOK_FOR,
     TOK_DO,
     TOK_DONE,
+    TOK_BACKTICKS,
     TOK_UNDEFINED
 } tokent_t;
 

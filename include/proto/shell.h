@@ -26,7 +26,12 @@
 /* Function prototypes */
 /**/
 
-struct sh shell_struct_initialise(int ac, char *const *av, char *const *ep);
+void shell_struct_initialise(
+    struct sh *this,
+    __attribute__((unused)) int ac,
+    __attribute__((unused)) char *const *av,
+    __attribute__((unused)) char *const *ep
+);
 void shell_start(struct sh *shell);
 
 #endif

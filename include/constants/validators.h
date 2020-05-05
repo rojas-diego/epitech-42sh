@@ -41,15 +41,15 @@ static const struct validator_s VALIDATORS[] = {
     {0, "(", 1, 1},                   // tokOParanth
     {0, ")", 1, 1},                   // tokCParanth
     {0, "&", 2, 2},                   // tokAndConditional
-    {0, "|", 2, 2},                   // tokOrConditional
     {0, "&", 1, 1},                   // tokJobControl
-    {VALI_MATCH, "\n", 0, 0},          // tokNewline
+    {0, "|", 2, 2},                   // tokOrConditional
+    {VALI_MATCH, "\n", 0, 0},         // tokNewline
     {0, ";", 2, 2},                   // tokDSeparator
-    {VALI_MATCH, ">&", 1, 1},          // tokGreatAnd
-    {VALI_MATCH, "<&", 1, 1},          // tokLessAnd
-    {VALI_MATCH, "<>", 1, 1},          // tokLessGreat
-    {VALI_MATCH, "<<-", 1, 1},         // tokDLessDash
-    {VALI_MATCH, ">|", 1, 1},          // tokClobber
+    {VALI_MATCH, ">&", 1, 1},         // tokGreatAnd
+    {VALI_MATCH, "<&", 1, 1},         // tokLessAnd
+    {VALI_MATCH, "<>", 1, 1},         // tokLessGreat
+    {VALI_MATCH, "<<-", 1, 1},        // tokDLessDash
+    {VALI_MATCH, ">|", 1, 1},         // tokClobber
     {TOK_RESERVED, "if", 0, 0},       // tokIf
     {TOK_RESERVED, "fi", 0, 0},       // tokFi
     {TOK_RESERVED, "then", 0, 0},     // tokThen
@@ -60,7 +60,8 @@ static const struct validator_s VALIDATORS[] = {
     {TOK_RESERVED, "for", 0, 0},      // tokFor
     {TOK_RESERVED, "do", 0, 0},       // tokDo
     {TOK_RESERVED, "done", 0, 0},     // tokDone
-    {VALI_MATCH, "", 0, 0},                   // tokUndefined
+    {VALI_MATCH, "`", 0, 0},     // TOK_BACKTICKS
+    {VALI_MATCH, "", 0, 0},           // tokUndefined
 };
 
 /**/
