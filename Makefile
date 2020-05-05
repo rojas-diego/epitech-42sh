@@ -25,7 +25,7 @@ SRC =		src/shell/shell_init.c					\
 		src/input/input_destroy.c				\
 		src/utilities/get_env.c					\
 
-SRCT =		tests/							\
+SRCT =		tests/input/parser/input_parse.c	\
 
 OBJ =		$(SRC:.c=.o)
 OBJT =		$(SRCT:.c=.o)
@@ -45,7 +45,7 @@ CPPFLAGS += 	-I include/ -I lib/include/
 LDLIBS += 	-L./lib/mynode/ -lnode 					\
 		-L./lib/parser_toolbox/ -lparser_toolbox	\
 
-TFLAGS += 	--corevage -lcriterion
+TFLAGS += 	--coverage -lcriterion
 
 all:		$(NAME)
 
@@ -66,9 +66,10 @@ $(NAME):	compiling
 		@ $(CC) -o $@ -c $< $(CFLAGS) $(CPPFLAGS)
 
 tests_run:	$(OBJ)
-tests_run:	$(OBJT)
-		$(CC) $(OBJ) $(OBJT) -o $(TESTNAME) $(LDFLAGS) $(TFLAGS)
-		./$(NAME)
+tests_run: 	compiling
+		@ echo -e "===> Compiling unit_tests"
+		@ $(CC) $(OBJ) $(SRCT) -o $(TESTNAME) $(LDFLAGS) $(TFLAGS) $(LDLIBS) $(CPPFLAGS)
+		@ ./$(TESTNAME)
 
 debug:		fclean
 debug:		CFLAGS += $(DEBUG)

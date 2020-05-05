@@ -5,6 +5,10 @@
 /42sh
 unit_tests
 
+# Unit tests
+*.gcno
+*.gcda
+
 # Prerequisites
 *.d
 
