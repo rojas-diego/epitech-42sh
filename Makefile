@@ -40,7 +40,8 @@ DEBUG = 	-g $(WARNINGS)
 
 CFLAGS += 	-Wall -Wextra
 
-CPPFLAGS += 	-I include/ -I lib/include/
+CPPFLAGS += 	-I include/ -I lib/include/ \
+	-I lib/parser_toolbox/include/
 
 LDLIBS += 	-L./lib/mynode/ -lnode 					\
 		-L./lib/parser_toolbox/ -lparser_toolbox	\
