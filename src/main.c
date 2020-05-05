@@ -14,8 +14,9 @@
 */
 int main(int argc, char * const *argv, char * const *envp)
 {
-    struct sh shell = shell_struct_initialise(argc, argv, envp);
+    struct sh shell;
 
+    shell_struct_initialise(&shell, argc, argv, envp);
     shell_start(&shell);
     return (0);
 }
