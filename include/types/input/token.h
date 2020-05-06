@@ -50,7 +50,8 @@ typedef enum tokent_e {
     TOK_DO,
     TOK_DONE,
     TOK_BACKTICKS,
-    TOK_UNDEFINED
+    TOK_UNDEFINED,
+    TOK_COUNT
 } tokent_t;
 
 /*
