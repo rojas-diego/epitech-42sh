@@ -23,7 +23,7 @@ void prompter(struct sh *shell)
         prompt_shell(shell);
         if (!shell->active)
             return;
-        input_parse(shell);
+        input_parse_tokens(shell);
         input_execute(shell);
         input_destroy(shell);
     }

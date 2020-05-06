@@ -13,16 +13,18 @@ TESTNAME =	unit_tests
 
 MAIN =		src/main.c						\
 
-SRC =		src/constants.c 					\
-		src/shell/shell_init.c					\
-		src/shell/shell_start.c					\
-		src/prompt/prompter.c					\
-		src/prompt/prompt_shell.c				\
+SRC =		src/constants.c 						\
+		src/shell/shell_init.c						\
+		src/shell/shell_start.c						\
+		src/prompt/prompter.c						\
+		src/prompt/prompt_shell.c					\
 		src/input/executer/input_execute.c			\
 		src/input/parser/input_parse.c				\
+		src/input/parser/input_parse_tokens.c		\
+		src/input/parser/input_parse_grammar.c		\
+		src/input/parser/token.c					\
 		src/input/parser/token_validate.c			\
 		src/input/parser/token_validate_composite.c	\
-		src/input/parser/token.c					\
 		src/input/input_destroy.c					\
 		src/utilities/get_env.c						\
 

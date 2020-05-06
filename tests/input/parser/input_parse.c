@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2019
 ** PSU_42sh_2019
 ** File description:
-** input_parse - test
+** input_parse_tokens - test
 */
 
 #include <criterion/criterion.h>
@@ -14,15 +14,15 @@
 
 /*
 ** @DESCRIPTION
-**   Tests basic functionality of the input_parse function.
+**   Tests basic functionality of the input_parse_tokens function.
 */
-Test(input_parse, simple_testing)
+Test(input_parse_tokens, simple_testing)
 {
     struct sh shell = MOCK_SH;
     struct token_s **table;
 
     shell.rawinput = strdup("ls | cat `ls > file`\n");
-    input_parse(&shell);
+    input_parse_tokens(&shell);
     cr_assert_eq(node_size(shell.tokens), 9);
     table = (struct token_s **)node_to_table(shell.tokens);
     cr_assert_eq(table[0]->type, TOK_ARGUMENT);
@@ -35,13 +35,13 @@ Test(input_parse, simple_testing)
     cr_assert_eq(table[7]->type, TOK_BACKTICKS);
 }
 
-Test(input_parse, token_coverage_1)
+Test(input_parse_tokens, token_coverage_1)
 {
     struct sh shell = MOCK_SH;
     struct token_s **table;
 
     shell.rawinput = strdup("> >>< << | & &&||if else\n");
-    input_parse(&shell);
+    input_parse_tokens(&shell);
     cr_assert_eq(node_size(shell.tokens), 11);
     table = (struct token_s **)node_to_table(shell.tokens);
     cr_assert_eq(table[0]->type, TOK_OUT_REDIR);
@@ -57,22 +57,22 @@ Test(input_parse, token_coverage_1)
     cr_assert_eq(table[10]->type, TOK_NEWLINE);
 }
 
-Test(input_parse, token_coverage_2)
+Test(input_parse_tokens, token_coverage_2)
 {
     struct sh shell = MOCK_SH;
     struct token_s **table;
 
     shell.rawinput = strdup("");
-    input_parse(&shell);
+    input_parse_tokens(&shell);
     cr_assert_eq(node_size(shell.tokens), 0);
 }
 
-Test(input_parse, empty)
+Test(input_parse_tokens, empty)
 {
     struct sh shell = MOCK_SH;
     struct token_s **table;
 
     shell.rawinput = strdup("");
-    input_parse(&shell);
+    input_parse_tokens(&shell);
     cr_assert_eq(node_size(shell.tokens), 0);
 }
