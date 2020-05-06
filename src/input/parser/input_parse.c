@@ -12,9 +12,9 @@
 #include "parser_toolbox.h"
 
 #include "types/shell.h"
-#include "proto/input/parser.h"
 #include "constants/validators.h"
-#include "constants/tokens.h"
+#include "proto/input/parser.h"
+#include "proto/constants.h"
 
 /*
 ** @DESCRIPTION
@@ -37,7 +37,7 @@ static struct token_s *input_scan(char const *string, unsigned int *index)
     if (!this)
         return (0);
     (*this).start = *index;
-    for (i = 0; i < TOKEN_COUNT; i++) {
+    for (i = 0; i < TOK_COUNT; i++) {
         current = token_validate(string + *index, VALIDATORS[i]);
         if (current >= record) {
             record = current;
