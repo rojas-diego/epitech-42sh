@@ -12,16 +12,18 @@
 
 #include "builtin/display_env.h"
 #include "parser_toolbox/argv_length.h"
+#include "parser_toolbox/whitelist.h"
+#include "parser_toolbox/range.h"
 
 /* */
 #include "builtin/setenv.h"
 
-static const char *SETENV_ERROR_MESSAGES[] = {
+static const char *SETENV_ERROR_MSG[] = {
     NULL,
     "setenv: Too many arguments.\n",
     "setenv: Variable name must contain alphanumeric characters.\n",
     "setenv: Variable name must begin with a letter.\n",
-}
+};
 
 enum builtin_setenv_e builtin_setenv(const char * const *argv)
 {
@@ -30,20 +32,18 @@ enum builtin_setenv_e builtin_setenv(const char * const *argv)
         return (SETENV_SUCCESS);
     }
     if (ptb_argv_length(argv) > 2) {
-        dprintf(2, SETENV_ERROR_MESSAGES[SETENV_TOO_MANY_ARGS]);
+        dprintf(2, "%s", SETENV_ERROR_MSG[SETENV_TOO_MANY_ARGS]);
         return (SETENV_TOO_MANY_ARGS);
     }
     if (!ptb_whitelist_alphanum(argv[0])) {
-        dprintf(2, SETENV_ERROR_MESSAGES[SETENV_ALPHANUM_ONLY]);
+        dprintf(2, "%s", SETENV_ERROR_MSG[SETENV_ALPHANUM_ONLY]);
         return (SETENV_ALPHANUM_ONLY);
     }
-    if (!ptb_whitelist_digit(argv[0])) {
-        dprintf(2, SETENV_ERROR_MESSAGES[SETENV_MUST_BEGIN_WITH_A_LETTER]);
+    if (ptb_range(argv[0][0], '1', '9')) {
+        dprintf(2, "%s", SETENV_ERROR_MSG[SETENV_MUST_BEGIN_WITH_A_LETTER]);
         return (SETENV_MUST_BEGIN_WITH_A_LETTER);
     }
-    if (setenv(argv[0], argv[1] ? argv[1] : "", 1) == -1) {
-        dprintf(2, "ENOMEM\n");
-        return (SETENV_ALLOCATION_FAIL);
-    }
-    return (SETENV_SUCCESS);
+    return (setenv(argv[0], argv[1] ? argv[1] : "", 1) == -1 ?
+        SETENV_ALLOCATION_FAIL : SETENV_SUCCESS
+    );
 }
