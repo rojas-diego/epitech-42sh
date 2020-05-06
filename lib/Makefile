@@ -7,7 +7,11 @@
 
 CC ?=		gcc
 
-LIBNAMES =	parser_toolbox
+LIBNAMES = parser_toolbox\
+		mynode\
+		builtins\
+		input_postprocessing\
+		find_binary\
 
 all:		COMMAND = all
 all:

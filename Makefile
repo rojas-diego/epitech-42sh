@@ -48,7 +48,11 @@ LDLIBS += 	-L./lib/mynode/ -lnode 					\
 
 TFLAGS += 	--coverage -lcriterion
 
-LIBNAMES = parser_toolbox
+LIBNAMES = parser_toolbox\
+		mynode\
+		builtins\
+		input_postprocessing\
+		find_binary\
 
 LIBFOLDER = ./lib
 

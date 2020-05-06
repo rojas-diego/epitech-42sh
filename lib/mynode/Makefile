@@ -7,7 +7,7 @@
 
 CC ?=		gcc
 
-NAME =		libnode.a
+NAME =		libmynode.a
 
 SRC =		src/node_append.c	\
 		src/node_insert.c	\
@@ -24,7 +24,7 @@ OBJ =		$(SRC:.c=.o)
 
 CFLAGS =	-Wall -Wextra
 
-CPPFLAGS =	-I ../include/
+CPPFLAGS =	-I ./include/
 
 TFLAGS =	--coverage -lcriterion
 
