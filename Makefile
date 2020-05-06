@@ -11,13 +11,13 @@ NAME =		42sh
 
 TESTNAME =	unit_tests
 
-MAIN =		src/main.c	\
+MAIN =		src/main.c						\
 
-SRC =		src/constants.c \
+SRC =		src/constants.c 					\
 		src/shell/shell_init.c					\
-		src/shell/shell_start.c						\
-		src/prompt/prompter.c						\
-		src/prompt/prompt_shell.c					\
+		src/shell/shell_start.c					\
+		src/prompt/prompter.c					\
+		src/prompt/prompt_shell.c				\
 		src/input/executer/input_execute.c			\
 		src/input/parser/input_parse.c				\
 		src/input/parser/token_validate.c			\
@@ -26,7 +26,7 @@ SRC =		src/constants.c \
 		src/input/input_destroy.c					\
 		src/utilities/get_env.c						\
 
-SRCT =		tests/input/parser/input_parse.c	\
+SRCT =		tests/input/parser/input_parse.c			\
 
 OBJ =		$(SRC:.c=.o)
 OBJM =		$(MAIN:.c=.o)
@@ -42,13 +42,23 @@ DEBUG = 	-g $(WARNINGS)
 
 CFLAGS += 	-Wall -Wextra
 
-CPPFLAGS += 	-I include/ -I lib/include/ \
-	-I lib/parser_toolbox/include/
+CPPFLAGS += 	-I include/ -I lib/include/ 				\
 
 LDLIBS += 	-L./lib/mynode/ -lnode 					\
-		-L./lib/parser_toolbox/ -lparser_toolbox	\
 
 TFLAGS += 	--coverage -lcriterion
+
+LIBNAMES = parser_toolbox\
+		mynode\
+		builtins\
+		input_postprocessing\
+		find_binary\
+
+LIBFOLDER = ./lib
+
+LDLIBS += $(patsubst %, -L $(LIBFOLDER)/%, ${LIBNAMES})
+LDLIBS += $(patsubst %, -l%, ${LIBNAMES})
+CPPFLAGS += $(patsubst %, -I $(LIBFOLDER)/%/include/, ${LIBNAMES})
 
 all:		$(NAME)
 
@@ -59,9 +69,9 @@ $(NAME):	$(MAIN:.c=.o)
 $(NAME):	$(OBJ)
 $(NAME):	compiling
 		@ echo "===> Compiling libraries..."
-		@ make -C ./lib/mynode/ -s
-		@ make -C ./lib/parser_toolbox/ -s
-		@ $(CC) $(MAIN:.c=.o) $(OBJ) -o $(NAME) $(LDLIBS)\
+		@ $(MAKE) -C ./lib/mynode/ -s
+		@ $(MAKE) -C ./lib/ -s
+		@ $(CC) $(MAIN:.c=.o) $(OBJ) -o $(NAME) $(LDLIBS)	\
 			&& echo "===> Success!!"
 
 %.o:		%.c
@@ -87,11 +97,11 @@ fclean:		clean
 
 fcleanlib:	fclean
 		@ echo "===> File cleaning libraries..."
-		@ make -C ./lib/mynode/ fclean -s
-		@ make -C ./lib/parser_toolbox/ fclean -s
+		@ $(MAKE) -C ./lib/mynode/ fclean -s
+		@ $(MAKE) -C ./lib/ fclean -s
 
 re:		fclean all
 
 relib:		fcleanlib all
 
-.PHONY: all debug clean fclean fcleanlib re relib tests_run
+.PHONY: all debug clean fclean fcleanlib re relib tests_run lib

@@ -4,6 +4,7 @@
 .DS_Store
 /42sh
 unit_tests
+local/**
 
 # Coverage
 *.gcno
