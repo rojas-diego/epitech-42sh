@@ -5,14 +5,14 @@
 ** input_parse
 */
 
+/* Needed for calloc, NULL */
 #include <stdlib.h>
-#include <stdio.h>
 
 #include "mynode.h"
 #include "parser_toolbox.h"
 
-#include "types/shell.h"
 #include "constants/validators.h"
+/* Following headers contain implicit includes for types */
 #include "proto/input/parser.h"
 #include "proto/constants.h"
 

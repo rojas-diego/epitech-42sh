@@ -7,8 +7,7 @@
 
 #include <stdbool.h>
 
-#include "types/input/token.h"
-#include "types/input/validator.h"
+/* Contains implicit includes for types */
 #include "proto/input/parser.h"
 
 /*

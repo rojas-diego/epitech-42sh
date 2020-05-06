@@ -7,7 +7,7 @@
 
 #include <string.h>
 
-#include "types/input/token.h"
+/* Contains implicit includes for types */
 #include "proto/input/parser.h"
 
 /*
