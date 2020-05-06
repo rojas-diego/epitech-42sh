@@ -12,8 +12,10 @@ NAME =		libinput_postprocessing.a
 TESTNAME =	unit_tests
 
 SRC =		src/quote_cleanup.c					\
+		src/env_var_replace.c					\
 
 SRCT =		tests/quote_cleanup.c				\
+		tests/env_var_replace.c						\
 
 OBJ =		$(SRC:.c=.o)
 OBJT =		$(SRCT:.c=.o)
@@ -28,11 +30,12 @@ DEBUG = 	-g $(WARNINGS)
 
 CFLAGS += 	-Wall -Wextra
 
-CPPFLAGS += 	-I include/
+CPPFLAGS += 	-I include/ -I include/ -I ../../lib/parser_toolbox/include
 
 TFLAGS += 	-lcriterion
 
 LDFLAGS +=	--coverage						\
+		-L../../lib/parser_toolbox -lparser_toolbox		\
 
 all:		$(NAME)
 
@@ -41,6 +44,7 @@ $(NAME):	$(OBJ)
 		ranlib $(NAME)
 
 tests_run:
+		make -C ../../lib/parser_toolbox/
 		$(CC) $(SRC) $(SRCT) -o $(TESTNAME) $(TFLAGS) $(LDFLAGS) \
 			$(CPPFLAGS) $(CFLAGS)
 		./$(TESTNAME) 2>&1 | (grep -v "profiling")
@@ -56,6 +60,7 @@ fclean:		clean
 		$(RM) $(NAME) $(TESTNAME)
 
 fcleanlib:	fclean
+		make -C ../../lib/parser_toolbox/ fclean
 
 re:		fclean all
 
