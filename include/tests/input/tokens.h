@@ -52,7 +52,8 @@ static const struct w2conststring_s TOKEN_NAMES[] = {
     {"Do", "do"},
     {"Done", "done"},
     {"Backticks", "`"},
-    {"Undefined", "?"}};
+    {"Undefined", "?"}
+};
 
 /**/
 /* Structures / Typedef / Enums declarations */
