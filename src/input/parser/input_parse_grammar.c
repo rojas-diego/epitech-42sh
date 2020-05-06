@@ -5,6 +5,9 @@
 ** input_btree
 */
 
+#include <stddef.h>
+
+#include "types/shell.h"
 #include "types/input/btree.h"
 
 /*
@@ -12,7 +15,11 @@
 **   This function takes in a token list and populates a binary
 **   tree to later be executed.
 */
-void input_btree(struct sh *shell)
+void input_parse_grammar(struct sh *shell)
 {
-    return;
+    struct bnode_s *tree = NULL;
+
+    for (struct node_s *curr = (*shell).tokens; curr; curr = curr->next) {
+        return;
+    }
 }

@@ -35,7 +35,7 @@ Test(input_parse, simple_testing)
     cr_assert_eq(table[7]->type, TOK_BACKTICKS);
 }
 
-Test(input_parse, giberish)
+Test(input_parse, token_coverage_1)
 {
     struct sh shell = MOCK_SH;
     struct token_s **table;
@@ -55,4 +55,24 @@ Test(input_parse, giberish)
     cr_assert_eq(table[8]->type, TOK_IF);
     cr_assert_eq(table[9]->type, TOK_ELSE);
     cr_assert_eq(table[10]->type, TOK_NEWLINE);
+}
+
+Test(input_parse, token_coverage_2)
+{
+    struct sh shell = MOCK_SH;
+    struct token_s **table;
+
+    shell.rawinput = strdup("");
+    input_parse(&shell);
+    cr_assert_eq(node_size(shell.tokens), 0);
+}
+
+Test(input_parse, empty)
+{
+    struct sh shell = MOCK_SH;
+    struct token_s **table;
+
+    shell.rawinput = strdup("");
+    input_parse(&shell);
+    cr_assert_eq(node_size(shell.tokens), 0);
 }
