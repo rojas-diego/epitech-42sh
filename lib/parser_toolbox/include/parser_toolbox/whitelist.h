@@ -14,4 +14,6 @@ bool ptb_whitelist(const char *string, const char * restrict withelist);
 
 bool ptb_whitelist_digit(const char *string);
 
+bool ptb_whitelist_alphanum(const char *string);
+
 #endif /* !PARSER_TOOLBOX_WHITELIST_H_ */

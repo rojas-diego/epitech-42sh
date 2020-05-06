@@ -12,6 +12,11 @@
 
 static const char PTB_WHITELIST_DIGIT[] = "0123456789";
 
+static const char PTB_WHITELIST_ALPHANUM[] =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    "abcdefghijklmnopqrstuvwxyz"
+    "_0123456789";
+
 /*
 ** @DESCRIPTION
 **   Returns true string only composed of withelisted characters
@@ -35,4 +40,14 @@ bool ptb_whitelist(const char *string, const char * restrict withelist)
 bool ptb_whitelist_digit(const char *string)
 {
     return (ptb_whitelist(string, PTB_WHITELIST_DIGIT));
+}
+
+/*
+** @DESCRIPTION
+**   Returns true string only composed of alphanumeric characters
+**   Returns false otherwise.
+*/
+bool ptb_whitelist_alphanum(const char *string)
+{
+    return (ptb_whitelist(string, PTB_WHITELIST_ALPHANUM));
 }

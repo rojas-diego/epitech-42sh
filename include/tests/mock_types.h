@@ -24,9 +24,15 @@ static const char *const MOCK_ENV[] = {
     "PATH=",
     "SHELL=/usr/bin/zsh",
     "PATH=/usr/bin:/usr/local/sbin:/usr/local/bin",
-    "OLDPWD=/home"};
+    "OLDPWD=/home"
+};
 
-static const struct sh MOCK_SH = {.active = true, .rawinput = NULL, .tokens = NULL, .envp = (char **)MOCK_ENV};
+static const struct sh MOCK_SH = {
+    .active = true,
+    .rawinput = NULL,
+    .tokens = NULL,
+    .envp = (char **) MOCK_ENV
+};
 
 /**/
 /* Structures / Typedef / Enums declarations */
