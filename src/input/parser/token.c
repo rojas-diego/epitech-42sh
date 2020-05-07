@@ -9,6 +9,8 @@
 
 /* Contains implicit includes for types */
 #include "proto/input/parser.h"
+#include "constants/tokens.h"
+#include "tests/input/tokens.h"
 
 /*
 ** @DESCRIPTION
@@ -17,4 +19,19 @@
 char *token_get_string(const struct token_s *this, const char *rawinput)
 {
     return (strndup(rawinput + (*this).start, (*this).end - (*this).start));
+}
+
+/*
+** @DESCRIPTION
+**   Prints a token list with the token name and symbol.
+*/
+void token_list_print(struct node_s *head)
+{
+    struct token_s *this;
+
+    for (struct node_s *curr = head; curr; curr = (*curr).next) {
+        this = (*curr).data;
+        printf("Token %s (%s)\n",
+            TOK_NAMES[(*this).type], TOKENS[(*this).type]);
+    }
 }

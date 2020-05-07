@@ -15,44 +15,43 @@
 /**/
 /* Constants */
 /**/
-
-typedef struct w2conststring_s {
-    char const *value1;
-    char const *value2;
-} w2conststring_t;
-
-static const struct w2conststring_s TOKEN_NAMES[] = {
-    {"Argument", "*"},
-    {"Pipe", "|"},
-    {"Separator", ";"},
-    {"Inside Redirection", "<"},
-    {"Inside Double Redirection", "<<"},
-    {"Outside Redirection", ">"},
-    {"Outside Double Redirection", ">>"},
-    {"Open Paranth", "("},
-    {"Closed Paranth", ")"},
-    {"And Conditional", "&&"},
-    {"Job Control", "&"},
-    {"Or Conditional", "||"},
-    {"Newline", "\n"},
-    {"Double Separator", ";;"},
-    {"Great And", ">&"},
-    {"Less And", "<&"},
-    {"Less Great", "<>"},
-    {"Double Less Dash", "<<-"},
-    {"Clobber", ">|"},
-    {"If", "if"},
-    {"Fi", "fi"},
-    {"Then", "then"},
-    {"Else", "else"},
-    {"Elif", "elif"},
-    {"Case", "case"},
-    {"Esac", "esac"},
-    {"For", "for"},
-    {"Do", "do"},
-    {"Done", "done"},
-    {"Backticks", "`"},
-    {"Undefined", "?"}
+/*
+** @DESCRIPTION
+**   Provides a name description for each token type.
+**   This structure is mainly used for debugging.
+*/
+static const char *TOK_NAMES[] = {
+    "Word",
+    "Assignment Word",
+    "Name",
+    "Newline",
+    "IO Number",
+    "And If",
+    "Or If",
+    "Double Semi",
+    "Double Less",
+    "Double Great",
+    "Less And",
+    "Great And",
+    "Less Great",
+    "Double Less Dash",
+    "Clobber",
+    "If",
+    "Then",
+    "Else",
+    "Elif",
+    "Fi",
+    "Do",
+    "Done",
+    "Case",
+    "Esac",
+    "While",
+    "Until",
+    "For",
+    "Left Brace",
+    "Right Brace",
+    "Bang",
+    "In"
 };
 
 /**/

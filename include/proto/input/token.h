@@ -14,6 +14,8 @@
 
 #include <stdbool.h>
 
+#include "mynode.h"
+
 /**/
 /* Constants */
 /**/
@@ -25,6 +27,9 @@
 /**/
 /* Function prototypes */
 /**/
+
+/* Belongs to src/input/parser/token_list_print.c */
+void token_list_print(struct node_s *head);
 
 /* Belongs to src/input/parser/token_validate_meta.c */
 unsigned int token_validate_word(
