@@ -1,40 +1,42 @@
 ##
 ## EPITECH PROJECT, 2020
-## my_printf
+## parser_toolbox
 ## File description:
 ## Makefile
 ##
 
-CC ?= gcc
+CC ?=		gcc
 
-NAME = libparser_toolbox.a
+NAME =		libparser_toolbox.a
 
-SRC = src/blacklist.c \
-		src/includes.c \
-		src/range.c \
-		src/whitelist.c \
-		src/argv_length.c \
+SRC =		src/add_char.c		\
+		src/argv_length.c	\
+		src/blacklist.c		\
+		src/includes.c		\
+		src/range.c		\
+		src/remove_char.c	\
+		src/whitelist.c		\
 
-OBJ = $(SRC:.c=.o)
+OBJ =		$(SRC:.c=.o)
 
-CFLAGS = -Wall -Wextra
+CFLAGS =	-Wall -Wextra
 
-CPPFLAGS = -I include/
+CPPFLAGS =	-I include/
 
-TFLAGS = --coverage -lcriterion
+TFLAGS =	--coverage -lcriterion
 
-all: $(NAME)
+all:		$(NAME)
 
-$(NAME): $(OBJ)
-	ar rc $(NAME) $(OBJ)
-	ranlib $(NAME)
+$(NAME):	$(OBJ)
+		ar rc $(NAME) $(OBJ)
+		ranlib $(NAME)
 
 clean:
-	$(RM) $(OBJ)
+		$(RM) $(OBJ)
 
 fclean:		clean
-	$(RM) $(NAME) $(TEST)
+		$(RM) $(NAME) $(TEST)
 
-re:	fclean all
+re:		fclean all
 
 .PHONY:	all clean fclean re
