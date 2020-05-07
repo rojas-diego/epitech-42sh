@@ -5,7 +5,7 @@
 ** builtin_echo
 */
 
-/* dprintf() */
+/* dprintf */
 #include <stdio.h>
 
 /* */

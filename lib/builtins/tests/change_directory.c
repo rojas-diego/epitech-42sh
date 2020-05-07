@@ -5,10 +5,10 @@
 ** test change_directory
 */
 
-/* getcwd() */
+/* getcwd */
 #include <unistd.h>
 
-/* getenv() */
+/* getenv */
 #include <stdlib.h>
 
 #include <criterion/criterion.h>

@@ -5,9 +5,9 @@
 ** builtin_setenv
 */
 
-/* dprintf() */
+/* dprintf */
 #include <stdio.h>
-/* unsetenv() */
+/* unsetenv */
 #include <stdlib.h>
 
 #include "parser_toolbox/argv_length.h"

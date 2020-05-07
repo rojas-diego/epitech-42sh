@@ -5,9 +5,9 @@
 ** builtin_setenv
 */
 
-/* dprintf() */
+/* dprintf */
 #include <stdio.h>
-/* setenv() */
+/* setenv */
 #include <stdlib.h>
 
 #include "builtin/display_env.h"

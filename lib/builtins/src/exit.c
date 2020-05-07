@@ -6,7 +6,7 @@
 */
 
 #include <stdio.h>
-/* exit() && atoi() */
+/* exit && atoi */
 #include <stdlib.h>
 
 #include "parser_toolbox/whitelist.h"

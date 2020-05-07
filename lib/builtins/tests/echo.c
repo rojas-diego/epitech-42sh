@@ -5,7 +5,7 @@
 ** test builtin_echo
 */
 
-/* getenv() */
+/* getenv */
 #include <stdlib.h>
 
 #include <criterion/criterion.h>

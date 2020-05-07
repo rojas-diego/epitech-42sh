@@ -5,13 +5,16 @@
 ** builtin_change_directory
 */
 
+/* perror */
 #include <stdio.h>
-#include <stdlib.h>
+/* chdir */
 #include <unistd.h>
+/* strdup */
 #include <string.h>
-#include <sys/types.h>
-#include <unistd.h>
-#include <pwd.h>
+/* getenv */
+#include <stdlib.h>
+
+#include "builtin/get_user_home.h"
 
 /* */
 #include "builtin/change_directory.h"
@@ -20,13 +23,13 @@ static const char CHANGE_DIRECTORY_GOTO_LAST_DIR[] = "-";
 
 static enum change_directory_e builtin_change_directory_to_home(void)
 {
-    struct passwd *pw = getpwuid(getuid());
+    const char *home = builtin_get_user_home();
 
-    if (pw == NULL) {
+    if (home == NULL) {
         perror("getpwuid");
         return (CD_GETPWUID_FAIL);
     }
-    if (chdir(pw->pw_dir) == -1) {
+    if (chdir(home) == -1) {
         perror("cd");
         return (CD_CHDIR_FAIL);
     }

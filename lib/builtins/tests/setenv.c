@@ -5,7 +5,7 @@
 ** test builtin_setenv
 */
 
-/* getenv() */
+/* getenv */
 #include <stdlib.h>
 
 #include <criterion/criterion.h>

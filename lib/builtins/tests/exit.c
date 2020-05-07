@@ -5,7 +5,7 @@
 ** test builtin_exit
 */
 
-/* getenv() */
+/* getenv */
 #include <stdlib.h>
 
 #include <criterion/criterion.h>

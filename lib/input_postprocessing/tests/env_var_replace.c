@@ -5,9 +5,9 @@
 ** test builtin_setenv
 */
 
-/* setenv() */
+/* setenv */
 #include <stdlib.h>
-/* strdup() */
+/* strdup */
 #include <string.h>
 
 #include <criterion/criterion.h>
