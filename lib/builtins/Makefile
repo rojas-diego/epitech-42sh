@@ -15,14 +15,15 @@ SRC =		src/change_directory.c					\
 		src/display_env.c					\
 		src/echo.c						\
 		src/exit.c						\
+		src/get_user_home.c					\
 		src/setenv.c						\
 		src/unsetenv.c						\
 
 SRCT =		tests/change_directory.c				\
+		tests/echo.c						\
+		tests/exit.c						\
 		tests/setenv.c						\
 		tests/unsetenv.c					\
-		tests/exit.c						\
-		tests/echo.c						\
 
 OBJ =		$(SRC:.c=.o)
 OBJT =		$(SRCT:.c=.o)
