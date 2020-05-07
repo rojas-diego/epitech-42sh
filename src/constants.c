@@ -13,4 +13,4 @@
 */
 const char *WHITESPACE = " \t";
 
-const char *TOK_WORD_BLACKLIST = "|><&";
+const char *TOK_WORD_BLACKLIST = " \n|><&";

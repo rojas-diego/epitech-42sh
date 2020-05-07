@@ -7,18 +7,18 @@
 
 CC ?=		gcc
 
-NAME =		libmynode.a
+NAME =		libnode.a
 
 SRC =		src/node_append.c	\
-		src/node_insert.c	\
-		src/node_apply.c	\
-		src/node_filter.c	\
-		src/node_free.c		\
-		src/node_pop.c		\
-		src/node_remove.c	\
-		src/node_reverse.c	\
-		src/node_size.c		\
-		src/node_to_table.c	\
+		src/node_insert.c		\
+		src/node_apply.c		\
+		src/node_filter.c		\
+		src/node_free.c			\
+		src/node_pop.c			\
+		src/node_remove.c		\
+		src/node_reverse.c		\
+		src/node_size.c			\
+		src/node_to_table.c		\
 
 OBJ =		$(SRC:.c=.o)
 

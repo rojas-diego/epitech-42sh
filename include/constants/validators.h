@@ -58,6 +58,10 @@ static const vafunc_f TOK_VALIDATORS[] = {
     token_validate_token,
     token_validate_token,
     token_validate_token,
+    token_validate_token,
+    token_validate_token,
+    token_validate_token,
+    token_validate_token,
     token_validate_token
 };
 

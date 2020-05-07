@@ -16,6 +16,8 @@
 
 #include "mynode.h"
 
+#include "types/input/token.h"
+
 /**/
 /* Constants */
 /**/
@@ -28,8 +30,11 @@
 /* Function prototypes */
 /**/
 
-/* Belongs to src/input/parser/token_list_print.c */
+/* Belongs to src/input/parser/token.c */
 void token_list_print(struct node_s *head);
+
+/* Belongs to src/input/parser/token.c */
+char *token_get_string(const struct token_s *this, const char *rawinput);
 
 /* Belongs to src/input/parser/token_validate_meta.c */
 unsigned int token_validate_word(

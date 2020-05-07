@@ -22,6 +22,7 @@ SRC =		src/constants.c 						\
 		src/input/parser/input_parse.c				\
 		src/input/parser/input_parse_tokens.c		\
 		src/input/parser/input_parse_grammar.c		\
+		src/input/parser/token.c					\
 		src/input/parser/token_validate.c			\
 		src/input/parser/token_validate_token.c		\
 		src/input/parser/token_validate_meta.c		\

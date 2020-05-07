@@ -5,10 +5,11 @@
 ** token class
 */
 
+#include <stdio.h>
 #include <string.h>
 
 /* Contains implicit includes for types */
-#include "proto/input/parser.h"
+#include "proto/input/token.h"
 #include "constants/tokens.h"
 #include "tests/input/tokens.h"
 

@@ -18,7 +18,9 @@ unsigned int token_validate_token(char const *string, char const *value)
 
     for (i = 0; string[i]; i++) {
         if (string[i] != value[i])
-            return (i);
+            return 0;
+        if (!value[i + 1])
+            return (i + 1);
     }
     return (i);
 }
