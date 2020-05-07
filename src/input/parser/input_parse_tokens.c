@@ -12,6 +12,7 @@
 #include "parser_toolbox.h"
 
 #include "constants/validators.h"
+#include "constants/tokens.h"
 /* Following headers contain implicit includes for types */
 #include "proto/input/parser.h"
 #include "proto/constants.h"
@@ -38,7 +39,7 @@ static struct token_s *input_scan(char const *string, unsigned int *index)
         return (0);
     (*this).start = *index;
     for (i = 0; i < TOK_COUNT; i++) {
-        current = token_validate(string + *index, VALIDATORS[i]);
+        current = TOK_VALIDATORS[i](string + *index, TOKENS[i]);
         if (current >= record) {
             record = current;
             (*this).type = i;

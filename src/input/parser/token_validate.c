@@ -7,84 +7,70 @@
 
 #include <stdbool.h>
 
-#include "parser_toolbox.h"
-
-/* Contains implicit includes for types */
-#include "proto/input/parser.h"
+#include "proto/input/token.h"
 
 /*
 ** @DESCRIPTION
-**   This function is called if the validator's mask contains the VALI_MATCH
-**   flag and is mostly meant to identify reserved words such as 'for' or
-**   'then'.
-**   If the VALI_LOWER flag is provided then each scanned character will be
-**   locally put to lowercase if it uppercase.
-** @RETURN
-**   If the token did not match this function returns 0.
-**   If the end of the 'valid' string was reached then its length is returned.
+**   This function skips the inhibitor from the string.
+** @TODO
+**   Raise an advor when the inhibitor is at the end of the line.
 */
-static unsigned int token_validate_exact_match(
-char const *string, const struct validator_s va)
+void token_validate_inhibitors(char const *string, unsigned int *i, bool *adv)
 {
-    unsigned int i;
-    int value;
-
-    for (i = 0; string[i]; i++) {
-        value = string[i];
-        if (va.mask & VALI_LOWER)
-            value = (ptb_range(string[i], 'A', 'Z')) ? value + 32 : value;
-        if (va.valid[i] == '\0')
-            break;
-        if (string[i] != va.valid[i])
-            return (0);
+    if (string[*i] != '\\') {
+        *adv = false;
+        return;
     }
-    return (i);
+    *adv = true;
+    if (!string[*i + 1])
+        return; // Raise an error.
+    else
+        (*i)++;
 }
 
 /*
 ** @DESCRIPTION
-**   This function ensures certain conditions from the validator's binary
-**   mask are met.
-**   It handles the VALI_INVALID, VALI_ALPHA and VALI_NUM mask flags.
-**   Check the include.s for documentation on those flags.
+**   This function skips the single quotes from the string.
+** @TODO
+**   Raise an error if there is an unmatched quote.
 */
-static bool token_validate_checks(const char c, const struct validator_s va)
+void token_validate_squotes(char const *string, unsigned int *i, bool *adv)
 {
-    if (va.mask & VALI_ALPHA
-        && (ptb_range(c, 'a', 'z') || ptb_range(c, 'A', 'Z')))
-            return true;
-    if (va.mask & VALI_NUM && ptb_range(c, '0', '9'))
-        return true;
-    if (va.valid && ptb_includes(c, va.valid))
-        return !(va.mask & VALI_INVALID);
-    return false;
+    if (string[*i] != '\"') {
+        *adv = false;
+        return;
+    }
+    *adv = true;
+    (*i)++;
+    for (; string[*i]; (*i)++) {
+        if (string[*i] == '\'')
+            return;
+    }
+    (*i)--;
 }
 
 /*
 ** @DESCRIPTION
-**   This function will return the index of 'string' for which the conditions
-**   of the validator_s struct were not met.
-**   It allows identifying tokens based on the token with the longest match
-**   value.
-**   See the include.s for documentation on the validator_s structure
+**   This function skips the double quotes from the string.
+** @TODO
+**   Raise an error if there is an unmatched quote.
 */
-unsigned int token_validate(char const *string, const struct validator_s va)
+void token_validate_dquotes(char const *string, unsigned int *i, bool *adv)
 {
-    bool composite_value;
-    unsigned int i;
+    bool self_adv;
 
-    if (va.mask & VALI_MATCH)
-        return token_validate_exact_match(string, va);
-    for (i = 0; string[i]; i++) {
-        composite_value = token_validate_composite(string, &i, va);
-        if (composite_value)
+    if (string[*i] != '\"') {
+        *adv = false;
+        return;
+    }
+    *adv = true;
+    (*i)++;
+    for (; string[*i]; (*i)++) {
+        token_validate_inhibitors(string, i, &self_adv);
+        if (self_adv)
             continue;
-        if (token_validate_checks(string[i], va) == false)
-            break;
-        if (va.maxlength && va.maxlength < i + 1)
-            return (0);
+        if (string[*i] == '\"')
+            return;
     }
-    if (va.minlength && va.minlength > i)
-        return (0);
-    return (i);
+    (*i)--;
 }

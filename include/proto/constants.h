@@ -13,8 +13,14 @@
 /**/
 /*
 ** @DESCRIPTION
-**   Defines the character set to be used as whitespace when parsing
+**   Defines the character set to be used as whitespace when parsing.
 */
 extern const char *WHITESPACE __attribute__((unused));
+
+/*
+** @DESCRIPTION
+**   Defines the unwanted characters of a word token.
+*/
+extern const char *TOK_WORD_BLACKLIST __attribute__((unused));
 
 #endif

@@ -5,6 +5,7 @@
 /42sh
 unit_tests
 local/**
+vgcore.*
 
 # Coverage
 *.gcno
