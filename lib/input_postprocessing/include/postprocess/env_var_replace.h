@@ -12,7 +12,8 @@ enum env_var_replace_status_e
 {
     ENV_VAR_REPLACE_SUCCESS,
     ENV_VAR_REPLACE_UNDEFINED_VAR,
-    ENV_VAR_REPLACE_ALLOCATION_FAIL
+    ENV_VAR_REPLACE_ALLOCATION_FAIL,
+    ENV_VAR_REPLACE_GETPWUID_FAIL,
 };
 
 enum env_var_replace_status_e ipp_env_var_replace(char **str);

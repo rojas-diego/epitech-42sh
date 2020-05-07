@@ -5,15 +5,17 @@
 ** env_var_replace
 */
 
+/* asprintf */
 #define _GNU_SOURCE
-/* setenv() */
+/* setenv */
 #include <stdlib.h>
-/* asprintf() && dprintf() */
+/* asprintf && dprintf */
 #include <stdio.h>
 /* size_t */
 #include <stddef.h>
 
 #include "parser_toolbox/includes.h"
+#include "builtin/get_user_home.h"
 
 /* */
 #include "postprocess/env_var_replace.h"
@@ -33,6 +35,7 @@ static size_t env_var_replace_find_env(
     size_t length = 0;
     char save = '\0';
 
+    str[-1] = '\0';
     for (; str[length] && !ptb_includes(str[length], ENV_VAR_SEP); ++length);
     save = str[length];
     str[length] = '\0';
@@ -49,23 +52,43 @@ static size_t env_var_replace_find_env(
     return (length);
 }
 
+static enum env_var_replace_status_e env_var_replace_put_home(char **str)
+{
+    const char *home = NULL;
+    char *save = *str;
+
+    if (save[0] != '~') {
+        return (ENV_VAR_REPLACE_SUCCESS);
+    }
+    home = builtin_get_user_home();
+    if (home == NULL) {
+        return (ENV_VAR_REPLACE_GETPWUID_FAIL);
+    }
+    if (asprintf(str, "%s", home, save + 1) < 0) {
+        return (ENV_VAR_REPLACE_ALLOCATION_FAIL);
+    }
+    free(save);
+    return (ENV_VAR_REPLACE_SUCCESS);
+}
+
 enum env_var_replace_status_e ipp_env_var_replace(char **str)
 {
+    enum env_var_replace_status_e ret = env_var_replace_put_home(str);
     char *save = *str;
     const char *env_var = NULL;
     size_t var_name_length = 0;
 
+    if (ret != ENV_VAR_REPLACE_SUCCESS)
+        return (ret);
     for (int i = 0; save[i] != '\0'; ++i) {
-        if (save[i] != '$') {
+        if (save[i] != '$')
             continue;
-        }
-        save[i] = '\0';
         var_name_length = env_var_replace_find_env(&env_var, save + ++i);
-        if (env_var == NULL) {
+        if (env_var == NULL)
             return (ENV_VAR_REPLACE_UNDEFINED_VAR);
-        }
         i += var_name_length;
-        asprintf(str, "%s%s%s", save, env_var, save + i);
+        if (asprintf(str, "%s%s%s", save, env_var, save + i) < 0)
+            return (ENV_VAR_REPLACE_ALLOCATION_FAIL);
         free(save);
         save = *str;
     }
