@@ -30,6 +30,7 @@ static const char *TOK_NAMES[] = {
     "Great",
     "Pipe",
     "Semicolon",
+    "Ampersand",
     "And If",
     "Or If",
     "Double Semi",
@@ -55,8 +56,7 @@ static const char *TOK_NAMES[] = {
     "Left Brace",
     "Right Brace",
     "Bang",
-    "In"
-};
+    "In"};
 
 /**/
 /* Structures / Typedef / Enums declarations */

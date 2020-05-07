@@ -29,6 +29,7 @@ typedef enum tokent_e {
     TOK_GREAT,
     TOK_PIPE,
     TOK_SEMI,
+    TOK_AMPERSAND,
     TOK_AND_IF,
     TOK_OR_IF,
     TOK_DSEMI,

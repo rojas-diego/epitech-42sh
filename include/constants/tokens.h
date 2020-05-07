@@ -26,6 +26,7 @@ static const char *TOKENS[] = {
     ">",     /* GREAT */
     "|",     /* PIPE */
     ";",     /* SEMI */
+    "&",     /* AMPERSAND */
     "&&",    /* AND_IF */
     "||",    /* OR_IF */
     ";;",    /* DSEMI */
