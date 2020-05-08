@@ -14,4 +14,5 @@ void prompt_empty_input(struct sh *shell)
         ++i;
     }
     shell->prompt.cursor = 0;
+    shell->prompt.length = 0;
 }

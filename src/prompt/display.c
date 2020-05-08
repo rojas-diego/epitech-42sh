@@ -20,7 +20,7 @@
 void prompt_display(__attribute__((unused)) struct sh *shell)
 {
     if (shell->atty) {
-        fputs("$> ", stdout);
+        printf("\033[38;2;150;220;150m%s\033[0m", "$> ");
         fflush(STDIN_FILENO);
     }
 }
