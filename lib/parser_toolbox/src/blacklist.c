@@ -1,5 +1,5 @@
 /*
-** EPITECH PROJECT, 2019
+** EPITECH PROJECT, 2020
 ** parser_toolbox
 ** File description:
 ** ptb_characters

@@ -1,5 +1,5 @@
 /*
-** EPITECH PROJECT, 2019
+** EPITECH PROJECT, 2020
 ** mynode
 ** File description:
 ** node_free

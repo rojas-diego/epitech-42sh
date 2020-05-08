@@ -1,6 +1,6 @@
 ##
 ## EPITECH PROJECT, 2020
-## PSU_42sh_2019
+## input_postprocessing
 ## File description:
 ## Makefile
 ##

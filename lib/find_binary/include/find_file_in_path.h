@@ -1,6 +1,6 @@
 /*
-** EPITECH PROJECT, 2019
-** PSU_42sh_2019
+** EPITECH PROJECT, 2020
+** find_binary
 ** File description:
 ** find_file_in_path
 */

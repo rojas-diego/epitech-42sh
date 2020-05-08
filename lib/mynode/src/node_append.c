@@ -1,6 +1,6 @@
 /*
-** EPITECH PROJECT, 2019
-** lib/mynode
+** EPITECH PROJECT, 2020
+** mynode
 ** File description:
 ** node_append
 */

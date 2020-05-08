@@ -1,6 +1,6 @@
 /*
-** EPITECH PROJECT, 2019
-** PSU_42sh_2019
+** EPITECH PROJECT, 2020
+** input_postprocessing
 ** File description:
 ** quote_cleanup
 */
