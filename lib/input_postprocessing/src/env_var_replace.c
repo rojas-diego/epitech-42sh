@@ -64,7 +64,7 @@ static enum env_var_replace_status_e env_var_replace_put_home(char **str)
     if (home == NULL) {
         return (ENV_VAR_REPLACE_GETPWUID_FAIL);
     }
-    if (asprintf(str, "%s", home, save + 1) < 0) {
+    if (asprintf(str, "%s%s", home, save + 1) < 0) {
         return (ENV_VAR_REPLACE_ALLOCATION_FAIL);
     }
     free(save);

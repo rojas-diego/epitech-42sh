@@ -8,6 +8,8 @@
 #ifndef PARSER_TOOLBOX_REMOVE_CHAR_H_
 #define PARSER_TOOLBOX_REMOVE_CHAR_H_
 
+#include <stddef.h>
+
 void ptb_remove_char(char *str, size_t pos);
 
 #endif /* !PARSER_TOOLBOX_REMOVE_CHAR_H_ */

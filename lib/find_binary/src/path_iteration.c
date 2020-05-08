@@ -63,5 +63,5 @@ const char *path_iteration(const char *path_env)
     strncpy(path, path_env + old_pos, pos - old_pos);
     path[pos - old_pos] = '\0';
     old_pos = pos + 1;
-    return(path);
+    return (path);
 }

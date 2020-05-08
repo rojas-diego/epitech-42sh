@@ -14,10 +14,12 @@
 /* */
 #include "builtin/exit.h"
 
+/* last status */
+
 void builtin_exit(const char * const *argv)
 {
     if (argv[0] == NULL) {
-        exit(0); /* last status */
+        exit(0);
     }
     if (argv[1] != NULL || !ptb_whitelist_digit(argv[0])) {
         dprintf(2, "exit: Expression Syntax.\n");
