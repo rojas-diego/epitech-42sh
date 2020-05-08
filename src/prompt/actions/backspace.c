@@ -20,10 +20,8 @@ void prompt_action_backspace(struct sh *shell)
     if (!(shell->prompt.input)[0] || !shell->prompt.cursor) {
         return;
     }
+    shell->prompt.cursor -= !!shell->prompt.cursor;
     ptb_remove_char(shell->prompt.input, shell->prompt.cursor);
-    if (shell->prompt.cursor) {
-        --shell->prompt.cursor;
-    }
     if (shell->atty) {
         putp(shell->prompt.effect[PROMPT_EFFECT_CURSOR_BACKWARD]);
         fputs(shell->prompt.input + shell->prompt.cursor, stdout);

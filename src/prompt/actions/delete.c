@@ -19,11 +19,11 @@
 
 void prompt_action_delete(struct sh *shell)
 {
-    if ((shell->prompt.input)[0] == 0
+    if (!(shell->prompt.input)[0]
     || shell->prompt.cursor >= strlen(shell->prompt.input)) {
         return;
     }
-    ptb_remove_char(shell->prompt.input, shell->prompt.cursor + 1);
+    ptb_remove_char(shell->prompt.input, shell->prompt.cursor);
     if (shell->atty) {
         fputs(shell->prompt.input + shell->prompt.cursor, stdout);
         fputs(" ", stdout);
