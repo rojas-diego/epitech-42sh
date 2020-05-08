@@ -20,7 +20,7 @@
 #include "proto/prompt/read_single_input.h"
 #include "proto/prompt/prompt_add_char.h"
 #include "proto/prompt/wait_input.h"
-#include "proto/prompt/set_raw.h"
+#include "proto/prompt/set_raw_mode.h"
 
 static int find_matching_action(struct sh *shell, char *buffer, size_t len)
 {
@@ -86,14 +86,15 @@ static int add_input_or_execute_action(struct sh *shell, char character)
         return (1);
     }
     buffer = buffer_seq(shell, character);
-    if (buffer) {
-        for (size_t i = 0; buffer[i] != '\0'; ++i) {
-            if (isprint(buffer[i])) {
-                prompt_add_char(shell, buffer[i]);
-            }
-        }
-        free(buffer);
+    if (!buffer) {
+        return (0);
     }
+    for (size_t i = 0; buffer[i] != '\0'; ++i) {
+        if (isprint(buffer[i])) {
+            prompt_add_char(shell, buffer[i]);
+        }
+    }
+    free(buffer);
     return (0);
 }
 
