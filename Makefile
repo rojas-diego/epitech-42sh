@@ -16,7 +16,9 @@ MAIN =		src/main.c						\
 SRC =		src/constants.c 					\
 		src/shell/shell_init.c					\
 		src/shell/shell_start.c					\
+		src/shell/shell_destroy.c				\
 		src/shell/term_init.c					\
+		src/shell/shlvl_update.c				\
 		src/input/executer/input_execute.c			\
 		src/input/parser/input_parse.c				\
 		src/input/parser/token_validate.c			\
@@ -34,16 +36,16 @@ SRC =		src/constants.c 					\
 		src/prompt/actions/home.c				\
 		src/prompt/actions/interrupt.c				\
 		src/prompt/actions/tab.c				\
-		src/prompt/add_char.c				\
-		src/prompt/empty.c				\
-		src/prompt/display.c				\
-		src/prompt/get_input.c				\
+		src/prompt/add_char.c					\
+		src/prompt/empty.c					\
+		src/prompt/display.c					\
+		src/prompt/get_input.c					\
 		src/prompt/prompt_shell.c				\
 		src/prompt/prompter.c					\
 		src/prompt/read_single_input.c				\
-		src/prompt/rewrite_color_command.c				\
+		src/prompt/rewrite_color_command.c			\
 		src/prompt/set_raw_mode.c				\
-		src/prompt/wait_input.c				\
+		src/prompt/wait_input.c					\
 
 SRCT =		tests/input/parser/input_parse.c			\
 
