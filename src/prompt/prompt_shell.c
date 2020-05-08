@@ -11,18 +11,10 @@
 
 #include "types/shell.h"
 #include "proto/prompt.h"
+#include "proto/prompt/display.h"
 
-/*
-** @DESCRIPTION
-**   Prints the shell prompt.
-** @TODO
-**   Handle non tty environments and dont display the prompt.
-*/
-static void prompt_display(struct sh *shell)
-{
-    (void)shell;
-    printf("$> ");
-}
+/* prompt_fetch(shell); */
+void get_input(struct sh *shell);
 
 /*
 ** @DESCRIPTION
@@ -39,6 +31,7 @@ static void prompt_fetch(struct sh *shell)
     if (response < 0) {
         shell->active = false;
         free(buffer);
+        buffer = NULL;
     }
     shell->rawinput = buffer;
 }
@@ -51,5 +44,5 @@ static void prompt_fetch(struct sh *shell)
 void prompt_shell(struct sh *shell)
 {
     prompt_display(shell);
-    prompt_fetch(shell);
+    get_input(shell);
 }

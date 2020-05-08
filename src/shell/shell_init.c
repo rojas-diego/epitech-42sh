@@ -5,8 +5,15 @@
 ** init
 */
 
+#include <unistd.h>
+#include <string.h>
+
 #include "types/shell.h"
 #include "proto/shell.h"
+
+int term_init(struct sh *shell);
+
+/* TODO: parse av: if fd replace STDIN_FILENO in isatty by fildes */
 
 /*
 ** @DESCRIPTION
@@ -22,4 +29,10 @@ void shell_struct_initialise(
     (*this).envp = ep;
     (*this).rawinput = 0;
     (*this).active = true;
+    (*this).atty = isatty(STDIN_FILENO);
+    (*this).prompt.cursor = 0;
+    memset((*this).prompt.input, 0, 8192);
+    if (term_init(this)) {
+        return;
+    }
 }

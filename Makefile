@@ -16,8 +16,7 @@ MAIN =		src/main.c						\
 SRC =		src/constants.c 					\
 		src/shell/shell_init.c					\
 		src/shell/shell_start.c					\
-		src/prompt/prompter.c					\
-		src/prompt/prompt_shell.c				\
+		src/shell/term_init.c					\
 		src/input/executer/input_execute.c			\
 		src/input/parser/input_parse.c				\
 		src/input/parser/token_validate.c			\
@@ -25,6 +24,26 @@ SRC =		src/constants.c 					\
 		src/input/parser/token.c				\
 		src/input/input_destroy.c				\
 		src/utilities/get_env.c					\
+									\
+		src/prompt/actions/arrows.c				\
+		src/prompt/actions/backspace.c				\
+		src/prompt/actions/clear.c				\
+		src/prompt/actions/cursor.c				\
+		src/prompt/actions/delete.c				\
+		src/prompt/actions/end.c				\
+		src/prompt/actions/home.c				\
+		src/prompt/actions/interrupt.c				\
+		src/prompt/actions/tab.c				\
+		src/prompt/add_char.c				\
+		src/prompt/empty.c				\
+		src/prompt/display.c				\
+		src/prompt/get_input.c				\
+		src/prompt/prompt_shell.c				\
+		src/prompt/prompter.c					\
+		src/prompt/read_single_input.c				\
+		src/prompt/rewrite_color_command.c				\
+		src/prompt/set_raw_mode.c				\
+		src/prompt/wait_input.c				\
 
 SRCT =		tests/input/parser/input_parse.c			\
 
@@ -36,7 +55,7 @@ WARNINGS =	-pedantic -Wshadow -Wpointer-arith -Wcast-align		\
 		-Wmissing-prototypes -Wmissing-declarations		\
 		-Wnested-externs -Wwrite-strings -Wredundant-decls	\
 		-Winline -Wno-long-long -Wconversion			\
-		-Wstrict-prototypes 					\
+		-Wstrict-prototypes -Wunused-function			\
 
 DEBUG = 	-g $(WARNINGS)
 
@@ -45,20 +64,21 @@ CFLAGS += 	-Wall -Wextra
 CPPFLAGS += 	-I include/ -I lib/include/ 				\
 
 LDLIBS += 	-L./lib/mynode/ -lnode 					\
+		-lcurses						\
 
 TFLAGS += 	--coverage -lcriterion
 
-LIBNAMES = parser_toolbox\
-		mynode\
-		builtins\
-		input_postprocessing\
-		find_binary\
+LIBNAMES =	parser_toolbox						\
+		mynode							\
+		builtins						\
+		input_postprocessing					\
+		find_binary						\
 
-LIBFOLDER = ./lib
+LIBFOLDER =	./lib
 
-LDLIBS += $(patsubst %, -L $(LIBFOLDER)/%, ${LIBNAMES})
-LDLIBS += $(patsubst %, -l%, ${LIBNAMES})
-CPPFLAGS += $(patsubst %, -I $(LIBFOLDER)/%/include/, ${LIBNAMES})
+LDLIBS +=	$(patsubst %, -L $(LIBFOLDER)/%, ${LIBNAMES})
+LDLIBS +=	$(patsubst %, -l%, ${LIBNAMES})
+CPPFLAGS +=	$(patsubst %, -I $(LIBFOLDER)/%/include/, ${LIBNAMES})
 
 all:		$(NAME)
 
@@ -78,9 +98,10 @@ $(NAME):	compiling
 		@ echo -e "." $<
 		@ $(CC) -o $@ -c $< $(CFLAGS) $(CPPFLAGS)
 
-tests_run: 	compiling
+tests_run:	compiling
 		@ echo -e "===> Compiling unit_tests"
-		@ $(CC) $(SRC) $(SRCT) -o $(TESTNAME) $(LDFLAGS) $(TFLAGS) $(LDLIBS) $(CPPFLAGS)
+		@ $(CC) $(SRC) $(SRCT) -o $(TESTNAME) $(LDFLAGS)	\
+			$(TFLAGS) $(LDLIBS) $(CPPFLAGS)
 		@ ./$(TESTNAME)
 
 debug:		fclean

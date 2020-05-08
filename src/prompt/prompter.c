@@ -10,6 +10,12 @@
 #include "proto/input/parser.h"
 #include "proto/input/executer.h"
 #include "proto/prompt.h"
+#include "proto/prompt/empty.h"
+
+/*
+input_parse(shell);
+input_execute(shell);
+*/
 
 /*
 ** @DESCRIPTION
@@ -23,8 +29,6 @@ void prompter(struct sh *shell)
         prompt_shell(shell);
         if (!shell->active)
             return;
-        input_parse(shell);
-        input_execute(shell);
-        input_destroy(shell);
+        prompt_empty_input(shell);
     }
 }

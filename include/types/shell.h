@@ -16,6 +16,8 @@
 
 #include "mynode.h"
 
+#include "types/prompt.h"
+
 /**/
 /* Constants */
 /**/
@@ -33,10 +35,12 @@
 **   - envp: the environement as an array of strings.
 */
 typedef struct sh {
-    bool         active;
-    char         *rawinput;
-    node_t       *tokens;
-    char * const *envp;
+    bool          active;
+    char          *rawinput;
+    node_t        *tokens;
+    char * const  *envp;
+    struct prompt prompt;
+    int           atty;
 } sh_t;
 
 /**/
