@@ -38,7 +38,7 @@ enum quote_cleaning_status_e ipp_quote_cleanup(char *str)
     size_t mismatched_index = 0;
 
     for (size_t index = 0; str[index] != '\0';) {
-        if (str[index] == '\\') {
+        if (status != QUOTE_CLEANUP_SINGLE_QUOTE_OPENED && str[index] == '\\') {
             str[mismatched_index++] = str[++index];
             ++index;
             continue;
