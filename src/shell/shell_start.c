@@ -6,6 +6,7 @@
 */
 
 #include "proto/shell.h"
+#include "proto/shell/shlvl_update.h"
 #include "proto/prompt.h"
 
 /*
@@ -13,7 +14,11 @@
 **   Starts the 42sh.
 **   Initialises all the 'dependencies' such as aliases etc...
 */
-void shell_start(struct sh *shell)
+int shell_start(struct sh *shell)
 {
+    if (shlvl_update()) {
+        return (1);
+    }
     prompter(shell);
+    return (0);
 }

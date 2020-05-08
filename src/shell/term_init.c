@@ -80,6 +80,8 @@ int term_init(struct sh *shell)
             return (1);
         }
     }
-    tcgetattr(0, &shell->prompt.oterm);
+    if (tcgetattr(0, &shell->prompt.orig_term) == -1) {
+        return (1);
+    }
     return (term_init_actions(shell));
 }

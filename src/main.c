@@ -16,7 +16,12 @@ int main(int argc, char * const *argv, char * const *envp)
 {
     struct sh shell;
 
-    shell_struct_initialise(&shell, argc, argv, envp);
-    shell_start(&shell);
+    if (shell_struct_initialise(&shell, argc, argv, envp)) {
+        return (84);
+    }
+    if (shell_start(&shell)) {
+        return (84);
+    }
+    shell_destroy(&shell);
     return (0);
 }

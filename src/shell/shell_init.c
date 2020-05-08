@@ -19,7 +19,7 @@ int term_init(struct sh *shell);
 ** @DESCRIPTION
 **   Initialises a local `struct sh` and inits all of its members.
 */
-void shell_struct_initialise(
+int shell_struct_initialise(
     struct sh *this,
     __attribute__((unused)) int ac,
     __attribute__((unused)) char *const *av,
@@ -31,8 +31,7 @@ void shell_struct_initialise(
     (*this).active = true;
     (*this).atty = isatty(STDIN_FILENO);
     (*this).prompt.cursor = 0;
+    (*this).prompt.length = 0;
     memset((*this).prompt.input, 0, 8192);
-    if (term_init(this)) {
-        return;
-    }
+    return (term_init(this));
 }

@@ -103,7 +103,7 @@ void get_input(struct sh *shell)
     char character = -1;
 
     if (shell->atty)
-        term_set_raw_mode(&(shell->prompt.oterm));
+        term_set_raw_mode(&(shell->prompt.orig_term));
     while (character != '\n') {
         wait_input();
         character = read_single_input();
@@ -116,6 +116,7 @@ void get_input(struct sh *shell)
             break;
         }
     }
-    if (shell->atty && tcsetattr(0, TCSANOW, &(shell->prompt.oterm)) == -1) {
+    if (shell->atty
+    && tcsetattr(0, TCSANOW, &(shell->prompt.orig_term)) == -1) {
     }
 }
