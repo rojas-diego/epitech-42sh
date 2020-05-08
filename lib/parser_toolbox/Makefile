@@ -16,6 +16,7 @@ SRC =		src/add_char.c		\
 		src/range.c		\
 		src/remove_char.c	\
 		src/whitelist.c		\
+		src/hexdumper.c		\
 
 OBJ =		$(SRC:.c=.o)
 
