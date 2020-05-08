@@ -18,10 +18,11 @@
 struct prompt
 {
     char input[8192];
+    size_t length;
     size_t cursor;
     const char *effect[PROMPT_EFFECT_COUNT];
     struct prompt_action action[11];
-    struct termios oterm;
+    struct termios orig_term;
 };
 
 #endif /* !SH_PROMPT_H_ */

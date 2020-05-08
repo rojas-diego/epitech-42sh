@@ -15,6 +15,6 @@
 ** @DESCRIPTION
 **   Defines the character set to be used as whitespace when parsing
 */
-extern const char *WHITESPACE __attribute__((unused));
+extern const char *WHITESPACE;
 
 #endif

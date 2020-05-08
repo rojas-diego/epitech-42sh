@@ -26,12 +26,13 @@
 /* Function prototypes */
 /**/
 
-void shell_struct_initialise(
+int shell_struct_initialise(
     struct sh *this,
-    __attribute__((unused)) int ac,
-    __attribute__((unused)) char *const *av,
-    __attribute__((unused)) char *const *ep
+    int ac,
+    char *const *av,
+    char *const *ep
 );
-void shell_start(struct sh *shell);
+int shell_start(struct sh *shell);
+void shell_destroy(struct sh *shell);
 
 #endif
