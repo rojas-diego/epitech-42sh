@@ -2,15 +2,17 @@
 ** EPITECH PROJECT, 2020
 ** PSU_42sh_2019
 ** File description:
-** parser header file.
+** grammar header file.
 */
 
-#ifndef SH_TYPES_INPUT_PARSER_H_
-#define SH_TYPES_INPUT_PARSER_H_
+#ifndef SH_PROTO_GRAMMAR_H_
+#define SH_PROTO_GRAMMAR_H_
 
 /**/
 /* Includes */
 /**/
+
+#include "types/grammar.h"
 
 /**/
 /* Constants */
@@ -23,5 +25,7 @@
 /**/
 /* Function prototypes */
 /**/
+
+void grammar_program(struct grammar_s *this);
 
 #endif

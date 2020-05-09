@@ -13,7 +13,7 @@
 const int PROMPT_ACTION_COUNT = 11;
 
 static const struct {
-    char *name;
+    char const *name;
     prompt_action action;
 } TERMINFO_KEY[11] = {
     {"kcub1", &prompt_action_left},

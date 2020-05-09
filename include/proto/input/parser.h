@@ -13,8 +13,7 @@
 /**/
 
 #include "types/shell.h"
-#include "types/input/validator.h"
-#include "types/input/token.h"
+#include "types/token.h"
 
 /**/
 /* Constants */
@@ -28,17 +27,13 @@
 /* Function prototypes */
 /**/
 
-/* Belongs to src/input/parser/input_parser.c */
+/* Belongs to src/input/parser/input_parse.c */
 void input_parse(struct sh *shell);
 
-/* Belongs to src/input/parser/token.c */
-char *token_get_string(const struct token_s *this, const char *rawinput);
+/* Belongs to src/input/parser/input_parse_tokens.c */
+void input_parse_tokens(struct sh *shell);
 
-/* Belongs to src/input/parser/token_validate.c */
-unsigned int token_validate(char const *string, const struct validator_s va);
-
-/* Belongs to src/input/parser/token_validate_composite.c */
-bool token_validate_composite(
-char const *string, unsigned int *i, const struct validator_s va);
+/* Belongs to src/input/parser/input_parse_grammar.c */
+void input_parse_grammar(struct sh *shell);
 
 #endif

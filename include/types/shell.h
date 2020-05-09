@@ -27,6 +27,17 @@
 /**/
 /*
 ** @DESCRIPTION
+**   Error wrapper.
+*/
+enum sh_error_e {
+    ER_NONE,
+    ER_MALLOC,
+    ER_SYSCALL,
+    ER_GRAMMAR
+};
+
+/*
+** @DESCRIPTION
 **   Main shell structure.
 ** @MEMBERS
 **   - active: the shell will run while active is true.
@@ -35,12 +46,13 @@
 **   - envp: the environement as an array of strings.
 */
 typedef struct sh {
-    bool          active;
-    char          *rawinput;
-    node_t        *tokens;
-    char * const  *envp;
-    struct prompt prompt;
-    int           atty;
+    bool                active;
+    char                *rawinput;
+    node_t              *tokens;
+    char * const        *envp;
+    struct prompt       prompt;
+    int                 atty;
+    enum sh_error_e     error;
 } sh_t;
 
 /**/

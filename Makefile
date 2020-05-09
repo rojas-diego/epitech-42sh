@@ -21,12 +21,14 @@ SRC =		src/constants.c 					\
 		src/shell/shlvl_update.c				\
 		src/input/executer/input_execute.c			\
 		src/input/parser/input_parse.c				\
-		src/input/parser/token_validate.c			\
-		src/input/parser/token_validate_composite.c		\
-		src/input/parser/token.c				\
-		src/input/input_destroy.c				\
-		src/utilities/get_env.c					\
-									\
+		src/input/parser/input_parse_tokens.c		\
+		src/input/parser/input_parse_grammar.c		\
+		src/input/input_destroy.c					\
+		src/grammar/grammar_program.c 				\
+		src/token/token.c							\
+		src/token/token_validate.c					\
+		src/token/token_validate_token.c			\
+		src/token/token_validate_meta.c				\
 		src/prompt/actions/arrows.c				\
 		src/prompt/actions/backspace.c				\
 		src/prompt/actions/clear.c				\
@@ -47,14 +49,14 @@ SRC =		src/constants.c 					\
 		src/prompt/set_raw_mode.c				\
 		src/prompt/wait_input.c					\
 
-SRCT =		tests/input/parser/input_parse.c			\
+SRCT =		tests/input/parser/input_parse.c		\
 
 OBJ =		$(SRC:.c=.o)
 OBJM =		$(MAIN:.c=.o)
 OBJT =		$(SRCT:.c=.o)
 
-WARNINGS =	-pedantic -Wshadow -Wpointer-arith -Wcast-align		\
-		-Wmissing-prototypes -Wmissing-declarations		\
+WARNINGS =	-pedantic -Wshadow -Wpointer-arith -Wcast-align	\
+		-Wmissing-prototypes -Wmissing-declarations			\
 		-Wnested-externs -Wwrite-strings -Wredundant-decls	\
 		-Winline -Wno-long-long -Wconversion			\
 		-Wstrict-prototypes -Wunused-function			\

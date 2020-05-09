@@ -65,7 +65,7 @@ int term_init_actions(struct sh *shell)
 */
 int term_init(struct sh *shell)
 {
-    char *terminfo_str[] = {"cub1", "cuf1", "clear"};
+    char const *terminfo_str[] = {"cub1", "cuf1", "clear"};
     int erret;
 
     if (!shell->atty) {
