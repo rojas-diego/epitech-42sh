@@ -19,6 +19,8 @@ void shell_struct_initialise(
     char *const *ep
 )
 {
+    (*this).error = ER_NONE;
+    (*this).tokens = 0;
     (*this).envp = ep;
     (*this).rawinput = 0;
     (*this).active = true;

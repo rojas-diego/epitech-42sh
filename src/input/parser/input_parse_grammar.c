@@ -5,11 +5,10 @@
 ** input_btree
 */
 
-/* Definition of NULL */
 #include <stddef.h>
 
-/* Prototypes for self */
-/* This header contains implicit #includes for types. */
+#include "types/grammar.h"
+/* Contains implicit includes for types */
 #include "proto/input/parser.h"
 
 /*
@@ -19,9 +18,11 @@
 */
 void input_parse_grammar(struct sh *shell)
 {
-    struct bnode_s *tree __attribute__((unused)) = NULL;
+    struct grammar_s this = {0};
 
-    for (struct node_s *curr = (*shell).tokens; curr; curr = curr->next) {
+    this.tokens = (struct token_s **)node_to_table((*shell).tokens);
+    if (this.tokens == NULL) {
+        (*shell).error = ER_MALLOC;
         return;
     }
 }

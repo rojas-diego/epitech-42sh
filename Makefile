@@ -22,11 +22,12 @@ SRC =		src/constants.c 						\
 		src/input/parser/input_parse.c				\
 		src/input/parser/input_parse_tokens.c		\
 		src/input/parser/input_parse_grammar.c		\
+		src/input/input_destroy.c					\
+		src/grammar/grammar_program.c 				\
 		src/token/token.c							\
 		src/token/token_validate.c					\
 		src/token/token_validate_token.c			\
 		src/token/token_validate_meta.c				\
-		src/input/input_destroy.c					\
 
 SRCT =		tests/input/parser/input_parse.c		\
 
