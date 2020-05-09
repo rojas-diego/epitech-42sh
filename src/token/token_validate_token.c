@@ -6,7 +6,7 @@
 */
 
 /* Contains implicit includes for types. */
-#include "proto/input/token.h"
+#include "proto/token.h"
 
 /*
 ** @DESCRIPTION

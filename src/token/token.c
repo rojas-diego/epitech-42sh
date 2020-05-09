@@ -9,9 +9,9 @@
 #include <string.h>
 
 /* Contains implicit includes for types */
-#include "proto/input/token.h"
+#include "proto/token.h"
 #include "constants/tokens.h"
-#include "tests/input/tokens.h"
+#include "tests/tokens.h"
 
 /*
 ** @DESCRIPTION

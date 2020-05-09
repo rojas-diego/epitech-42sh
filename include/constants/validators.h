@@ -12,7 +12,7 @@
 /* Includes */
 /**/
 
-#include "proto/input/token.h"
+#include "proto/token.h"
 
 /**/
 /* Constants */

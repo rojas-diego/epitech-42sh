@@ -16,7 +16,7 @@
 
 #include "mynode.h"
 
-#include "types/input/token.h"
+#include "types/token.h"
 
 /**/
 /* Constants */

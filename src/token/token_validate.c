@@ -7,7 +7,7 @@
 
 #include <stdbool.h>
 
-#include "proto/input/token.h"
+#include "proto/token.h"
 
 /*
 ** @DESCRIPTION
