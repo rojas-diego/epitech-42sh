@@ -12,5 +12,8 @@
 **   Defines the character set to be used as whitespace when parsing
 */
 const char *WHITESPACE = " \t";
-
+/*
+** @DESCRIPTION
+**   Character set used when validating the TOK_WORD.
+*/
 const char *TOK_WORD_BLACKLIST = " \n|><&";
