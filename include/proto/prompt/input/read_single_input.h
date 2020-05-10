@@ -8,6 +8,8 @@
 #ifndef SH_PROTO_READ_SINGLE_INPUT_H_
 #define SH_PROTO_READ_SINGLE_INPUT_H_
 
-char read_single_input(void);
+#include "types/prompt/input.h"
+
+enum get_input_e read_single_input(char *c);
 
 #endif /* !SH_PROTO_READ_SINGLE_INPUT_H_ */

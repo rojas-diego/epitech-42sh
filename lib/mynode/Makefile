@@ -7,7 +7,7 @@
 
 CC ?=		gcc
 
-NAME =		libnode.a
+NAME =		libmynode.a
 
 SRC =		src/node_append.c	\
 		src/node_insert.c		\

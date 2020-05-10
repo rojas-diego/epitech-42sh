@@ -9,7 +9,8 @@
 #define SH_PROTO_INPUT_GET_INPUT_H_
 
 #include "types/shell.h"
+#include "types/prompt/input.h"
 
-void get_input(struct sh *shell);
+enum get_input_e get_input(struct sh *shell);
 
 #endif /* !SH_PROTO_INPUT_GET_INPUT_H_ */

@@ -10,7 +10,7 @@
 
 #include "proto/prompt/input/wait_input.h"
 
-void wait_input(void)
+int wait_input(void)
 {
     struct pollfd events = (struct pollfd) {
         .fd = 0,
@@ -18,5 +18,5 @@ void wait_input(void)
         .revents = 0,
     };
 
-    poll(&events, 1, -1);
+    return (poll(&events, 1, -1));
 }

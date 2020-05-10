@@ -14,6 +14,11 @@
 
 #include "constants/prompt/private_action.h"
 
+/*
+{"kent", &prompt_action_enter},
+{"\x1b[5~", NULL}, // Super up history:
+    take current command, go up until finding same (FN + ARROW_UP)
+*/
 static const struct {
     const char *name;
     prompt_action action;
@@ -32,15 +37,10 @@ static const struct {
     {"\x01", &prompt_action_home},
     {"\x06", &prompt_action_right},
     {"\x02", &prompt_action_left},
-    //{"kent", &prompt_action_enter},
     {"\x1b[H", &prompt_action_home},
     {"\x1b[F", &prompt_action_end},
-    {"\17", &prompt_action_cut_line},
-    {"\15", &prompt_action_clear_line},
-    /*
-    {"\x1b[5~", NULL}, // Super up history:
-        take current command, go up until finding same (FN + ARROW_UP)
-    */
+    {"\x17", &prompt_action_cut_line},
+    {"\x15", &prompt_action_clear_line},
 };
 
 /* handle IOCTL ?
@@ -60,11 +60,11 @@ if (shell->prompt.rmkx == (char *) -1) {
 
 if (shell->ioctl && shell->prompt.smkx) {
 putp(shell->prompt.smkx);
-fflush(0);
+fflush(stdout);
 }
 if (shell->ioctl && shell->prompt.rmkx) {
 putp(shell->prompt.rmkx);
-fflush(0);
+fflush(stdout);
 }
 */
 

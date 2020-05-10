@@ -18,7 +18,8 @@
 
 void prompt_action_end(struct sh *shell)
 {
-    for (; shell->prompt.cursor < shell->prompt.length; ++shell->prompt.cursor) {
+    for (; shell->prompt.cursor < shell->prompt.length;
+    ++shell->prompt.cursor) {
         putp(shell->prompt.effect[PROMPT_EFFECT_CURSOR_FORWARD]);
     }
 }

@@ -49,9 +49,11 @@ SRC =		src/constants.c 					\
 		src/prompt/actions/clear_term.c				\
 									\
 		src/prompt/input/get_input.c				\
+		src/prompt/input/get_extended_input.c			\
 		src/prompt/input/get_input_with_raw_mode.c		\
 		src/prompt/input/empty.c				\
 		src/prompt/input/add_char.c				\
+		src/prompt/input/add_string.c				\
 		src/prompt/input/wait_input.c				\
 		src/prompt/input/read_single_input.c			\
 									\
@@ -69,8 +71,8 @@ OBJ =		$(SRC:.c=.o)
 OBJM =		$(MAIN:.c=.o)
 OBJT =		$(SRCT:.c=.o)
 
-WARNINGS =	-pedantic -Wshadow -Wpointer-arith -Wcast-align	\
-		-Wmissing-prototypes -Wmissing-declarations			\
+WARNINGS =	-pedantic -Wshadow -Wpointer-arith -Wcast-align		\
+		-Wmissing-prototypes -Wmissing-declarations		\
 		-Wnested-externs -Wwrite-strings -Wredundant-decls	\
 		-Winline -Wno-long-long -Wconversion			\
 		-Wstrict-prototypes -Wunused-function			\
