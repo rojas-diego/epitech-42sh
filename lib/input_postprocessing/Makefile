@@ -36,10 +36,10 @@ TFLAGS += 	-lcriterion
 
 LDFLAGS +=	--coverage						\
 
-LIBNAMES = parser_toolbox\
-		builtins\
+LIBNAMES =	parser_toolbox						\
+		builtins						\
 
-LIBFOLDER = ..
+LIBFOLDER =	..
 
 LDLIBS += $(patsubst %, -L $(LIBFOLDER)/%, ${LIBNAMES})
 LDLIBS += $(patsubst %, -l%, ${LIBNAMES})
@@ -56,7 +56,7 @@ tests_run:
 			$(MAKE) -C $(LIBFOLDER)/$$lib/ || exit 1 ;	\
 		done
 		$(CC) $(SRC) $(SRCT) -o $(TESTNAME) $(TFLAGS) $(LDFLAGS)\
-			$(CPPFLAGS) $(CFLAGS)
+			$(CPPFLAGS) $(CFLAGS) $(LDLIBS)
 		./$(TESTNAME) 2>&1 | (grep -v "profiling")
 
 debug:		fclean

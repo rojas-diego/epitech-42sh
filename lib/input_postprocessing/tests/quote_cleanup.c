@@ -21,10 +21,10 @@ Test(ipp_quote_cleanup, very_simple_quote_cleanup)
 
 Test(ipp_quote_cleanup, simple_quote_cleanup)
 {
-    char *dirty_string = strdup("\"I \"a'm a bit '\"dirty \\\"\"':)'");
+    char *dirty_string = strdup("\"I \"a'm a bit '\"dirty \\\"\"':)\\'");
 
     ipp_quote_cleanup(dirty_string);
-    cr_assert_str_eq(dirty_string, "I am a bit dirty \":)");
+    cr_assert_str_eq(dirty_string, "I am a bit dirty \":)\\");
 }
 
 Test(ipp_quote_cleanup, medium_quote_cleanup)
@@ -41,4 +41,12 @@ Test(ipp_quote_cleanup, hard_quote_cleanup)
 
     ipp_quote_cleanup(dirty_string);
     cr_assert_str_eq(dirty_string, "I 'a'm so \"dirty");
+}
+
+Test(ipp_quote_cleanup, tricky_single_quote)
+{
+    char *dirty_string = strdup("'""\\'\\'");
+
+    ipp_quote_cleanup(dirty_string);
+    cr_assert_str_eq(dirty_string, "\\'");
 }
