@@ -6,8 +6,9 @@
 */
 
 #include <stdio.h>
-
 #include <stdlib.h>
+
+#include "proto/shell/shlvl_update.h"
 
 /*
 ** @DESCRIPTION
@@ -20,7 +21,7 @@ int shlvl_update(void)
     char nb_stringified[16] = {'\0'};
 
     if (shlvl) {
-        snprintf(nb_stringified, 16, "%d", atoi(shlvl));
+        snprintf(nb_stringified, 16, "%d", atoi(shlvl) + 1);
     } else {
         nb_stringified[0] = '1';
     }
