@@ -15,14 +15,15 @@
 
 #include "types/shell.h"
 #include "types/prompt/effect.h"
-#include "proto/prompt/cursor.h"
+#include "proto/prompt/update_cursor_pos.h"
+#include "proto/prompt/action/delete.h"
 
 void prompt_action_delete(struct sh *shell)
 {
-    if (!(shell->prompt.input)[0]
-    || shell->prompt.cursor >= strlen(shell->prompt.input)) {
+    if (!shell->prompt.length || shell->prompt.cursor >= shell->prompt.length) {
         return;
     }
+    shell->prompt.length -= 1;
     ptb_remove_char(shell->prompt.input, shell->prompt.cursor);
     if (shell->atty) {
         fputs(shell->prompt.input + shell->prompt.cursor, stdout);

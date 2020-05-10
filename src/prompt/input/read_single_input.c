@@ -8,7 +8,7 @@
 /* read */
 #include <unistd.h>
 
-#include "proto/prompt/read_single_input.h"
+#include "proto/prompt/input/read_single_input.h"
 
 char read_single_input(void)
 {

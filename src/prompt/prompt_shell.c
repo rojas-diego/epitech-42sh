@@ -5,36 +5,10 @@
 ** prompt_shell
 */
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <sys/types.h>
-
-#include "types/shell.h"
-#include "proto/prompt.h"
 #include "proto/prompt/display.h"
-
-/* prompt_fetch(shell); */
-void get_input(struct sh *shell);
-
-/*
-** @DESCRIPTION
-**   This function fetches the input from the command line and stores it in
-**   the `struct sh`.
-*/
-static void prompt_fetch(struct sh *shell)
-{
-    char *buffer = 0;
-    size_t length = 0;
-    ssize_t response;
-
-    response = getline(&buffer, &length, stdin);
-    if (response < 0) {
-        shell->active = false;
-        free(buffer);
-        buffer = NULL;
-    }
-    shell->rawinput = buffer;
-}
+#include "proto/prompt/input/get_input.h"
+#include "proto/prompt/input/get_input_with_raw_mode.h"
+#include "proto/prompt.h"
 
 /*
 ** @DESCRIPTION
@@ -44,5 +18,9 @@ static void prompt_fetch(struct sh *shell)
 void prompt_shell(struct sh *shell)
 {
     prompt_display(shell);
-    get_input(shell);
+    if (shell->atty) {
+        get_input_with_raw_mode(shell);
+    } else {
+        get_input(shell);
+    }
 }

@@ -10,13 +10,16 @@
 #include <term.h>
 
 #include "types/shell.h"
+#include "proto/prompt/action/left.h"
+#include "proto/prompt/action/right.h"
+#include "proto/prompt/action/down.h"
+#include "proto/prompt/action/up.h"
 
 void prompt_action_left(struct sh *shell)
 {
     if (shell->prompt.cursor) {
         --shell->prompt.cursor;
         putp(shell->prompt.effect[PROMPT_EFFECT_CURSOR_BACKWARD]);
-        fflush(0);
     }
 }
 
@@ -25,7 +28,6 @@ void prompt_action_right(struct sh *shell)
     if ((shell->prompt.input)[shell->prompt.cursor]) {
         ++shell->prompt.cursor;
         putp(shell->prompt.effect[PROMPT_EFFECT_CURSOR_FORWARD]);
-        fflush(0);
     }
 }
 

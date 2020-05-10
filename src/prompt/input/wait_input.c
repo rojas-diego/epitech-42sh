@@ -8,7 +8,7 @@
 /* poll */
 #include <poll.h>
 
-#include "proto/prompt/wait_input.h"
+#include "proto/prompt/input/wait_input.h"
 
 void wait_input(void)
 {

@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2020
 ** PSU_42sh_2019
 ** File description:
-** prompt
+** prompter
 */
 
 /* printf */
@@ -15,7 +15,26 @@
 #include "proto/input/parser.h"
 #include "proto/input/executer.h"
 #include "proto/prompt.h"
-#include "proto/prompt/empty.h"
+#include "proto/prompt/input/empty.h"
+
+/* temp header */
+#include <wordexp.h>
+#include "proto/exec/get_argv.h"
+#include "proto/exec/simple_exec.h"
+
+/* temp function */
+static void prompt_execution(struct sh *shell)
+{
+    wordexp_t we;
+
+    if (exec_get_argv(&we, shell->rawinput)) {
+        return;
+    }
+    input_execute(shell);
+    //split_input(shell->rawinput);
+    simple_exec(&we);
+    wordfree(&we);
+}
 
 /*
 ** @DESCRIPTION
@@ -31,9 +50,8 @@ void prompter(struct sh *shell)
             return;
         shell->rawinput = strdup(shell->prompt.input);
         input_parse(shell);
-        input_execute(shell);
-        printf("\033[1m\033[38;2;150;150;220m%s\033[0m\n", shell->prompt.input);
+        prompt_execution(shell);
         input_destroy(shell);
-        prompt_empty_input(shell);
+        prompt_input_empty(shell);
     }
 }

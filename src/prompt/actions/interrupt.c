@@ -9,12 +9,13 @@
 
 #include "types/shell.h"
 #include "types/prompt/effect.h"
-#include "proto/prompt/empty.h"
+#include "proto/prompt/input/empty.h"
 #include "proto/prompt/display.h"
+#include "proto/prompt/action/interrupt.h"
 
 void prompt_action_interrupt(struct sh *shell)
 {
     puts("^C");
-    prompt_empty_input(shell);
+    prompt_input_empty(shell);
     prompt_display(shell);
 }

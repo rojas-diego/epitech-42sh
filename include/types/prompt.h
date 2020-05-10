@@ -21,7 +21,7 @@ struct prompt
     size_t length;
     size_t cursor;
     const char *effect[PROMPT_EFFECT_COUNT];
-    struct prompt_action action[11];
+    struct prompt_action action[PROMPT_ACTION_COUNT];
     struct termios orig_term;
 };
 

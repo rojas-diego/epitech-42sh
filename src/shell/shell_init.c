@@ -8,10 +8,8 @@
 #include <unistd.h>
 #include <string.h>
 
-#include "types/shell.h"
 #include "proto/shell.h"
-
-int term_init(struct sh *shell);
+#include "proto/shell/term_init.h"
 
 /* TODO: parse av: if fd replace STDIN_FILENO in isatty by fildes */
 

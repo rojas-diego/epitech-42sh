@@ -10,10 +10,9 @@
 
 #include "proto/prompt/action.h"
 
-const int PROMPT_ACTION_COUNT = 11;
-
+/* OLD, while tigetstr is broken :d
 static const struct {
-    char const *name;
+    const char *name;
     prompt_action action;
 } TERMINFO_KEY[11] = {
     {"kcub1", &prompt_action_left},
@@ -32,5 +31,6 @@ static const struct {
     {"\x03", &prompt_action_interrupt},
     //{"x01", &prompt_action_start}
 };
+*/
 
 #endif

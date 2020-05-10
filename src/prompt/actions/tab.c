@@ -7,6 +7,7 @@
 
 #include "types/shell.h"
 #include "types/prompt/effect.h"
+#include "proto/prompt/action/tab.h"
 
 void prompt_action_tab(__attribute__((unused)) struct sh *shell)
 {

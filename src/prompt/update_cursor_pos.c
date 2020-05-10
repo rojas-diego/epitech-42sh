@@ -13,6 +13,7 @@
 #include <term.h>
 
 #include "types/prompt.h"
+#include "proto/prompt/update_cursor_pos.h"
 
 void prompt_update_cursor_pos(struct prompt *prompt)
 {
@@ -20,5 +21,4 @@ void prompt_update_cursor_pos(struct prompt *prompt)
     --size) {
         putp(prompt->effect[PROMPT_EFFECT_CURSOR_BACKWARD]);
     }
-    fflush(0);
 }

@@ -13,13 +13,15 @@
 
 #include "types/shell.h"
 #include "types/prompt/effect.h"
-#include "proto/prompt/cursor.h"
+#include "proto/prompt/update_cursor_pos.h"
+#include "proto/prompt/action/backspace.h"
 
 void prompt_action_backspace(struct sh *shell)
 {
-    if (!(shell->prompt.input)[0] || !shell->prompt.cursor) {
+    if (!shell->prompt.length || !shell->prompt.cursor) {
         return;
     }
+    shell->prompt.length -= 1;
     shell->prompt.cursor -= !!shell->prompt.cursor;
     ptb_remove_char(shell->prompt.input, shell->prompt.cursor);
     if (shell->atty) {

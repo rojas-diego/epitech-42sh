@@ -2,12 +2,12 @@
 ** EPITECH PROJECT, 2020
 ** PSU_42sh_2019
 ** File description:
-** prompt_empty_input
+** prompt_input_empty
 */
 
-#include "proto/prompt/empty.h"
+#include "proto/prompt/input/empty.h"
 
-void prompt_empty_input(struct sh *shell)
+void prompt_input_empty(struct sh *shell)
 {
     for (size_t i = 0; shell->prompt.input[i];) {
         shell->prompt.input[i] = '\0';

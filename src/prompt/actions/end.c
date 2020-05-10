@@ -14,13 +14,11 @@
 
 #include "types/shell.h"
 #include "types/prompt/effect.h"
+#include "proto/prompt/action/end.h"
 
 void prompt_action_end(struct sh *shell)
 {
-    size_t len = strlen(shell->prompt.input);
-
-    for (; shell->prompt.cursor < len; ++shell->prompt.cursor) {
-        putp(shell->prompt.effect[PROMPT_EFFECT_CURSOR_BACKWARD]);
+    for (; shell->prompt.cursor < shell->prompt.length; ++shell->prompt.cursor) {
+        putp(shell->prompt.effect[PROMPT_EFFECT_CURSOR_FORWARD]);
     }
-    fflush(0);
 }

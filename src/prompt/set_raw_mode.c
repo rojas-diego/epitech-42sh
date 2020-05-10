@@ -8,12 +8,9 @@
 /* STDIN_FILENO */
 #include <unistd.h>
 
-/* tcsetattr */
-#include <termios.h>
-
 #include "proto/prompt/set_raw_mode.h"
 
-void term_set_raw_mode(struct termios *orig_term)
+void term_set_raw_mode(const struct termios *orig_term)
 {
     struct termios new_term;
 

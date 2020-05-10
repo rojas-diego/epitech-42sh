@@ -11,11 +11,11 @@
 
 #include "types/shell.h"
 #include "types/prompt/effect.h"
+#include "proto/prompt/action/home.h"
 
 void prompt_action_home(struct sh *shell)
 {
     for (; shell->prompt.cursor > 0; --shell->prompt.cursor) {
         putp(shell->prompt.effect[PROMPT_EFFECT_CURSOR_BACKWARD]);
     }
-    fflush(0);
 }

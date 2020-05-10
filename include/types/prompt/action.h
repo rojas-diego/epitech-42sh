@@ -8,7 +8,10 @@
 #ifndef SH_PROMPT_ACTION_H_
 #define SH_PROMPT_ACTION_H_
 
-const int PROMPT_ACTION_COUNT;
+/* const int PROMPT_ACTION_COUNT; */
+enum prompt_action_e {
+    PROMPT_ACTION_COUNT = 18
+};
 
 typedef struct sh sh_t;
 

@@ -14,42 +14,56 @@ TESTNAME =	unit_tests
 MAIN =		src/main.c						\
 
 SRC =		src/constants.c 					\
+									\
+		src/exec/get_argv.c					\
+		src/exec/simple_exec.c					\
+									\
 		src/shell/shell_init.c					\
 		src/shell/shell_start.c					\
 		src/shell/shell_destroy.c				\
 		src/shell/term_init.c					\
 		src/shell/shlvl_update.c				\
+									\
 		src/input/executer/input_execute.c			\
 		src/input/parser/input_parse.c				\
-		src/input/parser/input_parse_tokens.c		\
-		src/input/parser/input_parse_grammar.c		\
-		src/input/input_destroy.c					\
+		src/input/parser/input_parse_tokens.c			\
+		src/input/parser/input_parse_grammar.c			\
+		src/input/input_destroy.c				\
+									\
 		src/grammar/grammar_program.c 				\
-		src/token/token.c							\
-		src/token/token_validate.c					\
+									\
+		src/token/token.c					\
+		src/token/token_validate.c				\
 		src/token/token_validate_token.c			\
 		src/token/token_validate_meta.c				\
+									\
 		src/prompt/actions/arrows.c				\
 		src/prompt/actions/backspace.c				\
-		src/prompt/actions/clear.c				\
-		src/prompt/actions/cursor.c				\
 		src/prompt/actions/delete.c				\
 		src/prompt/actions/end.c				\
 		src/prompt/actions/home.c				\
 		src/prompt/actions/interrupt.c				\
 		src/prompt/actions/tab.c				\
-		src/prompt/add_char.c					\
-		src/prompt/empty.c					\
+		src/prompt/actions/cut_line.c				\
+		src/prompt/actions/clear_line.c				\
+		src/prompt/actions/clear_term.c				\
+									\
+		src/prompt/input/get_input.c				\
+		src/prompt/input/get_input_with_raw_mode.c		\
+		src/prompt/input/empty.c				\
+		src/prompt/input/add_char.c				\
+		src/prompt/input/wait_input.c				\
+		src/prompt/input/read_single_input.c			\
+									\
+		src/prompt/update_cursor_pos.c				\
+		src/prompt/move_cursor_pos.c				\
 		src/prompt/display.c					\
-		src/prompt/get_input.c					\
 		src/prompt/prompt_shell.c				\
 		src/prompt/prompter.c					\
-		src/prompt/read_single_input.c				\
 		src/prompt/rewrite_color_command.c			\
 		src/prompt/set_raw_mode.c				\
-		src/prompt/wait_input.c					\
 
-SRCT =		tests/input/parser/input_parse.c		\
+SRCT =		tests/input/parser/input_parse.c			\
 
 OBJ =		$(SRC:.c=.o)
 OBJM =		$(MAIN:.c=.o)
@@ -67,8 +81,7 @@ CFLAGS += 	-Wall -Wextra
 
 CPPFLAGS += 	-I include/ -I lib/include/ 				\
 
-LDLIBS += 	-L./lib/mynode/ -lnode 					\
-		-lcurses						\
+LDLIBS += 	-lcurses						\
 
 TFLAGS += 	--coverage -lcriterion
 
