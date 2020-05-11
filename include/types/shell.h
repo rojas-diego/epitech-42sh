@@ -52,6 +52,8 @@ typedef struct sh {
     char * const        *envp;
     struct prompt       prompt;
     int                 atty;
+    struct hasher       *builtin;
+    struct hasher       *alias;
     enum sh_error_e     error;
 } sh_t;
 

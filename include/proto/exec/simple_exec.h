@@ -8,6 +8,10 @@
 #ifndef SH_SHELL_EXEC_SIMPLE_EXEC_H_
 #define SH_SHELL_EXEC_SIMPLE_EXEC_H_
 
-void simple_exec(wordexp_t *we);
+#include <wordexp.h>
+
+#include "types/shell.h"
+
+void simple_exec(struct sh *sh, wordexp_t *we);
 
 #endif /* !SH_SHELL_EXEC_SIMPLE_EXEC_H_ */

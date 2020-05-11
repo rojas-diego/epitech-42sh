@@ -32,7 +32,7 @@ static void prompt_execution(struct sh *shell)
     }
     input_execute(shell);
     //split_input(shell->rawinput);
-    simple_exec(&we);
+    simple_exec(shell, &we);
     wordfree(&we);
 }
 

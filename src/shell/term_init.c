@@ -10,6 +10,7 @@
 /* setupterm */
 #include <term.h>
 
+#include "proto/shell/builtins.h"
 #include "proto/shell/term_init.h"
 
 #include "constants/prompt/private_action.h"
@@ -111,5 +112,6 @@ int term_init(struct sh *shell)
     if (tcgetattr(0, &shell->prompt.orig_term) == -1) {
         return (1);
     }
-    return (term_init_actions(shell));
+    shell->builtin = shell_builtin_hash_create();
+    return (term_init_actions(shell) || shell->builtin == NULL);
 }

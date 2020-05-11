@@ -13,7 +13,6 @@
 int exec_get_argv(wordexp_t *we, const char *input)
 {
     if (wordexp(input, we, WRDE_UNDEF)) {
-        /* handle */
         return (1);
     }
     dprintf(2, "\033[1m\033[38;2;150;150;220m");

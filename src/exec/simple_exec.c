@@ -8,12 +8,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <wordexp.h>
 #include <sys/wait.h>
 
+#include "types/builtins.h"
+#include "hasher/get_data.h"
+
+#include "types/shell.h"
 #include "proto/exec/simple_exec.h"
 
-void simple_exec(wordexp_t *we)
+static void simple_binary_exec(wordexp_t *we)
 {
     pid_t pid = fork();
 
@@ -27,4 +30,17 @@ void simple_exec(wordexp_t *we)
         exit(84);
     }
     waitpid(pid, NULL, 0);
+}
+
+void simple_exec(struct sh *sh, wordexp_t *we)
+{
+    builtin_handler builtin = (builtin_handler) hasher_get_data(
+        sh->builtin, we->we_wordv[0]
+    );
+
+    if (builtin) {
+        builtin(sh, we->we_wordv);
+    } else {
+        simple_binary_exec(we);
+    }
 }

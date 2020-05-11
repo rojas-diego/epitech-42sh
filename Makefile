@@ -22,6 +22,7 @@ SRC =		src/constants.c 					\
 		src/shell/shell_start.c					\
 		src/shell/shell_destroy.c				\
 		src/shell/term_init.c					\
+		src/shell/builtins_init.c					\
 		src/shell/shlvl_update.c				\
 									\
 		src/input/executer/input_execute.c			\
@@ -89,9 +90,10 @@ TFLAGS += 	--coverage -lcriterion
 
 LIBNAMES =	parser_toolbox						\
 		mynode							\
-		builtins						\
 		input_postprocessing					\
 		find_binary						\
+		hasher							\
+		builtins						\
 
 LIBFOLDER =	./lib
 

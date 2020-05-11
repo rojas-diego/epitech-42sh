@@ -9,7 +9,6 @@
 #include <curses.h>
 #include <term.h>
 
-#include "types/shell.h"
 #include "proto/prompt/action/left.h"
 #include "proto/prompt/action/right.h"
 #include "proto/prompt/action/down.h"
