@@ -7,11 +7,12 @@
 
 CC ?=		gcc
 
-LIBNAMES = parser_toolbox\
-		mynode\
-		builtins\
-		input_postprocessing\
-		find_binary\
+LIBNAMES =	parser_toolbox						\
+		mynode							\
+		builtins						\
+		input_postprocessing					\
+		find_binary						\
+		hasher							\
 
 all:		COMMAND = all
 all:
