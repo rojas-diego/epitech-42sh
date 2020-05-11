@@ -23,6 +23,7 @@ void builtin_exit(const char * const *argv)
     }
     if (argv[1] != NULL || !ptb_whitelist_digit(argv[0])) {
         dprintf(2, "exit: Expression Syntax.\n");
+        return;
     }
     exit((int) strtol(argv[0], (char **) NULL, 10));
 }

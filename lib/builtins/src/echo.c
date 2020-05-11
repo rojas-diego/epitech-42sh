@@ -14,8 +14,7 @@
 void builtin_echo(const char * const *argv)
 {
     for (int i = 0; argv[i]; ++i) {
-        dprintf(1, "%s", argv[i]);
+        dprintf(1, "%*s", !i, argv[i]);
     }
     dprintf(1, "\n");
-    return;
 }

@@ -21,10 +21,24 @@
 
 static const char CHANGE_DIRECTORY_GOTO_LAST_DIR[] = "-";
 
+static enum change_directory_e builtin_change_directory_set_env(const char *env)
+{
+    char *pwd = getcwd(NULL, 0);
+
+    if (pwd == NULL) {
+        return (CD_ALLOCATION_FAIL);
+    }
+    if (setenv(env, pwd, 1)) {
+        return (CD_ALLOCATION_FAIL);
+    }
+    return (CD_SUCCESS);
+}
+
 static enum change_directory_e builtin_change_directory_to_home(void)
 {
     const char *home = builtin_get_user_home();
 
+    builtin_change_directory_set_env("OLDPWD");
     if (home == NULL) {
         perror("getpwuid");
         return (CD_GETPWUID_FAIL);
@@ -33,7 +47,7 @@ static enum change_directory_e builtin_change_directory_to_home(void)
         perror("cd");
         return (CD_CHDIR_FAIL);
     }
-    return (CD_SUCCESS);
+    return (builtin_change_directory_set_env("PWD"));
 }
 
 static enum change_directory_e builtin_change_directory_to_last_dir(void)
@@ -66,9 +80,11 @@ enum change_directory_e builtin_change_directory(const char *path)
     if (!strcmp(path, CHANGE_DIRECTORY_GOTO_LAST_DIR)) {
         return (builtin_change_directory_to_last_dir());
     }
+    builtin_change_directory_set_env("OLDPWD");
     if (chdir(path) == -1) {
         perror("cd");
         return (CD_CHDIR_FAIL);
     }
+    builtin_change_directory_set_env("PWD");
     return (CD_SUCCESS);
 }
