@@ -17,6 +17,10 @@ SRC =		src/create.c					\
 		src/insert_data.c					\
 		src/insert.c					\
 		src/pop.c					\
+		src/destroy.c					\
+		src/get.c					\
+		src/replace_data.c					\
+		src/replace_key.c					\
 
 SRCT =			\
 
@@ -33,12 +37,12 @@ DEBUG = 	-g $(WARNINGS)
 
 CFLAGS += 	-Wall -Wextra
 
-CPPFLAGS += 	-I include/ -I ../../lib/parser_toolbox/include
+CPPFLAGS += 	-I include/ -I ../parser_toolbox/include
 
 TFLAGS += 	-lcriterion
 
 LDFLAGS +=	--coverage						\
-		-L../../lib/parser_toolbox -lparser_toolbox		\
+		-L../parser_toolbox -lparser_toolbox		\
 
 all:		$(NAME)
 
@@ -47,7 +51,7 @@ $(NAME):	$(OBJ)
 		ranlib $(NAME)
 
 tests_run:
-		make -C ../../lib/parser_toolbox/
+		make -C ../parser_toolbox/
 		$(CC) $(SRC) $(SRCT) -o $(TESTNAME) $(TFLAGS) $(LDFLAGS) \
 			$(CPPFLAGS) $(CFLAGS)
 		./$(TESTNAME) 2>&1 | (grep -v "profiling")
@@ -63,7 +67,7 @@ fclean:		clean
 		$(RM) $(NAME) $(TESTNAME)
 
 fcleanlib:	fclean
-		make -C ../../lib/parser_toolbox/ fclean
+		make -C ../parser_toolbox/ fclean
 
 re:		fclean all
 

@@ -10,9 +10,6 @@
 
 typedef _Bool hasher_compare(void *, void *);
 
-struct hasher_map {
-};
-
 struct hasher {
     struct hasher *next;
     char *key;
