@@ -18,8 +18,11 @@ static const char PATH_IT_DELIMITER = ':';
 
 static int path_iteration_check_path_env(const char *path_env, char **path)
 {
-    if (path_env == NULL && *path != NULL) {
-        free(*path);
+    if (path_env == NULL) {
+        if (*path != NULL) {
+            free(*path);
+            *path = NULL;
+        }
         return (1);
     }
     if (*path == NULL) {
@@ -64,4 +67,9 @@ const char *path_iteration(const char *path_env)
     path[pos - old_pos] = '\0';
     old_pos = pos + 1;
     return (path);
+}
+
+void path_iteration_atexit(void)
+{
+    path_iteration(NULL);
 }

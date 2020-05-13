@@ -10,4 +10,6 @@
 
 const char *path_iteration(const char *path_env);
 
+void path_iteration_atexit(void);
+
 #endif /* !PATH_ITERATION_H_ */

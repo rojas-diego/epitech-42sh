@@ -49,7 +49,6 @@ all:		$(NAME)
 
 $(NAME):	$(OBJ)
 		ar rc $(NAME) $(OBJ)
-		ranlib $(NAME)
 
 tests_run:
 		make -C ../parser_toolbox/
