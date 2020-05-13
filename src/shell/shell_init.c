@@ -9,6 +9,8 @@
 #include <string.h>
 
 #include "proto/shell.h"
+#include "proto/shell/builtins.h"
+#include "proto/shell/alias.h"
 #include "proto/shell/term_init.h"
 
 /* TODO: parse av: if fd replace STDIN_FILENO in isatty by fildes */
@@ -33,5 +35,7 @@ int shell_struct_initialise(
     (*this).prompt.cursor = 0;
     (*this).prompt.length = 0;
     memset((*this).prompt.input, 0, 8192);
+    (*this).builtin = shell_builtin_hash_create();
+    (*this).alias = shell_alias_hash_create();
     return (term_init(this));
 }

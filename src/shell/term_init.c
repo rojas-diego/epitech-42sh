@@ -10,7 +10,6 @@
 /* setupterm */
 #include <term.h>
 
-#include "proto/shell/builtins.h"
 #include "proto/shell/term_init.h"
 
 #include "constants/prompt/private_action.h"
@@ -31,6 +30,8 @@ static const struct {
     {"\x1b[C", &prompt_action_right},
     {"\x1b[A", &prompt_action_up},
     {"\x1b[B", &prompt_action_down},
+    {"\x1b[H", &prompt_action_home},
+    {"\x1b[F", &prompt_action_end},
     {"\x7f", &prompt_action_backspace},
     {"\t", &prompt_action_tab},
     {"\x0C", &prompt_action_clear_term},
@@ -38,10 +39,9 @@ static const struct {
     {"\x01", &prompt_action_home},
     {"\x06", &prompt_action_right},
     {"\x02", &prompt_action_left},
-    {"\x1b[H", &prompt_action_home},
-    {"\x1b[F", &prompt_action_end},
     {"\x17", &prompt_action_cut_line},
     {"\x15", &prompt_action_clear_line},
+    {"\x04", &prompt_action_end_of_file},
 };
 
 /* handle IOCTL ?
@@ -112,6 +112,5 @@ int term_init(struct sh *shell)
     if (tcgetattr(0, &shell->prompt.orig_term) == -1) {
         return (1);
     }
-    shell->builtin = shell_builtin_hash_create();
     return (term_init_actions(shell) || shell->builtin == NULL);
 }
