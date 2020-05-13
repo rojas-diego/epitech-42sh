@@ -12,6 +12,7 @@ NAME =		libparser_toolbox.a
 SRC =		src/add_char.c		\
 		src/argv_length.c	\
 		src/blacklist.c		\
+		src/consts.c		\
 		src/includes.c		\
 		src/range.c		\
 		src/remove_char.c	\
@@ -30,7 +31,6 @@ all:		$(NAME)
 
 $(NAME):	$(OBJ)
 		ar rc $(NAME) $(OBJ)
-		ranlib $(NAME)
 
 clean:
 		$(RM) $(OBJ)
