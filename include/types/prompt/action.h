@@ -10,7 +10,7 @@
 
 /* const int PROMPT_ACTION_COUNT; */
 enum prompt_action_e {
-    PROMPT_ACTION_COUNT = 18
+    PROMPT_ACTION_COUNT = 19
 };
 
 typedef struct sh sh_t;

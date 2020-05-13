@@ -23,7 +23,14 @@ SRC =		src/constants.c 					\
 		src/shell/shell_destroy.c				\
 		src/shell/term_init.c					\
 		src/shell/builtins_init.c					\
+		src/shell/alias_init.c					\
 		src/shell/shlvl_update.c				\
+									\
+		src/shell/builtin_handlers/builtins.c				\
+		src/shell/builtin_handlers/cd.c				\
+		src/shell/builtin_handlers/echo.c				\
+		src/shell/builtin_handlers/env.c				\
+		src/shell/builtin_handlers/exit.c				\
 									\
 		src/input/executer/input_execute.c			\
 		src/input/parser/input_parse.c				\
@@ -41,6 +48,7 @@ SRC =		src/constants.c 					\
 		src/prompt/actions/arrows.c				\
 		src/prompt/actions/backspace.c				\
 		src/prompt/actions/delete.c				\
+		src/prompt/actions/end_of_file.c				\
 		src/prompt/actions/end.c				\
 		src/prompt/actions/home.c				\
 		src/prompt/actions/interrupt.c				\
@@ -88,12 +96,12 @@ LDLIBS += 	-lcurses						\
 
 TFLAGS += 	--coverage -lcriterion
 
-LIBNAMES =	parser_toolbox						\
+LIBNAMES =	builtins						\
 		mynode							\
 		input_postprocessing					\
 		find_binary						\
 		hasher							\
-		builtins						\
+		parser_toolbox						\
 
 LIBFOLDER =	./lib
 
@@ -110,7 +118,6 @@ $(NAME):	$(MAIN:.c=.o)
 $(NAME):	$(OBJ)
 $(NAME):	compiling
 		@ echo "===> Compiling libraries..."
-		@ $(MAKE) -C ./lib/mynode/ -s
 		@ $(MAKE) -C ./lib/ -s
 		@ $(CC) $(MAIN:.c=.o) $(OBJ) -o $(NAME) $(LDLIBS)	\
 			&& echo "===> Success!!"
@@ -139,7 +146,6 @@ fclean:		clean
 
 fcleanlib:	fclean
 		@ echo "===> File cleaning libraries..."
-		@ $(MAKE) -C ./lib/mynode/ fclean -s
 		@ $(MAKE) -C ./lib/ fclean -s
 
 re:		fclean all

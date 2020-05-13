@@ -24,7 +24,8 @@ void prompt_action_cut_line(struct sh *shell)
     size_t diff = shell->prompt.length - shell->prompt.cursor;
 
     if (diff == 0) {
-        return (prompt_action_clear_line(shell));
+        prompt_action_clear_line(shell);
+        return;
     }
     strncpy(
         shell->prompt.input,

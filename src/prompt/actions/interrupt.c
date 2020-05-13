@@ -7,8 +7,6 @@
 
 #include <stdio.h>
 
-#include "types/shell.h"
-#include "types/prompt/effect.h"
 #include "proto/prompt/input/empty.h"
 #include "proto/prompt/display.h"
 #include "proto/prompt/action/interrupt.h"

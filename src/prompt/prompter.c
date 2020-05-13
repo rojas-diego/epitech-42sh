@@ -46,8 +46,12 @@ void prompter(struct sh *shell)
 {
     while (shell->active) {
         prompt_shell(shell);
-        if (!shell->active)
+        if (!shell->active) {
             return;
+        }
+        if (!shell->prompt.input[0]) {
+            continue;
+        }
         shell->rawinput = strdup(shell->prompt.input);
         input_parse(shell);
         prompt_execution(shell);
