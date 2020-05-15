@@ -7,6 +7,8 @@
 
 #include <stdio.h>
 
+#include "proto/prompt/rewrite_color_command.h"
+
 #include "proto/prompt/action/end_of_file.h"
 
 void prompt_action_end_of_file(struct sh *shell)

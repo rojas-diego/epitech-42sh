@@ -18,5 +18,6 @@
 void input_destroy(struct sh *shell)
 {
     free(shell->rawinput);
+    shell->rawinput = NULL;
     node_free(&(*shell).tokens, &free);
 }

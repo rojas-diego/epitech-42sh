@@ -25,13 +25,13 @@ static enum get_input_e add_input_or_execute_action(
     enum get_input_e status = GET_INPUT_CONTINUE;
     char *buffer = NULL;
 
-    if (character == '\n' || character == 0x00
-    || (!shell->prompt.length && character == 0x04)) {
-        shell->active = !(character == 0x04);
+    if (character == '\n' || character == 0x00) {
         rewrite_color_command(shell);
         return (GET_INPUT_END_OF_TRANSMISSION);
     }
     buffer = get_extended_input(shell, &status, character);
+    if (!shell->active)
+        return (GET_INPUT_END_OF_TRANSMISSION);
     if (status != GET_INPUT_CONTINUE) {
         if (buffer)
             free(buffer);

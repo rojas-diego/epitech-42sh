@@ -17,6 +17,8 @@
 #include "proto/prompt.h"
 #include "proto/prompt/input/empty.h"
 
+/* if (SYNTAX_ERROR && !shell->atty) { break; } */
+
 /* temp header */
 #include <wordexp.h>
 #include "proto/exec/get_argv.h"
@@ -49,10 +51,9 @@ void prompter(struct sh *shell)
         if (!shell->active) {
             return;
         }
-        if (!shell->prompt.input[0]) {
+        if (shell->rawinput == NULL) {
             continue;
         }
-        shell->rawinput = strdup(shell->prompt.input);
         input_parse(shell);
         prompt_execution(shell);
         input_destroy(shell);
