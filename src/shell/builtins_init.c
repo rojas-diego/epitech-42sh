@@ -15,24 +15,25 @@
 #include "proto/shell/builtin_handlers.h"
 #include "proto/shell/builtins.h"
 
-static const int BUILTIN_COUNT = 12;
+static const int BUILTIN_COUNT = 13;
 
 static const struct {
     const char *key;
     builtin_handler func;
 } BUILTINS_DICT[] = {
     {"unsetenv", &builtin_unsetenv_handler},
-    {"unalias", NULL},
+    {"unalias", &builtin_unalias_handler},
+    {"source", &builtin_source_handler},
     {"setenv", &builtin_setenv_handler},
     {"fg", NULL},
     {"exit", &builtin_exit_handler},
     {"echo", &builtin_echo_handler},
     {"cd", &builtin_change_directory_handler},
     {"builtins", &builtin_builtins_handler},
-    {"bindkey", NULL},
-    {"alias", NULL},
+    {"bindkey", &builtin_bindkey_handler},
+    {"alias", &builtin_alias_handler},
     {"@", NULL},
-    {":", NULL},
+    {":", &builtin_null_command_handler},
 };
 
 struct hasher *shell_builtin_hash_create(void)

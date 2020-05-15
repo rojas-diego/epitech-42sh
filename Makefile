@@ -22,15 +22,20 @@ SRC =		src/constants.c 					\
 		src/shell/shell_start.c					\
 		src/shell/shell_destroy.c				\
 		src/shell/term_init.c					\
-		src/shell/builtins_init.c					\
+		src/shell/builtins_init.c				\
 		src/shell/alias_init.c					\
 		src/shell/shlvl_update.c				\
 									\
-		src/shell/builtin_handlers/builtins.c				\
+		src/shell/builtin_handlers/builtins.c			\
 		src/shell/builtin_handlers/cd.c				\
-		src/shell/builtin_handlers/echo.c				\
-		src/shell/builtin_handlers/env.c				\
-		src/shell/builtin_handlers/exit.c				\
+		src/shell/builtin_handlers/echo.c			\
+		src/shell/builtin_handlers/env.c			\
+		src/shell/builtin_handlers/exit.c			\
+		src/shell/builtin_handlers/alias.c			\
+		src/shell/builtin_handlers/bindkey.c			\
+		src/shell/builtin_handlers/fg.c				\
+		src/shell/builtin_handlers/source.c			\
+		src/shell/builtin_handlers/null_command.c		\
 									\
 		src/input/executer/input_execute.c			\
 		src/input/parser/input_parse.c				\
@@ -48,7 +53,7 @@ SRC =		src/constants.c 					\
 		src/prompt/actions/arrows.c				\
 		src/prompt/actions/backspace.c				\
 		src/prompt/actions/delete.c				\
-		src/prompt/actions/end_of_file.c				\
+		src/prompt/actions/end_of_file.c			\
 		src/prompt/actions/end.c				\
 		src/prompt/actions/home.c				\
 		src/prompt/actions/interrupt.c				\
@@ -112,7 +117,7 @@ CPPFLAGS +=	$(patsubst %, -I $(LIBFOLDER)/%/include/, ${LIBNAMES})
 all:		$(NAME)
 
 compiling:
-		@echo "===> Compiling source files..."
+		@ echo "===> Compiling source files..."
 
 $(NAME):	$(MAIN:.c=.o)
 $(NAME):	$(OBJ)

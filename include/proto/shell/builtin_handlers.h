@@ -9,13 +9,30 @@
 #define SH_SHELL_BUILTIN_HANDLERS_H_
 
 int builtin_exit_handler(struct sh *shell, const char * const *argv);
+
 int builtin_echo_handler(struct sh *shell, const char * const *argv);
+
 int builtin_setenv_handler(struct sh *shell, const char * const *argv);
+
 int builtin_unsetenv_handler(struct sh *shell, const char * const *argv);
+
 int builtin_builtins_handler(struct sh *shell, const char * const *argv);
+
 int builtin_change_directory_handler(
     struct sh *shell,
     const char * const *argv
 );
+
+int builtin_alias_handler(struct sh *shell, const char * const *argv);
+
+int builtin_unalias_handler(struct sh *shell, const char * const *argv);
+
+int builtin_null_command_handler(struct sh *shell, const char * const *argv);
+
+int builtin_bindkey_handler(struct sh *shell, const char * const *argv);
+
+int builtin_source_handler(struct sh *shell, const char * const *argv);
+
+int builtin_fg_handler(struct sh *shell, const char * const *argv);
 
 #endif /* !SH_SHELL_BUILTIN_HANDLERS_H_ */
