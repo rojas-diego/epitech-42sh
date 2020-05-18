@@ -8,6 +8,9 @@
 #ifndef POSTPROCESS_QUOTE_CLEANUP_H_
 #define POSTPROCESS_QUOTE_CLEANUP_H_
 
+/* asprintf */
+#define _GNU_SOURCE
+
 enum env_var_replace_status_e
 {
     ENV_VAR_REPLACE_SUCCESS,

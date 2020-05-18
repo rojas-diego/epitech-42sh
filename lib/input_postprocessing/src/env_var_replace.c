@@ -5,8 +5,6 @@
 ** env_var_replace
 */
 
-/* asprintf */
-#define _GNU_SOURCE
 /* setenv */
 #include <stdlib.h>
 /* asprintf && dprintf */
