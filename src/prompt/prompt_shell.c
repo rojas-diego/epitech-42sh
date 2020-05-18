@@ -26,8 +26,10 @@ static void prompt_fetch(struct sh *shell)
     ssize_t response;
 
     response = getline(&buffer, &length, stdin);
-    if (response < 0) {
-        shell->active = false;
+    if (response < 0 || *buffer == '\n') {
+        if (response < 0) {
+            shell->active = false;
+        }
         if (buffer)
             free(buffer);
         buffer = NULL;
@@ -45,6 +47,10 @@ void prompt_shell(struct sh *shell)
     prompt_display(shell);
     if (shell->atty) {
         get_input_with_raw_mode(shell);
+        if (!shell->prompt.input) {
+            shell->rawinput = NULL;
+            return;
+        }
         shell->rawinput = strdup(shell->prompt.input);
     } else {
         prompt_fetch(shell);

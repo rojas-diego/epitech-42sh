@@ -20,4 +20,5 @@ void shell_destroy(struct sh *shell)
 {
     hasher_destroy(shell->builtin, true, false);
     hasher_destroy(shell->alias, true, true);
+    hasher_destroy(shell->bindkey, true, false);
 }

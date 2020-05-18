@@ -2,20 +2,31 @@
 ** EPITECH PROJECT, 2020
 ** PSU_42sh_2019
 ** File description:
-** alias
+** bindkey
 */
 
 #include <string.h>
 
+#include <curses.h>
+/* setupterm */
+#include <term.h>
+
 #include "hasher/insert_data.h"
 
-#include "proto/shell/alias.h"
+#include "proto/shell/term_init.h"
+#include "proto/shell/bindkey.h"
+#include "constants/prompt/private_action.h"
 
-static const int BINDKEY_COUNT = 15;
+static const int BINDKEY_COUNT = 19;
 
+/*
+{"kent", &prompt_action_enter},
+{"\x1b[5~", NULL}, // Super up history:
+    take current command, go up until finding same (FN + ARROW_UP)
+*/
 static const struct {
     const char *key;
-    const char *data;
+    prompt_action data;
 } BINDKEY_DICT[] = {
     {"kdch1", &prompt_action_delete},
     {"khome", &prompt_action_home},
@@ -38,20 +49,23 @@ static const struct {
     {"\x04", &prompt_action_end_of_file},
 };
 
-struct hasher *shell_alias_hash_create(void)
+struct hasher *shell_bindkey_hash_create(void)
 {
     struct hasher *hash = NULL;
-    void *data = NULL;
+    char *key = NULL;
 
     for (int i = 0; i < BINDKEY_COUNT; ++i) {
-        data = (void *) strdup(BINDKEY_DICT[i].data);
-        if (data == NULL) {
+        key = i > 2 ? strdup(BINDKEY_DICT[i].key)
+            : tigetstr(BINDKEY_DICT[i].key);
+        if ((i < 3 && key == (char *) -1) || key == NULL) {
             return (NULL);
         }
+        if (i < 3)
+            key = strdup(key);
         if (hasher_insert_data(
             &hash,
-            strdup(BINDKEY_DICT[i].key),
-            data
+            key,
+            (void *) BINDKEY_DICT[i].data
         )) {
             return (NULL);
         }

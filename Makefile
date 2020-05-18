@@ -23,6 +23,7 @@ SRC =		src/constants.c 					\
 		src/shell/shell_destroy.c				\
 		src/shell/term_init.c					\
 		src/shell/builtins_init.c				\
+		src/shell/bindkey_init.c				\
 		src/shell/alias_init.c					\
 		src/shell/shlvl_update.c				\
 									\

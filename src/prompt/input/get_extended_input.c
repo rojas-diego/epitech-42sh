@@ -25,13 +25,13 @@ static enum get_input_e find_action_match(
 {
     bool still_matching = false;
 
-    for (int i = 0; i < PROMPT_ACTION_COUNT; ++i) {
-        if (strncmp(shell->prompt.action[i].key, buffer, len)) {
+    for (struct hasher *hash = shell->bindkey; hash; hash = hash->next) {
+        if (strncmp(hash->key, buffer, len)) {
             continue;
         }
-        if (!strcmp(shell->prompt.action[i].key, buffer)) {
+        if (!strcmp(hash->key, buffer)) {
             free(buffer);
-            shell->prompt.action[i].action(shell);
+            ((prompt_action) hash->data)(shell);
             return (GET_INPUT_ACTION_FOUND);
         }
         still_matching = true;

@@ -15,6 +15,7 @@
 #include <stdbool.h>
 
 #include "mynode.h"
+#include "hasher/type.h"
 
 #include "types/prompt.h"
 
@@ -54,6 +55,7 @@ typedef struct sh {
     int                 atty;
     struct hasher       *builtin;
     struct hasher       *alias;
+    struct hasher       *bindkey;
     enum sh_error_e     error;
 } sh_t;
 
