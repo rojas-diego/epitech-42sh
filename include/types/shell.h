@@ -49,7 +49,7 @@ enum sh_error_e {
 typedef struct sh {
     bool                active;
     char                *rawinput;
-    node_t              *tokens;
+    struct node_s       *tokens;
     char * const        *envp;
     struct prompt       prompt;
     int                 atty;
