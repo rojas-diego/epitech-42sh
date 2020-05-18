@@ -11,7 +11,6 @@
 #include "hasher/insert.h"
 /* */
 #include "hasher/insert_data.h"
-#include "hasher/create.h"
 
 enum hasher_e hasher_insert_data(
     struct hasher **hasher,
@@ -25,5 +24,20 @@ enum hasher_e hasher_insert_data(
         return (HASHER_ALLOCATION_FAIL);
     }
     hasher_insert(hasher, new);
+    return (HASHER_SUCCESS);
+}
+
+enum hasher_e hasher_insert_data_ordered(
+    struct hasher **hasher,
+    char *key,
+    void *data
+)
+{
+    struct hasher *new = hasher_create(key, data);
+
+    if (new == NULL) {
+        return (HASHER_ALLOCATION_FAIL);
+    }
+    hasher_insert_ordered(hasher, new);
     return (HASHER_SUCCESS);
 }

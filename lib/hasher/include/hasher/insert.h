@@ -12,4 +12,6 @@
 
 void hasher_insert(struct hasher **hasher, struct hasher *to_insert);
 
+void hasher_insert_ordered(struct hasher **hasher, struct hasher *to_insert);
+
 #endif /* !HASHER_INSERT_H_ */

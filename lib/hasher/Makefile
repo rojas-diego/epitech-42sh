@@ -21,6 +21,7 @@ SRC =		src/create.c					\
 		src/get.c					\
 		src/replace_data.c					\
 		src/replace_key.c					\
+		src/override.c					\
 
 SRCT =			\
 

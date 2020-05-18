@@ -17,4 +17,10 @@ enum hasher_e hasher_insert_data(
     void *data
 );
 
+enum hasher_e hasher_insert_data_ordered(
+    struct hasher **hasher,
+    char *key,
+    void *data
+);
+
 #endif /* !HASHER_INSERT_DATA_H_ */

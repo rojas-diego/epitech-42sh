@@ -23,5 +23,6 @@ struct hasher *hasher_create(char *key, void *data)
     }
     hasher->key = key;
     hasher->data = data;
+    hasher->next = NULL;
     return (hasher);
 }

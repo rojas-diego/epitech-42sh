@@ -25,6 +25,7 @@ struct hasher *hasher_pop(struct hasher **hasher, const char *key)
         }
         poped = current->next;
         current->next = current->next->next;
+        poped->next = NULL;
         break;
     }
     return (poped);
