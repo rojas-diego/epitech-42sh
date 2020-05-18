@@ -84,6 +84,7 @@ SRC =		src/constants.c 					\
 		src/prompt/set_raw_mode.c				\
 
 SRCT =		tests/input/parser/input_parse.c			\
+	tests/grammar/grammar_match.c			\
 
 OBJ =		$(SRC:.c=.o)
 OBJM =		$(MAIN:.c=.o)
