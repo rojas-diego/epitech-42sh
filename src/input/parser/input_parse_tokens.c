@@ -56,8 +56,8 @@ static struct token_s *input_scan(char const *string, unsigned int *index)
 */
 void input_parse_tokens(struct sh *shell)
 {
-    node_t *tokens = NULL;
-    token_t *new;
+    struct node_s *tokens = NULL;
+    struct token_s *new;
 
     for (unsigned int i = 0; (*shell).rawinput[i]; i++) {
         if (ptb_includes((*shell).rawinput[i], WHITESPACE))
