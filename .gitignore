@@ -6,6 +6,9 @@
 unit_tests
 local/**
 vgcore.*
+.42shrc
+.42sh_history
+.42sh_profile
 
 # Coverage
 *.gcno
