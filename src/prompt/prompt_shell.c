@@ -47,7 +47,7 @@ void prompt_shell(struct sh *shell)
     prompt_display(shell);
     if (shell->atty) {
         get_input_with_raw_mode(shell);
-        if (!shell->prompt.input) {
+        if (!shell->prompt.input[0]) {
             shell->rawinput = NULL;
             return;
         }
