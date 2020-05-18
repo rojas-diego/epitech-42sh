@@ -84,8 +84,8 @@ SRC =		src/constants.c 					\
 		src/prompt/rewrite_color_command.c			\
 		src/prompt/set_raw_mode.c				\
 
-SRCT =		tests/input/parser/input_parse.c			\
-	tests/grammar/grammar_match.c			\
+SRCT =		tests/input/parser/test_input_parse.c			\
+	tests/grammar/test_grammar_match.c			\
 
 OBJ =		$(SRC:.c=.o)
 OBJM =		$(MAIN:.c=.o)
