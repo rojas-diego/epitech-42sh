@@ -1,0 +1,90 @@
+# # # # # # # # # # # # # # #
+# TCSH Grammar              #
+# # # # # # # # # # # # # # #
+
+###### Tokens ######
+
+EOF                 ::=     '\0'
+                    ;
+
+NEWLINE             ::=     '\n'
+                    ;
+
+SEMICOLON           ::=     ';'
+                    ;
+
+IO_NUMBER           ::=     '1'
+                    |       '2'
+                    ;
+
+GREAT               ::=     '>'
+                    ;
+
+DGREAT              ::=     '>>'
+                    ;
+
+LESS                ::=     '<'
+                    ;
+
+DLESS               ::=     '<<'
+                    ;
+
+###### Grammar ######
+
+program             ::=     [ block ] EOF
+                    ;
+
+block               ::=     compound_command [ block ]
+                    ;
+
+compound_command    ::=     ( command ) [ compound_command ]
+                    ;
+
+command             ::=     ( simple_command | shell_command | pipeline ) [ command ]
+                    ;
+
+pipeline            ::=     command TOK_PIPE command
+                    ;
+
+simple_command      ::=     command command_separator
+                    |       command redirection
+                    |       command element
+                    ;
+
+shell_command       ::=     if_statement
+                    ;
+
+if_statement        ::=     TOK_IF TOK_OPARANTH expression TOK_CPARANTH TOK_THEN [ block ] [ elseif_statement ] TOK_ENDIF
+                    ;
+
+elseif_statement    ::=     TOK_ELSE_IF TOK_OPARANTH expression TOK_CPARANTH TOK_THEN [ block ]
+                    ;
+
+else_statement      ::=     TOK_ELSE [block]
+
+expression          ::=     word
+                    ;
+
+command_separator   ::=     NEWLINE
+                    |       SEMICOLON
+                    ;
+
+redirection         ::=     IO_NUMBER GREAT WORD
+                    |       IO_NUMBER LESS WORD
+                    |       IO_NUMBER DGREAT WORD
+                    |       IO_NUMBER DLESS WORD
+                    ;
+
+redirection         ::=     GREAT WORD
+                    |       LESS WORD
+                    |       DLESS WORD
+                    |       DGREAT WORD
+                    |       IO_NUMBER GREAT WORD
+                    |       IO_NUMBER LESS WORD
+                    |       IO_NUMBER DGREAT WORD
+                    |       IO_NUMBER DLESS WORD
+                    ;
+
+element             ::=     NAME
+                    |       WORD
+                    ;
