@@ -39,7 +39,7 @@ void simple_exec(struct sh *sh, wordexp_t *we)
     );
 
     if (builtin) {
-        builtin(sh, we->we_wordv);
+        builtin(sh, (const char *const *)we->we_wordv);
     } else {
         simple_binary_exec(we);
     }

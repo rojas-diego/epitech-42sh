@@ -15,14 +15,17 @@
 ** @DESCRIPTION
 **   This function takes in a token list and populates a binary
 **   tree to later be executed.
+** @TODO
+**   Find lib / libc implementation for 2d pointer array size getter.
 */
 void input_parse_grammar(struct sh *shell)
 {
     struct grammar_s this = {0};
 
-    this.tokens = (struct token_s **)node_to_table((*shell).tokens);
+    this.tokens = (struct token_s **)node_to_table(shell->tokens);
     if (this.tokens == NULL) {
-        (*shell).error = ER_MALLOC;
+        shell->error = ER_MALLOC;
         return;
     }
+    for (; this.tokens[this.token_count]; this.token_count++);
 }

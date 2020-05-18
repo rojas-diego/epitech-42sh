@@ -12,6 +12,7 @@
 /* Includes */
 /**/
 
+#include <stdbool.h>
 #include "types/grammar.h"
 
 /**/
@@ -27,5 +28,9 @@
 /**/
 
 void grammar_program(struct grammar_s *this);
+bool grammar_match(struct grammar_s *this, unsigned long int count, ...);
+struct token_s *grammar_get_previous(struct grammar_s *this);
+struct token_s *grammar_peek(struct grammar_s *this);
+struct tokens_s *grammar_advance(struct grammar_s *this);
 
 #endif
