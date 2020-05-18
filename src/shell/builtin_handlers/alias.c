@@ -5,6 +5,8 @@
 ** builtins
 */
 
+#include "gnu_source.h"
+
 #include <stdlib.h>
 #include <string.h>
 
@@ -19,8 +21,6 @@
 #include "builtins.h"
 #include "types/shell.h"
 #include "proto/shell/builtin_handlers.h"
-
-#include "gnu_source.h"
 
 char *alias_concat_argv(const char * const *argv)
 {

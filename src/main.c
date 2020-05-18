@@ -11,7 +11,7 @@
 ** @DESCRIPTION
 **   Main.
 */
-int main(int argc, const char **argv, char * const *envp)
+int main(int argc, char *const *argv, char * const *envp)
 {
     struct sh shell;
 
