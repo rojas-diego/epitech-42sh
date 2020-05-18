@@ -18,6 +18,7 @@
 #include "hasher/type.h"
 
 #include "types/prompt.h"
+#include "types/job.h"
 
 /**/
 /* Constants */
@@ -50,6 +51,7 @@ typedef struct sh {
     bool                active;
     char                *rawinput;
     node_t              *tokens;
+    pid_t               pgid;
     char * const        *envp;
     struct prompt       prompt;
     int                 atty;
@@ -57,6 +59,8 @@ typedef struct sh {
     struct hasher       *alias;
     struct hasher       *bindkey;
     enum sh_error_e     error;
+    struct job_s        *job;
+    int                 fd;
 } sh_t;
 
 /**/

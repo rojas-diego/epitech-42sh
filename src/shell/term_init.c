@@ -5,12 +5,16 @@
 ** term_init
 */
 
+#include <sys/types.h>
+#include <termios.h>
+
 #include <unistd.h>
 #include <curses.h>
 /* setupterm */
 #include <term.h>
 
 #include "proto/shell/term_init.h"
+#include "proto/sighandler.h"
 
 /* handle IOCTL ?
 #include <sys/ioctl.h>
@@ -37,6 +41,24 @@ fflush(stdout);
 }
 */
 
+static int term_job_init(struct sh *shell)
+{
+    pid_t shell_pgid = getpgrp();
+
+    while (shell_pgid != tcgetpgrp(STDIN_FILENO)) {
+        kill(-shell_pgid, SIGTTIN);
+        shell_pgid = getpgrp();
+    }
+    term_set_signal_handling(SIG_IGN);
+    shell->pgid = getpid();
+    if (setpgid(shell_pgid, shell_pgid) < 0) {
+        perror("Couldn't put the shell in its own process group");
+        return (1);
+    }
+    tcsetpgrp(STDIN_FILENO, shell_pgid);
+    return (0);
+}
+
 /*
 ** @DESCRIPTION
 **   Initialises term && term keys.
@@ -61,5 +83,6 @@ int term_init(struct sh *shell)
     if (tcgetattr(0, &shell->prompt.orig_term) == -1) {
         return (1);
     }
+    term_job_init(shell);
     return (0);
 }

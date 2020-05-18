@@ -51,10 +51,10 @@ SRC =		src/constants.c 					\
 		src/token/token_validate_token.c			\
 		src/token/token_validate_meta.c				\
 									\
-		src/grammar/grammar_advance.c \
-		src/grammar/grammar_match.c \
-		src/grammar/grammar_toolbox.c \
-										\
+		src/grammar/grammar_advance.c				\
+		src/grammar/grammar_match.c				\
+		src/grammar/grammar_toolbox.c				\
+									\
 		src/prompt/actions/arrows.c				\
 		src/prompt/actions/backspace.c				\
 		src/prompt/actions/delete.c				\
@@ -83,9 +83,22 @@ SRC =		src/constants.c 					\
 		src/prompt/prompter.c					\
 		src/prompt/rewrite_color_command.c			\
 		src/prompt/set_raw_mode.c				\
+									\
+		src/job/process/launch.c				\
+		src/job/process/update_status.c				\
+		src/job/utils.c						\
+		src/job/launch.c					\
+		src/job/put.c						\
+		src/job/sighandler.c					\
+		src/job/continue.c					\
+		src/job/free.c						\
+		src/job/format_info.c					\
+		src/job/wait_for.c					\
+		src/job/do_notification.c				\
+		src/job/initialize.c				\
 
 SRCT =		tests/input/parser/input_parse.c			\
-	tests/grammar/grammar_match.c			\
+		tests/grammar/grammar_match.c				\
 
 OBJ =		$(SRC:.c=.o)
 OBJM =		$(MAIN:.c=.o)

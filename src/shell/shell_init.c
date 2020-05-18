@@ -32,15 +32,17 @@ int shell_struct_initialise(
     (*this).envp = ep;
     (*this).rawinput = 0;
     (*this).active = true;
-    (*this).atty = isatty(STDIN_FILENO);
+    (*this).fd = STDIN_FILENO;
+    (*this).atty = isatty((*this).fd);
     (*this).prompt.cursor = 0;
     (*this).prompt.length = 0;
+    (*this).job = NULL;
     memset((*this).prompt.input, 0, 8192);
     if (term_init(this)) {
         return (1);
     }
     (*this).builtin = shell_builtin_hash_create();
-    (*this).alias = NULL;
     (*this).bindkey = shell_bindkey_hash_create();
+    (*this).alias = NULL;
     return (!((*this).builtin && (*this).bindkey));
 }
