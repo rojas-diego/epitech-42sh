@@ -21,6 +21,8 @@
 **   This structure is mainly used for debugging.
 */
 static const char *TOK_NAMES[] = {
+    "(Unknown)",
+    "EOF",
     "Word",
     "Assignment Word",
     "Name",
@@ -41,22 +43,26 @@ static const char *TOK_NAMES[] = {
     "Less Great",
     "Double Less Dash",
     "Clobber",
-    "If",
-    "Then",
-    "Else",
-    "Elif",
-    "Fi",
-    "Do",
-    "Done",
-    "Case",
-    "Esac",
-    "While",
-    "Until",
-    "For",
     "Left Brace",
     "Right Brace",
     "Bang",
-    "In"};
+    "Break",
+    "Switch",
+    "Case",
+    "Breaksw",
+    "Default:",
+    "Endsw",
+    "Continue",
+    "Foreach",
+    "End",
+    "Goto",
+    "If",
+    "Else if",
+    "Else",
+    "Then",
+    "Repeat",
+    "While"
+};
 
 /**/
 /* Structures / Typedef / Enums declarations */

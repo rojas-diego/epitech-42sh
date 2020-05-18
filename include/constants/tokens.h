@@ -17,42 +17,49 @@
 /**/
 
 static const char *TOKENS[] = {
-    0,       /* WORD */
-    0,       /* ASSIGNMENT_WORD */
-    0,       /* NAME */
-    "\n",    /* NEWLINE */
-    0,       /* IO_NUMBER */
-    "<",     /* LESS */
-    ">",     /* GREAT */
-    "|",     /* PIPE */
-    ";",     /* SEMI */
-    "&",     /* AMPERSAND */
-    "&&",    /* AND_IF */
-    "||",    /* OR_IF */
-    ";;",    /* DSEMI */
-    "<<",    /* DLESS */
-    ">>",    /* DGREAT */
-    "<&",    /* LESSAND */
-    ">&",    /* GREATAND */
-    "<>",    /* LESSGREAT */
-    "<<-",   /* DLESSDASH */
-    ">|",    /* CLOBBER */
-    "if",    /* IF */
-    "then",  /* THEN */
-    "else",  /* ELSE */
-    "elif",  /* ELIF */
-    "fi",    /* FI */
-    "do",    /* DO */
-    "done",  /* DONE */
-    "case",  /* CASE */
-    "esac",  /* ESAC */
-    "while", /* WHILE */
-    "until", /* UNTIL */
-    "for",   /* FOR */
-    "{",     /* LBRACE */
-    "}",     /* RBRACE */
-    "!",     /* BANG */
-    "in"     /* IN */
+    "",         /* UNKNOW */
+    "",         /* EOF */
+    0,          /* WORD */
+    0,          /* ASSIGNMENT_WORD */
+    0,          /* NAME */
+    "\n",       /* NEWLINE */
+    0,          /* IO_NUMBER */
+    "<",        /* LESS */
+    ">",        /* GREAT */
+    "|",        /* PIPE */
+    ";",        /* SEMI */
+    "&",        /* AMPERSAND */
+    "&&",       /* AND_IF */
+    "||",       /* OR_IF */
+    ";;",       /* DSEMI */
+    "<<",       /* DLESS */
+    ">>",       /* DGREAT */
+    "<&",       /* LESSAND */
+    ">&",       /* GREATAND */
+    "<>",       /* LESSGREAT */
+    "<<-",      /* DLESSDASH */
+    ">|",       /* CLOBBER */
+    "{",        /* LBRACE */
+    "}",        /* RBRACE */
+    "(",        /* LBRACE */
+    ")",        /* RBRACE */
+    "!",        /* BANG */
+    "break",    /* BREAK */
+    "switch",   /* SWITCH */
+    "case",     /* CASE */
+    "breaksw",  /* BREAKSW */
+    "default:", /* DEFAULT */
+    "endsw",    /* ENDSW */
+    "continue", /* CONTINUE */
+    "foreach",  /* FOREACH */
+    "end",      /* END */
+    "goto",     /* GOTO */
+    "if",       /* IF */
+    "else if",  /* ELSE IF */
+    "else",     /* ELSE */
+    "then",     /* THEN */
+    "repeat",   /* REPEAT */
+    "while"     /* WHILE */
 };
 
 /**/

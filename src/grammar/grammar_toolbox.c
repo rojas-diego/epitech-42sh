@@ -5,7 +5,7 @@
 ** grammar_toolbox
 */
 
-#include "types/grammar.h"
+#include "proto/grammar.h"
 
 /*
 ** @DESCRIPTION

@@ -5,7 +5,7 @@
 ** grammar_advance
 */
 
-#include "types/grammar.h"
+#include "proto/grammar.h"
 
 /*
 ** @DESCRIPTION
