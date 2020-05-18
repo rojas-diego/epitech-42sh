@@ -5,6 +5,7 @@
 /42sh
 unit_tests
 local/**
+!local/42sh.ebnf
 vgcore.*
 .42shrc
 .42sh_history

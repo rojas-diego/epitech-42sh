@@ -28,6 +28,8 @@ typedef unsigned int (*vafunc_f)(char const *string, char const *value);
 **   This function assigns a handler function for each token type.
 */
 static const vafunc_f TOK_VALIDATORS[] = {
+    token_validate_token,
+    token_validate_token,
     token_validate_word,
     token_validate_assignment_word,
     token_validate_name,
@@ -63,7 +65,13 @@ static const vafunc_f TOK_VALIDATORS[] = {
     token_validate_token,
     token_validate_token,
     token_validate_token,
-    token_validate_token};
+    token_validate_token,
+    token_validate_token,
+    token_validate_token,
+    token_validate_token,
+    token_validate_token,
+    token_validate_token
+};
 
 /**/
 /* Structures / Typedef / Enums declarations */

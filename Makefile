@@ -97,8 +97,8 @@ SRC =		src/constants.c 					\
 		src/job/do_notification.c				\
 		src/job/initialize.c				\
 
-SRCT =		tests/input/parser/input_parse.c			\
-		tests/grammar/grammar_match.c				\
+SRCT =		tests/input/parser/test_input_parse.c			\
+	tests/grammar/test_grammar_match.c			\
 
 OBJ =		$(SRC:.c=.o)
 OBJM =		$(MAIN:.c=.o)

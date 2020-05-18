@@ -56,6 +56,22 @@ Test(input_parse_tokens, token_coverage)
     cr_assert_eq(table[10]->type, TOK_NEWLINE);
 }
 
+Test(input_parse_tokens, token_exec)
+{
+    struct sh shell = MOCK_SH;
+    struct token_s **table;
+
+    shell.rawinput = strdup("./exec 2> file\n");
+    input_parse_tokens(&shell);
+    cr_assert_eq(node_size(shell.tokens), 5);
+    table = (struct token_s **)node_to_table(shell.tokens);
+    cr_assert_eq(table[0]->type, TOK_NAME);
+    cr_assert_eq(table[1]->type, TOK_IONUMBER);
+    cr_assert_eq(table[2]->type, TOK_GREAT);
+    cr_assert_eq(table[3]->type, TOK_NAME);
+    cr_assert_eq(table[4]->type, TOK_NEWLINE);
+}
+
 Test(input_parse_tokens, empty)
 {
     struct sh shell = MOCK_SH;
