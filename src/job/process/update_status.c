@@ -13,26 +13,6 @@
 #include "proto/job/format_info.h"
 #include "proto/job/process/update_status.h"
 
-/*for (job = first_job; job; job = job->next) {
-    for (process = job->first_process; process; process = process->next) {
-        if (process->pid == pid) {
-            process->status = status;
-            if (WIFSTOPPED(status)) {
-                process->stopped = true;
-            } else {
-                process->completed = true;
-                if (WIFSIGNALED(status)) {
-                    fprintf(stderr, "%d: Terminated by signal %d.\n",
-                        (int) pid, WTERMSIG (process->status));
-                }
-            }
-            return (0);
-        }
-    }
-    fprintf(stderr, "No child process %d.\n", pid);
-    return (-1);
-}*/
-
 static int job_process_update_record_process(
     struct job_s *job,
     pid_t pid,
@@ -48,7 +28,7 @@ static int job_process_update_record_process(
         process->status = status;
         if (WIFSTOPPED(status)) {
             process->stopped = true;
-            continue;
+            return (1);
         }
         process->completed = true;
         if (WIFSIGNALED(status)) {
