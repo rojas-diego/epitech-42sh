@@ -13,13 +13,17 @@ TESTNAME =	unit_tests
 
 MAIN =		src/main.c						\
 
-SRC =		src/constants.c 					\
+SRC =		src/constants.c					\
 									\
 		src/exec/get_argv.c					\
 		src/exec/simple_exec.c					\
 									\
+		src/prompt/history/init.c				\
+		src/prompt/history/insert.c				\
+		src/prompt/history/destroy.c				\
+									\
 		src/shell/shell_init.c					\
-		src/shell/shell_start.c					\
+		src/shell/shell_start.c				\
 		src/shell/shell_destroy.c				\
 		src/shell/term_init.c					\
 		src/shell/builtins_init.c				\
@@ -28,13 +32,13 @@ SRC =		src/constants.c 					\
 		src/shell/shlvl_update.c				\
 									\
 		src/shell/builtin_handlers/builtins.c			\
-		src/shell/builtin_handlers/cd.c				\
+		src/shell/builtin_handlers/cd.c			\
 		src/shell/builtin_handlers/echo.c			\
 		src/shell/builtin_handlers/env.c			\
 		src/shell/builtin_handlers/exit.c			\
 		src/shell/builtin_handlers/alias.c			\
 		src/shell/builtin_handlers/bindkey.c			\
-		src/shell/builtin_handlers/fg.c				\
+		src/shell/builtin_handlers/fg.c			\
 		src/shell/builtin_handlers/source.c			\
 		src/shell/builtin_handlers/null_command.c		\
 									\
@@ -44,17 +48,17 @@ SRC =		src/constants.c 					\
 		src/input/parser/input_parse_grammar.c			\
 		src/input/input_destroy.c				\
 									\
-		src/grammar/grammar_program.c 				\
+		src/grammar/grammar_program.c				\
 									\
 		src/token/token.c					\
 		src/token/token_validate.c				\
 		src/token/token_validate_token.c			\
-		src/token/token_validate_meta.c				\
+		src/token/token_validate_meta.c			\
 									\
-		src/grammar/grammar_advance.c \
-		src/grammar/grammar_match.c \
-		src/grammar/grammar_toolbox.c \
-										\
+		src/grammar/grammar_advance.c				\
+		src/grammar/grammar_match.c				\
+		src/grammar/grammar_toolbox.c				\
+									\
 		src/prompt/actions/arrows.c				\
 		src/prompt/actions/backspace.c				\
 		src/prompt/actions/delete.c				\
@@ -64,8 +68,8 @@ SRC =		src/constants.c 					\
 		src/prompt/actions/interrupt.c				\
 		src/prompt/actions/tab.c				\
 		src/prompt/actions/cut_line.c				\
-		src/prompt/actions/clear_line.c				\
-		src/prompt/actions/clear_term.c				\
+		src/prompt/actions/clear_line.c			\
+		src/prompt/actions/clear_term.c			\
 									\
 		src/prompt/input/get_input.c				\
 		src/prompt/input/get_extended_input.c			\
@@ -108,6 +112,7 @@ LDLIBS += 	-lcurses						\
 TFLAGS += 	--coverage -lcriterion
 
 LIBNAMES =	builtins						\
+		dnode							\
 		mynode							\
 		input_postprocessing					\
 		find_binary						\
