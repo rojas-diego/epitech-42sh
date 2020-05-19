@@ -62,10 +62,6 @@ SRC =		src/constants.c					\
 		src/grammar/grammar_match.c				\
 		src/grammar/grammar_toolbox.c				\
 									\
-		src/grammar/grammar_advance.c				\
-		src/grammar/grammar_match.c				\
-		src/grammar/grammar_toolbox.c				\
-									\
 		src/prompt/actions/arrows.c				\
 		src/prompt/actions/backspace.c				\
 		src/prompt/actions/delete.c				\
