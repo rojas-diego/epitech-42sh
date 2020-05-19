@@ -98,6 +98,5 @@ void job_launch(struct sh *shell, struct job_s *job, bool foreground)
         );
         job_launch_process_clear_pipe(job, pipe_fd, fildes);
     }
-    job_format_info(job, "launched");
     job_launch_handle_launched_processes(shell, job, foreground);
 }

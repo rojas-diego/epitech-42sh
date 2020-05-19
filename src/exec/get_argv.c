@@ -16,8 +16,9 @@ int exec_get_argv(wordexp_t *we, const char *input)
         return (1);
     }
     dprintf(2, "\033[1m\033[38;2;150;150;220m");
-    for (size_t i = 0; i < we->we_wordc; ++i)
+    for (size_t i = 0; i < we->we_wordc; ++i) {
         dprintf(2, "%s ", we->we_wordv[i]);
+    }
     dprintf(2, "\033[0m\n");
     return (0);
 }

@@ -22,19 +22,21 @@ static int job_process_update_record_process(
     struct process_s *process;
 
     for (process = job->first_process; process; process = process->next) {
-        if (process->pid != pid) {
+        if (process->pid != pid)
             continue;
-        }
         process->status = status;
         if (WIFSTOPPED(status)) {
+            fprintf(stderr, "Suspended\n");
             process->stopped = true;
             return (1);
         }
         process->completed = true;
-        if (WIFSIGNALED(status)) {
-            fprintf(stderr, "%d: Terminated by signal %d.\n",
-                (int) pid, WTERMSIG(process->status));
-        }
+        if (!WIFSIGNALED(status))
+            return (1);
+        if (job->foreground)
+            fprintf(stderr, "Terminated\n");
+        else
+            job_format_info(job, "Terminated");
         return (1);
     }
     return (0);
@@ -53,6 +55,5 @@ int job_process_update_status(struct job_s *first_job, pid_t pid, int status)
             return (0);
         }
     }
-    fprintf(stderr, "No child process %d.\n", pid);
     return (-1);
 }

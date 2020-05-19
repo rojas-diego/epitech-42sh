@@ -36,7 +36,10 @@ SRC =		src/constants.c 					\
 		src/shell/builtin_handlers/bindkey.c			\
 		src/shell/builtin_handlers/fg.c				\
 		src/shell/builtin_handlers/source.c			\
+		src/shell/builtin_handlers/termname.c			\
 		src/shell/builtin_handlers/null_command.c		\
+		src/shell/builtin_handlers/wait.c		\
+		src/shell/builtin_handlers/too_many_arguments.c		\
 									\
 		src/input/executer/input_execute.c			\
 		src/input/parser/input_parse.c				\

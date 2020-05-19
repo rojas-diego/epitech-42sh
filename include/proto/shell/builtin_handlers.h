@@ -8,6 +8,8 @@
 #ifndef SH_SHELL_BUILTIN_HANDLERS_H_
 #define SH_SHELL_BUILTIN_HANDLERS_H_
 
+#include "types/shell.h"
+
 int builtin_exit_handler(struct sh *shell, const char * const *argv);
 
 int builtin_echo_handler(struct sh *shell, const char * const *argv);
@@ -34,5 +36,14 @@ int builtin_bindkey_handler(struct sh *shell, const char * const *argv);
 int builtin_source_handler(struct sh *shell, const char * const *argv);
 
 int builtin_fg_handler(struct sh *shell, const char * const *argv);
+
+int builtin_termname_handler(struct sh *shell, const char * const *argv);
+
+int builtin_wait_handler(struct sh *shell, const char * const *argv);
+
+int builtins_utils_too_many_arguments(
+    const char * const *argv,
+    int max_arg_count
+);
 
 #endif /* !SH_SHELL_BUILTIN_HANDLERS_H_ */
