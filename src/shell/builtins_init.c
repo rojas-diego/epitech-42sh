@@ -26,7 +26,7 @@ static const struct {
     {"termname", &builtin_termname_handler},
     {"source", &builtin_source_handler},
     {"setenv", &builtin_setenv_handler},
-    {"fg", NULL},
+    {"fg", &builtin_fg_handler},
     {"exit", &builtin_exit_handler},
     {"echo", &builtin_echo_handler},
     {"cd", &builtin_change_directory_handler},

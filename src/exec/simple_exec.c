@@ -16,6 +16,10 @@
 #include "types/shell.h"
 #include "proto/exec/simple_exec.h"
 
+#include "proto/job/initialize.h"
+#include "proto/job/launch.h"
+#include "proto/job/wait_for.h"
+
 static void simple_binary_exec(wordexp_t *we)
 {
     pid_t pid = fork();
@@ -32,14 +36,18 @@ static void simple_binary_exec(wordexp_t *we)
     waitpid(pid, NULL, 0);
 }
 
-void simple_exec(struct sh *sh, wordexp_t *we)
+void simple_exec(struct sh *shell, wordexp_t *we)
 {
     builtin_handler builtin = (builtin_handler) hasher_get_data(
-        sh->builtin, we->we_wordv[0]
+        shell->builtin, we->we_wordv[0]
     );
 
     if (builtin) {
-        builtin(sh, (const char *const *)we->we_wordv);
+        builtin(shell, (const char *const *)we->we_wordv);
+    } else if (1) {
+        job_initialize(shell, we->we_wordv);
+        job_launch(shell, shell->job, false);
+        job_wait_for(shell->job, shell->job);
     } else {
         simple_binary_exec(we);
     }

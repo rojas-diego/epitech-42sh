@@ -8,9 +8,6 @@
 /* isprint */
 #include <ctype.h>
 
-#include "parser_toolbox/add_char.h"
-
-#include "proto/prompt/update_cursor_pos.h"
 #include "proto/prompt/input/add_char.h"
 #include "proto/prompt/input/add_string.h"
 
