@@ -29,6 +29,21 @@ LESS                ::=     '<'
 DLESS               ::=     '<<'
                     ;
 
+IF                  ::=     'if'
+                    ;
+
+ELSE                ::=     'else'
+                    ;
+
+THEN                ::=     'then'
+                    ;
+
+OPARANTH            ::=     '('
+                    ;
+
+CPARANTH            ::=     ')'
+                    ;
+
 ###### Grammar ######
 
 program             ::=     [ block ] EOF
@@ -37,42 +52,34 @@ program             ::=     [ block ] EOF
 block               ::=     compound_command [ block ]
                     ;
 
-compound_command    ::=     ( command ) [ compound_command ]
+compound_command    ::=     command [ compound_command ]
                     ;
 
-command             ::=     ( simple_command | shell_command | pipeline ) [ command ]
+command             ::=     ( pipeline | shell_command | simple_command ) [ command ]
                     ;
 
-pipeline            ::=     command TOK_PIPE command
+pipeline            ::=     simple_command [ (PIPE simple_command)* ]
                     ;
 
-simple_command      ::=     command command_separator
-                    |       command redirection
-                    |       command element
+simple_command      ::=     ( command_separator | redirection | element ) command
                     ;
 
 shell_command       ::=     if_statement
                     ;
 
-if_statement        ::=     TOK_IF TOK_OPARANTH expression TOK_CPARANTH TOK_THEN [ block ] [ elseif_statement ] TOK_ENDIF
+if_statement        ::=     IF OPARANTH expression CPARANTH THEN [ block ] [ elseif_statement ] ENDIF
                     ;
 
-elseif_statement    ::=     TOK_ELSE_IF TOK_OPARANTH expression TOK_CPARANTH TOK_THEN [ block ]
+elseif_statement    ::=     ELSE_IF OPARANTH expression CPARANTH THEN [ block ] [ elseif_statement ]
                     ;
 
-else_statement      ::=     TOK_ELSE [block]
+else_statement      ::=     ELSE [ block ]
+                    ;
 
 expression          ::=     word
                     ;
 
-command_separator   ::=     NEWLINE
-                    |       SEMICOLON
-                    ;
-
-redirection         ::=     IO_NUMBER GREAT WORD
-                    |       IO_NUMBER LESS WORD
-                    |       IO_NUMBER DGREAT WORD
-                    |       IO_NUMBER DLESS WORD
+command_separator   ::=     NEWLINE | SEMICOLON
                     ;
 
 redirection         ::=     GREAT WORD

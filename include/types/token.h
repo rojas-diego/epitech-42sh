@@ -59,6 +59,7 @@ typedef enum tokent_e
     TOK_END,
     TOK_GOTO,
     TOK_IF,
+    TOK_ENDIF,
     TOK_ELSE_IF,
     TOK_ELSE,
     TOK_THEN,

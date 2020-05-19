@@ -55,6 +55,7 @@ static const char *TOKENS[] = {
     "end",      /* END */
     "goto",     /* GOTO */
     "if",       /* IF */
+    "endif",    /* ENDIF */
     "else if",  /* ELSE IF */
     "else",     /* ELSE */
     "then",     /* THEN */
