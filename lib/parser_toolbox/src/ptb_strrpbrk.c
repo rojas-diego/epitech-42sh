@@ -2,18 +2,18 @@
 ** EPITECH PROJECT, 2020
 ** parser_toolbox
 ** File description:
-** ptb_strrprbk
+** ptb_strrpbrk
 */
 
-#include <stdbool.h>
+#include <stddef.h>
 
-#include "parser_toolbox/strrprbk.h"
+#include "parser_toolbox/strrpbrk.h"
 
 /*
 ** @DESCRIPTION
 **   Returns last occurence of char in charset.
 */
-char *ptb_strrprbk(char *string, const char *charset)
+char *ptb_strrpbrk(char *string, const char *charset)
 {
     const char *accept;
 

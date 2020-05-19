@@ -19,6 +19,7 @@ SRC =		src/add_char.c		\
 		src/whitelist.c		\
 		src/hexdumper.c		\
 		src/sub_string.c		\
+		src/ptb_strrpbrk.c		\
 
 OBJ =		$(SRC:.c=.o)
 

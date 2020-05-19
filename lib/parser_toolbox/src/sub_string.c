@@ -18,7 +18,7 @@ char *ptb_sub_string(const char *str, size_t start, size_t end)
     if (start > end) {
         return (NULL);
     }
-    substr = malloc(sizeof(char) * (len + 2));
+    substr = malloc(sizeof(char) * (len + 1));
     if (substr == NULL) {
         return (NULL);
     }
