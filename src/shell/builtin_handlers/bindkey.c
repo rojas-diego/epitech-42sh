@@ -11,17 +11,16 @@
 
 void builtin_bindkey_help(void)
 {
-    
+
 }
 
 int builtin_bindkey_handler(
     __attribute__((unused)) struct sh *shell,
-    __attribute__((unused)) const char * const *argv
+    const char * const *argv
 )
 {
     if (!argv)
         return (1);
-    if (argv[1] && strcmp(argv[1], "-h"))
-        builtin_bindkey_help();
+    builtin_bindkey_help();
     return (0);
 }
