@@ -273,4 +273,15 @@ static const char BUILTIN_BINDKEY_EDITOR_COMMANDS_WITH_DESCRIPTIONS[] =
     "e_page_down\n"
     "          (WIN32 only) Page visible console window down\n";
 
+#include "proto/bindkey.h"
+
+static const struct {
+    char *flag;
+    void (*function)();
+} BINDKEY_FLAG[] = {
+    {"-h", &builtin_bindkey_help},
+    {"-l", &builtin_bindkey_list},
+    {NULL, NULL}
+};
+
 #endif
