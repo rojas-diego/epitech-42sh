@@ -8,6 +8,8 @@
 #ifndef SH_SHELL_BUILTIN_HANDLERS_H_
 #define SH_SHELL_BUILTIN_HANDLERS_H_
 
+#include <stddef.h>
+
 #include "types/shell.h"
 
 int builtin_exit_handler(struct sh *shell, const char * const *argv);
@@ -43,7 +45,7 @@ int builtin_wait_handler(struct sh *shell, const char * const *argv);
 
 int builtins_utils_too_many_arguments(
     const char * const *argv,
-    int max_arg_count
+    size_t max_arg_count
 );
 
 #endif /* !SH_SHELL_BUILTIN_HANDLERS_H_ */
