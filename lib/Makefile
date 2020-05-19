@@ -8,6 +8,7 @@
 CC ?=		gcc
 
 LIBNAMES =	builtins						\
+		dnode							\
 		mynode							\
 		input_postprocessing					\
 		find_binary						\

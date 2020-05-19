@@ -15,6 +15,7 @@
 #include "proto/input/parser.h"
 #include "proto/input/executer.h"
 #include "proto/prompt.h"
+#include "proto/prompt/history.h"
 #include "proto/prompt/input/empty.h"
 
 #include "proto/job/do_notification.h"
@@ -58,6 +59,7 @@ void prompter(struct sh *shell)
         if (shell->rawinput == NULL) {
             continue;
         }
+        history_insert(&(shell->history), shell->rawinput);
         input_parse(shell);
         prompt_execution(shell);
         input_destroy(shell);
