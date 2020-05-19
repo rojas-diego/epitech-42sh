@@ -13,7 +13,7 @@
 
 int builtins_utils_too_many_arguments(
     const char * const *argv,
-    int max_arg_count
+    size_t max_arg_count
 )
 {
     if (ptb_argv_length(argv) > max_arg_count) {
