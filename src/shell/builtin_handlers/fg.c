@@ -5,14 +5,21 @@
 ** builtins
 */
 
+#include <stdio.h>
+
 #include "builtins.h"
 #include "types/shell.h"
 #include "proto/shell/builtin_handlers.h"
 
 int builtin_fg_handler(
-    __attribute__((unused)) struct sh *shell,
+    struct sh *shell,
     __attribute__((unused)) const char * const *argv
 )
 {
-    return (0);
+    if (shell->job) {
+        job_continue(shell->job);
+        return (0);
+    }
+    fprintf(stderr, "fg: No current job.\n");
+    return (1);
 }
