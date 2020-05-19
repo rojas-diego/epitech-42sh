@@ -7,11 +7,19 @@
 
 #include "builtins.h"
 #include "types/shell.h"
+#include "constants/prompt/builtins/private_bindkey.h"
 #include "proto/shell/builtin_handlers.h"
+#include <string.h>
+#include <stdio.h>
 
-void builtin_bindkey_help(void)
+static void builtin_bindkey_list(void)
 {
+    printf(BUILTIN_BINDKEY_EDITOR_COMMANDS_WITH_DESCRIPTIONS);
+}
 
+static void builtin_bindkey_help(void)
+{
+    printf(BUILTIN_BINDKEY_HELP);
 }
 
 int builtin_bindkey_handler(
@@ -19,8 +27,17 @@ int builtin_bindkey_handler(
     const char * const *argv
 )
 {
-    if (!argv)
-        return (1);
-    builtin_bindkey_help();
+    if (!argv[1]) {
+        builtin_bindkey_help();
+        return (0);
+    }
+    if (!strcmp(argv[1], "-h")) {
+        builtin_bindkey_help();
+        return (0);
+    }
+    if (!strcmp(argv[1], "-l")) {
+        builtin_bindkey_list();
+        return (0);
+    }
     return (0);
 }
