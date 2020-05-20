@@ -12,6 +12,8 @@
 /* Includes */
 /**/
 
+#include <stdbool.h>
+
 #include "types/token.h"
 
 /**/
@@ -32,6 +34,7 @@ struct grammar_s {
     struct token_s  **tokens;
     unsigned int    index;
     unsigned int    token_count;
+    bool            error;
 };
 
 /**/

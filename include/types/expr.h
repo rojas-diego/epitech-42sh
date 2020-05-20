@@ -42,6 +42,20 @@ enum expr_type_e {
     EXPR_ELEMENT
 };
 
+union expr_union_u {
+    struct expr_program_s *program;
+    struct expr_block_s *block;
+    struct expr_compound_command_s *compound_command;
+    struct expr_command_s *command;
+    struct expr_shell_command_s *shell_command;
+    struct expr_if_statement_s *if_stmt;
+    struct expr_elseif_statement_s *elseif_stmt;
+    struct expr_else_statement_s *else_stmt;
+    struct expr_expression_s *expression;
+    struct expr_command_separator_s *command_separator;
+    struct expr_redirection_s *redirection;
+};
+
 /*
 ** @DESCRIPTION
 **   element expression terminal.
@@ -115,8 +129,7 @@ struct expr_if_statement_s {
 **   pipeline expression nonterminal.
 */
 struct expr_shell_command_s {
-    enum expr_type_e wrap_type;
-    union expr_union_u wrapper;
+    struct expr_if_statement_s *if_stmt;
 };
 
 /*
@@ -145,9 +158,11 @@ struct expr_pipeline_s
 **   command expression nonterminal.
 */
 struct expr_command_s {
-    enum expr_type_e        wrap_type;
-    union expr_union_u      wrapper;
-    struct expr_command_s   *command;
+    enum expr_type_e                type;
+    struct expr_pipeline_s          *pipeline;
+    struct expr_shell_command_s     *shell_command;
+    struct expr_simple_command_s    *simple_command;
+    struct expr_command_s           *command;
 };
 
 /*
@@ -174,21 +189,6 @@ struct expr_block_s {
 struct expr_program_s {
     struct expr_block_s             *block;
     struct token_s                  *eof;
-};
-
-union expr_union_u {
-    struct expr_program_s            program;
-    struct expr_block_s              block;
-    struct expr_compound_command_s   compound_command;
-    struct expr_command_s            command;
-    struct expr_shell_command_s      shell_command;
-    struct expr_if_statement_s       if_stmt;
-    struct expr_elseif_statement_s   elseif_stmt;
-    struct expr_else_statement_s     else_stmt;
-    struct expr_expression_s         expression;
-    struct expr_command_separator_s  command_separator;
-    struct expr_redirection_s        redirection;
-    struct expr_program_s            program;
 };
 
 /**/

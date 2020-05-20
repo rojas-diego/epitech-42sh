@@ -44,8 +44,6 @@ SRC =		src/constants.c 					\
 		src/input/parser/input_parse_grammar.c			\
 		src/input/input_destroy.c				\
 									\
-		src/grammar/grammar_program.c 				\
-									\
 		src/token/token.c					\
 		src/token/token_validate.c				\
 		src/token/token_validate_token.c			\
@@ -97,7 +95,7 @@ SRC =		src/constants.c 					\
 		src/job/do_notification.c				\
 		src/job/initialize.c				\
 
-SRCT =		tests/input/parser/test_input_parse.c			\
+SRCT =	tests/input/parser/test_input_parse.c			\
 	tests/grammar/test_grammar_match.c			\
 
 OBJ =		$(SRC:.c=.o)
