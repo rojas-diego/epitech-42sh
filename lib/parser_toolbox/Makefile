@@ -9,6 +9,8 @@ CC ?=		gcc
 
 NAME =		libparser_toolbox.a
 
+TESTNAME =	unit_tests
+
 SRC =		src/add_char.c		\
 		src/argv_length.c	\
 		src/blacklist.c		\
@@ -27,6 +29,8 @@ SRC =		src/add_char.c		\
 		src/longest_string.c	\
 		src/display_strings.c	\
 		src/display_strings_equalize.c	\
+
+SRCT = tests/	\
 
 OBJ =		$(SRC:.c=.o)
 
@@ -48,5 +52,10 @@ fclean:		clean
 		$(RM) $(NAME) $(TEST)
 
 re:		fclean all
+
+tests_run:
+	$(CC) $(SRC) $(SRCT) -o $(TESTNAME) $(TFLAGS)	\
+		$(CPPFLAGS) $(CFLAGS)
+	./$(TESTNAME) 2>&1 | (grep -v "profiling")
 
 .PHONY:	all clean fclean re
