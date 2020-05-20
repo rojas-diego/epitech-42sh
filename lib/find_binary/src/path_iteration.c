@@ -16,7 +16,11 @@
 static const size_t PATH_IT_PATH_LEN = 128;
 static const char PATH_IT_DELIMITER = ':';
 
-static int path_iteration_check_path_env(const char *path_env, char **path)
+static int path_iteration_check_path_env(
+    const char *path_env,
+    char **path,
+    size_t *old_pos
+)
 {
     if (path_env == NULL) {
         if (*path != NULL) {
@@ -30,6 +34,10 @@ static int path_iteration_check_path_env(const char *path_env, char **path)
         if (path == NULL) {
             return (1);
         }
+    }
+    if (path_env[*old_pos] == '\0') {
+        *old_pos = 0;
+        return (1);
     }
     return (0);
 }
@@ -54,18 +62,19 @@ const char *path_iteration(const char *path_env)
     static size_t size = PATH_IT_PATH_LEN;
     size_t pos = old_pos;
 
-    if (path_iteration_check_path_env(path_env, &path))
+    if (path_iteration_check_path_env(path_env, &path, &old_pos))
         return (NULL);
     if (env_point == NULL || *env_point != path_env)
         path_iteration_reset_env(&env_point, &path_env, &old_pos, &pos);
     if (path_env[old_pos] == '\0')
         return (NULL);
     for (; path_env[pos] && path_env[pos] != PATH_IT_DELIMITER; ++pos);
-    if (pos - old_pos >= size && double_array_size((void **) &path, &size))
-        return (NULL);
+    while (pos - old_pos >= size)
+        if (double_array_size((void **) &path, &size))
+            return (NULL);
     strncpy(path, path_env + old_pos, pos - old_pos);
     path[pos - old_pos] = '\0';
-    old_pos = pos + 1;
+    old_pos = path_env[pos] ? pos + 1 : pos;
     return (path);
 }
 
