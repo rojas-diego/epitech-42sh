@@ -9,7 +9,10 @@ program             ::=     [ block ] EOF
 block               ::=     statement [ block ]
                     ;
 
-statement           ::=     grouping | control
+statement           ::=     subshell | grouping | control
+                    ;
+
+subshell            ::=     OPARANTH [ block ] CPARANTH
                     ;
 
 grouping            ::=     pipeline ( ( AND_IF | OR_IF ) pipeline )*
@@ -18,14 +21,19 @@ grouping            ::=     pipeline ( ( AND_IF | OR_IF ) pipeline )*
 pipeline            ::=     command ( PIPE command )*
                     ;
 
-command             ::=     simple_command
+command             ::=     WORD [ redirection ] [ command ]
+                    ;
+
+redirection         ::=     GREAT WORD
+                    |       DGREAT WORD
+                    |       LESS WORD
+                    |       DLESS WORD
+                    |       IO_NUMBER GREAT WORD
+                    |       IO_NUMBER DGREAT WORD
                     ;
 
 # Control Flow !
-control             ::=     if_control
-                    |       while_control
-                    |       foreach_control
-                    |       repeat_control
+control             ::=     if_control | while_control | foreach_control | repeat_control
                     ;
 
 if_control          ::=     IF conditional THEN [ block ] [ else_if_statement ] ENDIF
@@ -37,7 +45,7 @@ else_if_statement   ::=     ELSE_IF conditional [ block ] [ else_statement ]
 else_statement      ::=     ELSE [ block ]
                     ;
 
-conditional         ::=     OPARANTH expression CPARANTH
+conditional         ::=     OPARANTH WORD CPARANTH
                     ;
 
 foreach_control     ::=     FOREACH NAME wordlist_expression
@@ -46,6 +54,6 @@ foreach_control     ::=     FOREACH NAME wordlist_expression
 wordlist_expression ::=     OPARANTH wordlist CPARANTH
                     ;
 
-wordlist            ::=     (WORD | NAME) [ wordlist ]
+wordlist            ::=     WORD [ wordlist ]
                     ;
 # ! Control Flow
