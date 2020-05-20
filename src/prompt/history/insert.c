@@ -12,7 +12,7 @@
 #include "proto/prompt/history.h"
 #include "types/history.h"
 
-const size_t HISTORY_MAX_SIZE = 100;
+const size_t HISTORY_MAX_SIZE = 10;
 
 void history_insert(struct history_s *history, char const *line)
 {
@@ -21,7 +21,8 @@ void history_insert(struct history_s *history, char const *line)
     dnode_insert_data(&(history->list), strdup(line));
     history->curr = NULL;
     ++history->size;
-    if (history->size == HISTORY_MAX_SIZE) {
+    if (history->size > HISTORY_MAX_SIZE) {
+        --history->size;
         last = dnode_goto_end(history->list);
         last->prev->next = NULL;
         free(last->data);
