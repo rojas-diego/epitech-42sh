@@ -16,6 +16,7 @@
 #include "parser_toolbox/includes.h"
 #include "parser_toolbox/range.h"
 #include "parser_toolbox/whitelist.h"
+#include "parser_toolbox/strrep.h"
 
 /**/
 /* Constants */
