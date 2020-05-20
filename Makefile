@@ -82,6 +82,7 @@ SRC =		src/constants.c					\
 		src/prompt/input/add_string.c				\
 		src/prompt/input/wait_input.c				\
 		src/prompt/input/read_single_input.c			\
+		src/prompt/input/reprint_input.c			\
 									\
 		src/prompt/update_cursor_pos.c				\
 		src/prompt/move_cursor_pos.c				\
