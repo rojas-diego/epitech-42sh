@@ -2,6 +2,12 @@
 # TCSH Grammar              #
 # # # # # # # # # # # # # # #
 
+"ls -l -a -b ; this | ls
+foreach i (int, has, two)
+    cat $i
+end
+"
+
 ###### Grammar ######
 program             ::=     [ block ] EOF
                     ;
@@ -9,7 +15,10 @@ program             ::=     [ block ] EOF
 block               ::=     statement [ block ]
                     ;
 
-statement           ::=     subshell | grouping | control
+statement           ::=     subshell | compound_command | control
+                    ;
+
+compound_command    ::=     [ grouping ] separator
                     ;
 
 subshell            ::=     OPARANTH [ block ] CPARANTH
@@ -32,14 +41,17 @@ redirection         ::=     GREAT WORD
                     |       IO_NUMBER DGREAT WORD
                     ;
 
+separator           ::=     NEWLINE | SEMI
+                    ;
+
 # Control Flow !
 control             ::=     if_control | while_control | foreach_control | repeat_control
                     ;
 
-if_control          ::=     IF conditional THEN [ block ] [ else_if_statement ] ENDIF
+if_control          ::=     IF conditional THEN NEWLINE [ block ] [ else_if_statement ] ENDIF NEWLINE
                     ;
 
-else_if_statement   ::=     ELSE_IF conditional [ block ] [ else_statement ]
+else_if_statement   ::=     ELSE_IF conditional NEWLINE [ block ] [ else_statement ]
                     ;
 
 else_statement      ::=     ELSE [ block ]
