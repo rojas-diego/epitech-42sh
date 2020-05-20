@@ -40,7 +40,11 @@ int job_initialize(struct sh *shell, char **argv)
         .next = NULL, .command = NULL,
         .first_process = NULL,
         .pgid = 0,
-        .notified = false
+        .notified = false,
+        .tmodes = {0},
+        .io = {0, 1, 2},
+        .foreground = false,
+        .launch_id = 1
     };
     if (process_initialize(job, argv)) {
         return (1);

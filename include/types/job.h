@@ -38,6 +38,8 @@ struct job_s
     bool notified;
     struct termios tmodes;
     int io[IO_COUNT];
+    bool foreground;
+    int launch_id;
 };
 
 #endif /* !SH_TYPES_JOB_H_ */

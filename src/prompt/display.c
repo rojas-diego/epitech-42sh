@@ -6,9 +6,12 @@
 */
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 #include "proto/shell.h"
 #include "proto/prompt/display.h"
+#include "parser_toolbox/strrep.h"
 
 /*
 ** @DESCRIPTION
@@ -16,8 +19,24 @@
 */
 void prompt_display(__attribute__((unused)) struct sh *shell)
 {
+    char *dir = getenv("PWD");
+    char *user = getenv("USER");
+    char *host = ptb_strrep(getenv("HOSTNAME"), '.', '\0');
+    char *home = getenv("HOME");
+
+    if (dir && home && !strcmp(dir, home)) {
+        dir = "/~";
+    }
+    dir = dir ? strrchr(dir, '/') : dir;
     if (shell->atty) {
-        printf("\033[38;2;150;220;150m%s\033[0m", "$> ");
+        printf(
+            "\033[38;2;150;220;150m"
+            "[%s@%s %s]%s\033[0m",
+            user ? user : "",
+            host ? host: "",
+            dir ? dir : "",
+            "$> "
+        );
         fflush(stdout);
     }
 }
