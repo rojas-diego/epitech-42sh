@@ -17,26 +17,25 @@
 ** @DESCRIPTION
 **   Prints the shell prompt.
 */
-void prompt_display(__attribute__((unused)) struct sh *shell)
+void prompt_display(struct sh *shell)
 {
-    char *dir = getenv("PWD");
-    char *user = getenv("USER");
-    char *host = ptb_strrep(getenv("HOSTNAME"), '.', '\0');
-    char *home = getenv("HOME");
+    const char *dir = getenv("PWD");
+    const char *user = getenv("USER");
+    const char *home = getenv("HOME");
+    char *host = getenv("HOSTNAME");
 
-    if (dir && home && !strcmp(dir, home)) {
+    if (host) {
+        host = ptb_strrep(strdup(host), '.', '\0');
+        if (!host)
+            return (EXIT_FAILURE);
+    }
+    if (dir && home && !strcmp(dir, home))
         dir = "/~";
-    }
     dir = dir ? strrchr(dir, '/') : dir;
-    if (shell->atty) {
-        printf(
-            "\033[38;2;150;220;150m"
-            "[%s@%s %s]%s\033[0m",
-            user ? user : "",
-            host ? host: "",
-            dir ? dir : "",
-            "$> "
-        );
-        fflush(stdout);
-    }
+    printf("\033[38;2;150;220;150m""[%s@%s %s]%s\033[0m",
+        user ? user : "", host ? host: "", dir ? dir : "", "$> ");
+    fflush(stdout);
+    if (host)
+        free(host);
+    return (EXIT_SUCCESS);
 }
