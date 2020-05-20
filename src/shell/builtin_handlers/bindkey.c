@@ -29,8 +29,8 @@ void builtin_bindkey_help(
 }
 
 void builtin_bindkey_bind(
-    __attribute__((unused)) struct sh *shell,
-    __attribute__((unused)) const char * const *argv
+    struct sh *shell,
+    const char * const *argv
 )
 {
 
