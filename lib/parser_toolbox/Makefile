@@ -24,6 +24,7 @@ SRC =		src/add_char.c		\
 		src/sub_string.c	\
 		src/sort_string.c	\
 		src/isdir.c	\
+		src/longest_string.c	\
 
 OBJ =		$(SRC:.c=.o)
 
