@@ -5,15 +5,15 @@
 ## Makefile
 ##
 
-CC ?=		gcc
+CC	?=	gcc
 
-NAME =		42sh
+NAME	=	42sh
 
-TESTNAME =	unit_tests
+TESTNAME	=	unit_tests
 
-MAIN =		src/main.c						\
+MAIN	=	src/main.c						\
 
-SRC =		src/constants.c					\
+SRC	=	src/constants.c						\
 									\
 		src/exec/get_argv.c					\
 		src/exec/simple_exec.c					\
@@ -23,7 +23,7 @@ SRC =		src/constants.c					\
 		src/prompt/history/destroy.c				\
 									\
 		src/shell/shell_init.c					\
-		src/shell/shell_start.c				\
+		src/shell/shell_start.c					\
 		src/shell/shell_destroy.c				\
 		src/shell/term_init.c					\
 		src/shell/builtins_init.c				\
@@ -32,17 +32,17 @@ SRC =		src/constants.c					\
 		src/shell/shlvl_update.c				\
 									\
 		src/shell/builtin_handlers/builtins.c			\
-		src/shell/builtin_handlers/cd.c			\
+		src/shell/builtin_handlers/cd.c				\
 		src/shell/builtin_handlers/echo.c			\
 		src/shell/builtin_handlers/env.c			\
 		src/shell/builtin_handlers/exit.c			\
 		src/shell/builtin_handlers/alias.c			\
 		src/shell/builtin_handlers/bindkey.c			\
-		src/shell/builtin_handlers/fg.c			\
+		src/shell/builtin_handlers/fg.c				\
 		src/shell/builtin_handlers/source.c			\
 		src/shell/builtin_handlers/termname.c			\
 		src/shell/builtin_handlers/null_command.c		\
-		src/shell/builtin_handlers/wait.c		\
+		src/shell/builtin_handlers/wait.c			\
 		src/shell/builtin_handlers/too_many_arguments.c		\
 									\
 		src/input/executer/input_execute.c			\
@@ -56,7 +56,7 @@ SRC =		src/constants.c					\
 		src/token/token.c					\
 		src/token/token_validate.c				\
 		src/token/token_validate_token.c			\
-		src/token/token_validate_meta.c			\
+		src/token/token_validate_meta.c				\
 									\
 		src/grammar/grammar_advance.c				\
 		src/grammar/grammar_match.c				\
@@ -71,8 +71,8 @@ SRC =		src/constants.c					\
 		src/prompt/actions/interrupt.c				\
 		src/prompt/actions/tab.c				\
 		src/prompt/actions/cut_line.c				\
-		src/prompt/actions/clear_line.c			\
-		src/prompt/actions/clear_term.c			\
+		src/prompt/actions/clear_line.c				\
+		src/prompt/actions/clear_term.c				\
 									\
 		src/prompt/input/get_input.c				\
 		src/prompt/input/get_extended_input.c			\
@@ -103,44 +103,44 @@ SRC =		src/constants.c					\
 		src/job/format_info.c					\
 		src/job/wait_for.c					\
 		src/job/do_notification.c				\
-		src/job/initialize.c				\
+		src/job/initialize.c					\
 
-SRCT =		tests/input/parser/test_input_parse.c			\
-	tests/grammar/test_grammar_match.c			\
+SRCT	=	tests/input/parser/test_input_parse.c			\
+		tests/grammar/test_grammar_match.c			\
 
-OBJ =		$(SRC:.c=.o)
-OBJM =		$(MAIN:.c=.o)
-OBJT =		$(SRCT:.c=.o)
+OBJ	=	$(SRC:.c=.o)
+OBJM	=	$(MAIN:.c=.o)
+OBJT 	=	$(SRCT:.c=.o)
 
-WARNINGS =	-pedantic -Wshadow -Wpointer-arith -Wcast-align		\
-		-Wmissing-prototypes -Wmissing-declarations		\
-		-Wnested-externs -Wwrite-strings -Wredundant-decls	\
-		-Winline -Wno-long-long -Wconversion			\
-		-Wstrict-prototypes -Wunused-function			\
+WARNINGS	=	-pedantic -Wshadow -Wpointer-arith -Wcast-align	\
+			-Wmissing-prototypes -Wmissing-declarations	\
+			-Wnested-externs -Wwrite-strings -Wconversion	\
+			-Wredundant-decls -Winline -Wno-long-long	\
+			-Wstrict-prototypes -Wunused-function		\
 
-DEBUG = 	-g $(WARNINGS)
+DEBUG	=	-g $(WARNINGS)
 
-CFLAGS += 	-Wall -Wextra
+CFLAGS	+=	-Wall -Wextra
 
-CPPFLAGS += 	-I include/ -I lib/include/ 				\
+CPPFLAGS	+=	-I include/ -I lib/include/			\
 
-LDLIBS += 	-lcurses						\
+LDLIBS	+=	-lcurses						\
 
-TFLAGS += 	--coverage -lcriterion
+TFLAGS	+=	--coverage -lcriterion
 
-LIBNAMES =	builtins						\
-		dnode							\
-		mynode							\
-		input_postprocessing					\
-		find_binary						\
-		hasher							\
-		parser_toolbox						\
+LIBNAMES	=	builtins					\
+			dnode						\
+			mynode						\
+			input_postprocessing				\
+			find_binary					\
+			hasher						\
+			parser_toolbox					\
 
-LIBFOLDER =	./lib
+LIBFOLDER	=	./lib
 
-LDLIBS +=	$(patsubst %, -L $(LIBFOLDER)/%, ${LIBNAMES})
-LDLIBS +=	$(patsubst %, -l%, ${LIBNAMES})
-CPPFLAGS +=	$(patsubst %, -I $(LIBFOLDER)/%/include/, ${LIBNAMES})
+LDLIBS	+=	$(patsubst %, -L $(LIBFOLDER)/%, ${LIBNAMES})
+LDLIBS	+=	$(patsubst %, -l%, ${LIBNAMES})
+CPPFLAGS	+=	$(patsubst %, -I $(LIBFOLDER)/%/include/, ${LIBNAMES})
 
 all:		$(NAME)
 
