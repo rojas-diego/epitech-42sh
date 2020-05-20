@@ -29,6 +29,7 @@ SRC =		src/add_char.c		\
 		src/longest_string.c	\
 		src/display_strings.c	\
 		src/display_strings_equalize.c	\
+		src/word_array_chr.c	\
 
 SRCT = tests/	\
 
