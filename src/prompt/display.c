@@ -17,7 +17,7 @@
 ** @DESCRIPTION
 **   Prints the shell prompt.
 */
-int prompt_display(struct sh *shell)
+int prompt_display(__attribute__((unused)) struct sh *shell)
 {
     const char *dir = getenv("PWD");
     const char *user = getenv("USER");

@@ -44,8 +44,8 @@ static void prompt_fetch(struct sh *shell)
 */
 void prompt_shell(struct sh *shell)
 {
-    prompt_display(shell);
     if (shell->atty) {
+        prompt_display(shell);
         get_input_with_raw_mode(shell);
         if (!shell->prompt.input[0]) {
             shell->rawinput = NULL;
