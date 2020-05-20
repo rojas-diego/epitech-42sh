@@ -2,11 +2,23 @@
 ** EPITECH PROJECT, 2020
 ** PSU_42sh_2019
 ** File description:
-** Constants private_action
+** Constants private_bindkey
 */
 
-#ifndef SH_CONSTANTS_PROMPT_PRIVATE_ACTION_H_
-#define SH_CONSTANTS_PROMPT_PRIVATE_ACTION_H_
+#ifndef SH_CONSTANTS_PROMPT_BUILTINS_PRIVATE_BINDKEY_H_
+#define SH_CONSTANTS_PROMPT_BUILTINS_PRIVATE_BINDKEY_H_
+
+#include "types/builtins.h"
+#include "proto/shell/bindkey.h"
+
+static const struct {
+    const char *flag;
+    void (*function)(struct sh *shell, const char * const *argv);
+} BINDKEY_FLAG[] = {
+    {"-h", &builtin_bindkey_help},
+    {"-l", &builtin_bindkey_list},
+    {NULL, NULL}
+};
 
 static const char BUILTIN_BINDKEY_HELP[] =
     "Usage: bindkey [options] [--] [KEY [COMMAND]]\n"
@@ -284,15 +296,4 @@ static const char BUILTIN_BINDKEY_EDITOR_COMMANDS_WITH_DESCRIPTIONS[] =
     "e_page_down\n"
     "          (WIN32 only) Page visible console window down\n";
 
-#include "proto/bindkey.h"
-
-static const struct {
-    char *flag;
-    void (*function)();
-} BINDKEY_FLAG[] = {
-    {"-h", &builtin_bindkey_help},
-    {"-l", &builtin_bindkey_list},
-    {NULL, NULL}
-};
-
-#endif
+#endif /* !SH_CONSTANTS_PROMPT_BUILTINS_PRIVATE_BINDKEY_H_ */
