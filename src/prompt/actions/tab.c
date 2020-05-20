@@ -31,7 +31,7 @@ static void prompt_action_tab_extend_glob(struct sh *shell, char *str)
         return;
     }
     if (we.we_wordc == 1) {
-        prompt_input_add_string(shell, we.we_wordv[0] + strlen(str) - 2);
+        prompt_input_add_string(shell, we.we_wordv[0] + strlen(str) - 1);
         prompt_input_add_char(shell, (ptb_isdir(we.we_wordv[0])) ? '/' : ' ');
     } else {
         puts("");
