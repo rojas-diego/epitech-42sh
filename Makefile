@@ -17,6 +17,7 @@ SRC	=	src/constants.c						\
 									\
 		src/exec/get_argv.c					\
 		src/exec/simple_exec.c					\
+		src/exec/my_wordexp/wordfree.c					\
 									\
 		src/prompt/history/init.c				\
 		src/prompt/history/insert.c				\
