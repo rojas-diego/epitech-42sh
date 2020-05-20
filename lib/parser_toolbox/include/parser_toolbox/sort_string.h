@@ -10,6 +10,6 @@
 
 #include <stddef.h>
 
-void ptb_sort_string(const char **strings, size_t length);
+void ptb_sort_string(char * const *strings, size_t length);
 
 #endif /* !PARSER_TOOLBOX_SORT_STRING_H_ */

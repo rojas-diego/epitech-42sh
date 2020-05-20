@@ -12,10 +12,10 @@
 
 static int sort_string_cmp(const void *a, const void *b)
 {
-    return (strcmp(*((const char **) a), *((const char **) b)));
+    return (strcmp(*((char * const *) a), *((char * const *) b)));
 }
 
-void ptb_sort_string(const char **strings, size_t length)
+void ptb_sort_string(char * const *strings, size_t length)
 {
     qsort((void *) strings, length, sizeof(char *), sort_string_cmp);
 }

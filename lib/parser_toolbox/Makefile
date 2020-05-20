@@ -23,6 +23,7 @@ SRC =		src/add_char.c		\
 		src/strrep.c		\
 		src/sub_string.c	\
 		src/sort_string.c	\
+		src/isdir.c	\
 
 OBJ =		$(SRC:.c=.o)
 
