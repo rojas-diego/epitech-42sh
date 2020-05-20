@@ -48,8 +48,8 @@ void builtin_bindkey_display_settings(
 }
 
 void builtin_bindkey_bind(
-    struct sh *shell,
-    const char * const *argv
+    __attribute__((unused)) struct sh *shell,
+    __attribute__((unused)) const char * const *argv
 )
 {
     //hasher_insert_data_ordered(shell->bindkey, );
