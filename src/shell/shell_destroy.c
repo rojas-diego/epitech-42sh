@@ -9,6 +9,7 @@
 
 #include "types/shell.h"
 #include "proto/shell.h"
+#include "proto/prompt/history.h"
 
 /* hasher_destroy(shell->binkey, false, false); */
 
@@ -21,4 +22,5 @@ void shell_destroy(struct sh *shell)
     hasher_destroy(shell->builtin, true, false);
     hasher_destroy(shell->alias, true, true);
     hasher_destroy(shell->bindkey, true, false);
+    history_destroy(&shell->history);
 }

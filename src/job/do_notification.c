@@ -34,7 +34,7 @@ void job_do_notification(struct job_s **first_job)
     for (job = *first_job; job; job = job_next) {
         job_next = job->next;
         if (job_is_completed(job)) {
-            job_format_info(job, "completed");
+            job_format_info(job, "Done");
             if (job_last) {
                 job_last->next = job_next;
             } else {
@@ -42,7 +42,7 @@ void job_do_notification(struct job_s **first_job)
             }
             job_free(job);
         } else if (job_is_stopped(job) && !job->notified) {
-            job_format_info (job, "stopped");
+            job_format_info(job, "stopped");
             job->notified = true;
             job_last = job;
         } else {

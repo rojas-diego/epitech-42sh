@@ -16,6 +16,7 @@
 
 #include "mynode.h"
 #include "hasher/type.h"
+#include "types/history.h"
 
 #include "types/prompt.h"
 #include "types/job.h"
@@ -55,6 +56,7 @@ typedef struct sh {
     char * const        *envp;
     struct prompt       prompt;
     int                 atty;
+    struct history_s    history;
     struct hasher       *builtin;
     struct hasher       *alias;
     struct hasher       *bindkey;
