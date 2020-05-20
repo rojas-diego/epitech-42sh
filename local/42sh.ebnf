@@ -2,12 +2,6 @@
 # TCSH Grammar              #
 # # # # # # # # # # # # # # #
 
-"ls -l -a -b ; this | ls
-foreach i (int, has, two)
-    cat $i
-end
-"
-
 ###### Grammar ######
 program             ::=     [ block ] EOF
                     ;
@@ -21,13 +15,13 @@ statement           ::=     subshell | compound_command | control
 compound_command    ::=     [ grouping ] separator
                     ;
 
-subshell            ::=     OPARANTH [ block ] CPARANTH
+subshell            ::=     OPARANTH block CPARANTH
                     ;
 
-grouping            ::=     pipeline ( ( AND_IF | OR_IF ) pipeline )*
+grouping            ::=     pipeline ( ( AND_IF | OR_IF ) grouping )*
                     ;
 
-pipeline            ::=     command ( PIPE command )*
+pipeline            ::=     command ( PIPE pipeline )*
                     ;
 
 command             ::=     WORD [ redirection ] [ command ]
@@ -48,24 +42,30 @@ separator           ::=     NEWLINE | SEMI
 control             ::=     if_control | while_control | foreach_control | repeat_control
                     ;
 
-if_control          ::=     IF conditional THEN NEWLINE [ block ] [ else_if_statement ] ENDIF NEWLINE
+if_control          ::=     IF conditional THEN NEWLINE [ block ] [ else_if_control ] ENDIF NEWLINE
                     ;
 
-else_if_statement   ::=     ELSE_IF conditional NEWLINE [ block ] [ else_statement ]
+else_if_control     ::=     ELSE_IF conditional NEWLINE [ block ] [ else_control ]
                     ;
 
-else_statement      ::=     ELSE [ block ]
-                    ;
-
-conditional         ::=     OPARANTH WORD CPARANTH
+else_control        ::=     ELSE NEWLINE [ block ]
                     ;
 
 foreach_control     ::=     FOREACH NAME wordlist_expression
+                    ;
+
+while_control       ::=     WHILE conditional NEWLINE block END NEWLINE
+                    ;
+
+repeat_control      ::=     REPEAT WORD grouping
                     ;
 
 wordlist_expression ::=     OPARANTH wordlist CPARANTH
                     ;
 
 wordlist            ::=     WORD [ wordlist ]
+                    ;
+
+conditional         ::=     OPARANTH WORD CPARANTH
                     ;
 # ! Control Flow
