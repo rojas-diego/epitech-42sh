@@ -26,7 +26,7 @@ static int job_process_update_record_process(
             continue;
         process->status = status;
         if (WIFSTOPPED(status)) {
-            fprintf(stderr, "Suspended\n");
+            fprintf(stderr, "\nSuspended\n");
             process->stopped = true;
             return (1);
         }
