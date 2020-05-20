@@ -25,6 +25,8 @@ SRC =		src/add_char.c		\
 		src/sort_string.c	\
 		src/isdir.c	\
 		src/longest_string.c	\
+		src/display_strings.c	\
+		src/display_strings_equalize.c	\
 
 OBJ =		$(SRC:.c=.o)
 
