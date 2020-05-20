@@ -18,12 +18,15 @@
 struct expr_program_s *expr_program(struct grammar_s *this)
 {
     struct expr_program_s *exp = malloc(sizeof(struct expr_program_s));
+    unsigned int save_index = this->index;
 
     if (!exp)
         exit(84);
     memset(exp, 0, sizeof(struct expr_program_s));
     exp->block = expr_block(this);
-    if (grammar_match(this, 1, TOK_EOF)) {
+    if (!exp->block) {
+        this->index = save_index;
+    } if (grammar_match(this, 1, TOK_EOF)) {
         exp->eof = grammar_get_previous(this);
     } else {
         this->error = true;

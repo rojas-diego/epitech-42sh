@@ -19,15 +19,19 @@ struct expr_compound_command_s *expr_compound_command(struct grammar_s *this)
 {
     struct expr_compound_command_s *exp = malloc(
         sizeof(struct expr_compound_command_s));
+    unsigned int save_index = this->index;
 
     if (!exp)
         exit(84);
     memset(exp, 0, sizeof(struct expr_compound_command_s));
-    exp->command = expr_command(this);
-    if (!exp->command) {
+    exp->grouping = expr_grouping(this);
+    if (!exp->grouping)
+        this->index = save_index;
+    exp->separator = expr_separator(this);
+    if (!exp->separator) {
+        this->index = save_index;
         free(exp);
         return NULL;
     }
-    exp->compound_command = expr_compound_command(this);
     return exp;
 }
