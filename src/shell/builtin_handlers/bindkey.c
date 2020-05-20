@@ -7,8 +7,9 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
 
-#include "../lib/hasher/hasher.h"
+#include "hasher/type.h"
 #include "builtins.h"
 #include "constants/prompt/builtins/private_bindkey.h"
 #include "proto/shell/builtin_handlers.h"
@@ -30,11 +31,20 @@ void builtin_bindkey_help(
 }
 
 void builtin_bindkey_display_settings(
-    __attribute__((unused)) struct sh *shell,
+    struct sh *shell,
     __attribute__((unused)) const char * const *argv
 )
 {
-
+    for (struct hasher *this = shell->bindkey; this; this = this->next) {
+        printf("\"");
+        for (int i = 0; this->key[i]; i++) {
+            if (isprint(this->key[i]))
+                printf("%c", this->key[i]);
+        }
+        printf("\"");
+        printf(" -> ");
+        printf("\n");
+    }
 }
 
 void builtin_bindkey_bind(
