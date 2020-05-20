@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "../lib/hasher/hasher.h"
 #include "builtins.h"
 #include "constants/prompt/builtins/private_bindkey.h"
 #include "proto/shell/builtin_handlers.h"
@@ -28,18 +29,26 @@ void builtin_bindkey_help(
     printf(BUILTIN_BINDKEY_HELP);
 }
 
-void builtin_bindkey_bind(
-    struct sh *shell,
-    const char * const *argv
+void builtin_bindkey_display_settings(
+    __attribute__((unused)) struct sh *shell,
+    __attribute__((unused)) const char * const *argv
 )
 {
 
 }
 
+void builtin_bindkey_bind(
+    struct sh *shell,
+    const char * const *argv
+)
+{
+    //hasher_insert_data_ordered(shell->bindkey, );
+}
+
 int builtin_bindkey_handler(struct sh *shell, const char * const *argv)
 {
     if (!argv[1]) {
-        builtin_bindkey_help(shell, argv);
+        builtin_bindkey_display_settings(shell, argv);
         return (0);
     }
     for (int i = 0; BINDKEY_FLAG[i].flag; i++) {
