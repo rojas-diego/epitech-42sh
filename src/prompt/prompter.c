@@ -33,7 +33,7 @@
 /* temp function */
 static void prompt_execution(struct sh *shell)
 {
-    wordexp_t we;
+    wordexp_t we = {0};
 
     if (exec_get_argv(&we, shell->rawinput)) {
         return;
