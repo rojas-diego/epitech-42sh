@@ -7,11 +7,11 @@
 
 #include <stdlib.h>
 
-#include "proto/job/initialize.h"
-
 #include "types/job.h"
 
-int process_initialize(struct job_s *job, char **argv)
+#include "proto/job/initialize.h"
+
+static int process_initialize(struct job_s *job, char **argv)
 {
     struct process_s *process = malloc(sizeof(struct process_s));
 
