@@ -16,7 +16,9 @@ char **ptb_word_array_parse(
     char c,
     char *(*func)(const char *, int)
 );
-char **word_array_chr(char **word_array, size_t size, char c);
-char **word_array_rchr(char **word_array, size_t size, char c);
+
+char **ptb_word_array_chr(char **word_array, size_t size, char c);
+
+char **ptb_word_array_rchr(char **word_array, size_t size, char c);
 
 #endif /* !PARSER_TOOLBOX_WORD_ARRAY_CHR_H_ */

@@ -10,6 +10,7 @@
 
 #include "parser_toolbox/word_array_chr.h"
 
+/* new[i] = temp ? strdup(temp) : strdup(word_array[i]); */
 char **ptb_word_array_parse(
     char **word_array,
     size_t size,
@@ -23,9 +24,10 @@ char **ptb_word_array_parse(
     if (!new) {
         return (NULL);
     }
+    new[size] = NULL;
     for (size_t i = 0; i < size; ++i) {
         temp = func(word_array[i], c);
-        new[i] = temp ? strdup(temp) : strdup(word_array[i]);
+        new[i] = temp ? temp + 1 : word_array[i];
     }
     return (new);
 }
