@@ -44,6 +44,7 @@ SRC =		src/constants.c						\
 		src/shell/builtin_handlers/null_command.c		\
 		src/shell/builtin_handlers/wait.c			\
 		src/shell/builtin_handlers/where.c			\
+		src/shell/builtin_handlers/which.c			\
 		src/shell/builtin_handlers/bg.c				\
 		src/shell/builtin_handlers/jobs.c			\
 		src/shell/builtin_handlers/too_many_arguments.c		\

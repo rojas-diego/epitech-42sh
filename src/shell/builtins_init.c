@@ -15,12 +15,13 @@
 #include "proto/shell/builtin_handlers.h"
 #include "proto/shell/builtins.h"
 
-static const int BUILTIN_COUNT = 16;
+static const int BUILTIN_COUNT = 18;
 
 static const struct {
     const char *key;
     builtin_handler func;
 } BUILTINS_DICT[] = {
+    {"which", &builtin_which_handler},
     {"where", &builtin_where_handler},
     {"unsetenv", &builtin_unsetenv_handler},
     {"unalias", &builtin_unalias_handler},

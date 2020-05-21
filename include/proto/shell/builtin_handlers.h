@@ -59,4 +59,6 @@ int builtin_jobs_handler(struct sh *shell, const char * const *argv);
 
 int builtin_where_handler(struct sh *shell, const char * const *argv);
 
+int builtin_which_handler(struct sh *shell, const char * const *argv);
+
 #endif /* !SH_SHELL_BUILTIN_HANDLERS_H_ */
