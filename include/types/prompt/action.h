@@ -17,7 +17,7 @@ typedef struct sh sh_t;
 
 typedef void (*prompt_action)(sh_t *shell);
 
-struct prompt_action
+struct prompt_action_s
 {
     const char *key;
     prompt_action action;
