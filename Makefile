@@ -19,6 +19,11 @@ SRC =		src/constants.c					\
 		src/exec/get_argv.c					\
 		src/exec/simple_exec.c					\
 									\
+		src/shell/local_variables/display.c				\
+		src/shell/local_variables/assign_value.c				\
+		src/shell/local_variables/from_data.c				\
+		src/shell/local_variables/get_type.c				\
+									\
 		src/prompt/history/init.c				\
 		src/prompt/history/insert.c				\
 		src/prompt/history/destroy.c				\
@@ -51,6 +56,9 @@ SRC =		src/constants.c					\
 		src/shell/builtin_handlers/jobs.c			\
 		src/shell/builtin_handlers/too_many_arguments.c	\
 		src/shell/builtin_handlers/too_few_arguments.c		\
+		src/shell/builtin_handlers/set.c		\
+		src/shell/builtin_handlers/unset.c		\
+		src/shell/builtin_handlers/at.c		\
 									\
 		src/input/executer/input_execute.c			\
 		src/input/parser/input_parse.c				\
