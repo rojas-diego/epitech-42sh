@@ -24,7 +24,7 @@ grouping            ::=     pipeline ( ( AND_IF | OR_IF ) grouping )*
 pipeline            ::=     command ( PIPE pipeline )*
                     ;
 
-command             ::=     (WORD | redirection ) [ command ]
+command             ::=     ( WORD | redirection ) [ command ]
                     ;
 
 redirection         ::=     [ IO_NUMBER ] GREAT WORD
