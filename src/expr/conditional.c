@@ -30,7 +30,7 @@ struct expr_conditional_s *expr_conditional_w(
 {
     struct expr_conditional_s *exp;
 
-    expr_print(this, "conditional Expression");
+    expr_print(this, "Conditional");
     exp = expr_conditional(this);
     expr_print_debug(this, exp);
     return exp;
