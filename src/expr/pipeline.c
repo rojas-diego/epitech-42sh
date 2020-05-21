@@ -24,7 +24,7 @@ struct expr_pipeline_s *expr_pipeline(struct grammar_s *this)
     if (!exp)
         exit(84);
     memset(exp, 0, sizeof(struct expr_pipeline_s));
-    exp->command = expr_command(this);
+    exp->command = expr_command_w(this);
     if (!exp->command) {
         free(exp);
         return NULL;
