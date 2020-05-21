@@ -29,6 +29,6 @@ void input_parse_grammar(struct sh *shell)
         return;
     }
     for (; this.tokens[this.token_count]; this.token_count++);
-    // expression = expr_program(&this);
+    expression = expr_program(&this);
     (void)(expression);
 }

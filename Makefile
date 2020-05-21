@@ -60,6 +60,18 @@ SRC =		src/constants.c					\
 		src/grammar/grammar_match.c				\
 		src/grammar/grammar_toolbox.c				\
 									\
+		src/expr/program.c \
+		src/expr/block.c \
+		src/expr/statement.c \
+		src/expr/compound_command.c \
+		src/expr/subshell.c \
+		src/expr/grouping.c \
+		src/expr/pipeline.c \
+		src/expr/command.c \
+		src/expr/redirection.c \
+		src/expr/separator.c \
+		src/expr/control.c \
+							\
 		src/prompt/actions/arrows.c				\
 		src/prompt/actions/backspace.c				\
 		src/prompt/actions/delete.c				\

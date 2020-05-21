@@ -20,7 +20,7 @@ bool grammar_match(struct grammar_s *this, unsigned long int count, ...)
 
     va_start(ap, count);
     for (; count; --count) {
-        if (this->index > this->token_count) {
+        if (this->index >= this->token_count) {
             return (false);
         } if (va_arg(ap, unsigned long int) ==
             this->tokens[this->index]->type) {
