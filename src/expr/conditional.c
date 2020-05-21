@@ -16,7 +16,7 @@
 ** @DESCRIPTION
 **   Rule for conditional expression.
 */
-struct expr_conditional_s *expr_conditional(
+static struct expr_conditional_s *expr_conditional(
     struct grammar_s *this
 )
 {

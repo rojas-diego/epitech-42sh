@@ -16,7 +16,9 @@
 ** @DESCRIPTION
 **   Rule for repeat_control expression.
 */
-struct expr_repeat_control_s *expr_repeat_control(struct grammar_s *this)
+static struct expr_repeat_control_s *expr_repeat_control(
+    struct grammar_s *this
+)
 {
     (void)(this);
     return NULL;

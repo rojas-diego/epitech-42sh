@@ -16,7 +16,7 @@
 ** @DESCRIPTION
 **   Rule for else_control expression.
 */
-struct expr_else_control_s *expr_else_control(struct grammar_s *this)
+static struct expr_else_control_s *expr_else_control(struct grammar_s *this)
 {
     (void)(this);
     return NULL;

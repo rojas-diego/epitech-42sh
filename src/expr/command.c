@@ -15,7 +15,7 @@
 ** @DESCRIPTION
 **   Rule for command expression.
 */
-struct expr_command_s *expr_command(struct grammar_s *this)
+static struct expr_command_s *expr_command(struct grammar_s *this)
 {
     struct expr_command_s *exp = malloc(
         sizeof(struct expr_command_s));

@@ -16,7 +16,7 @@
 ** @DESCRIPTION
 **   Rule for while_control expression.
 */
-struct expr_while_control_s *expr_while_control(struct grammar_s *this)
+static struct expr_while_control_s *expr_while_control(struct grammar_s *this)
 {
     (void)(this);
     return NULL;

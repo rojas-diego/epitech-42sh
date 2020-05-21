@@ -16,7 +16,9 @@
 ** @DESCRIPTION
 **   Rule for foreach_control expression.
 */
-struct expr_foreach_control_s *expr_foreach_control(struct grammar_s *this)
+static struct expr_foreach_control_s *expr_foreach_control(
+    struct grammar_s *this
+)
 {
     (void)(this);
     return NULL;

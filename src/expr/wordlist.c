@@ -16,7 +16,7 @@
 ** @DESCRIPTION
 **   Rule for wordlist expression.
 */
-struct expr_wordlist_s *expr_wordlist(
+static struct expr_wordlist_s *expr_wordlist(
     struct grammar_s *this
 )
 {

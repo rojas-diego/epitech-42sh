@@ -15,7 +15,7 @@
 ** @DESCRIPTION
 **   Rule for statement expression.
 */
-struct expr_statement_s *expr_statement(struct grammar_s *this)
+static struct expr_statement_s *expr_statement(struct grammar_s *this)
 {
     struct expr_statement_s *exp = malloc(sizeof(struct expr_statement_s));
     unsigned int save_index = this->index;

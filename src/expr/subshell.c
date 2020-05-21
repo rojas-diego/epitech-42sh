@@ -15,7 +15,7 @@
 ** @DESCRIPTION
 **   Rule for subshell expression.
 */
-struct expr_subshell_s *expr_subshell(struct grammar_s *this)
+static struct expr_subshell_s *expr_subshell(struct grammar_s *this)
 {
     struct expr_subshell_s *exp = malloc(
         sizeof(struct expr_subshell_s));

@@ -15,7 +15,7 @@
 ** @DESCRIPTION
 **   Rule for control expression.
 */
-struct expr_control_s *expr_control(struct grammar_s *this)
+static struct expr_control_s *expr_control(struct grammar_s *this)
 {
     (void)(this);
     return NULL;

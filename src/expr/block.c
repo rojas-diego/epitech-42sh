@@ -15,7 +15,7 @@
 ** @DESCRIPTION
 **   Rule for block expression.
 */
-struct expr_block_s *expr_block(struct grammar_s *this)
+static struct expr_block_s *expr_block(struct grammar_s *this)
 {
     struct expr_block_s *exp = malloc(sizeof(struct expr_block_s));
     unsigned int save_index = this->index;

@@ -15,7 +15,9 @@
 ** @DESCRIPTION
 **   Rule for compound_command expression.
 */
-struct expr_compound_command_s *expr_compound_command(struct grammar_s *this)
+static struct expr_compound_command_s *expr_compound_command(
+    struct grammar_s *this
+)
 {
     struct expr_compound_command_s *exp = malloc(
         sizeof(struct expr_compound_command_s));
