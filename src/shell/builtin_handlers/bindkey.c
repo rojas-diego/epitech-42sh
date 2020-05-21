@@ -40,7 +40,7 @@ void builtin_bindkey_help(
     __attribute__((unused)) const char * const *argv
 )
 {
-    printf(BUILTIN_BINDKEY_HELP);
+    printf("%s%s", BUILTIN_BINDKEY_HELP, BUILTIN_BINDKEY_HELP_PART_2);
 }
 
 void builtin_bindkey_display_settings(
