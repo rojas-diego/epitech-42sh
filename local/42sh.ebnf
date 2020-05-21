@@ -33,7 +33,7 @@ redirection         ::=     [ IO_NUMBER ] GREAT WORD
                     |       DLESS WORD
                     ;
 
-separator           ::=     NEWLINE | SEMI
+separator           ::=     NEWLINE | SEMI | EOF
                     ;
 
 # Control Flow !
