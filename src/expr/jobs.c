@@ -15,17 +15,17 @@
 ** @DESCRIPTION
 **   Rule for compound_command expression.
 */
-static struct expr_job_s *expr_jobs(
+static struct expr_jobs_s *expr_jobs(
     struct grammar_s *this
 )
 {
-    struct expr_job_s *exp = malloc(
-        sizeof(struct expr_job_s));
+    struct expr_jobs_s *exp = malloc(
+        sizeof(struct expr_jobs_s));
     unsigned int save_index = this->index;
 
     if (!exp)
         exit(84);
-    memset(exp, 0, sizeof(struct expr_job_s));
+    memset(exp, 0, sizeof(struct expr_jobs_s));
     exp->grouping = expr_grouping_w(this);
     if (!exp->grouping)
         this->index = save_index;
@@ -38,9 +38,9 @@ static struct expr_job_s *expr_jobs(
     return exp;
 }
 
-struct expr_job_s *expr_jobs_w(struct grammar_s *this)
+struct expr_jobs_s *expr_jobs_w(struct grammar_s *this)
 {
-    struct expr_job_s *exp;
+    struct expr_jobs_s *exp;
 
     expr_print(this, "Jobs");
     exp = expr_jobs(this);

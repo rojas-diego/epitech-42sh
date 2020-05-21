@@ -35,7 +35,7 @@ void expr_print_debug(struct grammar_s *this, void *ptr);
 struct expr_program_s *expr_program_w(struct grammar_s *this);
 struct expr_block_s *expr_block_w(struct grammar_s *this);
 struct expr_statement_s *expr_statement_w(struct grammar_s *this);
-struct expr_job_s *expr_jobs_w(
+struct expr_jobs_s *expr_jobs_w(
     struct grammar_s *this);
 struct expr_subshell_s *expr_subshell_w(struct grammar_s *this);
 struct expr_grouping_s *expr_grouping_w(struct grammar_s *this);

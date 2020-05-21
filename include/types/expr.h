@@ -45,7 +45,7 @@ enum expr_type_e {
 union expr_union_u {
     struct expr_program_s *program;
     struct expr_block_s *block;
-    struct expr_job_s *jobs;
+    struct expr_jobs_s *jobs;
     struct expr_command_s *command;
     struct expr_shell_command_s *shell_command;
     struct expr_if_statement_s *if_stmt;
@@ -230,9 +230,9 @@ struct expr_subshell_s {
 
 /*
 ** @DESCRIPTION
-**   Rule: jobs
+**   Rule: JOBS
 */
-struct expr_job_s {
+struct expr_jobs_s {
     struct expr_grouping_s  *grouping;
     struct expr_separator_s *separator;
 };
@@ -243,7 +243,7 @@ struct expr_job_s {
 */
 struct expr_statement_s {
     struct expr_subshell_s          *subshell;
-    struct expr_job_s               *jobs;
+    struct expr_jobs_s               *jobs;
     struct expr_control_s           *control;
 };
 
