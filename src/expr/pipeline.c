@@ -15,7 +15,7 @@
 ** @DESCRIPTION
 **   Rule for pipeline expression.
 */
-struct expr_pipeline_s *expr_pipeline(struct grammar_s *this)
+static struct expr_pipeline_s *expr_pipeline(struct grammar_s *this)
 {
     struct expr_pipeline_s *exp = malloc(
         sizeof(struct expr_pipeline_s));

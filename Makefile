@@ -78,7 +78,7 @@ SRC =		src/constants.c					\
 		src/expr/program.c \
 		src/expr/block.c \
 		src/expr/statement.c \
-		src/expr/compound_command.c \
+		src/expr/jobs.c \
 		src/expr/subshell.c \
 		src/expr/grouping.c \
 		src/expr/pipeline.c \
@@ -86,6 +86,15 @@ SRC =		src/constants.c					\
 		src/expr/redirection.c \
 		src/expr/separator.c \
 		src/expr/control.c \
+		src/expr/if_control.c \
+		src/expr/else_if_control.c \
+		src/expr/else_control.c \
+		src/expr/foreach_control.c \
+		src/expr/while_control.c \
+		src/expr/repeat_control.c \
+		src/expr/wordlist_expression.c \
+		src/expr/wordlist.c \
+		src/expr/conditional.c \
 		src/expr/utility.c \
 							\
 		src/prompt/actions/arrows.c				\
@@ -131,7 +140,7 @@ SRC =		src/constants.c					\
 		src/job/do_notification.c				\
 		src/job/initialize.c					\
 
-SRCT =		tests/input/parser/test_input_parse.c			\
+SRCT =		tests/input/parser/test_input_parse_tokens.c			\
 		tests/grammar/test_grammar_match.c			\
 
 OBJ =		$(SRC:.c=.o)

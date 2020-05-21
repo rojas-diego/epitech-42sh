@@ -15,7 +15,7 @@
 ** @DESCRIPTION
 **   Rule for program expression.
 */
-struct expr_program_s *expr_program(struct grammar_s *this)
+static struct expr_program_s *expr_program(struct grammar_s *this)
 {
     struct expr_program_s *exp = malloc(sizeof(struct expr_program_s));
     unsigned int save_index = this->index;

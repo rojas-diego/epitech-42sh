@@ -43,6 +43,8 @@ static const char *TOK_NAMES[] = {
     "Clobber",
     "Left Brace",
     "Right Brace",
+    "Left Paranthesis",
+    "Right Paranthesis",
     "Bang",
     "Break",
     "Switch",
@@ -52,6 +54,7 @@ static const char *TOK_NAMES[] = {
     "Endsw",
     "Continue",
     "Foreach",
+    "Endif",
     "End",
     "Goto",
     "If",
@@ -59,8 +62,7 @@ static const char *TOK_NAMES[] = {
     "Else",
     "Then",
     "Repeat",
-    "While"
-};
+    "While"};
 
 /**/
 /* Structures / Typedef / Enums declarations */

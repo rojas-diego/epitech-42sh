@@ -57,12 +57,9 @@ unsigned int token_validate_token(
 );
 
 /* Belongs to src/input/parser/token_validate.c */
+bool token_peek_characters(char const *string, char const *chars);
 void token_validate_inhibitors(char const *string, unsigned int *i, bool *adv);
-
-/* Belongs to src/input/parser/token_validate.c */
 void token_validate_squotes(char const *string, unsigned int *i, bool *adv);
-
-/* Belongs to src/input/parser/token_validate.c */
 void token_validate_dquotes(char const *string, unsigned int *i, bool *adv);
 
 #endif

@@ -15,7 +15,7 @@
 ** @DESCRIPTION
 **   Rule for separator expression.
 */
-struct expr_separator_s *expr_separator(struct grammar_s *this)
+static struct expr_separator_s *expr_separator(struct grammar_s *this)
 {
     struct expr_separator_s *exp = malloc(
         sizeof(struct expr_separator_s));

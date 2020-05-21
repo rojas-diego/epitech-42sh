@@ -15,7 +15,7 @@
 ** @DESCRIPTION
 **   Rule for grouping expression.
 */
-struct expr_grouping_s *expr_grouping(struct grammar_s *this)
+static struct expr_grouping_s *expr_grouping(struct grammar_s *this)
 {
     struct expr_grouping_s *exp = malloc(
         sizeof(struct expr_grouping_s));

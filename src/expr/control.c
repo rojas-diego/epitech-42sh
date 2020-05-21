@@ -15,10 +15,35 @@
 ** @DESCRIPTION
 **   Rule for control expression.
 */
-struct expr_control_s *expr_control(struct grammar_s *this)
+static struct expr_control_s *expr_control(struct grammar_s *this)
 {
-    (void)(this);
-    return NULL;
+    struct expr_control_s *exp = malloc(sizeof(struct expr_control_s));
+    unsigned int save_index = this->index;
+
+    if (!exp)
+        exit(84);
+    memset(exp, 0, sizeof(struct expr_control_s));
+    exp->if_control = expr_if_control_w(this);
+    if (!exp->if_control)
+        this->index = save_index;
+    else
+        return exp;
+    exp->while_control = expr_while_control_w(this);
+    if (!exp->while_control)
+        this->index = save_index;
+    else
+        return exp;
+    exp->foreach_control = expr_foreach_control_w(this);
+    if (!exp->foreach_control)
+        this->index = save_index;
+    else
+        return exp;
+    exp->repeat_control = expr_repeat_control_w(this);
+    if (!exp->repeat_control) {
+        free(exp);
+        return NULL;
+    }
+    return exp;
 }
 
 struct expr_control_s *expr_control_w(struct grammar_s *this)

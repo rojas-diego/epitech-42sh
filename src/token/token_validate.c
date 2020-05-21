@@ -7,6 +7,9 @@
 
 #include <stdbool.h>
 
+#include "parser_toolbox.h"
+
+#include "proto/constants.h"
 #include "proto/token.h"
 
 /*
@@ -73,4 +76,15 @@ void token_validate_dquotes(char const *string, unsigned int *i, bool *adv)
             return;
     }
     (*i)--;
+}
+
+bool token_peek_characters(char const *string, char const *chars)
+{
+    for (unsigned int i = 0; string[i]; i++) {
+        if (ptb_includes(string[i], WHITESPACE))
+            continue;
+        if (ptb_includes(string[i], chars))
+            return (true);
+    }
+    return (false);
 }

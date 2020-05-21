@@ -9,13 +9,13 @@ program             ::=     [ block ] EOF
 block               ::=     statement [ block ]
                     ;
 
-statement           ::=     subshell | compound_command | control
+statement           ::=     subshell | jobs | control
                     ;
 
-compound_command    ::=     [ grouping ] separator
+jobs                ::=     [ & ] grouping ( & grouping )* [ & ] separator
                     ;
 
-subshell            ::=     OPARANTH block CPARANTH
+subshell            ::=     LPARANTH block RPARANTH
                     ;
 
 grouping            ::=     pipeline ( ( AND_IF | OR_IF ) grouping )*
@@ -24,7 +24,7 @@ grouping            ::=     pipeline ( ( AND_IF | OR_IF ) grouping )*
 pipeline            ::=     command ( PIPE pipeline )*
                     ;
 
-command             ::=     WORD [ redirection ] [ command ]
+command             ::=     ( WORD | redirection ) [ command ]
                     ;
 
 redirection         ::=     [ IO_NUMBER ] GREAT WORD
@@ -43,13 +43,13 @@ control             ::=     if_control | while_control | foreach_control | repea
 if_control          ::=     IF conditional THEN NEWLINE [ block ] [ else_if_control ] ENDIF NEWLINE
                     ;
 
-else_if_control     ::=     ELSE_IF conditional NEWLINE [ block ] [ else_control ]
+else_if_control     ::=     ELSE_IF conditional THEN NEWLINE [ block ] [ else_control ]
                     ;
 
 else_control        ::=     ELSE NEWLINE [ block ]
                     ;
 
-foreach_control     ::=     FOREACH NAME wordlist_expression [ block ] END
+foreach_control     ::=     FOREACH WORD wordlist_expression NEWLINE [ block ] END NEWLINE
                     ;
 
 while_control       ::=     WHILE conditional NEWLINE [ block ] END NEWLINE
@@ -58,12 +58,12 @@ while_control       ::=     WHILE conditional NEWLINE [ block ] END NEWLINE
 repeat_control      ::=     REPEAT WORD grouping
                     ;
 
-wordlist_expression ::=     OPARANTH wordlist CPARANTH
+wordlist_expression ::=     LPARANTH wordlist RPARANTH
                     ;
 
 wordlist            ::=     WORD [ wordlist ]
                     ;
 
-conditional         ::=     OPARANTH WORD CPARANTH
+conditional         ::=     LPARANTH WORD RPARANTH
                     ;
 # ! Control Flow

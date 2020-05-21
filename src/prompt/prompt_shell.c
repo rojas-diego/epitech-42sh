@@ -28,7 +28,7 @@ static void prompt_fetch(struct sh *shell)
     size_t length = 0;
     ssize_t response;
 
-    response = getline(&buffer, &length, stdin);
+    response = getdelim(&buffer, &length, 0, stdin);
     if (response <= 0 || ptb_whitelist(buffer, PTB_WHITESPACES)) {
         if (response < 0) {
             shell->active = false;

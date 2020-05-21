@@ -15,7 +15,7 @@
 ** @DESCRIPTION
 **   Rule for redirection expression.
 */
-struct expr_redirection_s *expr_redirection(struct grammar_s *this)
+static struct expr_redirection_s *expr_redirection(struct grammar_s *this)
 {
     struct expr_redirection_s *exp = malloc(
         sizeof(struct expr_redirection_s));
