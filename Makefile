@@ -14,6 +14,7 @@ TESTNAME =	unit_tests
 MAIN =		src/main.c						\
 
 SRC =		src/constants.c					\
+			src/check_debug_mode.c			\
 									\
 		src/exec/get_argv.c					\
 		src/exec/simple_exec.c					\
