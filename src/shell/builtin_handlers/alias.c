@@ -92,8 +92,7 @@ int builtin_unalias_handler(
 {
     struct hasher *poped = NULL;
 
-    if (!argv[1]) {
-        dprintf(2, "%s: Too few arguments.\n", argv[0]);
+    if (builtins_utils_too_few_arguments(argv, 1)) {
         return (1);
     }
     if (!shell->alias) {

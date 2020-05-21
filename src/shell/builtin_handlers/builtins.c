@@ -15,8 +15,7 @@
 
 int builtin_builtins_handler(struct sh *shell, const char * const *argv)
 {
-    if (argv[1]) {
-        dprintf(2, "%s: Too many arguments.\n", argv[0]);
+    if (builtins_utils_too_many_arguments(argv, 0)) {
         return (1);
     }
     for (struct hasher *builtin = shell->builtin; builtin != NULL;
