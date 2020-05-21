@@ -47,6 +47,6 @@ struct expr_pipeline_s *expr_pipeline_w(struct grammar_s *this)
 
     expr_print(this, "Pipeline");
     exp = expr_pipeline(this);
-    expr_print_debug(this, "Pipeline", exp);
+    expr_print_debug(this, exp);
     return exp;
 }

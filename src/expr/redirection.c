@@ -45,6 +45,6 @@ struct expr_redirection_s *expr_redirection_w(struct grammar_s *this)
 
     expr_print(this, "Redirection");
     exp = expr_redirection(this);
-    expr_print_debug(this, "Redirection", exp);
+    expr_print_debug(this, exp);
     return exp;
 }

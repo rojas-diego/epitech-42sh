@@ -42,6 +42,6 @@ struct expr_block_s *expr_block_w(struct grammar_s *this)
 
     expr_print(this, "Block");
     exp = expr_block(this);
-    expr_print_debug(this, "Block", exp);
+    expr_print_debug(this, exp);
     return exp;
 }

@@ -40,6 +40,6 @@ struct expr_program_s *expr_program_w(struct grammar_s *this)
 
     expr_print(this, "Program");
     exp = expr_program(this);
-    expr_print_debug(this, "Program", exp);
+    expr_print_debug(this, exp);
     return exp;
 }

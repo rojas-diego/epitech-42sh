@@ -30,7 +30,7 @@
 
 void expr_print_padding(unsigned int depth);
 void expr_print(struct grammar_s *this, char const *name);
-void expr_print_debug(struct grammar_s *this, char const *name, void *ptr);
+void expr_print_debug(struct grammar_s *this, void *ptr);
 
 struct expr_program_s *expr_program(struct grammar_s *this);
 struct expr_block_s *expr_block(struct grammar_s *this);

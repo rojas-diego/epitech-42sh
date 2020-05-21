@@ -42,6 +42,6 @@ struct expr_compound_command_s *expr_compound_command_w(struct grammar_s *this)
 
     expr_print(this, "Compound Command");
     exp = expr_compound_command(this);
-    expr_print_debug(this, "Compound Command", exp);
+    expr_print_debug(this, exp);
     return exp;
 }

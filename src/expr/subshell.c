@@ -48,6 +48,6 @@ struct expr_subshell_s *expr_subshell_w(struct grammar_s *this)
 
     expr_print(this, "Subshell");
     exp = expr_subshell(this);
-    expr_print_debug(this, "Subshell", exp);
+    expr_print_debug(this, exp);
     return exp;
 }

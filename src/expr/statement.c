@@ -48,6 +48,6 @@ struct expr_statement_s *expr_statement_w(struct grammar_s *this)
 
     expr_print(this, "Statement");
     exp = expr_statement(this);
-    expr_print_debug(this, "Statement", exp);
+    expr_print_debug(this, exp);
     return exp;
 }

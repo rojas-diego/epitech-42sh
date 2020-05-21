@@ -38,6 +38,6 @@ struct expr_separator_s *expr_separator_w(struct grammar_s *this)
 
     expr_print(this, "Separator");
     exp = expr_separator(this);
-    expr_print_debug(this, "Separator", exp);
+    expr_print_debug(this, exp);
     return exp;
 }

@@ -27,7 +27,7 @@ void expr_print(struct grammar_s *this, char const *name)
     this->depth += 1;
 }
 
-void expr_print_debug(struct grammar_s *this, char const *name, void *ptr)
+void expr_print_debug(struct grammar_s *this, void *ptr)
 {
     if (!this->debug)
         return;

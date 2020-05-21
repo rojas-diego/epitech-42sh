@@ -47,6 +47,6 @@ struct expr_grouping_s *expr_grouping_w(struct grammar_s *this)
 
     expr_print(this, "Grouping");
     exp = expr_grouping(this);
-    expr_print_debug(this, "Grouping", exp);
+    expr_print_debug(this, exp);
     return exp;
 }
