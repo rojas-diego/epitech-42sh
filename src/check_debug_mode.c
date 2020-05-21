@@ -8,6 +8,8 @@
 #include <stdbool.h>
 #include <string.h>
 
+#include "proto/shell/check_debug_mode.h"
+
 bool check_debug_mode(char *const *av)
 {
     if (!av[1])
