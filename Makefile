@@ -132,7 +132,7 @@ SRC =		src/constants.c					\
 		src/job/do_notification.c				\
 		src/job/initialize.c					\
 
-SRCT =		tests/input/parser/test_input_parse.c			\
+SRCT =		tests/input/parser/test_input_parse_tokens.c			\
 		tests/grammar/test_grammar_match.c			\
 
 OBJ =		$(SRC:.c=.o)
