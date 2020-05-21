@@ -18,7 +18,7 @@ static size_t word_len(const char *str)
 {
     size_t i = 0;
 
-    for (; str[i] && !strchr(PTB_WHITESPACES, str[i]); ++i) {}
+    for (; str[i] && (!strchr(PTB_WHITESPACES, str[i]) || str[i] != '!'); ++i) {}
     return (i);
 }
 
@@ -26,7 +26,7 @@ static size_t word_len(const char *str)
 ** @Description
 **    this function replace all '!' by the matching previous command
 */
-void history_replace(struct history_s *history, char **str)
+_Bool history_replace(struct history_s *history, char **str)
 {
     struct dnode_s *node = NULL;
     size_t len = 0;
@@ -34,15 +34,19 @@ void history_replace(struct history_s *history, char **str)
 
     for (size_t i = 0; (*str)[i]; ++i) {
         if ((*str)[i] == '!' && (!i || strchr(PTB_WHITESPACES, (*str)[i - 1]))) {
-            (*str)[i] = 0;
             substring = ptb_sub_string(*str, i + 1, i + word_len(&(*str)[i + 1]));
+            if (!substring) {
+                continue;
+            }
             len = strlen(substring) + 1 + i;
             node = dnode_find_after(history->list, substring, &ptb_ncmp_string);
             if (!node) {
                 dprintf(2, "!%s: Event not found.\n", substring ? substring : "");
-                return;
+                return (1);
             }
-            asprintf(str, "%s%s%s", *str, node->data, &(*str)[len]);
+            (*str)[i] = 0;
+            asprintf(str, "%s%s%s", *str, (char *) node->data, &(*str)[len]);
         }
     }
+    return (0);
 }

@@ -11,6 +11,7 @@
 #include "types/history.h"
 
 void history_insert(struct history_s *history, char const *line);
+_Bool history_replace(struct history_s *history, char **str);
 void history_destroy(struct history_s *history);
 _Bool history_init(struct history_s *history);
 

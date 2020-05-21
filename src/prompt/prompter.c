@@ -60,6 +60,7 @@ void prompter(struct sh *shell)
             prompt_input_empty(shell);
             continue;
         }
+        history_replace(&(shell->history), &(shell->rawinput));
         history_insert(&(shell->history), shell->rawinput);
         input_parse(shell);
         prompt_execution(shell);
