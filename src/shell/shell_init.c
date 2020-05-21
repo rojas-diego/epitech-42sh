@@ -46,5 +46,5 @@ int shell_struct_initialise(
     (*this).builtin = shell_builtin_hash_create();
     (*this).bindkey = shell_bindkey_hash_create();
     (*this).alias = NULL;
-    return ((*this).atty && !((*this).builtin && (*this).bindkey));
+    return (!(*this).builtin || ((*this).atty && !(*this).bindkey));
 }

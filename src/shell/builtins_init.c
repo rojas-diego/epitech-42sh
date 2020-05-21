@@ -15,7 +15,7 @@
 #include "proto/shell/builtin_handlers.h"
 #include "proto/shell/builtins.h"
 
-static const int BUILTIN_COUNT = 13;
+static const int BUILTIN_COUNT = 14;
 
 static const struct {
     const char *key;
