@@ -8,12 +8,13 @@
 CC ?=		gcc
 
 LIBNAMES =	builtins						\
-		dnode							\
-		mynode							\
-		input_postprocessing					\
-		find_binary						\
-		hasher							\
+		dnode								\
+		mynode								\
+		input_postprocessing				\
+		find_binary							\
+		hasher								\
 		parser_toolbox						\
+		myerror								\
 
 all:		COMMAND = all
 all:
