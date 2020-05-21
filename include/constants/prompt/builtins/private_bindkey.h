@@ -165,7 +165,9 @@ static const char BUILTIN_BINDKEY_EDITOR_COMMANDS_WITH_DESCRIPTIONS[] =
     "redisplay\n"
     "          Redisplay everything\n"
     "run-fg-editor\n"
-    "          Restart stopped editor\n"
+    "          Restart stopped editor\n";
+
+static const char BUILTIN_BINDKEY_HELP_PART_2[] =
     "run-help\n"
     "          Look for help on current command\n"
     "self-insert-command\n"
