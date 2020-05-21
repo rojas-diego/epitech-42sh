@@ -23,7 +23,6 @@ void input_parse_grammar(struct sh *shell)
     struct grammar_s this = {0};
     struct expr_program_s *expression;
 
-    this.debug = true;
     this.tokens = (struct token_s **)node_to_table(shell->tokens);
     if (this.tokens == NULL) {
         shell->error = ER_MALLOC;
