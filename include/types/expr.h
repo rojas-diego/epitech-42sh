@@ -61,9 +61,9 @@ union expr_union_u {
 **   Rule: CONDITIONAL
 */
 struct expr_conditional_s {
-    struct token_s *oparanth;
+    struct token_s *lparanth;
     struct token_s *word;
-    struct token_s *cparanth;
+    struct token_s *rparanth;
 };
 
 /*
@@ -80,9 +80,9 @@ struct expr_wordlist_s {
 **   Rule: WORDLIST CONTROL
 */
 struct expr_wordlist_expression_s {
-    struct token_s                  *oparanth;
+    struct token_s                  *lparanth;
     struct expr_wordlist_s          *wordlist;
-    struct token_s                  *cparanth;
+    struct token_s                  *rparanth;
 };
 
 /*
@@ -220,9 +220,9 @@ struct expr_grouping_s {
 **   Rule: SUBSHELL
 */
 struct expr_subshell_s {
-    struct token_s          *oparanth;
+    struct token_s          *lparanth;
     struct expr_block_s     *block;
-    struct token_s          *cparanth;
+    struct token_s          *rparanth;
 };
 
 /*
