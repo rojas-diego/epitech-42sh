@@ -52,7 +52,7 @@ else_control        ::=     ELSE NEWLINE [ block ]
 foreach_control     ::=     FOREACH WORD wordlist_expression NEWLINE [ block ] END NEWLINE
                     ;
 
-while_control       ::=     WHILE conditional THEN NEWLINE [ block ] END NEWLINE
+while_control       ::=     WHILE conditional NEWLINE [ block ] END NEWLINE
                     ;
 
 repeat_control      ::=     REPEAT WORD grouping
