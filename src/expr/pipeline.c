@@ -19,7 +19,7 @@ struct expr_pipeline_s *expr_pipeline(struct grammar_s *this)
 {
     struct expr_pipeline_s *exp = malloc(
         sizeof(struct expr_pipeline_s));
-    unsigned int save_index = this->index;
+    unsigned int save_index __attribute__((unused)) = this->index;
 
     if (!exp)
         exit(84);

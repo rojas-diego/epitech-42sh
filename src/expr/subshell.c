@@ -19,7 +19,7 @@ struct expr_subshell_s *expr_subshell(struct grammar_s *this)
 {
     struct expr_subshell_s *exp = malloc(
         sizeof(struct expr_subshell_s));
-    unsigned int save_index = this->index;
+    unsigned int save_index __attribute__((unused)) = this->index;
 
     if (!exp)
         exit(84);
