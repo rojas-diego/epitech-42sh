@@ -9,6 +9,9 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "parser_toolbox/consts.h"
+#include "parser_toolbox/whitelist.h"
+
 #include "proto/prompt/display.h"
 #include "proto/prompt/input/get_input.h"
 #include "proto/prompt/input/get_input_with_raw_mode.h"
@@ -26,13 +29,15 @@ static void prompt_fetch(struct sh *shell)
     ssize_t response;
 
     response = getline(&buffer, &length, stdin);
-    if (response < 0 || *buffer == '\n') {
+    if (response <= 0 || ptb_whitelist(buffer, PTB_WHITESPACES)) {
         if (response < 0) {
             shell->active = false;
         }
         if (buffer)
             free(buffer);
         buffer = NULL;
+    } else if (buffer[response - 1] == '\n') {
+        buffer[response - 1] = '\0';
     }
     shell->rawinput = buffer;
 }
@@ -47,7 +52,7 @@ void prompt_shell(struct sh *shell)
     if (shell->atty) {
         prompt_display(shell);
         get_input_with_raw_mode(shell);
-        if (!shell->prompt.input[0]) {
+        if (ptb_whitelist(shell->prompt.input, PTB_WHITESPACES)) {
             shell->rawinput = NULL;
             return;
         }

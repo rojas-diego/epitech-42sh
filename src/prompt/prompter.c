@@ -57,6 +57,7 @@ void prompter(struct sh *shell)
             return;
         }
         if (shell->rawinput == NULL) {
+            prompt_input_empty(shell);
             continue;
         }
         history_insert(&(shell->history), shell->rawinput);
