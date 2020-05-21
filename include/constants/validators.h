@@ -31,8 +31,6 @@ static const vafunc_f TOK_VALIDATORS[] = {
     token_validate_token,
     token_validate_token,
     token_validate_word,
-    token_validate_assignment_word,
-    token_validate_name,
     token_validate_token,
     token_validate_io_number,
     token_validate_token,
