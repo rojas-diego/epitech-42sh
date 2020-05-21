@@ -34,7 +34,7 @@ void input_parse_grammar(struct sh *shell)
         printf("\n=============== AST DEBUG MODE ===============\n");
     expression = expr_program_w(&this);
     if (this.debug)
-        printf("\nError: %d\n", this.error);
+        printf("\nError: %s\n", (this.error) ? "Fatal" : "None");
     if (this.debug)
         printf("==============================================\n\n");
     (void)(expression);
