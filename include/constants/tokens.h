@@ -20,8 +20,6 @@ static const char *TOKENS[] = {
     "",         /* UNKNOW */
     "",         /* EOF */
     0,          /* WORD */
-    0,          /* ASSIGNMENT_WORD */
-    0,          /* NAME */
     "\n",       /* NEWLINE */
     0,          /* IO_NUMBER */
     "<",        /* LESS */
@@ -55,6 +53,7 @@ static const char *TOKENS[] = {
     "end",      /* END */
     "goto",     /* GOTO */
     "if",       /* IF */
+    "endif",    /* ENDIF */
     "else if",  /* ELSE IF */
     "else",     /* ELSE */
     "then",     /* THEN */
