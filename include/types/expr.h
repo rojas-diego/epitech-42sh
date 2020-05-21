@@ -97,7 +97,7 @@ struct expr_repeat_control_s {
 
 /*
 ** @DESCRIPTION
-**   Rule: FOREACH CONTROL
+**   Rule: WHILE CONTROL
 */
 struct expr_while_control_s {
     struct token_s                  *while_token;
@@ -116,6 +116,9 @@ struct expr_foreach_control_s {
     struct token_s                  *foreach;
     struct token_s                  *word;
     struct expr_wordlist_expression *wordlist_expression;
+    struct expr_block               *block;
+    struct token_s                  *end;
+    struct token_s                  *newline;
 };
 
 /*
