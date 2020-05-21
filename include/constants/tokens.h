@@ -16,10 +16,6 @@
 /* Constants */
 /**/
 
-
-
-
-
 static const char *TOKENS[] = {
     "",         /* UNKNOW */
     "",         /* EOF */
@@ -54,10 +50,10 @@ static const char *TOKENS[] = {
     "endsw",    /* ENDSW */
     "continue", /* CONTINUE */
     "foreach",  /* FOREACH */
+    "endif",    /* ENDIF */
     "end",      /* END */
     "goto",     /* GOTO */
     "if",       /* IF */
-    "endif",    /* ENDIF */
     "else if",  /* ELSE IF */
     "else",     /* ELSE */
     "then",     /* THEN */
