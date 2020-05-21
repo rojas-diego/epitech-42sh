@@ -51,6 +51,9 @@ SRC =		src/constants.c					\
 		src/shell/builtin_handlers/jobs.c			\
 		src/shell/builtin_handlers/too_many_arguments.c	\
 		src/shell/builtin_handlers/too_few_arguments.c		\
+		src/shell/builtin_handlers/set.c		\
+		src/shell/builtin_handlers/unset.c		\
+		src/shell/builtin_handlers/at.c		\
 									\
 		src/input/executer/input_execute.c			\
 		src/input/parser/input_parse.c				\
