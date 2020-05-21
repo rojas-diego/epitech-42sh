@@ -33,7 +33,7 @@
 /* temp function */
 static void prompt_execution(struct sh *shell)
 {
-    wordexp_t we;
+    wordexp_t we = {0};
 
     if (exec_get_argv(&we, shell->rawinput)) {
         return;
@@ -57,8 +57,10 @@ void prompter(struct sh *shell)
             return;
         }
         if (shell->rawinput == NULL) {
+            prompt_input_empty(shell);
             continue;
         }
+        history_replace(&(shell->history), &(shell->rawinput));
         history_insert(&(shell->history), shell->rawinput);
         input_parse(shell);
         prompt_execution(shell);

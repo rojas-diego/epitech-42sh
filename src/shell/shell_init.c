@@ -13,6 +13,7 @@
 #include "proto/shell/alias.h"
 #include "proto/shell/term_init.h"
 #include "proto/shell/bindkey.h"
+#include "proto/shell/check_debug_mode.h"
 #include "proto/prompt/history.h"
 
 /* TODO: parse av: if fd replace STDIN_FILENO in isatty by fildes */
@@ -46,5 +47,6 @@ int shell_struct_initialise(
     (*this).builtin = shell_builtin_hash_create();
     (*this).bindkey = shell_bindkey_hash_create();
     (*this).alias = NULL;
-    return (!((*this).builtin && (*this).bindkey));
+    this->debug_mode = check_debug_mode(av);
+    return (!(*this).builtin || ((*this).atty && !(*this).bindkey));
 }

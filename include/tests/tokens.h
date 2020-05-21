@@ -24,8 +24,6 @@ static const char *TOK_NAMES[] = {
     "(Unknown)",
     "EOF",
     "Word",
-    "Assignment Word",
-    "Name",
     "Newline",
     "IO Number",
     "Less",

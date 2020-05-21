@@ -43,18 +43,6 @@ unsigned int token_validate_word(
 );
 
 /* Belongs to src/input/parser/token_validate_meta.c */
-unsigned int token_validate_assignment_word(
-    char const *string __attribute__((unused)),
-    char const *token __attribute__((unused))
-);
-
-/* Belongs to src/input/parser/token_validate_meta.c */
-unsigned int token_validate_name(
-    char const *string,
-    char const *token __attribute__((unused))
-);
-
-/* Belongs to src/input/parser/token_validate_meta.c */
 unsigned int token_validate_io_number(
     char const *string,
     char const *token __attribute__((unused))

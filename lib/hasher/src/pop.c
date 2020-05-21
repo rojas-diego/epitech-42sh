@@ -15,8 +15,9 @@ struct hasher *hasher_pop(struct hasher **hasher, const char *key)
     struct hasher *poped = NULL;
     struct hasher *current = *hasher;
 
-    if (strcmp(current->key, key)) {
+    if (!strcmp(current->key, key)) {
         *hasher = current->next;
+        current->next = NULL;
         return (current);
     }
     for (; current->next != NULL; current = current->next) {

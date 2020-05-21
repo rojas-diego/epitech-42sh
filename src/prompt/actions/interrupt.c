@@ -15,5 +15,7 @@ void prompt_action_interrupt(struct sh *shell)
 {
     puts("^C");
     prompt_input_empty(shell);
-    prompt_display(shell);
+    if (shell->atty) {
+        prompt_display(shell);
+    }
 }

@@ -2,96 +2,68 @@
 # TCSH Grammar              #
 # # # # # # # # # # # # # # #
 
-###### Tokens ######
-
-EOF                 ::=     '\0'
-                    ;
-
-NEWLINE             ::=     '\n'
-                    ;
-
-SEMICOLON           ::=     ';'
-                    ;
-
-IO_NUMBER           ::=     '1'
-                    |       '2'
-                    ;
-
-GREAT               ::=     '>'
-                    ;
-
-DGREAT              ::=     '>>'
-                    ;
-
-LESS                ::=     '<'
-                    ;
-
-DLESS               ::=     '<<'
-                    ;
-
-IF                  ::=     'if'
-                    ;
-
-ELSE                ::=     'else'
-                    ;
-
-THEN                ::=     'then'
-                    ;
-
-OPARANTH            ::=     '('
-                    ;
-
-CPARANTH            ::=     ')'
-                    ;
-
 ###### Grammar ######
-
 program             ::=     [ block ] EOF
                     ;
 
-block               ::=     compound_command [ block ]
+block               ::=     statement [ block ]
                     ;
 
-compound_command    ::=     command [ compound_command ]
+statement           ::=     subshell | compound_command | control
                     ;
 
-command             ::=     ( pipeline | shell_command | simple_command ) [ command ]
+compound_command    ::=     [ grouping ] separator
                     ;
 
-pipeline            ::=     simple_command [ (PIPE simple_command)* ]
+subshell            ::=     OPARANTH block CPARANTH
                     ;
 
-simple_command      ::=     ( command_separator | redirection | element ) command
+grouping            ::=     pipeline ( ( AND_IF | OR_IF ) grouping )*
                     ;
 
-shell_command       ::=     if_statement
+pipeline            ::=     command ( PIPE pipeline )*
                     ;
 
-if_statement        ::=     IF OPARANTH expression CPARANTH THEN [ block ] [ elseif_statement ] ENDIF
+command             ::=     WORD [ redirection ] [ command ]
                     ;
 
-elseif_statement    ::=     ELSE_IF OPARANTH expression CPARANTH THEN [ block ] [ elseif_statement ]
-                    ;
-
-else_statement      ::=     ELSE [ block ]
-                    ;
-
-expression          ::=     word
-                    ;
-
-command_separator   ::=     NEWLINE | SEMICOLON
-                    ;
-
-redirection         ::=     GREAT WORD
+redirection         ::=     [ IO_NUMBER ] GREAT WORD
+                    |       [ IO_NUMBER ] DGREAT WORD
                     |       LESS WORD
                     |       DLESS WORD
-                    |       DGREAT WORD
-                    |       IO_NUMBER GREAT WORD
-                    |       IO_NUMBER LESS WORD
-                    |       IO_NUMBER DGREAT WORD
-                    |       IO_NUMBER DLESS WORD
                     ;
 
-element             ::=     NAME
-                    |       WORD
+separator           ::=     NEWLINE | SEMI
                     ;
+
+# Control Flow !
+control             ::=     if_control | while_control | foreach_control | repeat_control
+                    ;
+
+if_control          ::=     IF conditional THEN NEWLINE [ block ] [ else_if_control ] ENDIF NEWLINE
+                    ;
+
+else_if_control     ::=     ELSE_IF conditional NEWLINE [ block ] [ else_control ]
+                    ;
+
+else_control        ::=     ELSE NEWLINE [ block ]
+                    ;
+
+foreach_control     ::=     FOREACH NAME wordlist_expression
+                    ;
+
+while_control       ::=     WHILE conditional NEWLINE block END NEWLINE
+                    ;
+
+repeat_control      ::=     REPEAT WORD grouping
+                    ;
+
+wordlist_expression ::=     OPARANTH wordlist CPARANTH
+                    ;
+
+wordlist            ::=     WORD [ wordlist ]
+                    ;
+
+conditional         ::=     OPARANTH WORD CPARANTH
+                    ;
+# ! Control Flow

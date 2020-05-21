@@ -10,6 +10,6 @@
 
 #include "proto/shell.h"
 
-void prompt_display(__attribute__((unused)) struct sh *shell);
+int prompt_display(struct sh *shell);
 
 #endif /* !SH_PROTO_PROMPT_ADD_CHAR_H_ */

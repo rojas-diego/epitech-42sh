@@ -49,6 +49,7 @@ enum sh_error_e {
 **   - envp: the environement as an array of strings.
 */
 typedef struct sh {
+    bool                debug_mode;
     bool                active;
     char                *rawinput;
     struct node_s       *tokens;
