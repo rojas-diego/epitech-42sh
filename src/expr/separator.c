@@ -21,6 +21,7 @@ struct expr_separator_s *expr_separator(struct grammar_s *this)
         sizeof(struct expr_separator_s));
     unsigned int save_index __attribute__((unused)) = this->index;
 
+    printf("- Separator.\n");
     if (!exp)
         exit(84);
     memset(exp, 0, sizeof(struct expr_separator_s));

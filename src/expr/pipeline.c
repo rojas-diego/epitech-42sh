@@ -21,6 +21,7 @@ struct expr_pipeline_s *expr_pipeline(struct grammar_s *this)
         sizeof(struct expr_pipeline_s));
     unsigned int save_index __attribute__((unused)) = this->index;
 
+    printf("- Pipeline.\n");
     if (!exp)
         exit(84);
     memset(exp, 0, sizeof(struct expr_pipeline_s));

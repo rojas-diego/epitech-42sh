@@ -20,6 +20,7 @@ struct expr_statement_s *expr_statement(struct grammar_s *this)
     struct expr_statement_s *exp = malloc(sizeof(struct expr_statement_s));
     unsigned int save_index = this->index;
 
+    printf("- Statement.\n");
     if (!exp)
         exit(84);
     memset(exp, 0, sizeof(struct expr_statement_s));

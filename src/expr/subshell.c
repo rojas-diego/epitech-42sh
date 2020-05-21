@@ -21,6 +21,7 @@ struct expr_subshell_s *expr_subshell(struct grammar_s *this)
         sizeof(struct expr_subshell_s));
     unsigned int save_index __attribute__((unused)) = this->index;
 
+    printf("- Subshell.\n");
     if (!exp)
         exit(84);
     memset(exp, 0, sizeof(struct expr_subshell_s));

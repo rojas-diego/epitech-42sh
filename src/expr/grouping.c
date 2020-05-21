@@ -21,6 +21,7 @@ struct expr_grouping_s *expr_grouping(struct grammar_s *this)
         sizeof(struct expr_grouping_s));
     unsigned int save_index __attribute__((unused)) = this->index;
 
+    printf("- Grouping.\n");
     if (!exp)
         exit(84);
     memset(exp, 0, sizeof(struct expr_grouping_s));

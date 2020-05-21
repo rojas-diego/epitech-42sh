@@ -21,6 +21,7 @@ struct expr_command_s *expr_command(struct grammar_s *this)
         sizeof(struct expr_command_s));
     unsigned int save_index = this->index;
 
+    printf("- Command.\n");
     if (!exp)
         exit(84);
     memset(exp, 0, sizeof(struct expr_command_s));

@@ -12,6 +12,8 @@
 /* Includes */
 /**/
 
+#include <stdio.h>
+
 #include "types/expr.h"
 
 /**/

@@ -20,6 +20,7 @@ struct expr_block_s *expr_block(struct grammar_s *this)
     struct expr_block_s *exp = malloc(sizeof(struct expr_block_s));
     unsigned int save_index = this->index;
 
+    printf("- Block.\n");
     if (!exp)
         exit(84);
     memset(exp, 0, sizeof(struct expr_block_s));

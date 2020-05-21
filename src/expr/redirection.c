@@ -21,6 +21,7 @@ struct expr_redirection_s *expr_redirection(struct grammar_s *this)
         sizeof(struct expr_redirection_s));
     unsigned int save_index __attribute__((unused)) = this->index;
 
+    printf("- Redirection.\n");
     if (!exp)
         exit(84);
     memset(exp, 0, sizeof(struct expr_redirection_s));

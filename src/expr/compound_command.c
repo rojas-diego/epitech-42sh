@@ -21,6 +21,7 @@ struct expr_compound_command_s *expr_compound_command(struct grammar_s *this)
         sizeof(struct expr_compound_command_s));
     unsigned int save_index = this->index;
 
+    printf("- Compound command.\n");
     if (!exp)
         exit(84);
     memset(exp, 0, sizeof(struct expr_compound_command_s));
