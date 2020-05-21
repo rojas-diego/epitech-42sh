@@ -42,6 +42,11 @@ static struct expr_foreach_control_s *expr_foreach_control(
         free(exp);
         return NULL;
     }
+    if (!grammar_match(this, 1, TOK_NEWLINE)) {
+        free(exp);
+        return NULL;
+    }
+    exp->newline = grammar_get_previous(this);
     save_index = this->index;
     exp->block = expr_block_w(this);
     if (!exp->block)

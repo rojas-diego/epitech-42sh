@@ -28,7 +28,7 @@ struct expr_repeat_control_s *expr_repeat_control_w(struct grammar_s *this)
 {
     struct expr_repeat_control_s *exp;
 
-    expr_print(this, "repeat Control");
+    expr_print(this, "Repeat Control");
     exp = expr_repeat_control(this);
     expr_print_debug(this, exp);
     return exp;
