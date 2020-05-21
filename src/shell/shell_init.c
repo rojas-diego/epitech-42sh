@@ -13,6 +13,7 @@
 #include "proto/shell/alias.h"
 #include "proto/shell/term_init.h"
 #include "proto/shell/bindkey.h"
+#include "proto/prompt/history.h"
 
 /* TODO: parse av: if fd replace STDIN_FILENO in isatty by fildes */
 
@@ -38,11 +39,12 @@ int shell_struct_initialise(
     (*this).prompt.length = 0;
     (*this).job = NULL;
     memset((*this).prompt.input, 0, 8192);
+    history_init(&this->history);
     if (term_init(this)) {
         return (1);
     }
     (*this).builtin = shell_builtin_hash_create();
     (*this).bindkey = shell_bindkey_hash_create();
     (*this).alias = NULL;
-    return (!((*this).builtin && (*this).bindkey));
+    return (!(*this).builtin || ((*this).atty && !(*this).bindkey));
 }

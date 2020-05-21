@@ -13,10 +13,14 @@ TESTNAME =	unit_tests
 
 MAIN =		src/main.c						\
 
-SRC =		src/constants.c 					\
+SRC =		src/constants.c						\
 									\
 		src/exec/get_argv.c					\
 		src/exec/simple_exec.c					\
+									\
+		src/prompt/history/init.c				\
+		src/prompt/history/insert.c				\
+		src/prompt/history/destroy.c				\
 									\
 		src/shell/shell_init.c					\
 		src/shell/shell_start.c					\
@@ -36,7 +40,15 @@ SRC =		src/constants.c 					\
 		src/shell/builtin_handlers/bindkey.c			\
 		src/shell/builtin_handlers/fg.c				\
 		src/shell/builtin_handlers/source.c			\
+		src/shell/builtin_handlers/termname.c			\
 		src/shell/builtin_handlers/null_command.c		\
+		src/shell/builtin_handlers/wait.c			\
+		src/shell/builtin_handlers/where.c			\
+		src/shell/builtin_handlers/which.c			\
+		src/shell/builtin_handlers/bg.c				\
+		src/shell/builtin_handlers/jobs.c			\
+		src/shell/builtin_handlers/too_many_arguments.c		\
+		src/shell/builtin_handlers/too_few_arguments.c		\
 									\
 		src/input/executer/input_execute.c			\
 		src/input/parser/input_parse.c				\
@@ -44,7 +56,7 @@ SRC =		src/constants.c 					\
 		src/input/parser/input_parse_grammar.c			\
 		src/input/input_destroy.c				\
 									\
-		src/grammar/grammar_program.c 				\
+		src/grammar/grammar_program.c				\
 									\
 		src/token/token.c					\
 		src/token/token_validate.c				\
@@ -75,6 +87,7 @@ SRC =		src/constants.c 					\
 		src/prompt/input/add_string.c				\
 		src/prompt/input/wait_input.c				\
 		src/prompt/input/read_single_input.c			\
+		src/prompt/input/reprint_input.c			\
 									\
 		src/prompt/update_cursor_pos.c				\
 		src/prompt/move_cursor_pos.c				\
@@ -95,10 +108,10 @@ SRC =		src/constants.c 					\
 		src/job/format_info.c					\
 		src/job/wait_for.c					\
 		src/job/do_notification.c				\
-		src/job/initialize.c				\
+		src/job/initialize.c					\
 
 SRCT =		tests/input/parser/test_input_parse.c			\
-	tests/grammar/test_grammar_match.c			\
+		tests/grammar/test_grammar_match.c			\
 
 OBJ =		$(SRC:.c=.o)
 OBJM =		$(MAIN:.c=.o)
@@ -106,21 +119,22 @@ OBJT =		$(SRCT:.c=.o)
 
 WARNINGS =	-pedantic -Wshadow -Wpointer-arith -Wcast-align		\
 		-Wmissing-prototypes -Wmissing-declarations		\
-		-Wnested-externs -Wwrite-strings -Wredundant-decls	\
-		-Winline -Wno-long-long -Wconversion			\
+		-Wnested-externs -Wwrite-strings -Wconversion		\
+		-Wredundant-decls -Winline -Wno-long-long		\
 		-Wstrict-prototypes -Wunused-function			\
 
-DEBUG = 	-g $(WARNINGS)
+DEBUG =		-g $(WARNINGS)
 
-CFLAGS += 	-Wall -Wextra
+CFLAGS +=	-Wall -Wextra
 
-CPPFLAGS += 	-I include/ -I lib/include/ 				\
+CPPFLAGS +=	-I include/ -I lib/include/				\
 
-LDLIBS += 	-lcurses						\
+LDLIBS +=	-lcurses						\
 
-TFLAGS += 	--coverage -lcriterion
+TFLAGS +=	--coverage -lcriterion
 
 LIBNAMES =	builtins						\
+		dnode							\
 		mynode							\
 		input_postprocessing					\
 		find_binary						\
@@ -156,9 +170,11 @@ tests_run:	compiling
 			$(TFLAGS) $(LDLIBS) $(CPPFLAGS)
 		@ ./$(TESTNAME)
 
-debug:		fclean
 debug:		CFLAGS += $(DEBUG)
 debug:		$(NAME)
+
+redebug:	fclean
+redebug:	debug
 
 clean:
 		@ echo "===> Cleaning..."

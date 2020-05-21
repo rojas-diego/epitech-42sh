@@ -10,6 +10,7 @@
 
 #include "types/job.h"
 
+void job_format_info_launch_background(struct job_s *job);
 void job_format_info(struct job_s *job, const char *status);
 
 #endif /* !SH_PROTO_JOB_INFO_H_ */

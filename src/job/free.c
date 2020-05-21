@@ -5,9 +5,19 @@
 ** job
 */
 
+#include <stdlib.h>
+
 #include "proto/job/free.h"
 
-void job_free(__attribute__((unused)) struct job_s *job)
+void job_free(struct job_s *job)
 {
-    return;
+    struct process_s *process = job->first_process;
+    struct process_s *hold = NULL;
+
+    while (process) {
+        hold = process;
+        process = process->next;
+        free(hold);
+    }
+    free(job);
 }

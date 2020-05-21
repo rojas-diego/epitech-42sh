@@ -15,6 +15,7 @@
 #include "proto/input/parser.h"
 #include "proto/input/executer.h"
 #include "proto/prompt.h"
+#include "proto/prompt/history.h"
 #include "proto/prompt/input/empty.h"
 
 #include "proto/job/do_notification.h"
@@ -26,24 +27,19 @@
 #include <stdbool.h>
 #include "proto/exec/get_argv.h"
 #include "proto/exec/simple_exec.h"
-#include "proto/job/initialize.h"
-#include "proto/job/launch.h"
-#include "proto/job/wait_for.h"
 
-//split_input(shell->rawinput);
-//simple_exec(shell, &we);
+/* split_input(shell->rawinput); */
+
 /* temp function */
 static void prompt_execution(struct sh *shell)
 {
-    wordexp_t we;
+    wordexp_t we = {0};
 
     if (exec_get_argv(&we, shell->rawinput)) {
         return;
     }
     input_execute(shell);
-    job_initialize(shell, we.we_wordv);
-    job_launch(shell, shell->job, false);
-    job_wait_for(shell->job, shell->job);
+    simple_exec(shell, &we);
     wordfree(&we);
 }
 
@@ -61,8 +57,10 @@ void prompter(struct sh *shell)
             return;
         }
         if (shell->rawinput == NULL) {
+            prompt_input_empty(shell);
             continue;
         }
+        history_insert(&(shell->history), shell->rawinput);
         input_parse(shell);
         prompt_execution(shell);
         input_destroy(shell);

@@ -7,11 +7,11 @@
 
 #include <stdlib.h>
 
-#include "proto/job/initialize.h"
-
 #include "types/job.h"
 
-int process_initialize(struct job_s *job, char **argv)
+#include "proto/job/initialize.h"
+
+static int process_initialize(struct job_s *job, char **argv)
 {
     struct process_s *process = malloc(sizeof(struct process_s));
 
@@ -40,7 +40,11 @@ int job_initialize(struct sh *shell, char **argv)
         .next = NULL, .command = NULL,
         .first_process = NULL,
         .pgid = 0,
-        .notified = false
+        .notified = false,
+        .tmodes = {0},
+        .io = {0, 1, 2},
+        .foreground = false,
+        .launch_id = 1
     };
     if (process_initialize(job, argv)) {
         return (1);
