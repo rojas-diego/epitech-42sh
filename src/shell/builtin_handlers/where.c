@@ -68,7 +68,7 @@ int builtin_where_handler(struct sh *shell, const char * const *argv)
         return (1);
     }
     for (size_t i = 1; argv[i]; i++) {
-        if (strchr(argv[1], '/')) {
+        if (strchr(argv[i], '/')) {
             dprintf(2, "%s: / in command makes no sense\n", argv[0]);
             ret = 1;
         } else {
