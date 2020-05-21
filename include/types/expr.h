@@ -138,6 +138,7 @@ struct expr_else_control_s {
 struct expr_else_if_control_s {
     struct token_s                  *else_if_token;
     struct expr_conditional_s       *conditional;
+    struct token_s                  *then;
     struct token_s                  *newline;
     struct expr_block_s             *block;
     struct expr_else_control_s      *else_control;
