@@ -103,7 +103,7 @@ void prompt_action_tab(struct sh *shell)
         return;
     shell->prompt.input[shell->prompt.cursor] = '\0';
     str = ptb_strrpbrk(shell->prompt.input, PTB_WHITESPACES);
-    start = str ? (str - shell->prompt.input) + 1 : 0;
+    start = (unsigned int) (str ? (str - shell->prompt.input) + 1 : 0);
     str = ptb_sub_string(shell->prompt.input, start, shell->prompt.cursor);
     if (str == NULL)
         return;
