@@ -43,6 +43,15 @@ struct expr_command_s *expr_command(struct grammar_s *this);
 struct expr_redirection_s *expr_redirection(struct grammar_s *this);
 struct expr_separator_s *expr_separator(struct grammar_s *this);
 struct expr_control_s *expr_control(struct grammar_s *this);
+struct expr_if_control_s *expr_if_control(struct grammar_s *this);
+struct expr_else_if_control_s *expr_else_if_control(struct grammar_s *this);
+struct expr_else_control_s *expr_else_control(struct grammar_s *this);
+struct expr_while_control_s *expr_while_control(struct grammar_s *this);
+struct expr_foreach_control_s *expr_foreach_control(struct grammar_s *this);
+struct expr_repeat_control_s *expr_repeat_control(struct grammar_s *this);
+struct expr_wordlist_expression_s *expr_wordlist_expression(struct grammar_s *this);
+struct expr_wordlist_s *expr_wordlist(struct grammar_s *this);
+struct expr_conditional_s *expr_conditional(struct grammar_s *this);
 
 struct expr_program_s *expr_program_w(struct grammar_s *this);
 struct expr_block_s *expr_block_w(struct grammar_s *this);
@@ -56,5 +65,14 @@ struct expr_command_s *expr_command_w(struct grammar_s *this);
 struct expr_redirection_s *expr_redirection_w(struct grammar_s *this);
 struct expr_separator_s *expr_separator_w(struct grammar_s *this);
 struct expr_control_s *expr_control_w(struct grammar_s *this);
+struct expr_if_control_s *expr_if_control_w(struct grammar_s *this);
+struct expr_else_if_control_s *expr_else_if_control_w(struct grammar_s *this);
+struct expr_else_control_s *expr_else_control_w(struct grammar_s *this);
+struct expr_while_control_s *expr_while_control_w(struct grammar_s *this);
+struct expr_foreach_control_s *expr_foreach_control_w(struct grammar_s *this);
+struct expr_repeat_control_s *expr_repeat_control_w(struct grammar_s *this);
+struct expr_wordlist_expression_s *expr_wordlist_expression_w(struct grammar_s *this);
+struct expr_wordlist_s *expr_wordlist_w(struct grammar_s *this);
+struct expr_conditional_s *expr_conditional_w(struct grammar_s *this);
 
 #endif

@@ -78,6 +78,15 @@ SRC =		src/constants.c					\
 		src/expr/redirection.c \
 		src/expr/separator.c \
 		src/expr/control.c \
+		src/expr/if_control.c \
+		src/expr/else_if_control.c \
+		src/expr/else_control.c \
+		src/expr/foreach_control.c \
+		src/expr/while_control.c \
+		src/expr/repeat_control.c \
+		src/expr/wordlist_expression.c \
+		src/expr/wordlist.c \
+		src/expr/conditional.c \
 		src/expr/utility.c \
 							\
 		src/prompt/actions/arrows.c				\
