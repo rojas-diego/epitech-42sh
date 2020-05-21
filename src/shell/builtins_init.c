@@ -49,7 +49,7 @@ struct hasher *shell_builtin_hash_create(void)
         if (hasher_insert_data(
             &hash,
             strdup(BUILTINS_DICT[i].key),
-            (void *) BUILTINS_DICT[i].func)
+            (void *) &BUILTINS_DICT[i].func)
         ) {
             return (NULL);
         }
