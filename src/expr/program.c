@@ -28,8 +28,6 @@ struct expr_program_s *expr_program(struct grammar_s *this)
         this->index = save_index;
     } if (grammar_match(this, 1, TOK_EOF)) {
         exp->eof = grammar_get_previous(this);
-    } else {
-        this->error = true;
     }
     return exp;
 }
