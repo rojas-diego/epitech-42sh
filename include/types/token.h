@@ -19,8 +19,7 @@
 ** @DESCRIPTION
 **  Defines all of the shell tokens.
 */
-typedef enum tokent_e
-{
+typedef enum tokent_e {
     TOK_NONE,
     TOK_EOF,
     TOK_WORD,
