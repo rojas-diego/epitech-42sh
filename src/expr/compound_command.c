@@ -21,18 +21,27 @@ struct expr_compound_command_s *expr_compound_command(struct grammar_s *this)
         sizeof(struct expr_compound_command_s));
     unsigned int save_index = this->index;
 
-    printf("- Compound command.\n");
     if (!exp)
         exit(84);
     memset(exp, 0, sizeof(struct expr_compound_command_s));
-    exp->grouping = expr_grouping(this);
+    exp->grouping = expr_grouping_w(this);
     if (!exp->grouping)
         this->index = save_index;
-    exp->separator = expr_separator(this);
+    exp->separator = expr_separator_w(this);
     if (!exp->separator) {
         this->index = save_index;
         free(exp);
         return NULL;
     }
+    return exp;
+}
+
+struct expr_compound_command_s *expr_compound_command_w(struct grammar_s *this)
+{
+    struct expr_compound_command_s *exp;
+
+    expr_print(this, "Compound Command");
+    exp = expr_compound_command(this);
+    expr_print_debug(this, "Compound Command", exp);
     return exp;
 }

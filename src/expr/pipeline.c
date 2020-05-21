@@ -21,7 +21,6 @@ struct expr_pipeline_s *expr_pipeline(struct grammar_s *this)
         sizeof(struct expr_pipeline_s));
     unsigned int save_index __attribute__((unused)) = this->index;
 
-    printf("- Pipeline.\n");
     if (!exp)
         exit(84);
     memset(exp, 0, sizeof(struct expr_pipeline_s));
@@ -39,5 +38,15 @@ struct expr_pipeline_s *expr_pipeline(struct grammar_s *this)
         free(exp);
         return NULL;
     }
+    return exp;
+}
+
+struct expr_pipeline_s *expr_pipeline_w(struct grammar_s *this)
+{
+    struct expr_pipeline_s *exp;
+
+    expr_print(this, "Pipeline");
+    exp = expr_pipeline(this);
+    expr_print_debug(this, "Pipeline", exp);
     return exp;
 }

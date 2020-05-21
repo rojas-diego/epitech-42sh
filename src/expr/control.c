@@ -18,6 +18,15 @@
 struct expr_control_s *expr_control(struct grammar_s *this)
 {
     (void)(this);
-    printf("- Control.\n");
     return NULL;
+}
+
+struct expr_control_s *expr_control_w(struct grammar_s *this)
+{
+    struct expr_control_s *exp;
+
+    expr_print(this, "Control");
+    exp = expr_control(this);
+    expr_print_debug(this, "Control", exp);
+    return exp;
 }

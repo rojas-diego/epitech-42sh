@@ -21,7 +21,6 @@ struct expr_subshell_s *expr_subshell(struct grammar_s *this)
         sizeof(struct expr_subshell_s));
     unsigned int save_index __attribute__((unused)) = this->index;
 
-    printf("- Subshell.\n");
     if (!exp)
         exit(84);
     memset(exp, 0, sizeof(struct expr_subshell_s));
@@ -30,7 +29,7 @@ struct expr_subshell_s *expr_subshell(struct grammar_s *this)
         return NULL;
     }
     exp->lparanth = grammar_get_previous(this);
-    exp->block = expr_block(this);
+    exp->block = expr_block_w(this);
     if (!exp->block) {
         free(exp);
         return NULL;
@@ -40,5 +39,15 @@ struct expr_subshell_s *expr_subshell(struct grammar_s *this)
         return NULL;
     }
     exp->rparanth = grammar_get_previous(this);
+    return exp;
+}
+
+struct expr_subshell_s *expr_subshell_w(struct grammar_s *this)
+{
+    struct expr_subshell_s *exp;
+
+    expr_print(this, "Subshell");
+    exp = expr_subshell(this);
+    expr_print_debug(this, "Subshell", exp);
     return exp;
 }

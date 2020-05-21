@@ -21,7 +21,6 @@ struct expr_redirection_s *expr_redirection(struct grammar_s *this)
         sizeof(struct expr_redirection_s));
     unsigned int save_index __attribute__((unused)) = this->index;
 
-    printf("- Redirection.\n");
     if (!exp)
         exit(84);
     memset(exp, 0, sizeof(struct expr_redirection_s));
@@ -37,5 +36,15 @@ struct expr_redirection_s *expr_redirection(struct grammar_s *this)
         return NULL;
     }
     exp->word = grammar_get_previous(this);
+    return exp;
+}
+
+struct expr_redirection_s *expr_redirection_w(struct grammar_s *this)
+{
+    struct expr_redirection_s *exp;
+
+    expr_print(this, "Redirection");
+    exp = expr_redirection(this);
+    expr_print_debug(this, "Redirection", exp);
     return exp;
 }

@@ -21,11 +21,10 @@ struct expr_grouping_s *expr_grouping(struct grammar_s *this)
         sizeof(struct expr_grouping_s));
     unsigned int save_index __attribute__((unused)) = this->index;
 
-    printf("- Grouping.\n");
     if (!exp)
         exit(84);
     memset(exp, 0, sizeof(struct expr_grouping_s));
-    exp->pipeline = expr_pipeline(this);
+    exp->pipeline = expr_pipeline_w(this);
     if (!exp->pipeline) {
         free(exp);
         return NULL;
@@ -33,11 +32,21 @@ struct expr_grouping_s *expr_grouping(struct grammar_s *this)
     if (!grammar_match(this, 2, TOK_AND_IF, TOK_OR_IF))
         return exp;
     exp->conditional = grammar_get_previous(this);
-    exp->grouping = expr_grouping(this);
+    exp->grouping = expr_grouping_w(this);
     if (!exp->grouping) {
         this->error = true;
         free(exp);
         return NULL;
     }
+    return exp;
+}
+
+struct expr_grouping_s *expr_grouping_w(struct grammar_s *this)
+{
+    struct expr_grouping_s *exp;
+
+    expr_print(this, "Grouping");
+    exp = expr_grouping(this);
+    expr_print_debug(this, "Grouping", exp);
     return exp;
 }

@@ -20,25 +20,34 @@ struct expr_statement_s *expr_statement(struct grammar_s *this)
     struct expr_statement_s *exp = malloc(sizeof(struct expr_statement_s));
     unsigned int save_index = this->index;
 
-    printf("- Statement.\n");
     if (!exp)
         exit(84);
     memset(exp, 0, sizeof(struct expr_statement_s));
-    exp->subshell = expr_subshell(this);
+    exp->subshell = expr_subshell_w(this);
     if (!exp->subshell)
         this->index = save_index;
     else
         return exp;
-    exp->compound_command = expr_compound_command(this);
+    exp->compound_command = expr_compound_command_w(this);
     if (!exp->compound_command)
         this->index = save_index;
     else
         return exp;
-    exp->control = expr_control(this);
+    exp->control = expr_control_w(this);
     if (!exp->control) {
         this->index = save_index;
         free(exp);
         return NULL;
     }
+    return exp;
+}
+
+struct expr_statement_s *expr_statement_w(struct grammar_s *this)
+{
+    struct expr_statement_s *exp;
+
+    expr_print(this, "Statement");
+    exp = expr_statement(this);
+    expr_print_debug(this, "Statement", exp);
     return exp;
 }

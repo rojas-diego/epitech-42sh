@@ -21,7 +21,6 @@ struct expr_command_s *expr_command(struct grammar_s *this)
         sizeof(struct expr_command_s));
     unsigned int save_index = this->index;
 
-    printf("- Command.\n");
     if (!exp)
         exit(84);
     memset(exp, 0, sizeof(struct expr_command_s));
@@ -31,13 +30,23 @@ struct expr_command_s *expr_command(struct grammar_s *this)
     }
     exp->word = grammar_get_previous(this);
     save_index = this->index;
-    exp->redirection = expr_redirection(this);
+    exp->redirection = expr_redirection_w(this);
     if (!exp->redirection)
         this->index = save_index;
     else
         save_index = this->index;
-    exp->command = expr_command(this);
+    exp->command = expr_command_w(this);
     if (!exp->command)
         this->index = save_index;
+    return exp;
+}
+
+struct expr_command_s *expr_command_w(struct grammar_s *this)
+{
+    struct expr_command_s *exp;
+
+    expr_print(this, "Command");
+    exp = expr_command(this);
+    expr_print_debug(this, "Command", exp);
     return exp;
 }

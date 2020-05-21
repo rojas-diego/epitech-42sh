@@ -35,6 +35,9 @@ struct grammar_s {
     unsigned int    index;
     unsigned int    token_count;
     bool            error;
+    bool            debug;
+    unsigned int    depth;
+    unsigned int    callindex;
 };
 
 /**/

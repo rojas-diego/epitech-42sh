@@ -71,6 +71,7 @@ SRC =		src/constants.c					\
 		src/expr/redirection.c \
 		src/expr/separator.c \
 		src/expr/control.c \
+		src/expr/utility.c \
 							\
 		src/prompt/actions/arrows.c				\
 		src/prompt/actions/backspace.c				\
