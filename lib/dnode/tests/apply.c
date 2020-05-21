@@ -23,12 +23,12 @@ Test(dnode_apply, basic_func)
 {
     struct dnode_s *list = NULL;
 
-    dnode_insert_data(&list, "(int *)4");
-    dnode_insert_data(&list, "(int *)6");
-    dnode_insert_data(&list, "(int *)2");
+    dnode_insert_data(&list, "AAAAAAAA");
+    dnode_insert_data(&list, "BBBBBBBB");
+    dnode_insert_data(&list, "CCCCCCCC");
     cr_redirect_stdout();
     dnode_apply(list, &display_data);
-    cr_assert_stdout_eq_str("(int *)2(int *)6(int *)4");
+    cr_assert_stdout_eq_str("AAAAAAAABBBBBBBBCCCCCCCC");
 }
 
 Test(dnode_apply, null_func)

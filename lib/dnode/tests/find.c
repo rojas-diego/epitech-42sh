@@ -10,11 +10,9 @@
 #include "dnode/find.h"
 #include "dnode/insert.h"
 
-static _Bool is_help(void *data)
+static _Bool is_identic(void *data1, void *data2)
 {
-    char *str = data;
-
-    return (str[0] == '-' && str[1] == 'h' && !str[2]);
+    return (data1 == data2);
 }
 
 Test(dnode_find, basic_test)
@@ -24,7 +22,6 @@ Test(dnode_find, basic_test)
 
     dnode_insert_data(&list, "-h");
     dnode_insert_data(&list, "salut");
-    dnode_insert_data(&list, "wesh");
-    node = dnode_find(list, &is_help);
-    cr_assert_str_eq(node->data, "-h");
+    node = dnode_find(list, list->data, &is_identic);
+    cr_assert_str_eq(node->data, list->data);
 }
