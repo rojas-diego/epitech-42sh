@@ -20,8 +20,43 @@ static struct expr_foreach_control_s *expr_foreach_control(
     struct grammar_s *this
 )
 {
-    (void)(this);
-    return NULL;
+    struct expr_foreach_control_s *exp = malloc(
+        sizeof(struct expr_foreach_control_s));
+    unsigned int save_index = this->index;
+
+    if (!exp)
+        exit(84);
+    memset(exp, 0, sizeof(struct expr_foreach_control_s));
+    if (!grammar_match(this, 1, TOK_FOREACH)) {
+        free(exp);
+        return NULL;
+    }
+    exp->foreach = grammar_get_previous(this);
+    if (!grammar_match(this, 1, TOK_WORD)) {
+        free(exp);
+        return NULL;
+    }
+    exp->word = grammar_get_previous(this);
+    exp->wordlist_expression = expr_wordlist_expression_w(this);
+    if (!exp->wordlist_expression) {
+        free(exp);
+        return NULL;
+    }
+    save_index = this->index;
+    exp->block = expr_block_w(this);
+    if (!exp->block)
+        this->index = save_index;
+    if (!grammar_match(this, 1, TOK_END)) {
+        free(exp);
+        return NULL;
+    }
+    exp->end = grammar_get_previous(this);
+    if (!grammar_match(this, 1, TOK_NEWLINE)) {
+        free(exp);
+        return NULL;
+    }
+    exp->newline = grammar_get_previous(this);
+    return exp;
 }
 
 struct expr_foreach_control_s *expr_foreach_control_w(struct grammar_s *this)

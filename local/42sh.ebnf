@@ -49,7 +49,7 @@ else_if_control     ::=     ELSE_IF conditional THEN NEWLINE [ block ] [ else_co
 else_control        ::=     ELSE NEWLINE [ block ]
                     ;
 
-foreach_control     ::=     FOREACH NAME wordlist_expression [ block ] END NEWLINE
+foreach_control     ::=     FOREACH WORD wordlist_expression [ block ] END NEWLINE
                     ;
 
 while_control       ::=     WHILE conditional THEN NEWLINE [ block ] END NEWLINE

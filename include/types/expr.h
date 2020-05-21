@@ -113,12 +113,12 @@ struct expr_while_control_s {
 **   Rule: FOREACH CONTROL
 */
 struct expr_foreach_control_s {
-    struct token_s                  *foreach;
-    struct token_s                  *word;
-    struct expr_wordlist_expression *wordlist_expression;
-    struct expr_block               *block;
-    struct token_s                  *end;
-    struct token_s                  *newline;
+    struct token_s                      *foreach;
+    struct token_s                      *word;
+    struct expr_wordlist_expression_s   *wordlist_expression;
+    struct expr_block_s                 *block;
+    struct token_s                      *end;
+    struct token_s                      *newline;
 };
 
 /*

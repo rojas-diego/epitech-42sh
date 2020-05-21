@@ -20,7 +20,6 @@ static struct expr_else_control_s *expr_else_control(struct grammar_s *this)
 {
     struct expr_else_control_s *exp = malloc(
         sizeof(struct expr_else_control_s));
-    unsigned int save_index = this->index;
 
     if (!exp)
         exit(84);
