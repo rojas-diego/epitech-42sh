@@ -10,15 +10,15 @@
 /* */
 #include "hasher/filter.h"
 
-struct hasher *hasher_filter(
-    struct hasher **hasher,
+struct hasher_s *hasher_filter(
+    struct hasher_s **hasher,
     const char *key,
     size_t len
 )
 {
-    struct hasher *filtered = NULL;
-    struct hasher *holder = NULL;
-    struct hasher *current = *hasher;
+    struct hasher_s *filtered = NULL;
+    struct hasher_s *holder = NULL;
+    struct hasher_s *current = *hasher;
 
     if (!current)
         return (NULL);

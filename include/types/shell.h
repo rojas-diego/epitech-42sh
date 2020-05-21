@@ -58,9 +58,10 @@ typedef struct sh {
     struct prompt       prompt;
     int                 atty;
     struct history_s    history;
-    struct hasher       *builtin;
-    struct hasher       *alias;
-    struct hasher       *bindkey;
+    struct hasher_s       *builtin;
+    struct hasher_s       *alias;
+    struct hasher_s       *bindkey;
+    struct hasher_s       *local_var;
     enum sh_error_e     error;
     struct job_s        *job;
     int                 fd;

@@ -10,14 +10,14 @@
 /* */
 #include "hasher/create.h"
 
-struct hasher *hasher_create(char *key, void *data)
+struct hasher_s *hasher_create(char *key, void *data)
 {
-    struct hasher *hasher = NULL;
+    struct hasher_s *hasher = NULL;
 
     if (key == NULL) {
         return (NULL);
     }
-    hasher = (struct hasher *) malloc(sizeof(struct hasher));
+    hasher = (struct hasher_s *) malloc(sizeof(struct hasher_s));
     if (hasher == NULL) {
         return (NULL);
     }

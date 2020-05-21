@@ -12,12 +12,12 @@
 #include "hasher/replace_data.h"
 
 void *hasher_replace_data(
-    struct hasher *hasher,
+    struct hasher_s *hasher,
     const char *current_data,
     char *new_data
 )
 {
-    struct hasher *match = hasher_get(hasher, current_data);
+    struct hasher_s *match = hasher_get(hasher, current_data);
     void *old_data = NULL;
 
     if (match) {

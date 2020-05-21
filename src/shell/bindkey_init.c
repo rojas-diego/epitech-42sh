@@ -178,9 +178,9 @@ static const struct {
     // {end,     {&action_end_of_line,             "end-of-line"}},
 };
 
-struct hasher *shell_bindkey_hash_create(void)
+struct hasher_s *shell_bindkey_hash_create(void)
 {
-    struct hasher *hash = NULL;
+    struct hasher_s *hash = NULL;
     char *key = NULL;
 
     for (int i = 0; i < BINDKEY_COUNT; ++i) {

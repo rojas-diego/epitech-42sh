@@ -27,7 +27,7 @@ static enum get_input_e find_action_match(
 {
     bool still_matching = false;
 
-    for (struct hasher *hash = shell->bindkey; hash; hash = hash->next) {
+    for (struct hasher_s *hash = shell->bindkey; hash; hash = hash->next) {
         if (strncmp(hash->key, buffer, len)) {
             continue;
         }

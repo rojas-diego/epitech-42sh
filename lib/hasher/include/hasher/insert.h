@@ -10,8 +10,8 @@
 
 #include "hasher/type.h"
 
-void hasher_insert(struct hasher **hasher, struct hasher *to_insert);
+void hasher_insert(struct hasher_s **hasher, struct hasher_s *to_insert);
 
-void hasher_insert_ordered(struct hasher **hasher, struct hasher *to_insert);
+void hasher_insert_ordered(struct hasher_s **hasher, struct hasher_s *to_insert);
 
 #endif /* !HASHER_INSERT_H_ */

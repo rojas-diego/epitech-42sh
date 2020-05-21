@@ -13,12 +13,12 @@
 #include "hasher/insert_data.h"
 
 enum hasher_e hasher_insert_data(
-    struct hasher **hasher,
+    struct hasher_s **hasher,
     char *key,
     void *data
 )
 {
-    struct hasher *new = hasher_create(key, data);
+    struct hasher_s *new = hasher_create(key, data);
 
     if (new == NULL) {
         return (HASHER_ALLOCATION_FAIL);
@@ -28,12 +28,12 @@ enum hasher_e hasher_insert_data(
 }
 
 enum hasher_e hasher_insert_data_ordered(
-    struct hasher **hasher,
+    struct hasher_s **hasher,
     char *key,
     void *data
 )
 {
-    struct hasher *new = hasher_create(key, data);
+    struct hasher_s *new = hasher_create(key, data);
 
     if (new == NULL) {
         return (HASHER_ALLOCATION_FAIL);

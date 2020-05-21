@@ -11,7 +11,7 @@
 #include "hasher/type.h"
 
 void hasher_destroy(
-    struct hasher *hasher,
+    struct hasher_s *hasher,
     _Bool destroy_key,
     _Bool destroy_data
 );

@@ -43,9 +43,9 @@ static const struct {
     {":", &builtin_null_command_handler},
 };
 
-struct hasher *shell_builtin_hash_create(void)
+struct hasher_s *shell_builtin_hash_create(void)
 {
-    struct hasher *hash = NULL;
+    struct hasher_s *hash = NULL;
 
     for (int i = 0; i < BUILTIN_COUNT; ++i) {
         if (hasher_insert_data(

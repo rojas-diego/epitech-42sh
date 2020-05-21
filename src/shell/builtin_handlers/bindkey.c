@@ -50,7 +50,7 @@ void builtin_bindkey_display_settings(
 {
     int i;
 
-    for (struct hasher *this = shell->bindkey; this; this = this->next) {
+    for (struct hasher_s *this = shell->bindkey; this; this = this->next) {
         printf("\"");
         for (i = 0; this->key[i]; i++) {
             if (isprint(this->key[i]))

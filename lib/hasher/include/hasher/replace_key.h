@@ -11,7 +11,7 @@
 #include "hasher/type.h"
 
 char *hasher_replace_key(
-    struct hasher *hasher,
+    struct hasher_s *hasher,
     const char *current_key,
     char *new_key
 );
