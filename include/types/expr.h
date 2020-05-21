@@ -171,8 +171,7 @@ struct expr_control_s {
 **   Rule: SEPARATOR
 */
 struct expr_separator_s {
-    struct token_s  *newline;
-    struct token_s  *semicolon;
+    struct token_s  *separator;
 };
 
 /*

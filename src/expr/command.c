@@ -19,23 +19,24 @@ struct expr_command_s *expr_command(struct grammar_s *this)
 {
     struct expr_command_s *exp = malloc(
         sizeof(struct expr_command_s));
+    unsigned int save_index = this->index;
 
     if (!exp)
         exit(84);
     memset(exp, 0, sizeof(struct expr_command_s));
-    exp->pipeline = expr_pipeline(this);
-    if (exp->pipeline)
-        exp->type = EXPR_PIPELINE;
-    exp->shell_command = expr_shell_command(this);
-    if (exp->shell_command && exp->type == EXPR_NULL)
-        exp->type = EXPR_SHELL_COMMAND;
-    exp->simple_command = expr_simple_command(this);
-    if (exp->simple_command && exp->type == EXPR_NULL) {
-        exp->type = EXPR_SIMPLE_COMMAND;
-    } else {
-        this->error = true;
+    if (!grammar_match(this, 1, TOK_WORD)) {
+        free(exp);
         return NULL;
     }
+    exp->word = grammar_get_previous(this);
+    save_index = this->index;
+    exp->redirection = expr_redirection(this);
+    if (!exp->redirection)
+        this->index = save_index;
+    else
+        save_index = this->index;
     exp->command = expr_command(this);
+    if (!exp->command)
+        this->index = save_index;
     return exp;
 }

@@ -27,12 +27,10 @@ pipeline            ::=     command ( PIPE pipeline )*
 command             ::=     WORD [ redirection ] [ command ]
                     ;
 
-redirection         ::=     GREAT WORD
-                    |       DGREAT WORD
+redirection         ::=     [ IO_NUMBER ] GREAT WORD
+                    |       [ IO_NUMBER ] DGREAT WORD
                     |       LESS WORD
                     |       DLESS WORD
-                    |       IO_NUMBER GREAT WORD
-                    |       IO_NUMBER DGREAT WORD
                     ;
 
 separator           ::=     NEWLINE | SEMI
