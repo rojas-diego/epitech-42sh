@@ -55,7 +55,7 @@ static struct expr_if_control_s *expr_if_control(struct grammar_s *this)
         free(exp);
         return NULL;
     }
-    exp->endif_newline = grammar_get_previous(this);
+    exp->endif = grammar_get_previous(this);
     if (!grammar_match(this, 1, TOK_NEWLINE)) {
         free(exp);
         return NULL;

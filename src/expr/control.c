@@ -26,12 +26,18 @@ static struct expr_control_s *expr_control(struct grammar_s *this)
     exp->if_control = expr_if_control_w(this);
     if (!exp->if_control)
         this->index = save_index;
+    else
+        return exp;
     exp->while_control = expr_while_control_w(this);
     if (!exp->while_control)
         this->index = save_index;
+    else
+        return exp;
     exp->foreach_control = expr_foreach_control_w(this);
     if (!exp->foreach_control)
         this->index = save_index;
+    else
+        return exp;
     exp->repeat_control = expr_repeat_control_w(this);
     if (!exp->repeat_control) {
         free(exp);

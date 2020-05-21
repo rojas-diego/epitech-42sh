@@ -16,4 +16,4 @@ const char *WHITESPACE = " \t";
 ** @DESCRIPTION
 **   Character set used when validating the TOK_WORD.
 */
-const char *TOK_WORD_BLACKLIST = " \n|><&()";
+const char *TOK_WORD_BLACKLIST = " \n|><&();";
