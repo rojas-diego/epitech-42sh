@@ -20,8 +20,30 @@ static struct expr_repeat_control_s *expr_repeat_control(
     struct grammar_s *this
 )
 {
-    (void)(this);
-    return NULL;
+    struct expr_repeat_control_s *exp = malloc(
+        sizeof(struct expr_repeat_control_s));
+
+    if (!exp)
+        exit(84);
+    memset(exp, 0, sizeof(struct expr_repeat_control_s));
+    if (!grammar_match(this, 1, TOK_REPEAT)) {
+        free(exp);
+        return NULL;
+    }
+    exp->repeat = grammar_get_previous(this);
+    if (!grammar_match(this, 1, TOK_WORD)) {
+        this->error = true;
+        free(exp);
+        return NULL;
+    }
+    exp->word = grammar_get_previous(this);
+    exp->grouping = expr_grouping_w(this);
+    if (!exp->grouping) {
+        this->error = true;
+        free(exp);
+        return NULL;
+    }
+    return exp;
 }
 
 struct expr_repeat_control_s *expr_repeat_control_w(struct grammar_s *this)
