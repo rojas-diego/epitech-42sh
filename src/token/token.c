@@ -7,6 +7,7 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 /* Contains implicit includes for types */
 #include "proto/token.h"
@@ -54,4 +55,15 @@ void token_print_debug(struct node_s *head)
         }
     }
     printf("\n==============================================\n");
+}
+
+struct token_s *token_new(enum tokent_e type)
+{
+    struct token_s *this = malloc(sizeof(struct token_s));
+
+    if (!this)
+        return NULL;
+    memset(this, 0, sizeof(struct token_s));
+    this->type = type;
+    return this;
 }

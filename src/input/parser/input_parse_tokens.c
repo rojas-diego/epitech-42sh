@@ -67,6 +67,7 @@ void input_parse_tokens(struct sh *shell)
         if (!(*shell).rawinput[i])
             i--;
     }
+    node_insert(&tokens, token_new(TOK_EOF));
     node_reverse(&tokens);
     (*shell).tokens = tokens;
     if (shell->debug_mode)
