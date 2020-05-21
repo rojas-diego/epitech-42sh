@@ -28,8 +28,8 @@ static struct expr_statement_s *expr_statement(struct grammar_s *this)
         this->index = save_index;
     else
         return exp;
-    exp->compound_command = expr_compound_command_w(this);
-    if (!exp->compound_command)
+    exp->jobs = expr_jobs_w(this);
+    if (!exp->jobs)
         this->index = save_index;
     else
         return exp;

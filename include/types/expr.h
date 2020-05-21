@@ -28,7 +28,7 @@ enum expr_type_e {
     EXPR_NULL,
     EXPR_PROGRAM,
     EXPR_BLOCK,
-    EXPR_COMPOUND_COMMAND,
+    EXPR_JOBS,
     EXPR_COMMAND,
     EXPR_PIPELINE,
     EXPR_SIMPLE_COMMAND,
@@ -45,7 +45,7 @@ enum expr_type_e {
 union expr_union_u {
     struct expr_program_s *program;
     struct expr_block_s *block;
-    struct expr_compound_command_s *compound_command;
+    struct expr_job_s *jobs;
     struct expr_command_s *command;
     struct expr_shell_command_s *shell_command;
     struct expr_if_statement_s *if_stmt;
@@ -230,9 +230,9 @@ struct expr_subshell_s {
 
 /*
 ** @DESCRIPTION
-**   Rule: COMPOUND_COMMAND
+**   Rule: jobs
 */
-struct expr_compound_command_s {
+struct expr_job_s {
     struct expr_grouping_s  *grouping;
     struct expr_separator_s *separator;
 };
@@ -243,7 +243,7 @@ struct expr_compound_command_s {
 */
 struct expr_statement_s {
     struct expr_subshell_s          *subshell;
-    struct expr_compound_command_s  *compound_command;
+    struct expr_job_s               *jobs;
     struct expr_control_s           *control;
 };
 

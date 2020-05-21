@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2019
 ** PSU_42sh_2019
 ** File description:
-** expr_compound_command
+** expr_jobs
 */
 
 #include <stdlib.h>
@@ -15,17 +15,17 @@
 ** @DESCRIPTION
 **   Rule for compound_command expression.
 */
-static struct expr_compound_command_s *expr_compound_command(
+static struct expr_job_s *expr_jobs(
     struct grammar_s *this
 )
 {
-    struct expr_compound_command_s *exp = malloc(
-        sizeof(struct expr_compound_command_s));
+    struct expr_job_s *exp = malloc(
+        sizeof(struct expr_job_s));
     unsigned int save_index = this->index;
 
     if (!exp)
         exit(84);
-    memset(exp, 0, sizeof(struct expr_compound_command_s));
+    memset(exp, 0, sizeof(struct expr_job_s));
     exp->grouping = expr_grouping_w(this);
     if (!exp->grouping)
         this->index = save_index;
@@ -38,12 +38,12 @@ static struct expr_compound_command_s *expr_compound_command(
     return exp;
 }
 
-struct expr_compound_command_s *expr_compound_command_w(struct grammar_s *this)
+struct expr_job_s *expr_jobs_w(struct grammar_s *this)
 {
-    struct expr_compound_command_s *exp;
+    struct expr_job_s *exp;
 
-    expr_print(this, "Compound Command");
-    exp = expr_compound_command(this);
+    expr_print(this, "Jobs");
+    exp = expr_jobs(this);
     expr_print_debug(this, exp);
     return exp;
 }

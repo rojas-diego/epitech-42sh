@@ -70,7 +70,7 @@ SRC =		src/constants.c					\
 		src/expr/program.c \
 		src/expr/block.c \
 		src/expr/statement.c \
-		src/expr/compound_command.c \
+		src/expr/jobs.c \
 		src/expr/subshell.c \
 		src/expr/grouping.c \
 		src/expr/pipeline.c \
