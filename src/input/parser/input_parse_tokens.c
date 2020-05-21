@@ -69,4 +69,6 @@ void input_parse_tokens(struct sh *shell)
     }
     node_reverse(&tokens);
     (*shell).tokens = tokens;
+    if (shell->debug_mode)
+        token_print_debug(tokens);
 }

@@ -33,9 +33,9 @@ void expr_print_debug(struct grammar_s *this, void *ptr)
         return;
     this->depth -= 1;
     expr_print_padding(this->depth);
+    printf("└─ ");
     if (ptr)
         printf("\033[0m\033[38;2;150;200;0mDONE\033[0m\n");
     else
         printf("\033[0m\033[38;2;230;70;100mFAILED\033[0m\n");
-
 }
