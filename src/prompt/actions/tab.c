@@ -16,6 +16,7 @@
 #include "parser_toolbox/includes.h"
 #include "parser_toolbox/isdir.h"
 #include "parser_toolbox/display_strings_equalize.h"
+#include "parser_toolbox/word_array_chr.h"
 
 #include "path_iteration.h"
 
@@ -33,6 +34,7 @@ static void prompt_action_tab_extend_glob(
 {
 
     enum parser_toolbox_e ret;
+    char **copy = NULL;
 
     if (we->we_wordc == 1) {
         ret = ptb_isdir(we->we_wordv[0]);
@@ -42,10 +44,12 @@ static void prompt_action_tab_extend_glob(
         prompt_input_add_string(shell, we->we_wordv[0] + strlen(str) - 1);
         prompt_input_add_char(shell, (ret) ? '/' : ' ');
     } else {
+        copy = ptb_word_array_rchr(we->we_wordv, we->we_wordc, '/');
         puts("");
-        ptb_display_sorted_strings_equalize(we->we_wordv, we->we_wordc, 132);
+        ptb_display_sorted_strings_equalize(copy, we->we_wordc, 132);
         prompt_display(shell);
         prompt_reprint_input(&(shell->prompt));
+        free(copy);
     }
 }
 
