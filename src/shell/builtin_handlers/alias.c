@@ -22,7 +22,7 @@
 #include "types/shell.h"
 #include "proto/shell/builtin_handlers.h"
 
-char *alias_concat_argv(const char * const *argv)
+static char *alias_concat_argv(const char * const *argv)
 {
     size_t length = ptb_argv_length(argv);
     char *data = NULL;
@@ -82,7 +82,7 @@ int builtin_alias_handler(
         }
         return (0);
     }
-    return (insert_alias(shell, argv));
+    return (!argv[2] && insert_alias(shell, argv));
 }
 
 int builtin_unalias_handler(
