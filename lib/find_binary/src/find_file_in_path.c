@@ -16,6 +16,8 @@
 /* */
 #include "find_file_in_path.h"
 
+/* TCSH DOESN'T PROMPT 'no such file or directory :: perror(path); */
+
 /* Cannot make diff between error and not found because of recurs */
 static enum find_file_in_path_e find_file_in_path_handling(
     const char *path,
@@ -35,7 +37,7 @@ static enum find_file_in_path_e find_file_in_path_handling(
         return (FFIP_FOUND);
     }
     if (stat(current_path, &sb) == -1) {
-        perror("stat");
+        perror(current_path);
         return (FFIP_ERROR);
     }
     free(current_path);
@@ -50,7 +52,6 @@ char *find_file_in_path(const char *path, const char *bin)
     enum find_file_in_path_e ret = 0;
 
     if (!dir) {
-        perror("opendir");
         return (NULL);
     }
     for (dp = readdir(dir); dp != NULL; dp = readdir(dir)) {
