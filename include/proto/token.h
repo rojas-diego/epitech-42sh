@@ -32,6 +32,7 @@
 
 /* Belongs to src/input/parser/token.c */
 void token_list_print(struct node_s *head);
+void token_print_debug(struct node_s *head);
 
 /* Belongs to src/input/parser/token.c */
 char *token_get_string(const struct token_s *this, const char *rawinput);

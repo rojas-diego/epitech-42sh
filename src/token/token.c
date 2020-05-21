@@ -10,6 +10,7 @@
 
 /* Contains implicit includes for types */
 #include "proto/token.h"
+#include "tests/tokens.h"
 #include "constants/tokens.h"
 #include "tests/tokens.h"
 
@@ -35,4 +36,16 @@ void token_list_print(struct node_s *head)
         printf("Token %s (%s)\n",
             TOK_NAMES[(*this).type], TOKENS[(*this).type]);
     }
+}
+
+void token_print_debug(struct node_s *head)
+{
+    struct token_s *this;
+
+    printf("\n================== TOKENS ====================\n");
+    for (struct node_s *curr = head; curr; curr = curr->next) {
+        this = curr->data;
+        printf("\033[1m\033[38;2;230;70;200m %s\033[0m  ", TOK_NAMES[this->type]);
+    }
+    printf("\n==============================================\n");
 }
