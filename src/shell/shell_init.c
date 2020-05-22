@@ -14,6 +14,7 @@
 #include "proto/shell/term_init.h"
 #include "proto/shell/bindkey.h"
 #include "proto/shell/check_debug_mode.h"
+#include "proto/shell/local_variables.h"
 #include "proto/prompt/history.h"
 
 /* TODO: parse av: if fd replace STDIN_FILENO in isatty by fildes */
@@ -37,7 +38,7 @@ int shell_struct_initialise(
         .atty = isatty(fd), .history = {0},
         .builtin = shell_builtin_hash_create(), .alias = NULL,
         .bindkey = NULL,
-        .local_var = NULL, .error = ER_NONE, .job = NULL,
+        .local_var = local_variables_init(), .error = ER_NONE, .job = NULL,
         .fd = fd, .expression = NULL, .debug = {.depth = 0}
     };
     if (term_init(this)) {
