@@ -44,13 +44,12 @@ static int job_process_update_record_process(
 
 int job_process_update_status(struct job_s *first_job, pid_t pid, int status)
 {
-    if (pid == 0 || errno == ECHILD) {
+    if (pid == 0 || (pid < 0 && errno == ECHILD)) {
         return (-1);
     }  else if (pid < 0) {
-        perror ("waitpid");
+        perror("waitpid");
         return (-1);
     }
-    dprintf(2, "STATUS: %d\n", status);
     for (struct job_s *job = first_job; job; job = job->next) {
         if (job_process_update_record_process(job, pid, status)) {
             return (0);

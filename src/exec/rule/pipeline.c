@@ -30,6 +30,7 @@ int exec_rule_pipeline(
     }
     exec_rule_debug(shell, "job_launch", true);
     exec_rule_job_display(shell, job);
+    shell->job = job;
     job_launch(shell, job, true);
     exec_rule_debug(shell, "job_launch", false);
     exec_rule_debug(shell, "pipeline", false);
