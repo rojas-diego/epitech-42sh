@@ -29,26 +29,27 @@ int shell_struct_initialise(
     char *const *ep
 )
 {
-    (*this).error = ER_NONE;
-    (*this).tokens = 0;
-    (*this).envp = ep;
-    (*this).rawinput = 0;
-    (*this).active = true;
-    (*this).fd = STDIN_FILENO;
-    (*this).atty = isatty((*this).fd);
-    (*this).prompt.cursor = 0;
-    (*this).prompt.length = 0;
-    (*this).job = NULL;
-    (*this).expression = NULL;
-    (*this).debug.depth = 0;
-    memset((*this).prompt.input, 0, 8192);
+    this->error = ER_NONE;
+    this->tokens = 0;
+    this->envp = ep;
+    this->rawinput = 0;
+    this->active = true;
+    this->fd = STDIN_FILENO;
+    this->atty = isatty(this->fd);
+    this->prompt.cursor = 0;
+    this->prompt.length = 0;
+    this->job = NULL;
+    this->expression = NULL;
+    this->debug.depth = 0;
+    this->last_status = 0;
+    memset(this->prompt.input, 0, 8192);
     history_init(&this->history);
     if (term_init(this)) {
         return (1);
     }
-    (*this).builtin = shell_builtin_hash_create();
-    (*this).bindkey = shell_bindkey_hash_create();
-    (*this).alias = NULL;
+    this->builtin = shell_builtin_hash_create();
+    this->bindkey = shell_bindkey_hash_create();
+    this->alias = NULL;
     this->debug_mode = check_debug_mode(av);
-    return (!(*this).builtin || ((*this).atty && !(*this).bindkey));
+    return (!this->builtin || (this->atty && !this->bindkey));
 }
