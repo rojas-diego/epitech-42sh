@@ -23,6 +23,7 @@ SRC =		src/constants.c					\
 		src/shell/local_variables/assign_value.c		\
 		src/shell/local_variables/from_data.c			\
 		src/shell/local_variables/get_type.c			\
+		src/shell/local_variables/init.c			\
 									\
 		src/prompt/history/init.c				\
 		src/prompt/history/insert.c				\

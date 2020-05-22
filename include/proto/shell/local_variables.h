@@ -23,5 +23,6 @@ struct local_var_s *local_variable_from_data(
 );
 void local_variable_assign_value(struct local_var_s *var, char *data);
 enum var_type_e local_variable_get_type(char *data);
+struct hasher_s *local_variables_init(void);
 
 #endif /* !PROTO_SHELL_LOCAL_VARIABLES_H_ */
