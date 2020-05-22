@@ -5,6 +5,8 @@
 ** exec rule command
 */
 
+#include <stdlib.h>
+
 #include "types/token.h"
 
 #include "types/exec/rule.h"
