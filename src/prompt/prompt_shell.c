@@ -36,8 +36,6 @@ static void prompt_fetch(struct sh *shell)
         if (buffer)
             free(buffer);
         buffer = NULL;
-    } else if (buffer[response - 1] == '\n') {
-        buffer[response - 1] = '\0';
     }
     shell->rawinput = buffer;
 }
