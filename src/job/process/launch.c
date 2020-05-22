@@ -33,6 +33,7 @@ void process_launch(
     struct sh *shell,
     struct process_s *process,
     int fds[IO_COUNT],
+    int pgid,
     bool foreground
 )
 {
@@ -40,12 +41,12 @@ void process_launch(
 
     if (shell->atty) {
         pid = getpid();
-        if (shell->pgid == 0) {
-            shell->pgid = pid;
+        if (!pgid) {
+            pgid = pid;
         }
-        setpgid(pid, shell->pgid);
+        setpgid(pid, pgid);
         if (foreground) {
-            tcsetpgrp(shell->fd, shell->pgid);
+            tcsetpgrp(shell->fd, pgid);
         }
         term_set_signal_handling(SIG_DFL);
     }

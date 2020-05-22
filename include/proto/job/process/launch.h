@@ -17,6 +17,7 @@ void process_launch(
     struct sh *shell,
     struct process_s *process,
     int fds[IO_COUNT],
+    int pgid,
     bool foreground
 );
 

@@ -16,7 +16,6 @@
 #include "proto/job/wait_for.h"
 
 static void job_launch_process_clear_pipe(
-    struct job_s *job,
     int pipe_fd[2],
     int fildes[IO_COUNT]
 )
@@ -35,13 +34,14 @@ static pid_t job_launch_process_fork(
     struct sh *shell,
     struct process_s *process,
     int fildes[IO_COUNT],
+    int pgid,
     bool foreground
 )
 {
     pid_t pid = fork();
 
     if (pid == 0) {
-        process_launch(shell, process, fildes, foreground);
+        process_launch(shell, process, fildes, pgid, foreground);
         exit(1);
     } else if (pid < 0) {
         perror("fork");
@@ -100,8 +100,8 @@ void job_launch(struct sh *shell, struct job_s *job, bool foreground)
             fildes[IO_ERR] = job->io[IO_ERR];
         }
         job_launch_handle_parent(job, process, shell->atty,
-            job_launch_process_fork(shell, process, fildes, foreground));
-        job_launch_process_clear_pipe(job, pipe_fd, fildes);
+            job_launch_process_fork(shell, process, fildes, job->pgid, foreground));
+        job_launch_process_clear_pipe(pipe_fd, fildes);
     }
     job_launch_handle_launched_processes(shell, job, foreground);
 }
