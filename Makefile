@@ -164,6 +164,7 @@ LIBNAMES =	builtins						\
 		input_postprocessing					\
 		find_binary						\
 		hasher							\
+		myerror							\
 		parser_toolbox						\
 
 LIBFOLDER =	./lib

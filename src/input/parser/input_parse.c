@@ -5,6 +5,10 @@
 ** input_parse
 */
 
+#include <stdio.h>
+
+#include "myerror.h"
+
 /* Contains implicit includes for types */
 #include "proto/input/parser.h"
 
@@ -15,5 +19,10 @@
 void input_parse(struct sh *shell)
 {
     input_parse_tokens(shell);
+    if (my_error(err_read, 84)) {
+        dprintf(2, "Error: Couldn't tokenise.\n");
+        shell->error = 1;
+        return;
+    }
     input_parse_grammar(shell);
 }

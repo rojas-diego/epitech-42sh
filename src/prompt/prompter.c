@@ -19,7 +19,7 @@
 #include "proto/prompt/input/empty.h"
 
 #include "proto/job/do_notification.h"
-
+#include "myerror.h"
 /* if (SYNTAX_ERROR && !shell->atty) { break; } */
 
 /* temp header */
@@ -63,9 +63,11 @@ void prompter(struct sh *shell)
         history_replace(&(shell->history), &(shell->rawinput));
         history_insert(&(shell->history), shell->rawinput);
         input_parse(shell);
-        prompt_execution(shell);
+        if (!shell->error)
+            prompt_execution(shell);
         input_destroy(shell);
         prompt_input_empty(shell);
         job_do_notification(&(shell->job));
+        shell->error = 0;
     }
 }
