@@ -12,9 +12,11 @@
 #include "proto/exec/rule/command.h"
 #include "proto/exec/rule/pipeline.h"
 
+#include <stdio.h>
+
 static void job_display(struct job_s *job)
 {
-    dprintf(2, "Job\n");
+    dprintf(2, "/ Job\n");
     for (struct process_s *s = job->first_process; s; s = s->next) {
         dprintf(2, "PROC: ");
         for (size_t i = 0; i < s->argc; ++i) {
@@ -22,7 +24,7 @@ static void job_display(struct job_s *job)
         }
         dprintf(2, "\n");
     }
-    dprintf(2, "\\Job\n");
+    dprintf(2, "\\ Job\n");
 }
 
 int exec_rule_pipeline(
@@ -39,7 +41,8 @@ int exec_rule_pipeline(
         }
     }
     exec_rule_debug(shell, "job_launch", true);
-    job_display(job);
+    //if (shell->debug_mode)
+        job_display(job);
     job_launch(shell, job, true);
     exec_rule_debug(shell, "job_launch", false);
     exec_rule_debug(shell, "pipeline", false);

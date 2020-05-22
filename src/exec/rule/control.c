@@ -5,12 +5,16 @@
 ** exec rule control
 */
 
+#include "proto/exec/rule/debug.h"
+
 #include "proto/exec/rule/control.h"
 
 int exec_rule_control(
     struct sh *shell,
-    struct expr_control_s *rule
+    __attribute__((unused)) struct expr_control_s *rule
 )
 {
+    exec_rule_debug(shell, "control", true);
+    exec_rule_debug(shell, "control", false);
     return (0);
 }

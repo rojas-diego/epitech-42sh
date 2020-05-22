@@ -5,12 +5,16 @@
 ** exec rule control if
 */
 
+#include "proto/exec/rule/debug.h"
+
 #include "proto/exec/rule/control/if.h"
 
 int exec_rule_control_if(
     struct sh *shell,
-    struct expr_if_control_s *rule
+    __attribute__((unused)) struct expr_if_control_s *rule
 )
 {
+    exec_rule_debug(shell, "if", true);
+    exec_rule_debug(shell, "if", false);
     return (0);
 }

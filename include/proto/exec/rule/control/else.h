@@ -11,5 +11,9 @@
 #include "types/shell.h"
 #include "types/expr.h"
 
+int exec_rule_control_else(
+    struct sh *shell,
+    struct expr_else_control_s *rule
+);
 
 #endif /* !SH_SHELL_EXEC_RULE_CONTROL_ELSE_H_ */

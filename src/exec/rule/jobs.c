@@ -12,7 +12,7 @@
 
 int exec_rule_jobs(
     struct sh *shell,
-    struct expr_jobs_s *rule
+    __attribute__((unused)) struct expr_jobs_s *rule
 )
 {
     exec_rule_debug(shell, "jobs", true);

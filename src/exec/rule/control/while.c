@@ -5,12 +5,16 @@
 ** exec rule control while
 */
 
+#include "proto/exec/rule/debug.h"
+
 #include "proto/exec/rule/control/while.h"
 
 int exec_rule_control_while(
     struct sh *shell,
-    struct expr_while_control_s *rule
+    __attribute__((unused)) struct expr_while_control_s *rule
 )
 {
+    exec_rule_debug(shell, "while", true);
+    exec_rule_debug(shell, "while", false);
     return (0);
 }

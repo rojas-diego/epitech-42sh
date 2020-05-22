@@ -14,7 +14,7 @@
 
 int builtin_at_handler(struct sh *shell, const char * const *argv)
 {
-    int argc = ptb_argv_length(argv);
+    size_t argc = ptb_argv_length(argv);
 
     if (argc == 1) {
         local_variables_display(
