@@ -16,7 +16,7 @@
 ** @DESCRIPTION
 **   This is a wrapper function for the tokenisation and the grammar parsing.
 */
-void input_parse(struct sh *shell)
+int input_parse(struct sh *shell)
 {
     input_parse_tokens(shell);
     if (my_error(err_read, 84)) {
@@ -25,4 +25,5 @@ void input_parse(struct sh *shell)
         return;
     }
     input_parse_grammar(shell);
+    return (0);
 }
