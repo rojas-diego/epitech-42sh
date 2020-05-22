@@ -27,20 +27,28 @@
 #include <stdbool.h>
 #include "proto/exec/get_argv.h"
 #include "proto/exec/simple_exec.h"
+#include "proto/expr_destroy.h"
 
 /* split_input(shell->rawinput); */
-
+#include "types/expr.h"
+#include "proto/exec/rule/program.h"
 /* temp function */
 static void prompt_execution(struct sh *shell)
 {
     wordexp_t we = {0};
 
-    if (exec_get_argv(&we, shell->rawinput)) {
-        return;
+    if (!shell->debug_mode) {
+        if (exec_get_argv(&we, shell->rawinput)) {
+            return;
+        }
+        input_execute(shell);
+        simple_exec(shell, &we);
+        wordfree(&we);
+    } else if (shell->expression) {
+        exec_rule_program(shell, shell->expression);
+        expr_program_destroy(shell->expression);
+        shell->expression = NULL;
     }
-    input_execute(shell);
-    simple_exec(shell, &we);
-    wordfree(&we);
 }
 
 /*

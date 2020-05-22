@@ -10,7 +10,7 @@
 #include "proto/shell/local_variables.h"
 #include "types/local_variables.h"
 
-enum var_type_e local_variable_get_type(char *data)
+enum var_type_e local_variable_get_type(char const *data)
 {
     for (size_t i = (*data == '-'); data[i]; ++i) {
         if (!(data[i] <= '9' && data[i] >= '0')) {
