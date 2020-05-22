@@ -37,14 +37,15 @@ static void prompt_execution(struct sh *shell)
 {
     wordexp_t we = {0};
 
-    if (!shell->debug_mode) {
+    if (0 && !shell->debug_mode) {
         if (exec_get_argv(&we, shell->rawinput)) {
             return;
         }
         input_execute(shell);
         simple_exec(shell, &we);
         wordfree(&we);
-    } else if (shell->expression) {
+    }
+    if (shell->expression) {
         exec_rule_program(shell, shell->expression);
         expr_program_destroy(shell->expression);
         shell->expression = NULL;

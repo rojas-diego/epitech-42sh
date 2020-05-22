@@ -30,8 +30,17 @@ int exec_rule_pipeline(
     }
     exec_rule_debug(shell, "job_launch", true);
     exec_rule_job_display(shell, job);
-    shell->job = job;
-    job_launch(shell, job, true);
+    #include "hasher/get_data.h"
+    #include "types/builtins.h"
+    builtin_handler *builtin = (builtin_handler *) hasher_get_data(
+        shell->builtin, job->first_process->argv[0]
+    );
+    if (builtin && *builtin) {
+        (*builtin)(shell, (const char *const *)job->first_process->argv);
+    } else {
+        shell->job = job;
+        job_launch(shell, job, true);
+    }
     exec_rule_debug(shell, "job_launch", false);
     exec_rule_debug(shell, "pipeline", false);
     return (0);
