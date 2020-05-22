@@ -53,5 +53,6 @@ struct expr_repeat_control_s *expr_repeat_control_w(struct grammar_s *this);
 struct expr_wordlist_expression_s *expr_wordlist_expression_w(struct grammar_s *this);
 struct expr_wordlist_s *expr_wordlist_w(struct grammar_s *this);
 struct expr_conditional_s *expr_conditional_w(struct grammar_s *this);
+struct expr_compound_s *expr_compound_w(struct grammar_s *this);
 
 #endif
