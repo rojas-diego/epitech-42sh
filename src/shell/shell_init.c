@@ -29,27 +29,23 @@ int shell_struct_initialise(
     char *const *ep
 )
 {
-    this->error = ER_NONE;
-    this->tokens = 0;
-    this->envp = ep;
-    this->rawinput = 0;
-    this->active = true;
-    this->fd = STDIN_FILENO;
-    this->atty = isatty(this->fd);
-    this->prompt.cursor = 0;
-    this->prompt.length = 0;
-    this->job = NULL;
-    this->expression = NULL;
-    this->debug.depth = 0;
-    this->last_status = 0;
-    memset(this->prompt.input, 0, 8192);
-    history_init(&this->history);
+    int fd = STDIN_FILENO;
+
+    *this = (struct sh) {
+        .debug_mode = check_debug_mode(av), .active = true, .rawinput = NULL,
+        .tokens = NULL, .pgid = 0, .envp = ep, .prompt = {{0}},
+        .atty = isatty(fd), .history = {0},
+        .builtin = shell_builtin_hash_create(), .alias = NULL,
+        .bindkey = NULL,
+        .local_var = NULL, .error = ER_NONE, .job = NULL,
+        .fd = fd, .expression = NULL, .debug = {.depth = 0}
+    };
     if (term_init(this)) {
         return (1);
     }
-    this->builtin = shell_builtin_hash_create();
+    history_init(&this->history);
     this->bindkey = shell_bindkey_hash_create();
-    this->alias = NULL;
-    this->debug_mode = check_debug_mode(av);
-    return (!this->builtin || (this->atty && !this->bindkey));
+    return (
+        !this->builtin || (this->atty && !this->bindkey)
+    );
 }
