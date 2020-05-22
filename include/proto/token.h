@@ -32,7 +32,7 @@
 
 /* Belongs to src/input/parser/token.c */
 void token_list_print(struct node_s *head);
-void token_print_debug(struct node_s *head);
+void token_print_debug(struct node_s *head, char const *rawinput);
 struct token_s *token_new(enum tokent_e type);
 
 /* Belongs to src/input/parser/token.c */
