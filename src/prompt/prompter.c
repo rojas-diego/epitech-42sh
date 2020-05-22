@@ -62,7 +62,7 @@ void prompter(struct sh *shell)
         }
         history_replace(&(shell->history), &(shell->rawinput));
         history_insert(&(shell->history), shell->rawinput);
-        input_parse(shell);
+        shell->last_status = input_parse(shell);
         if (!shell->error)
             prompt_execution(shell);
         input_destroy(shell);

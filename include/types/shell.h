@@ -61,6 +61,7 @@ typedef struct sh {
     char * const            *envp;
     struct prompt           prompt;
     int                     atty;
+    int                     last_status;
     struct history_s        history;
     struct hasher_s         *builtin;
     struct hasher_s         *alias;
