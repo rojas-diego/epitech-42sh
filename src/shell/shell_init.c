@@ -25,7 +25,7 @@
 int shell_struct_initialise(
     struct sh *this,
     __attribute__((unused)) int ac,
-    __attribute__((unused)) char *const *av,
+    char *const *av,
     char *const *ep
 )
 {
@@ -39,6 +39,8 @@ int shell_struct_initialise(
     (*this).prompt.cursor = 0;
     (*this).prompt.length = 0;
     (*this).job = NULL;
+    (*this).expression = NULL;
+    (*this).debug.depth = 0;
     memset((*this).prompt.input, 0, 8192);
     history_init(&this->history);
     if (term_init(this)) {
