@@ -30,7 +30,8 @@ int exec_rule_command_add_redirection(
         input[redirection->io_number->start] - '0': 1;
     char *substr = NULL;
 
-    if (job->io[io] != io)
+    if (job->io[io] != io && (redirection->redirection->type == TOK_GREAT
+    || redirection->redirection->type == TOK_DGREAT))
         return (EXEC_RULE_AMBIGUOUS_REDIRECTION);
     substr = token_get_string(redirection->word, input);
     if (substr == NULL)
@@ -40,9 +41,9 @@ int exec_rule_command_add_redirection(
     } else if (redirection->redirection->type == TOK_DGREAT)
         job->io[io] = exec_do_redirect_double_right(substr);
     if (redirection->redirection->type == TOK_LESS) {
-        job->io[io] = exec_do_redirect_left(substr);
+        job->io[IO_IN] = exec_do_redirect_left(substr);
     } else if (redirection->redirection->type == TOK_DLESS)
-        job->io[io] = exec_do_redirect_double_left(substr);
+        job->io[IO_IN] = exec_do_redirect_double_left(substr);
     free(substr);
     return (job->io[io] == -1 ? EXEC_RULE_REDIRECTION_FAIL : EXEC_RULE_SUCCESS);
 }

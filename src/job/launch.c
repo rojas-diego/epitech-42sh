@@ -27,7 +27,8 @@ static void job_launch_process_clear_pipe(
         close(fildes[IO_OUT]);
     if (fildes[IO_ERR] != IO_ERR)
         close(fildes[IO_OUT]);
-    fildes[IO_IN] = pipe_fd[0];
+    if (pipe_fd != IO_IN)
+        fildes[IO_IN] = pipe_fd[0];
 }
 
 static pid_t job_launch_process_fork(
@@ -83,8 +84,8 @@ static void job_launch_handle_launched_processes(
 void job_launch(struct sh *shell, struct job_s *job, bool foreground)
 {
     struct process_s *process = NULL;
-    int pipe_fd[2] = {-1, -1};
-    int fildes[IO_COUNT] = {IO_IN, IO_OUT, IO_ERR};
+    int pipe_fd[2] = {IO_IN, IO_IN};
+    int fildes[IO_COUNT] = {job->io[IO_IN], IO_OUT, IO_ERR};
 
     for (process = job->first_process; process; process = process->next) {
         if (process->next) {
@@ -93,7 +94,6 @@ void job_launch(struct sh *shell, struct job_s *job, bool foreground)
                 exit(1);
             }
             fildes[IO_OUT] = pipe_fd[1];
-            fildes[IO_OUT] = IO_OUT;
             fildes[IO_ERR] = IO_ERR;
         } else {
             fildes[IO_OUT] = job->io[IO_OUT];

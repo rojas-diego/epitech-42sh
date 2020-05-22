@@ -42,10 +42,13 @@ int exec_rule_grouping(
             }
         } else if (rule->conditional->type == TOK_OR_IF) {
             if (!last_status) {
+                exec_rule_debug(shell, "grouping", false);
                 return (1);
             }
-        } else
+        } else {
+            exec_rule_debug(shell, "grouping", false);
             return (1);
+        }
     }
     if (rule && rule->pipeline) {
         exec_rule_pipeline(shell, rule->pipeline);

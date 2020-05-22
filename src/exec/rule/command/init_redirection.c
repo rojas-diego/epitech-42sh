@@ -23,7 +23,7 @@ int exec_do_redirect_left(const char *path)
     dup2(fd, piped_fd[0]);
     close(fd);
     close(piped_fd[1]);
-    return (0);
+    return (piped_fd[0]);
 }
 
 int exec_do_redirect_double_left(const char *word)
@@ -39,8 +39,8 @@ int exec_do_redirect_double_left(const char *word)
     }
     write(1, "? ", 2);
     ret = getline(&line, &len, stdin);
-    for (; ret > 0 && strcmp(line, word); ret = getline(&line, &len, stdin)) {
-        write(fd[1], line, len + 1);
+    for (; ret > 0 && strcmp(line, word) != '\n'; ret = getline(&line, &len, stdin)) {
+        write(fd[1], line, ret);
         write(1, "? ", 2);
     }
     if (ret < 0)
