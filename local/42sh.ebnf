@@ -12,7 +12,10 @@ block               ::=     statement [ block ]
 statement           ::=     subshell | jobs | control
                     ;
 
-jobs                ::=     [ & ] grouping ( & grouping )* [ & ] separator
+compound            ::=     [ jobs ] separator
+                    ;
+
+jobs                ::=     [ & ] grouping ( & grouping )* [ & ]
                     ;
 
 subshell            ::=     LPARANTH block RPARANTH
