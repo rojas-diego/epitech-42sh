@@ -41,6 +41,7 @@ SRC =		src/constants.c					\
 									\
 		src/shell/builtin_handlers/builtins.c			\
 		src/shell/builtin_handlers/cd.c			\
+		src/shell/builtin_handlers/debug.c			\
 		src/shell/builtin_handlers/echo.c			\
 		src/shell/builtin_handlers/env.c			\
 		src/shell/builtin_handlers/exit.c			\

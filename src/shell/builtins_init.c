@@ -15,7 +15,7 @@
 #include "proto/shell/builtin_handlers.h"
 #include "proto/shell/builtins.h"
 
-static const int BUILTIN_COUNT = 21;
+static const int BUILTIN_COUNT = 22;
 
 static const struct {
     const char *key;
@@ -35,6 +35,7 @@ static const struct {
     {"fg", &builtin_fg_handler},
     {"exit", &builtin_exit_handler},
     {"echo", &builtin_echo_handler},
+    {"debug", &builtin_debug_handler},
     {"cd", &builtin_change_directory_handler},
     {"builtins", &builtin_builtins_handler},
     {"bindkey", &builtin_bindkey_handler},
