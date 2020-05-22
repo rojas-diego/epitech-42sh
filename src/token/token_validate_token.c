@@ -22,5 +22,7 @@ unsigned int token_validate_token(char const *string, char const *value)
         if (!value[i + 1])
             return (i + 1);
     }
+    if (value[i] != '\0')
+        return 0;
     return (i);
 }

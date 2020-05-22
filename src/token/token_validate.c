@@ -8,6 +8,7 @@
 #include <stdbool.h>
 
 #include "parser_toolbox.h"
+#include "myerror.h"
 
 #include "proto/constants.h"
 #include "proto/token.h"
@@ -39,7 +40,7 @@ void token_validate_inhibitors(char const *string, unsigned int *i, bool *adv)
 */
 void token_validate_squotes(char const *string, unsigned int *i, bool *adv)
 {
-    if (string[*i] != '\"') {
+    if (string[*i] != '\'') {
         *adv = false;
         return;
     }
@@ -49,6 +50,7 @@ void token_validate_squotes(char const *string, unsigned int *i, bool *adv)
         if (string[*i] == '\'')
             return;
     }
+    my_error(err_write, 84);
     (*i)--;
 }
 
@@ -75,6 +77,7 @@ void token_validate_dquotes(char const *string, unsigned int *i, bool *adv)
         if (string[*i] == '\"')
             return;
     }
+    my_error(err_write, 84);
     (*i)--;
 }
 
