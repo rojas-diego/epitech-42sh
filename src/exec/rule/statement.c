@@ -9,7 +9,7 @@
 #include "proto/exec/rule/debug.h"
 
 #include "proto/exec/rule/subshell.h"
-#include "proto/exec/rule/jobs.h"
+#include "proto/exec/rule/compound.h"
 #include "proto/exec/rule/control.h"
 #include "proto/exec/rule/statement.h"
 
@@ -22,8 +22,8 @@ int exec_rule_statement(
     if (rule->subshell) {
         return (exec_rule_subshell(shell, rule->subshell));
     }
-    if (rule->jobs) {
-        return (exec_rule_jobs(shell, rule->jobs));
+    if (rule->compound) {
+        return (exec_rule_compound(shell, rule->compound));
     }
     if (rule->control) {
         return (exec_rule_control(shell, rule->control));

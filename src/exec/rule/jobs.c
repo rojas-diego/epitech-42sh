@@ -12,13 +12,15 @@
 
 int exec_rule_jobs(
     struct sh *shell,
-    struct expr_jobs_s *rule
+    struct expr_jobs_s *rule,
+    bool foreground
 )
 {
     exec_rule_debug(shell, "jobs", true);
-    if (rule->grouping) {
-        exec_rule_grouping(shell, rule->grouping, true);
+    for (; rule->jobs; rule = rule->jobs) {
+        exec_rule_grouping(shell, rule->grouping, !rule->jobs);
     }
+    exec_rule_grouping(shell, rule->grouping, foreground);
     exec_rule_debug(shell, "jobs", false);
     return (0);
 }

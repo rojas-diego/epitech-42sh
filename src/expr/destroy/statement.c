@@ -20,7 +20,7 @@ void expr_statement_destroy(struct expr_statement_s *this)
         return;
     }
     expr_subshell_destroy(this->subshell);
-    expr_jobs_destroy(this->jobs);
+    expr_compound_destroy(this->compound);
     expr_control_destroy(this->control);
     free(this);
 }

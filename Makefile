@@ -90,6 +90,7 @@ SRC =		src/constants.c					\
 		src/expr/redirection.c					\
 		src/expr/separator.c					\
 		src/expr/control.c					\
+		src/expr/compound.c					\
 		src/expr/if_control.c					\
 		src/expr/else_if_control.c				\
 		src/expr/else_control.c				\
@@ -121,6 +122,7 @@ SRC =		src/constants.c					\
 		src/expr/destroy/wordlist_expression.c			\
 		src/expr/destroy/wordlist.c				\
 		src/expr/destroy/conditional.c				\
+		src/expr/destroy/compound.c				\
 									\
 		src/prompt/actions/arrows.c				\
 		src/prompt/actions/backspace.c				\
@@ -180,6 +182,7 @@ SRC =		src/constants.c					\
 		src/exec/rule/jobs.c					\
 		src/exec/rule/pipeline.c				\
 		src/exec/rule/program.c				\
+		src/exec/rule/compound.c			\
 		src/exec/rule/redirection.c				\
 		src/exec/rule/separator.c				\
 		src/exec/rule/statement.c				\

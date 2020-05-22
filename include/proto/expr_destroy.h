@@ -18,6 +18,7 @@ void expr_subshell_destroy(struct expr_subshell_s *this);
 void expr_grouping_destroy(struct expr_grouping_s *this);
 void expr_pipeline_destroy(struct expr_pipeline_s *this);
 void expr_command_destroy(struct expr_command_s *this);
+void expr_compound_destroy(struct expr_compound_s *this);
 void expr_redirection_destroy(struct expr_redirection_s *this);
 void expr_separator_destroy(struct expr_separator_s *this);
 void expr_control_destroy(struct expr_control_s *this);

@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2019
 ** PSU_42sh_2019
 ** File description:
-** expr_jobs
+** expr_compound
 */
 
 /* free */
@@ -12,13 +12,14 @@
 
 /*
 ** @DESCRIPTION
-**   Rule for jobs expression.
+**   Rule for compound expression.
 */
-void expr_jobs_destroy(struct expr_jobs_s *this)
+void expr_compound_destroy(struct expr_compound_s *this)
 {
     if (!this) {
         return;
     }
     expr_grouping_destroy(this->grouping);
-    free(this);
+    expr_jobs_destroy(this->jobs);
+    expr_separator_destroy(this->separator);
 }

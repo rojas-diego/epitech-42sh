@@ -13,7 +13,8 @@
 
 int exec_rule_jobs(
     struct sh *shell,
-    struct expr_jobs_s *rule
+    struct expr_jobs_s *rule,
+    bool foreground
 );
 
 #endif /* !SH_SHELL_EXEC_RULE_JOBS_H_ */
