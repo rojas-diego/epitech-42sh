@@ -27,6 +27,7 @@
 #include <stdbool.h>
 #include "proto/exec/get_argv.h"
 #include "proto/exec/simple_exec.h"
+#include "proto/expr_destroy.h"
 
 /* split_input(shell->rawinput); */
 #include "types/expr.h"
@@ -45,6 +46,8 @@ static void prompt_execution(struct sh *shell)
         wordfree(&we);
     } else if (shell->expression) {
         exec_rule_program(shell, shell->expression);
+        expr_program_destroy(shell->expression);
+        shell->expression = NULL;
     }
 }
 
