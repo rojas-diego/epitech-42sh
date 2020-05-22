@@ -10,6 +10,7 @@
 #include "types/shell.h"
 #include "proto/shell.h"
 #include "proto/prompt/history.h"
+#include "proto/shell/local_variables.h"
 
 /* hasher_destroy(shell->binkey, false, false); */
 
@@ -23,4 +24,5 @@ void shell_destroy(struct sh *shell)
     hasher_destroy(shell->alias, true, true);
     hasher_destroy(shell->bindkey, true, false);
     history_destroy(&shell->history);
+    local_variables_destroy(shell->local_var);
 }

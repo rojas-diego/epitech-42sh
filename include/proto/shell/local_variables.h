@@ -18,11 +18,12 @@ void local_variables_display(
 );
 struct local_var_s *local_variable_from_data(
     struct hasher_s *hasher,
-    char *key,
+    char const *key,
     char *data
 );
-void local_variable_assign_value(struct local_var_s *var, char *data);
-enum var_type_e local_variable_get_type(char *data);
+void local_variable_assign_value(struct local_var_s *var, char const *data);
+enum var_type_e local_variable_get_type(char const *data);
 struct hasher_s *local_variables_init(void);
+void local_variables_destroy(struct hasher_s *hasher);
 
 #endif /* !PROTO_SHELL_LOCAL_VARIABLES_H_ */

@@ -13,7 +13,7 @@
 #include "proto/shell/local_variables.h"
 #include "types/local_variables.h"
 
-void local_variable_assign_value(struct local_var_s *var, char *data)
+void local_variable_assign_value(struct local_var_s *var, char const *data)
 {
     var->type = local_variable_get_type(data);
     if (var->type == STRING) {

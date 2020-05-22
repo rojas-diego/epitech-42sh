@@ -15,7 +15,7 @@
 
 const size_t HISTORY_MAX_SIZE = 10;
 
-_Bool history_can_insert(struct dnode_s *list, char const *line)
+static _Bool history_can_insert(struct dnode_s *list, char const *line)
 {
     if (!list) {
         return (1);

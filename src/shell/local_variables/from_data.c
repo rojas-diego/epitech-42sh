@@ -14,7 +14,7 @@
 
 struct local_var_s *local_variable_from_data(
     struct hasher_s *hasher,
-    char *key,
+    char const *key,
     char *data
 )
 {

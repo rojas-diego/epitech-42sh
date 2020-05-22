@@ -24,6 +24,7 @@ SRC =		src/constants.c					\
 		src/shell/local_variables/from_data.c			\
 		src/shell/local_variables/get_type.c			\
 		src/shell/local_variables/init.c			\
+		src/shell/local_variables/destroy.c			\
 									\
 		src/prompt/history/init.c				\
 		src/prompt/history/insert.c				\
@@ -99,6 +100,27 @@ SRC =		src/constants.c					\
 		src/expr/wordlist.c					\
 		src/expr/conditional.c					\
 		src/expr/utility.c					\
+									\
+		src/expr/destroy/program.c				\
+		src/expr/destroy/block.c				\
+		src/expr/destroy/statement.c				\
+		src/expr/destroy/jobs.c				\
+		src/expr/destroy/subshell.c				\
+		src/expr/destroy/grouping.c				\
+		src/expr/destroy/pipeline.c				\
+		src/expr/destroy/command.c				\
+		src/expr/destroy/redirection.c				\
+		src/expr/destroy/separator.c				\
+		src/expr/destroy/control.c				\
+		src/expr/destroy/if_control.c				\
+		src/expr/destroy/else_if_control.c			\
+		src/expr/destroy/else_control.c			\
+		src/expr/destroy/foreach_control.c			\
+		src/expr/destroy/while_control.c			\
+		src/expr/destroy/repeat_control.c			\
+		src/expr/destroy/wordlist_expression.c			\
+		src/expr/destroy/wordlist.c				\
+		src/expr/destroy/conditional.c				\
 									\
 		src/prompt/actions/arrows.c				\
 		src/prompt/actions/backspace.c				\
