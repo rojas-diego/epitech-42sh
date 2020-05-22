@@ -22,6 +22,7 @@ int input_parse(struct sh *shell)
     if (my_error(err_read, 84)) {
         dprintf(2, "Error: Couldn't tokenise.\n");
         shell->error = 1;
+        my_error(err_write, 0);
         return;
     }
     input_parse_grammar(shell);
