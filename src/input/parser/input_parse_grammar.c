@@ -37,5 +37,5 @@ void input_parse_grammar(struct sh *shell)
         printf("\nError: %s\n", (this.error) ? "Fatal" : "None");
     if (this.debug)
         printf("==============================================\n\n");
-    (void)(expression);
+    shell->expression = this.error ? NULL : expression;
 }
