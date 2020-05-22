@@ -12,12 +12,12 @@
 #include "hasher/replace_key.h"
 
 char *hasher_replace_key(
-    struct hasher *hasher,
+    struct hasher_s *hasher,
     const char *current_key,
     char *new_key
 )
 {
-    struct hasher *match = hasher_get(hasher, current_key);
+    struct hasher_s *match = hasher_get(hasher, current_key);
     char *old_key = NULL;
 
     if (match) {

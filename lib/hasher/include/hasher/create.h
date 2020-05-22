@@ -10,6 +10,6 @@
 
 #include "hasher/type.h"
 
-struct hasher *hasher_create(char *key, void *data);
+struct hasher_s *hasher_create(char *key, void *data);
 
 #endif /* !HASHER_CREATE_H_ */

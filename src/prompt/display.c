@@ -13,6 +13,11 @@
 #include "proto/prompt/display.h"
 #include "parser_toolbox/strrep.h"
 
+const char *DISPLAY_COLOR[2] = {
+    "\033[38;2;255;50;50m",
+    "\033[38;2;150;220;150m"
+};
+
 /*
 ** @DESCRIPTION
 **   Prints the shell prompt.
@@ -32,7 +37,7 @@ int prompt_display(__attribute__((unused)) struct sh *shell)
     if (dir && home && !strcmp(dir, home))
         dir = "/~";
     dir = dir ? strrchr(dir, '/') : dir;
-    printf("\033[38;2;150;220;150m""[%s@%s %s]%s\033[0m",
+    printf("%s[%s@%s %s]%s\033[0m", DISPLAY_COLOR[!shell->last_status],
         user ? user : "", host ? host: "", dir ? dir : "", "$> ");
     fflush(stdout);
     if (host)

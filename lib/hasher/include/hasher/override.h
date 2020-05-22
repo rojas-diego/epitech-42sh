@@ -10,9 +10,9 @@
 
 #include "hasher/type.h"
 
-struct hasher *hasher_override(
-    struct hasher **hasher,
-    struct hasher *to_insert
+struct hasher_s *hasher_override(
+    struct hasher_s **hasher,
+    struct hasher_s *to_insert
 );
 
 #endif /* !HASHER_OVERRIDE_H_ */

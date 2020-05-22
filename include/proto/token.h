@@ -32,24 +32,14 @@
 
 /* Belongs to src/input/parser/token.c */
 void token_list_print(struct node_s *head);
+void token_print_debug(struct node_s *head, char const *rawinput);
+struct token_s *token_new(enum tokent_e type);
 
 /* Belongs to src/input/parser/token.c */
 char *token_get_string(const struct token_s *this, const char *rawinput);
 
 /* Belongs to src/input/parser/token_validate_meta.c */
 unsigned int token_validate_word(
-    char const *string,
-    char const *token __attribute__((unused))
-);
-
-/* Belongs to src/input/parser/token_validate_meta.c */
-unsigned int token_validate_assignment_word(
-    char const *string __attribute__((unused)),
-    char const *token __attribute__((unused))
-);
-
-/* Belongs to src/input/parser/token_validate_meta.c */
-unsigned int token_validate_name(
     char const *string,
     char const *token __attribute__((unused))
 );
@@ -67,12 +57,9 @@ unsigned int token_validate_token(
 );
 
 /* Belongs to src/input/parser/token_validate.c */
+bool token_peek_characters(char const *string, char const *chars);
 void token_validate_inhibitors(char const *string, unsigned int *i, bool *adv);
-
-/* Belongs to src/input/parser/token_validate.c */
 void token_validate_squotes(char const *string, unsigned int *i, bool *adv);
-
-/* Belongs to src/input/parser/token_validate.c */
 void token_validate_dquotes(char const *string, unsigned int *i, bool *adv);
 
 #endif

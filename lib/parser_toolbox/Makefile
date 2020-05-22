@@ -30,6 +30,7 @@ SRC =		src/add_char.c		\
 		src/display_strings.c	\
 		src/display_strings_equalize.c	\
 		src/word_array_chr.c	\
+		src/cmp_string.c		\
 
 SRCT = tests/	\
 

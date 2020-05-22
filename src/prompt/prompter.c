@@ -19,7 +19,7 @@
 #include "proto/prompt/input/empty.h"
 
 #include "proto/job/do_notification.h"
-
+#include "myerror.h"
 /* if (SYNTAX_ERROR && !shell->atty) { break; } */
 
 /* temp header */
@@ -27,20 +27,29 @@
 #include <stdbool.h>
 #include "proto/exec/get_argv.h"
 #include "proto/exec/simple_exec.h"
+#include "proto/expr_destroy.h"
 
 /* split_input(shell->rawinput); */
-
+#include "types/expr.h"
+#include "proto/exec/rule/program.h"
 /* temp function */
 static void prompt_execution(struct sh *shell)
 {
     wordexp_t we = {0};
 
-    if (exec_get_argv(&we, shell->rawinput)) {
-        return;
+    if (0 && !shell->debug_mode) {
+        if (exec_get_argv(&we, shell->rawinput)) {
+            return;
+        }
+        input_execute(shell);
+        simple_exec(shell, &we);
+        wordfree(&we);
     }
-    input_execute(shell);
-    simple_exec(shell, &we);
-    wordfree(&we);
+    if (shell->expression) {
+        exec_rule_program(shell, shell->expression);
+        expr_program_destroy(shell->expression);
+        shell->expression = NULL;
+    }
 }
 
 /*
@@ -60,11 +69,14 @@ void prompter(struct sh *shell)
             prompt_input_empty(shell);
             continue;
         }
+        history_replace(&(shell->history), &(shell->rawinput));
         history_insert(&(shell->history), shell->rawinput);
-        input_parse(shell);
-        prompt_execution(shell);
+        shell->last_status = input_parse(shell);
+        if (!shell->error)
+            prompt_execution(shell);
         input_destroy(shell);
         prompt_input_empty(shell);
         job_do_notification(&(shell->job));
+        shell->error = 0;
     }
 }

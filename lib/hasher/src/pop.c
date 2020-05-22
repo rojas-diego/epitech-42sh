@@ -10,10 +10,10 @@
 /* */
 #include "hasher/pop.h"
 
-struct hasher *hasher_pop(struct hasher **hasher, const char *key)
+struct hasher_s *hasher_pop(struct hasher_s **hasher, const char *key)
 {
-    struct hasher *poped = NULL;
-    struct hasher *current = *hasher;
+    struct hasher_s *poped = NULL;
+    struct hasher_s *current = *hasher;
 
     if (!strcmp(current->key, key)) {
         *hasher = current->next;

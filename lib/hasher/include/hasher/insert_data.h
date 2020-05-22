@@ -12,13 +12,13 @@
 #include "hasher/enum.h"
 
 enum hasher_e hasher_insert_data(
-    struct hasher **hasher,
+    struct hasher_s **hasher,
     char *key,
     void *data
 );
 
 enum hasher_e hasher_insert_data_ordered(
-    struct hasher **hasher,
+    struct hasher_s **hasher,
     char *key,
     void *data
 );

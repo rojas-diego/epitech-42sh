@@ -23,14 +23,14 @@ Test(input_parse_tokens, simple_testing)
 
     shell.rawinput = strdup("ls | cat ls > file\n");
     input_parse_tokens(&shell);
-    cr_assert_eq(node_size(shell.tokens), 7);
+    cr_assert_eq(node_size(shell.tokens), 8);
     table = (struct token_s **)node_to_table(shell.tokens);
-    cr_assert_eq(table[0]->type, TOK_NAME);
+    cr_assert_eq(table[0]->type, TOK_WORD);
     cr_assert_eq(table[1]->type, TOK_PIPE);
-    cr_assert_eq(table[2]->type, TOK_NAME);
-    cr_assert_eq(table[3]->type, TOK_NAME);
+    cr_assert_eq(table[2]->type, TOK_WORD);
+    cr_assert_eq(table[3]->type, TOK_WORD);
     cr_assert_eq(table[4]->type, TOK_GREAT);
-    cr_assert_eq(table[5]->type, TOK_NAME);
+    cr_assert_eq(table[5]->type, TOK_WORD);
     cr_assert_eq(table[6]->type, TOK_NEWLINE);
 }
 
@@ -41,7 +41,7 @@ Test(input_parse_tokens, token_coverage)
 
     shell.rawinput = strdup("> >>< << | & &&||if else\n");
     input_parse_tokens(&shell);
-    cr_assert_eq(node_size(shell.tokens), 11);
+    cr_assert_eq(node_size(shell.tokens), 12);
     table = (struct token_s **)node_to_table(shell.tokens);
     cr_assert_eq(table[0]->type, TOK_GREAT);
     cr_assert_eq(table[1]->type, TOK_DGREAT);
@@ -63,12 +63,12 @@ Test(input_parse_tokens, token_exec)
 
     shell.rawinput = strdup("./exec 2> file\n");
     input_parse_tokens(&shell);
-    cr_assert_eq(node_size(shell.tokens), 5);
+    cr_assert_eq(node_size(shell.tokens), 6);
     table = (struct token_s **)node_to_table(shell.tokens);
-    cr_assert_eq(table[0]->type, TOK_NAME);
+    cr_assert_eq(table[0]->type, TOK_WORD);
     cr_assert_eq(table[1]->type, TOK_IONUMBER);
     cr_assert_eq(table[2]->type, TOK_GREAT);
-    cr_assert_eq(table[3]->type, TOK_NAME);
+    cr_assert_eq(table[3]->type, TOK_WORD);
     cr_assert_eq(table[4]->type, TOK_NEWLINE);
 }
 
@@ -79,5 +79,21 @@ Test(input_parse_tokens, empty)
 
     shell.rawinput = strdup("");
     input_parse_tokens(&shell);
-    cr_assert_eq(node_size(shell.tokens), 0);
+    cr_assert_eq(node_size(shell.tokens), 1);
+}
+
+Test(input_parse_tokens, token_io_number)
+{
+    struct sh shell = MOCK_SH;
+    struct token_s **table;
+
+    shell.rawinput = strdup("./exec 2 > file\n");
+    input_parse_tokens(&shell);
+    cr_assert_eq(node_size(shell.tokens), 6);
+    table = (struct token_s **)node_to_table(shell.tokens);
+    cr_assert_eq(table[0]->type, TOK_WORD);
+    cr_assert_eq(table[1]->type, TOK_IONUMBER);
+    cr_assert_eq(table[2]->type, TOK_GREAT);
+    cr_assert_eq(table[3]->type, TOK_WORD);
+    cr_assert_eq(table[4]->type, TOK_NEWLINE);
 }

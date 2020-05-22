@@ -11,9 +11,9 @@
 /* */
 #include "hasher/get_data.h"
 
-void *hasher_get_data(struct hasher *hasher, const char *key)
+void *hasher_get_data(struct hasher_s *hasher, const char *key)
 {
-    struct hasher *match = hasher_get(hasher, key);
+    struct hasher_s *match = hasher_get(hasher, key);
 
     return (match ? match->data : NULL);
 }

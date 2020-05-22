@@ -38,12 +38,12 @@ static void simple_binary_exec(wordexp_t *we)
 
 void simple_exec(struct sh *shell, wordexp_t *we)
 {
-    builtin_handler builtin = (builtin_handler) hasher_get_data(
+    builtin_handler *builtin = (builtin_handler *) hasher_get_data(
         shell->builtin, we->we_wordv[0]
     );
 
-    if (builtin) {
-        builtin(shell, (const char *const *)we->we_wordv);
+    if (builtin && *builtin) {
+        (*builtin)(shell, (const char *const *)we->we_wordv);
     } else if (1) {
         job_initialize(shell, we->we_wordv);
         job_launch(shell, shell->job, false);

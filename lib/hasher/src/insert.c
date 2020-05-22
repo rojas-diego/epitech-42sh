@@ -10,15 +10,15 @@
 /* */
 #include "hasher/insert.h"
 
-void hasher_insert(struct hasher **hasher, struct hasher *to_insert)
+void hasher_insert(struct hasher_s **hasher, struct hasher_s *to_insert)
 {
     to_insert->next = *hasher;
     (*hasher) = to_insert;
 }
 
-void hasher_insert_ordered(struct hasher **hasher, struct hasher *to_insert)
+void hasher_insert_ordered(struct hasher_s **hasher, struct hasher_s *to_insert)
 {
-    struct hasher *hash = NULL;
+    struct hasher_s *hash = NULL;
 
     if (!(*hasher) || strcmp(to_insert->key, (*hasher)->key) < 0) {
         to_insert->next = *hasher;

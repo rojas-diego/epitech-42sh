@@ -7,7 +7,7 @@
 
 #include "proto/sighandler.h"
 
-static const int SIGCOUNT = 6;
+static const int SIGCOUNT = 5;
 
 static const int SIGNUMS[] = {
     SIGINT, SIGQUIT, SIGTSTP, SIGTTIN, SIGTTOU, SIGCHLD

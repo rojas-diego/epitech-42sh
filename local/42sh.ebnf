@@ -2,96 +2,71 @@
 # TCSH Grammar              #
 # # # # # # # # # # # # # # #
 
-###### Tokens ######
-
-EOF                 ::=     '\0'
-                    ;
-
-NEWLINE             ::=     '\n'
-                    ;
-
-SEMICOLON           ::=     ';'
-                    ;
-
-IO_NUMBER           ::=     '1'
-                    |       '2'
-                    ;
-
-GREAT               ::=     '>'
-                    ;
-
-DGREAT              ::=     '>>'
-                    ;
-
-LESS                ::=     '<'
-                    ;
-
-DLESS               ::=     '<<'
-                    ;
-
-IF                  ::=     'if'
-                    ;
-
-ELSE                ::=     'else'
-                    ;
-
-THEN                ::=     'then'
-                    ;
-
-OPARANTH            ::=     '('
-                    ;
-
-CPARANTH            ::=     ')'
-                    ;
-
 ###### Grammar ######
-
 program             ::=     [ block ] EOF
                     ;
 
-block               ::=     compound_command [ block ]
+block               ::=     statement [ block ]
                     ;
 
-compound_command    ::=     command [ compound_command ]
+statement           ::=     subshell | compound | control
                     ;
 
-command             ::=     ( pipeline | shell_command | simple_command ) [ command ]
+compound            ::=     [ & ] grouping ( jobs )* [ & ] separator
                     ;
 
-pipeline            ::=     simple_command [ (PIPE simple_command)* ]
+jobs                ::=     & grouping [ jobs ]
                     ;
 
-simple_command      ::=     ( command_separator | redirection | element ) command
+subshell            ::=     LPARANTH block RPARANTH
                     ;
 
-shell_command       ::=     if_statement
+grouping            ::=     pipeline ( ( AND_IF | OR_IF ) grouping )*
                     ;
 
-if_statement        ::=     IF OPARANTH expression CPARANTH THEN [ block ] [ elseif_statement ] ENDIF
+pipeline            ::=     command ( PIPE pipeline )*
                     ;
 
-elseif_statement    ::=     ELSE_IF OPARANTH expression CPARANTH THEN [ block ] [ elseif_statement ]
+command             ::=     ( WORD | redirection ) [ command ]
                     ;
 
-else_statement      ::=     ELSE [ block ]
-                    ;
-
-expression          ::=     word
-                    ;
-
-command_separator   ::=     NEWLINE | SEMICOLON
-                    ;
-
-redirection         ::=     GREAT WORD
+redirection         ::=     [ IO_NUMBER ] GREAT WORD
+                    |       [ IO_NUMBER ] DGREAT WORD
                     |       LESS WORD
                     |       DLESS WORD
-                    |       DGREAT WORD
-                    |       IO_NUMBER GREAT WORD
-                    |       IO_NUMBER LESS WORD
-                    |       IO_NUMBER DGREAT WORD
-                    |       IO_NUMBER DLESS WORD
                     ;
 
-element             ::=     NAME
-                    |       WORD
+separator           ::=     NEWLINE | SEMI | EOF
                     ;
+
+# Control Flow !
+control             ::=     if_control | while_control | foreach_control | repeat_control
+                    ;
+
+if_control          ::=     IF conditional THEN NEWLINE [ block ] [ else_if_control ] ENDIF NEWLINE
+                    ;
+
+else_if_control     ::=     ELSE_IF conditional THEN NEWLINE [ block ] [ else_control ]
+                    ;
+
+else_control        ::=     ELSE NEWLINE [ block ]
+                    ;
+
+foreach_control     ::=     FOREACH WORD wordlist_expression NEWLINE [ block ] END NEWLINE
+                    ;
+
+while_control       ::=     WHILE conditional NEWLINE [ block ] END NEWLINE
+                    ;
+
+repeat_control      ::=     REPEAT WORD grouping
+                    ;
+
+wordlist_expression ::=     LPARANTH wordlist RPARANTH
+                    ;
+
+wordlist            ::=     WORD [ wordlist ]
+                    ;
+
+conditional         ::=     LPARANTH WORD RPARANTH
+                    ;
+# ! Control Flow

@@ -10,6 +10,6 @@
 
 #include "hasher/type.h"
 
-struct hasher *hasher_pop(struct hasher **hasher, const char *key);
+struct hasher_s *hasher_pop(struct hasher_s **hasher, const char *key);
 
 #endif /* !HASHER_POP_H_ */

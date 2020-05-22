@@ -42,7 +42,7 @@ void job_do_notification(struct job_s **first_job)
             }
             job_free(job);
         } else if (job_is_stopped(job) && !job->notified) {
-            job_format_info(job, "stopped");
+            job_format_info(job, "Stopped");
             job->notified = true;
             job_last = job;
         } else {
