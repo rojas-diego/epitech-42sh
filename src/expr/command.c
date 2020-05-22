@@ -31,6 +31,7 @@ static struct expr_command_s *expr_command(struct grammar_s *this)
             return NULL;
         }
     }
+    exp->word = grammar_get_previous(this);
     save_index = this->index;
     exp->command = expr_command_w(this);
     if (!exp->command)
