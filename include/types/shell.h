@@ -39,6 +39,10 @@ enum sh_error_e {
     ER_GRAMMAR
 };
 
+struct debug_mode_s {
+    int depth;
+};
+
 /*
 ** @DESCRIPTION
 **   Main shell structure.
@@ -49,23 +53,35 @@ enum sh_error_e {
 **   - envp: the environement as an array of strings.
 */
 typedef struct sh {
-    bool                debug_mode;
-    bool                active;
-    char                *rawinput;
-    struct node_s       *tokens;
-    pid_t               pgid;
-    char * const        *envp;
-    struct prompt       prompt;
-    int                 atty;
-    struct history_s    history;
-    struct hasher_s       *builtin;
-    struct hasher_s       *alias;
-    struct hasher_s       *bindkey;
-    struct hasher_s       *local_var;
-    enum sh_error_e     error;
-    struct job_s        *job;
-    int                 fd;
+    bool                    debug_mode;
+    bool                    active;
+    char                    *rawinput;
+    struct node_s           *tokens;
+    pid_t                   pgid;
+    char * const            *envp;
+    struct prompt           prompt;
+    int                     atty;
+    struct history_s        history;
+    struct hasher_s         *builtin;
+    struct hasher_s         *alias;
+    struct hasher_s         *bindkey;
+    struct hasher_s         *local_var;
+    enum sh_error_e         error;
+    struct job_s            *job;
+    int                     fd;
+    struct expr_program_s   *expression;
+    struct debug_mode_s     debug;
 } sh_t;
+/*
+** Attribute:
+**  active, pgid, atty, fd, debug_mode, error
+** Cat:
+**  history, builtin alias bindkey
+** ???:
+**  rawinput, prompt
+** Exec:
+**  job, tokens
+*/
 
 /**/
 /* Function prototypes */
