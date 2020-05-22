@@ -233,7 +233,20 @@ struct expr_subshell_s {
 **   Rule: JOBS
 */
 struct expr_jobs_s {
+    struct token_s          *ampersand;
     struct expr_grouping_s  *grouping;
+    struct expr_jobs_s      *jobs;
+};
+
+/*
+** @DESCRIPTION
+**   Rule: COMPOUND
+*/
+struct expr_compound_s {
+    struct token_s          *ampersand_start;
+    struct expr_grouping_s  *grouping;
+    struct expr_jobs_s      *jobs;
+    struct token_s          *ampersand_end;
     struct expr_separator_s *separator;
 };
 
@@ -243,7 +256,7 @@ struct expr_jobs_s {
 */
 struct expr_statement_s {
     struct expr_subshell_s          *subshell;
-    struct expr_jobs_s               *jobs;
+    struct expr_compound_s          *compound;
     struct expr_control_s           *control;
 };
 

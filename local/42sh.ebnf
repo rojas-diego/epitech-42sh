@@ -9,13 +9,13 @@ program             ::=     [ block ] EOF
 block               ::=     statement [ block ]
                     ;
 
-statement           ::=     subshell | jobs | control
+statement           ::=     subshell | compound | control
                     ;
 
-compound            ::=     [ jobs ] separator
+compound            ::=     [ & ] grouping ( jobs )* [ & ] separator
                     ;
 
-jobs                ::=     [ & ] grouping ( & grouping )* [ & ]
+jobs                ::=     & grouping [ jobs ]
                     ;
 
 subshell            ::=     LPARANTH block RPARANTH

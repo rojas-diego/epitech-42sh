@@ -26,15 +26,20 @@ static struct expr_jobs_s *expr_jobs(
     if (!exp)
         exit(84);
     memset(exp, 0, sizeof(struct expr_jobs_s));
-    exp->grouping = expr_grouping_w(this);
-    if (!exp->grouping)
-        this->index = save_index;
-    exp->separator = expr_separator_w(this);
-    if (!exp->separator) {
-        this->index = save_index;
+    if (!grammar_match(this, 1, TOK_AMPERSAND)) {
         free(exp);
         return NULL;
     }
+    exp->ampersand = grammar_get_previous(this);
+    exp->grouping = expr_grouping_w(this);
+    if (!exp->grouping) {
+        free(exp);
+        return NULL;
+    }
+    save_index = this->index;
+    exp->jobs = expr_jobs_w(this);
+    if (!exp->jobs)
+        this->index = save_index;
     return exp;
 }
 
