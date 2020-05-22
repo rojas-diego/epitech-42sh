@@ -14,7 +14,7 @@
 struct token_s *grammar_get_previous(struct grammar_s *this)
 {
     if (this->index > 0)
-        return this->tokens[this->index];
+        return this->tokens[this->index - 1];
     return 0;
 }
 
