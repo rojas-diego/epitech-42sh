@@ -29,18 +29,22 @@
 #include "proto/exec/simple_exec.h"
 
 /* split_input(shell->rawinput); */
-
+#include "types/expr.h"
+#include "proto/exec/rule/program.h"
 /* temp function */
 static void prompt_execution(struct sh *shell)
 {
-    wordexp_t we = {0};
+    /*wordexp_t we = {0};
 
     if (exec_get_argv(&we, shell->rawinput)) {
         return;
     }
     input_execute(shell);
     simple_exec(shell, &we);
-    wordfree(&we);
+    wordfree(&we);*/
+    if (shell->expression) {
+        exec_rule_program(shell, shell->expression);
+    }
 }
 
 /*

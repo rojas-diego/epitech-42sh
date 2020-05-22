@@ -23,7 +23,7 @@ struct job_s *job_create(int launch_id)
         .pgid = 0,
         .notified = false,
         .tmodes = {0},
-        .io = {0, 1, 2},
+        .io = {IO_IN, IO_OUT, IO_ERR},
         .foreground = false,
         .launch_id = launch_id
     };
