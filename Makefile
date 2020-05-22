@@ -151,6 +151,7 @@ SRC =		src/constants.c					\
 		src/exec/rule/command.c				\
 		src/exec/rule/command/add_word.c			\
 		src/exec/rule/command/add_redirection.c		\
+		src/exec/rule/command/init_redirection.c	\
 		src/exec/rule/conditional.c				\
 		src/exec/rule/control.c				\
 		src/exec/rule/grouping.c				\
