@@ -214,8 +214,6 @@ CPPFLAGS +=	-I include/ -I lib/include/
 
 LDLIBS +=	-lcurses
 
-LDTLIBS += -lcriterion
-
 IMPLICIT = \
 
 LIBNAMES =	builtins		\
@@ -244,7 +242,8 @@ $(NAME):	$(OBJ)
 tests_run: IMPLICIT += --coverage
 tests_run: $(OBJ) $(OBJT)
 tests_run:
-	@ $(CC) $(OBJ) $(OBJT) -o $(TESTNAME) $(LDFLAGS) $(LDTLIBS) $(LDLIBS) $(CPPFLAGS)
+	@ $(MAKE) -C ./lib/ -s
+	@ $(CC) $(OBJ) $(OBJT) -o $(TESTNAME) $(LDFLAGS) $(LDLIBS) $(CPPFLAGS) --coverage -lcriterion
 	@ ./$(TESTNAME)
 	@ gcovr -r . --html --html-details -o gcovr.html
 	@ mkdir -p gcovr/
