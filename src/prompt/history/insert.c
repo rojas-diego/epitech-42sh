@@ -34,11 +34,17 @@ static _Bool history_can_insert(struct dnode_s *list, char const *line)
 void history_insert(struct history_s *history, char const *line)
 {
     struct dnode_s *last = NULL;
+    size_t len = strlen(line);
+    char *new = strdup(line);
 
-    if (!history_can_insert(history->list, line)) {
+    if (!new || !history_can_insert(history->list, line)) {
+        history->curr = NULL;
         return;
     }
-    dnode_insert_data(&(history->list), strdup(line));
+    if (new[len - 1] == '\n') {
+        new[len - 1] = 0;
+    }
+    dnode_insert_data(&(history->list), new);
     history->curr = NULL;
     ++history->size;
     if (history->size > HISTORY_MAX_SIZE) {
