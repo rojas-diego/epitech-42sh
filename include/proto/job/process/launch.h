@@ -15,10 +15,9 @@
 
 void process_launch(
     struct sh *shell,
+    struct job_s *job,
     struct process_s *process,
-    int fds[IO_COUNT],
-    int pgid,
-    bool foreground
+    int fds[IO_COUNT]
 );
 
 #endif /* !SH_PROTO_JOB_PROCESS_LAUNCH_H_ */

@@ -8,8 +8,8 @@
 #include <stddef.h>
 #include <sys/wait.h>
 
+#include "proto/job/destroy.h"
 #include "proto/job/utils.h"
-#include "proto/job/free.h"
 #include "proto/job/format_info.h"
 #include "proto/job/process/update_status.h"
 #include "proto/job/do_notification.h"
@@ -40,7 +40,7 @@ void job_do_notification(struct job_s **first_job)
             } else {
                 *first_job = job_next;
             }
-            job_free(job);
+            job_destroy(job);
         } else if (job_is_stopped(job) && !job->notified) {
             job_format_info(job, "Stopped");
             job->notified = true;

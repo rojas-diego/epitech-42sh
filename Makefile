@@ -164,6 +164,7 @@ SRC =		src/constants.c					\
 		src/job/sighandler.c					\
 		src/job/continue.c					\
 		src/job/free.c						\
+		src/job/destroy.c						\
 		src/job/format_info.c					\
 		src/job/wait_for.c					\
 		src/job/do_notification.c				\
