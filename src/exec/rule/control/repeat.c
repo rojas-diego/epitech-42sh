@@ -9,13 +9,13 @@
 
 #include "parser_toolbox/whitelist.h"
 
+#include "proto/token/get_string.h"
+
 #include "proto/exec/rule/debug.h"
 #include "types/exec/rule.h"
 
 #include "proto/exec/rule/grouping.h"
 #include "proto/exec/rule/control/repeat.h"
-
-char *token_get_string(const struct token_s *this, const char *rawinput);
 
 int exec_rule_control_repeat(
     struct sh *shell,

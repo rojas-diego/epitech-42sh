@@ -8,12 +8,11 @@
 #include <stdlib.h>
 
 #include "types/token.h"
+#include "proto/token/get_string.h"
 
 #include "types/exec/rule.h"
 #include "proto/exec/rule/command/init_redirection.h"
 #include "proto/exec/rule/command/add_redirection.h"
-
-static const size_t PROCESS_ARGV_DEFAULT_SIZE = 32;
 
 int exec_rule_command_add_redirection(
     struct job_s *job,

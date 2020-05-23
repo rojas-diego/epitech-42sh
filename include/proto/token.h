@@ -36,7 +36,7 @@ void token_print_debug(struct node_s *head, char const *rawinput);
 struct token_s *token_new(enum tokent_e type);
 
 /* Belongs to src/input/parser/token.c */
-char *token_get_string(const struct token_s *this, const char *rawinput);
+#include "proto/token/get_string.h"
 
 /* Belongs to src/input/parser/token_validate_meta.c */
 unsigned int token_validate_word(

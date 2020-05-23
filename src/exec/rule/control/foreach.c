@@ -7,14 +7,14 @@
 
 #include <stddef.h>
 
+#include "proto/token/get_string.h"
+
 #include "proto/shell/local_variables.h"
 
 #include "proto/exec/rule/debug.h"
 
 #include "proto/exec/rule/block.h"
 #include "proto/exec/rule/control/foreach.h"
-
-char *token_get_string(const struct token_s *this, const char *rawinput);
 
 int exec_rule_control_foreach(
     struct sh *shell,

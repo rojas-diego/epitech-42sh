@@ -8,12 +8,12 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "proto/token/get_string.h"
+
 #include "types/exec/rule.h"
 
 #include "proto/exec/rule/command/add_word.h"
 
-//printf("%zu, %s\n", process->argc, process->argv[process->argc++]);
-char *token_get_string(const struct token_s *this, const char *rawinput);
 // parse substring
 int exec_rule_command_add_word(
     struct process_s *process,
