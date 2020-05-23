@@ -30,11 +30,8 @@ int exec_rule_grouping(
     int last_status = 0;
 
     exec_rule_debug(shell, "grouping", true);
-    if (!foreground) {
-        return (0);//exec_rule_grouping_foreground());
-    }
     for (; rule->conditional; rule = rule->grouping) {
-        last_status = exec_rule_pipeline(shell, rule->pipeline);
+        last_status = exec_rule_pipeline(shell, rule->pipeline, foreground);
         if (rule->conditional->type == TOK_AND_IF) {
             if (last_status) {
                 rule = exec_rule_grouping_skip_until_next_or_if(rule);
@@ -42,16 +39,19 @@ int exec_rule_grouping(
             }
         } else if (rule->conditional->type == TOK_OR_IF) {
             if (!last_status) {
+                shell->last_status = 1;
                 exec_rule_debug(shell, "grouping", false);
                 return (1);
             }
         } else {
+            shell->last_status = 1;
             exec_rule_debug(shell, "grouping", false);
             return (1);
         }
     }
     if (rule && rule->pipeline) {
-        exec_rule_pipeline(shell, rule->pipeline);
+        shell->last_status = exec_rule_pipeline(
+            shell, rule->pipeline, foreground);
     }
     exec_rule_debug(shell, "grouping", false);
     return (0);

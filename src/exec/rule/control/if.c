@@ -27,9 +27,11 @@ int exec_rule_control_if(
     if (condition) {
         exec_rule_block(shell, rule->block);
     } else if (rule->else_if_control) {
-        exec_rule_control_else_if(shell, rule->else_if_control);
+        if (exec_rule_control_else_if(shell, rule->else_if_control)) {
+            exec_rule_control_else(shell, rule->else_control);
+        }
     } else {
-        //exec_rule_else(shell, rule->else_control);
+        exec_rule_control_else(shell, rule->else_control);
     }
     exec_rule_debug(shell, "if", false);
     return (0);

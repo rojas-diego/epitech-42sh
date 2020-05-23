@@ -66,7 +66,11 @@ static int exec_replace_alias(struct sh *shell, struct job_s *job)
     return (EXEC_RULE_SUCCESS);
 }
 
-static int exec_rule_pipeline_launch_job(struct sh *shell, struct job_s *job)
+static int exec_rule_pipeline_launch_job(
+    struct sh *shell,
+    struct job_s *job,
+    bool foreground
+)
 {
     builtin_handler *builtin = (builtin_handler *) hasher_get_data(
         shell->builtin, job->first_process->argv[0]
@@ -81,14 +85,16 @@ static int exec_rule_pipeline_launch_job(struct sh *shell, struct job_s *job)
         shell->job = job;
         if (job_process_is_last_is_builtin(shell, job)) {
         }
-        job_launch(shell, job, true);
+        job->foreground = foreground;
+        job_launch(shell, job);
     }
     return (EXEC_RULE_SUCCESS);
 }
 
 int exec_rule_pipeline(
     struct sh *shell,
-    struct expr_pipeline_s *rule
+    struct expr_pipeline_s *rule,
+    bool foreground
 )
 {
     struct job_s *job = job_create(0);
@@ -104,7 +110,7 @@ int exec_rule_pipeline(
     }
     exec_rule_debug(shell, "job_launch", true);
     exec_rule_job_display(shell, job);
-    if (exec_rule_pipeline_launch_job(shell, job)) {
+    if (exec_rule_pipeline_launch_job(shell, job, foreground)) {
         return (EXEC_RULE_ALLOCATION_FAIL);
     }
     exec_rule_debug(shell, "job_launch", false);

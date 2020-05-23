@@ -44,7 +44,7 @@ void simple_exec(struct sh *shell, wordexp_t *we)
         (*builtin)(shell, (const char *const *)we->we_wordv);
     } else if (1) {
         job_initialize(shell, we->we_wordv);
-        job_launch(shell, shell->job, false);
+        job_launch(shell, shell->job);
         job_wait_for(shell->job, shell->job);
     } else {
         simple_binary_exec(we);

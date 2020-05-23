@@ -43,7 +43,7 @@ int job_initialize(struct sh *shell, char **argv)
         .notified = false,
         .tmodes = {0},
         .io = {0, 1, 2},
-        .foreground = false,
+        .foreground = true,
         .launch_id = 1
     };
     if (process_initialize(job, argv)) {

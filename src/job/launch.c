@@ -67,20 +67,19 @@ static void job_launch_handle_parent(
 
 static void job_launch_handle_launched_processes(
     struct sh *shell,
-    struct job_s *job,
-    bool foreground
+    struct job_s *job
 )
 {
     if (!shell->atty) {
         job_wait_for(shell->job, job);
-    } else if (foreground) {
+    } else if (job->foreground) {
         job_put_in_foreground(shell, job, false);
     } else {
         job_put_in_background(job, false);
     }
 }
 
-void job_launch(struct sh *shell, struct job_s *job, bool foreground)
+void job_launch(struct sh *shell, struct job_s *job)
 {
     struct process_s *process = NULL;
     int pipe_fd[2] = {IO_IN, IO_IN};
@@ -100,5 +99,5 @@ void job_launch(struct sh *shell, struct job_s *job, bool foreground)
             job_launch_process_fork(shell, job, process, fildes));
         job_launch_process_clear_pipe(pipe_fd, fildes);
     }
-    job_launch_handle_launched_processes(shell, job, foreground);
+    job_launch_handle_launched_processes(shell, job);
 }

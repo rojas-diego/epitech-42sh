@@ -13,6 +13,6 @@
 #include "types/shell.h"
 #include "types/job.h"
 
-void job_launch(struct sh *shell, struct job_s *job, bool foreground);
+void job_launch(struct sh *shell, struct job_s *job);
 
 #endif /* !SH_PROTO_JOB_LAUNCH_H_ */
