@@ -93,12 +93,14 @@ function line_formatting () {
 
 function error_handling () {
     $YELLOW ; echo "=----= ERROR HANDLING =----=" ; $WHITE
+    gcc ./tests/binaries/bin_not_compatible.c -o ./tests/binaries/bin_not_compatible
+    cat ./tests/binaries/bin_not_compatible | tr 'ELF' 'ABC' > ./tests/binaries/bin_not_compatible
+    gcc ./tests/binaries/div_zero.c -o ./tests/binaries/div_zero
+    gcc ./tests/binaries/segfault.c -o ./tests/binaries/segfault
     _test './tests/binaries/bin_not_compatible' "" "" "cat" bin_not_compatible "Bin not compatible"
-    _test './tests/binaries/' "" "" "cat" div_zero "div_zero"
-    _test './tests/binaries/' "" "" "cat"  ""
-    _test './tests/binaries/' "" "" "cat"  ""
-    _test './tests/binaries/' "" "" "cat"  ""
-    _test './tests/binaries/' "" "" "cat"  ""
+    _test './tests/binaries/div_zero' "" "" "cat" div_zero "DivZero with core dump"
+    _test './tests/binaries/segfault' "" "" "cat" segfault "SegFault with core dump"
+    _test './src' "" "" "cat" exec_directory "Exec a directory"
     display_test_result ERROR_HANDLING
 }
 
@@ -195,6 +197,7 @@ path_handling
 setenv_and_unsetenv
 builtin_cd
 line_formatting
+error_handling
 
 personnals
 
