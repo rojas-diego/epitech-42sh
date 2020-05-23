@@ -22,15 +22,11 @@ unsigned int token_validate_io_number(
     char const *value __attribute__((unused))
 )
 {
-    unsigned int i;
+    unsigned int i = 0;
 
-    for (i = 0; string[i]; i++) {
-        if (ptb_range('0', '9', string[i])) {
-            continue;
-        } else if (token_peek_characters(string + i, "<>")) {
-            return (i + 1);
-        } else {
-            return 0;
+    if (string[i] == '1' || string[i] == '2') {
+        if (token_peek_characters(string + i, "<>")) {
+            return 1;
         }
     }
     return 0;
