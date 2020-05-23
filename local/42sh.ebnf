@@ -43,10 +43,10 @@ separator           ::=     NEWLINE | SEMI | EOF
 control             ::=     if_control | while_control | foreach_control | repeat_control
                     ;
 
-if_control          ::=     IF conditional THEN NEWLINE [ block ] [ else_if_control ] ENDIF NEWLINE
+if_control          ::=     IF wordlist_expression THEN NEWLINE [ block ] [ else_if_control ] ENDIF NEWLINE
                     ;
 
-else_if_control     ::=     ELSE_IF conditional THEN NEWLINE [ block ] [ else_control ]
+else_if_control     ::=     ELSE_IF wordlist_expression THEN NEWLINE [ block ] [ else_control ]
                     ;
 
 else_control        ::=     ELSE NEWLINE [ block ]
@@ -55,13 +55,10 @@ else_control        ::=     ELSE NEWLINE [ block ]
 foreach_control     ::=     FOREACH WORD wordlist_expression NEWLINE [ block ] END NEWLINE
                     ;
 
-while_control       ::=     WHILE conditional NEWLINE [ block ] END NEWLINE
+while_control       ::=     WHILE wordlist_expression NEWLINE [ block ] END NEWLINE
                     ;
 
 repeat_control      ::=     REPEAT WORD grouping
-                    ;
-
-conditional         ::=     LPARANTH wordlist_expression RPARANTH
                     ;
 
 wordlist_expression ::=     LPARANTH wordlist RPARANTH
