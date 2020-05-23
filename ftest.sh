@@ -166,11 +166,12 @@ function _if () {
     $YELLOW ; echo "=----= IF =----=" ; $WHITE
 }
 
-function repeat () {
+function _repeat () {
     $YELLOW ; echo "=----= REPEAT =----=" ; $WHITE
     _test 'repeat 4 ls' "" cat repeat "basic repeat"
     _test 'repeat -1 ls' "" cat repeat "negative repeat"
     _test 'repeat 0 ls' "" cat repeat "null repeat"
+    display_test_result _REPEAT
 }
 
 function parenthesis () {
@@ -205,7 +206,7 @@ line_formatting
 
 personnals
 parenthesis
-repeat
+_repeat
 
 NB_TEST_PASSED=$TOTAL_TESTS_PASSED
 NB_TEST_FAILED=$TOTAL_TESTS_FAILED
