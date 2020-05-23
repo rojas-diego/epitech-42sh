@@ -93,13 +93,13 @@ function line_formatting () {
 
 function error_handling () {
     $YELLOW ; echo "=----= ERROR HANDLING =----=" ; $WHITE
-    gcc ./tests/binaries/bin_not_compatible.c -o ./tests/binaries/bin_not_compatible
-    cat ./tests/binaries/bin_not_compatible | tr 'ELF' 'ABC' > ./tests/binaries/bin_not_compatible
+    cp ./tests/binaries/bin_not_compatible.c ./tests/binaries/bin_not_compatible
+    chmod +x ./tests/binaries/bin_not_compatible
     gcc ./tests/binaries/div_zero.c -o ./tests/binaries/div_zero
     gcc ./tests/binaries/segfault.c -o ./tests/binaries/segfault
-    _test './tests/binaries/bin_not_compatible' "" "" "cat" bin_not_compatible "Bin not compatible"
-    _test './tests/binaries/div_zero' "" "" "cat" div_zero "DivZero with core dump"
-    _test './tests/binaries/segfault' "" "" "cat" segfault "SegFault with core dump"
+    _test './tests/binaries/bin_not_compatible' "" "cat" bin_not_compatible "Bin not compatible"
+    _test './tests/binaries/div_zero' "" "cat" div_zero "DivZero with core dump"
+    _test './tests/binaries/segfault' "" "cat" segfault "SegFault with core dump"
     _test './src' "" "" "cat" exec_directory "Exec a directory"
     display_test_result ERROR_HANDLING
 }
@@ -212,20 +212,31 @@ function personnals () {
     display_test_result PERSONNALS
 }
 
-basic_test
-path_handling
-setenv_and_unsetenv
-builtin_cd
-line_formatting
-error_handling
+function all () {
+    basic_test
+    path_handling
+    setenv_and_unsetenv
+    builtin_cd
+    line_formatting
+    error_handling
 
-personnals
-parenthesis
-_repeat
-_if
-_where
-_which
+    personnals
+    parenthesis
+    _repeat
+    _if
+    _where
+    _which
 
-NB_TEST_PASSED=$TOTAL_TESTS_PASSED
-NB_TEST_FAILED=$TOTAL_TESTS_FAILED
-display_test_result TOTAL
+    NB_TEST_PASSED=$TOTAL_TESTS_PASSED
+    NB_TEST_FAILED=$TOTAL_TESTS_FAILED
+    display_test_result TOTAL
+}
+
+function clean () {
+    rm -f ./tests/binaries/bin_not_compatible
+    rm -f ./tests/binaries/divzero
+    rm -f ./tests/binaries/segfault
+    rm -f ./tests/ftests/*.ftest
+}
+
+$1
