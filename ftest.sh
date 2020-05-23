@@ -168,6 +168,9 @@ function _if () {
 
 function _repeat () {
     $YELLOW ; echo "=----= REPEAT =----=" ; $WHITE
+    _test 'repeat 4 ls' "" cat repeat "basic repeat"
+    _test 'repeat -1 ls' "" cat repeat "negative repeat"
+    _test 'repeat 0 ls' "" cat repeat "null repeat"
 }
 
 function parenthesis () {
