@@ -23,6 +23,9 @@ void job_format_info(struct job_s *job, const char *status)
 {
     char state = '+';
 
+    if (job->foreground) {
+        return;
+    }
     fprintf(
         stderr, "%*c %-30s%s\n",
         fprintf(stderr, "[%d]", job->launch_id) == 3 ? 2 : 1,
