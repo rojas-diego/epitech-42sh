@@ -189,6 +189,7 @@ SRC =		src/constants.c					\
 		src/exec/rule/subshell.c				\
 		src/exec/rule/wordlist.c				\
 		src/exec/rule/wordlist_expression.c			\
+		src/exec/rule/control/check_condition.c				\
 		src/exec/rule/control/else.c				\
 		src/exec/rule/control/else_if.c			\
 		src/exec/rule/control/foreach.c			\
