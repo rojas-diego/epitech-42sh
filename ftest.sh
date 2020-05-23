@@ -84,10 +84,22 @@ function builtin_cd () {
 
 function line_formatting () {
     $YELLOW ; echo "=----= LINE FORMATTING =----=" ; $WHITE
+    _test '    ' "" "" "cat" space_1 "Space 1"
+    _test '  \n  /bin/echo   \n    /bin/ls   \n' "" "" "cat" space_2 "Space 2"
+    _test ' \t   \n  /bin/echo\t \n \t /bin/ls \t   -l \n   ' "" "" "cat" space_and_tab "Space and tab"
+    _test '/bin/ls\t-l\t' "" "" "cat" tab "Tab"
+    display_test_result LINE_FORMATTING
 }
 
 function error_handling () {
     $YELLOW ; echo "=----= ERROR HANDLING =----=" ; $WHITE
+    _test './tests/binaries/bin_not_compatible' "" "" "cat" bin_not_compatible "Bin not compatible"
+    _test './tests/binaries/' "" "" "cat" div_zero "div_zero"
+    _test './tests/binaries/' "" "" "cat"  ""
+    _test './tests/binaries/' "" "" "cat"  ""
+    _test './tests/binaries/' "" "" "cat"  ""
+    _test './tests/binaries/' "" "" "cat"  ""
+    display_test_result ERROR_HANDLING
 }
 
 function separator () {
@@ -182,7 +194,7 @@ basic_test
 path_handling
 setenv_and_unsetenv
 builtin_cd
-
+line_formatting
 
 personnals
 
