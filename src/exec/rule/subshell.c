@@ -10,9 +10,9 @@
 #include "proto/exec/rule/subshell.h"
 
 int exec_rule_subshell(
-    struct sh *shell,
-    struct expr_subshell_s *rule,
-    struct job_s *job
+    __attribute__((unused)) struct sh *shell,
+    __attribute__((unused)) struct expr_subshell_s *rule,
+    __attribute__((unused)) struct job_s *job
 )
 {
     exec_rule_debug(shell, "subshell", true);

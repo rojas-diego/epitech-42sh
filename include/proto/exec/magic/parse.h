@@ -8,6 +8,8 @@
 #ifndef PROTO_EXEC_MAGIC_PARSE_H_
 #define PROTO_EXEC_MAGIC_PARSE_H_
 
+#include "types/shell.h"
+
 char **do_magic_parse(int fd);
 
 char **do_subshelled_magic_quote(struct sh *shell, char *eval);
