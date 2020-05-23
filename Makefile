@@ -99,7 +99,6 @@ SRC =		src/constants.c					\
 		src/expr/repeat_control.c				\
 		src/expr/wordlist_expression.c				\
 		src/expr/wordlist.c					\
-		src/expr/conditional.c					\
 		src/expr/utility.c					\
 									\
 		src/expr/destroy/program.c				\
