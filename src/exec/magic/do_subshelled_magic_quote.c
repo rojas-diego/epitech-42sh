@@ -14,7 +14,7 @@
 
 #include "proto/exec/magic/parse.h"
 
-char **do_subshelled_magic_quote(struct sh *shell, const char *eval)
+char **do_subshelled_magic_quote(struct sh *shell, char *eval)
 {
     pid_t pid;
     int fd[2];
