@@ -162,18 +162,34 @@ function _which () {
 
 function _where () {
     $YELLOW ; echo "=----= WHERE =----=" ; $WHITE
+    _test 'unalias ls \n where ls' "" cat repeat "basic where"
+    _test 'where fewijpfow fpwokefew' "" cat repeat "where error handling"
+    _test 'unalias ls \n where ls' "" cat repeat "builtin where"
+    display_test_result _WHERE
 }
 
 function _if () {
     $YELLOW ; echo "=----= IF =----=" ; $WHITE
+    _test 'if(1) ls' "" cat repeat "basic if"
+    _test 'if ($?) ls' "" cat repeat "if with variable"
+    _test 'if(0) ls' "" cat repeat "null if"
+    display_test_result _IF
 }
 
 function _repeat () {
     $YELLOW ; echo "=----= REPEAT =----=" ; $WHITE
+    _test 'repeat 4 ls' "" cat repeat "basic repeat"
+    _test 'repeat -1 ls' "" cat repeat "negative repeat"
+    _test 'repeat 0 ls' "" cat repeat "null repeat"
+    display_test_result _REPEAT
 }
 
 function parenthesis () {
     $YELLOW ; echo "=----= PARENTHESIS =----=" ; $WHITE
+    _test '(ls | cat)' "" cat parenthesis "basic parenthesis"
+    _test '(ls | cat) | grep test' "" cat parenthesis "parenthesis with something after"
+    _test 'ls | (grep toto | cat)' "" cat parenthesis "parenthesis at the end"
+    display_test_result PARENTHESIS
 }
 
 function personnals () {
@@ -200,6 +216,10 @@ line_formatting
 error_handling
 
 personnals
+parenthesis
+_repeat
+_if
+_where
 
 NB_TEST_PASSED=$TOTAL_TESTS_PASSED
 NB_TEST_FAILED=$TOTAL_TESTS_FAILED
