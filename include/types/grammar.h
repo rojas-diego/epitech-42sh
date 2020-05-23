@@ -37,6 +37,7 @@ struct grammar_s {
     bool            error;
     bool            debug;
     unsigned int    depth;
+    char            *error_message;
     unsigned int    callindex;
 };
 
