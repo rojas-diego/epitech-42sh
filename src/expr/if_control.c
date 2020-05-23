@@ -43,10 +43,11 @@ static struct expr_if_control_s *expr_if_control(struct grammar_s *this)
         return NULL;
     }
     exp->then_newline = grammar_get_previous(this);
-    save_index = this->index;
     exp->block = expr_block_w(this);
-    if (!exp->block)
-        this->index = save_index;
+    if (!exp->block) {
+        free(exp);
+        return NULL;
+    }
     save_index = this->index;
     exp->else_if_control = expr_else_if_control_w(this);
     if (!exp->else_if_control)
