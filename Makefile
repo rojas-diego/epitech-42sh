@@ -91,6 +91,7 @@ SRC =		src/constants.c					\
 		src/expr/separator.c					\
 		src/expr/control.c					\
 		src/expr/compound.c					\
+		src/expr/if_inline_control.c					\
 		src/expr/if_control.c					\
 		src/expr/else_if_control.c				\
 		src/expr/else_control.c				\

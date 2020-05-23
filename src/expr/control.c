@@ -23,6 +23,11 @@ static struct expr_control_s *expr_control(struct grammar_s *this)
     if (!exp)
         exit(84);
     memset(exp, 0, sizeof(struct expr_control_s));
+    exp->if_inline_control = expr_if_inline_control_w(this);
+    if (!exp->if_inline_control)
+        this->index = save_index;
+    else
+        return exp;
     exp->if_control = expr_if_control_w(this);
     if (!exp->if_control)
         this->index = save_index;
