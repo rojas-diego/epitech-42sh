@@ -34,6 +34,6 @@ int input_parse(struct sh *shell);
 void input_parse_tokens(struct sh *shell);
 
 /* Belongs to src/input/parser/input_parse_grammar.c */
-void input_parse_grammar(struct sh *shell);
+int input_parse_grammar(struct sh *shell);
 
 #endif

@@ -25,6 +25,5 @@ int input_parse(struct sh *shell)
         my_error(err_write, 0);
         return (1);
     }
-    input_parse_grammar(shell);
-    return (0);
+    return (input_parse_grammar(shell));
 }
