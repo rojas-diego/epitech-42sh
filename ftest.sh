@@ -128,6 +128,9 @@ function advanced_pipe () {
 
 function redirections () {
     $YELLOW ; echo "=----= REDIRECTIONS =----=" ; $WHITE
+    _test 'ls > tests/binaries/redirection_test \ncat tests/binaries/redirection_test' "" cat redirections_simple_right "simple right redirection"
+    _test 'ls >> tests/binaries/redirection_test \ncat tests/binaries/redirection_test' "" cat redirections_double_right "double right redirection"
+    _test 'cat < tests/binaries/div_zero.c' "" cat redirections_simple_left "simple left redirection"
     display_test_result REDIRECTIONS
 }
 
@@ -266,6 +269,7 @@ function all () {
     _alias
     globbing
     AND_and_OR_tests
+    redirections
 
     NB_TEST_PASSED=$TOTAL_TESTS_PASSED
     NB_TEST_FAILED=$TOTAL_TESTS_FAILED
