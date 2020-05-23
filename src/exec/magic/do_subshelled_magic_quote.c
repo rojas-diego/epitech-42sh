@@ -10,9 +10,14 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
-#include "types/shell.h"
-
 #include "proto/exec/magic/parse.h"
+#include "myerror.h"
+#include "proto/prompt/input/empty.h"
+#include "proto/input/parser.h"
+#include "proto/input/executer.h"
+#include "proto/exec/rule/program.h"
+#include "proto/expr_destroy.h"
+#include "proto/input.h"
 
 char **do_subshelled_magic_quote(struct sh *shell, char *eval)
 {

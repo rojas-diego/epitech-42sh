@@ -138,11 +138,19 @@ function advanced_manipulations () {
 
 function AND_and_OR_tests () {
     $YELLOW ; echo "=----= && AND || TESTS =----=" ; $WHITE
+    _test 'ls && ls' "" cat AND_and_OR "AND simple test"
+    _test 'ls || ls' "" cat AND_and_OR "OR simple test"
+    _test 'ls || ls && ls' "" cat AND_and_OR "OR and AND advanced test 1"
+    _test 'ls || ls && ls && jfweiji || cat telpw && grep' "" cat AND_and_OR "OR and AND advanced test 2"
     display_test_result AND_and_OR_TESTS
 }
 
 function globbing () {
     $YELLOW ; echo "=----= GLOBBING =----=" ; $WHITE
+    _test 'ls ?ests' "" cat globbing "? globbing"
+    _test 'ls [a-z]ests' "" cat globbing "[] globbing"
+    _test 'ls [a-z]rew' "" cat globbing "error globbing"
+    _test 'cat *' "" cat globbing "* globbing"
     display_test_result GLOBBING
 }
 
@@ -163,7 +171,10 @@ function magic_quote() {
 
 function _alias () {
     $YELLOW ; echo "=----= ALIAS =----=" ; $WHITE
-    display_test_result ALIAS
+    _test 'alias lol ls \n lol' "" cat _alias "basic alias"
+    _test 'alias lol=ls \n lol' "" cat _alias "error alias 1"
+    _test 'alias lolle eqwo \n lollle' "" cat _alias "error alias 2"
+    display_test_result _ALIAS
 }
 
 function scripting () {
@@ -173,29 +184,32 @@ function scripting () {
 
 function _foreach () {
     $YELLOW ; echo "=----= FOREACH =----=" ; $WHITE
+    _test 'foreach f (1 543 5) \n echo $f \n end' "" cat _foreach "basic foreach"
+    _test 'foreach f (1) \n if($f) ls \n end' "" cat _foreach "combined with if foreach"
+    display_test_result _FOREACH
 }
 
 function _which () {
     $YELLOW ; echo "=----= WHICH =----=" ; $WHITE
-    _test 'unalias ls \n which ls' "" cat repeat "basic where"
-    _test 'which fewijpfow fpwokefew' "" cat repeat "where error handling"
-    _test 'unalias ls \n which ls' "" cat repeat "builtin where"
+    _test 'unalias ls \n which ls' "" cat _which "basic where"
+    _test 'which fewijpfow fpwokefew' "" cat _which "where error handling"
+    _test 'unalias ls \n which ls' "" cat _which "builtin where"
     display_test_result _WHICH
 }
 
 function _where () {
     $YELLOW ; echo "=----= WHERE =----=" ; $WHITE
-    _test 'unalias ls \n where ls' "" cat repeat "basic where"
-    _test 'where fewijpfow fpwokefew' "" cat repeat "where error handling"
-    _test 'unalias ls \n where ls' "" cat repeat "builtin where"
+    _test 'unalias ls \n where ls' "" cat _where "basic where"
+    _test 'where fewijpfow fpwokefew' "" cat _where "where error handling"
+    _test 'unalias ls \n where ls' "" cat _where "builtin where"
     display_test_result _WHERE
 }
 
 function _if () {
     $YELLOW ; echo "=----= IF =----=" ; $WHITE
-    _test 'if(1) ls' "" cat repeat "basic if"
-    _test 'if ($?) ls' "" cat repeat "if with variable"
-    _test 'if(0) ls' "" cat repeat "null if"
+    _test 'if(1) ls' "" cat _if "basic if"
+    _test 'if ($?) ls' "" cat _if "if with variable"
+    _test 'if(0) ls' "" cat _if "null if"
     display_test_result _IF
 }
 
@@ -248,6 +262,10 @@ function all () {
     _if
     _where
     _which
+    _foreach
+    _alias
+    globbing
+    AND_and_OR_tests
 
     NB_TEST_PASSED=$TOTAL_TESTS_PASSED
     NB_TEST_FAILED=$TOTAL_TESTS_FAILED
