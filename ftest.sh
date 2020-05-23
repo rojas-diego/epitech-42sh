@@ -164,6 +164,10 @@ function _where () {
 
 function _if () {
     $YELLOW ; echo "=----= IF =----=" ; $WHITE
+    _test 'if(1) ls' "" cat repeat "basic if"
+    _test 'if ($?) ls' "" cat repeat "if with variable"
+    _test 'if(0) ls' "" cat repeat "null if"
+    display_test_result _IF
 }
 
 function _repeat () {
@@ -207,6 +211,7 @@ line_formatting
 personnals
 parenthesis
 _repeat
+_if
 
 NB_TEST_PASSED=$TOTAL_TESTS_PASSED
 NB_TEST_FAILED=$TOTAL_TESTS_FAILED
