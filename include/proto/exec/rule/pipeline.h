@@ -13,7 +13,8 @@
 
 int exec_rule_pipeline(
     struct sh *shell,
-    struct expr_pipeline_s *rule
+    struct expr_pipeline_s *rule,
+    bool foreground
 );
 
 #endif /* !SH_SHELL_EXEC_RULE_PIPELINE_H_ */

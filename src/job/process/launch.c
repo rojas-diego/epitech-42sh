@@ -10,6 +10,9 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <errno.h>
+#include <string.h>
+
+#include "find_binary_in_path_env.h"
 
 #include "hasher/get_data.h"
 #include "types/builtins.h"
@@ -17,16 +20,18 @@
 #include "proto/sighandler.h"
 #include "proto/job/process/launch.h"
 
+extern char **environ;
+
 static const size_t NB_EXEC_ERROR = 18;
 
 static const struct {
     int err_nbr;
-    char *status;
+    const char *status;
 } EXEC_ERROR[] = {
     {E2BIG, "Argument list too long."},
     {EACCES, "Permission denied."},
     {EAGAIN, "EAGAIN."},
-    {EFAULT, "EFAULT."},
+    {EFAULT, "Command not found."},
     {EINVAL, "EINVAL."},
     {EIO, "EIO."},
     {EISDIR, "EISDIR."},
@@ -80,7 +85,10 @@ static void process_launch_exec(
     if (builtin && *builtin) {
         exit((*builtin)(shell, (const char * const *) process->argv));
     } else {
-        execvp(process->argv[0], process->argv);
+        execve(strchr(process->argv[0], '/') ? process->argv[0]
+            : find_binary_in_path_env(getenv("PATH"), process->argv[0]),
+            process->argv, environ
+        );
         process_launch_find_exec_error(process->argv[0]);
     }
 }

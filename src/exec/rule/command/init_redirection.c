@@ -10,15 +10,37 @@
 #include <stdlib.h>
 #include <fcntl.h>
 #include <string.h>
+#include <errno.h>
 
+#include "proto/exec/rule/command/init_redirection.h"
+
+static const size_t NB_REDIRECT_ERROR = 2;
+
+static const struct {
+    int err_nbr;
+    const char *status;
+} REDIRECT_ERROR[] = {
+    {ENOENT, "No such file or directory."},
+    {EACCES, "Permission denied."}
+};
+
+static void exec_do_redirect_error_handling(const char *path)
+{
+    for (size_t i = 0; i < NB_REDIRECT_ERROR; ++i) {
+        if (errno == REDIRECT_ERROR[i].err_nbr) {
+            dprintf(2, "%s: %s\n", path, REDIRECT_ERROR[i].status);
+            break;
+        }
+    }
+}
 int exec_do_redirect_left(const char *path)
 {
     int fd = open(path, O_RDONLY);
     int piped_fd[2];
 
     if (fd == -1 || pipe(piped_fd) == -1) {
-        perror(fd == -1 ? path : "pipe");
-        return (1);
+        exec_do_redirect_error_handling(path);
+        return (-1);
     }
     dup2(fd, piped_fd[0]);
     close(fd);
@@ -34,17 +56,15 @@ int exec_do_redirect_double_left(const char *word)
     ssize_t ret = 1;
 
     if (pipe(fd) == -1) {
-        perror("pipe");
         return (-1);
     }
     write(1, "? ", 2);
     ret = getline(&line, &len, stdin);
-    for (; ret > 0 && strcmp(line, word) != '\n'; ret = getline(&line, &len, stdin)) {
+    for (; ret > 0 && strcmp(line, word) != '\n';
+    ret = getline(&line, &len, stdin)) {
         write(fd[1], line, (size_t) ret);
         write(1, "? ", 2);
     }
-    if (ret < 0)
-        close(fd[0]);
     close(fd[1]);
     free(line);
     return (ret < 0 ? -1 : fd[0]);
@@ -52,10 +72,20 @@ int exec_do_redirect_double_left(const char *word)
 
 int exec_do_redirect_right(const char *path)
 {
-    return (open(path, O_WRONLY | O_CREAT | O_TRUNC, 0664));
+    int fd = open(path, O_WRONLY | O_CREAT | O_TRUNC, 0664);
+
+    if (fd == -1) {
+        exec_do_redirect_error_handling(path);
+    }
+    return (fd);
 }
 
 int exec_do_redirect_double_right(const char *path)
 {
-    return (open(path, O_WRONLY | O_CREAT | O_APPEND, 0664));
+    int fd = open(path, O_WRONLY | O_CREAT | O_APPEND, 0664);
+
+    if (fd == -1) {
+        exec_do_redirect_error_handling(path);
+    }
+    return (fd);
 }

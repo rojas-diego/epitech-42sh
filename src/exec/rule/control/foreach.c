@@ -7,6 +7,10 @@
 
 #include <stddef.h>
 
+#include "proto/token/get_string.h"
+
+#include "proto/shell/local_variables.h"
+
 #include "proto/exec/rule/debug.h"
 
 #include "proto/exec/rule/block.h"
@@ -24,7 +28,7 @@ int exec_rule_control_foreach(
     exec_rule_debug(shell, "foreach", true);
     local_variable_from_data(shell->local_var, substr, "\0");
     for (size_t i = 0; i < len; ++i) {
-        local_variable_from_data(shell->local_var, words[i]);
+        local_variable_from_data(shell->local_var, substr, words[i]);
         exec_rule_block(shell, rule->block);
     }
     exec_rule_debug(shell, "foreach", false);

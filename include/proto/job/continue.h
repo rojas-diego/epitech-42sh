@@ -13,6 +13,6 @@
 #include "types/shell.h"
 #include "types/job.h"
 
-void job_continue(struct sh *shell, struct job_s *job, bool foreground);
+void job_continue(struct sh *shell, struct job_s *job);
 
 #endif /* !SH_PROTO_JOB_CONTINUE_H_ */

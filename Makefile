@@ -91,6 +91,7 @@ SRC =		src/constants.c					\
 		src/expr/separator.c					\
 		src/expr/control.c					\
 		src/expr/compound.c					\
+		src/expr/if_inline_control.c					\
 		src/expr/if_control.c					\
 		src/expr/else_if_control.c				\
 		src/expr/else_control.c				\
@@ -99,7 +100,6 @@ SRC =		src/constants.c					\
 		src/expr/repeat_control.c				\
 		src/expr/wordlist_expression.c				\
 		src/expr/wordlist.c					\
-		src/expr/conditional.c					\
 		src/expr/utility.c					\
 									\
 		src/expr/destroy/program.c				\
@@ -121,7 +121,6 @@ SRC =		src/constants.c					\
 		src/expr/destroy/repeat_control.c			\
 		src/expr/destroy/wordlist_expression.c			\
 		src/expr/destroy/wordlist.c				\
-		src/expr/destroy/conditional.c				\
 		src/expr/destroy/compound.c				\
 									\
 		src/prompt/actions/arrows.c				\
@@ -177,7 +176,6 @@ SRC =		src/constants.c					\
 		src/exec/rule/command/add_word.c			\
 		src/exec/rule/command/add_redirection.c		\
 		src/exec/rule/command/init_redirection.c	\
-		src/exec/rule/conditional.c				\
 		src/exec/rule/control.c				\
 		src/exec/rule/grouping.c				\
 		src/exec/rule/jobs.c					\
@@ -251,7 +249,7 @@ $(NAME):	compiling
 
 %.o:		%.c
 		@ echo -e "." $<
-		@ $(CC) -o $@ -c $< $(CFLAGS) $(CPPFLAGS)
+		@ $(CC) -o $@ -c $< $(CFLAGS) $(CPPFLAGS) -fprofile-abs-path
 
 tests_run:	compiling
 		@ echo -e "===> Compiling unit_tests"

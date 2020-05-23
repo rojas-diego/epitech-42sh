@@ -26,7 +26,7 @@ struct hasher_s *hasher_override(struct hasher_s **hasher, struct hasher_s *to_i
         if (!(strcmp(to_insert->key, hash->next->key))) {
             overrided = hash->next;
             hash->next = to_insert;
-            to_insert->next = overrided;
+            to_insert->next = overrided->next;
             overrided->next = NULL;
             break;
         }

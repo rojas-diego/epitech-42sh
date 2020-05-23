@@ -13,7 +13,8 @@
 
 _Bool exec_rule_control_check_condition(
     struct sh *shell,
-    struct token_s *token
+    __attribute__((unused))
+    struct expr_wordlist_expression_s *wordlist_expression
 )
 {
     exec_rule_debug(shell, "check_condition", true);

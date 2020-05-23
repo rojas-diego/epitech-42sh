@@ -30,6 +30,5 @@ void expr_foreach_control_destroy(struct expr_foreach_control_s *this);
 void expr_repeat_control_destroy(struct expr_repeat_control_s *this);
 void expr_wordlist_expression_destroy(struct expr_wordlist_expression_s *this);
 void expr_wordlist_destroy(struct expr_wordlist_s *this);
-void expr_conditional_destroy(struct expr_conditional_s *this);
 
 #endif /* !PROTO_EXPR_DESTROY_H_ */

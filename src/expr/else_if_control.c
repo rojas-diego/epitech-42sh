@@ -32,8 +32,8 @@ static struct expr_else_if_control_s *expr_else_if_control(
         return NULL;
     }
     exp->else_if_token = grammar_get_previous(this);
-    exp->conditional = expr_conditional_w(this);
-    if (!exp->conditional) {
+    exp->wordlist_expression = expr_wordlist_expression_w(this);
+    if (!exp->wordlist_expression) {
         this->error = true;
         free(exp);
         return NULL;
@@ -57,8 +57,8 @@ static struct expr_else_if_control_s *expr_else_if_control(
         return NULL;
     }
     save_index = this->index;
-    exp->else_control = expr_else_control_w(this);
-    if (!exp->else_control)
+    exp->else_if_control = expr_else_if_control_w(this);
+    if (!exp->else_if_control)
         this->index = save_index;
     return exp;
 }

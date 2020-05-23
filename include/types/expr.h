@@ -58,16 +58,6 @@ union expr_union_u {
 
 /*
 ** @DESCRIPTION
-**   Rule: CONDITIONAL
-*/
-struct expr_conditional_s {
-    struct token_s *lparanth;
-    struct token_s *word;
-    struct token_s *rparanth;
-};
-
-/*
-** @DESCRIPTION
 **   Rule: WORDLIST
 */
 struct expr_wordlist_s {
@@ -100,12 +90,12 @@ struct expr_repeat_control_s {
 **   Rule: WHILE CONTROL
 */
 struct expr_while_control_s {
-    struct token_s                  *while_token;
-    struct expr_conditional_s       *conditional;
-    struct token_s                  *conditional_newline;
-    struct expr_block_s             *block;
-    struct token_s                  *end;
-    struct token_s                  *end_newline;
+    struct token_s                      *while_token;
+    struct expr_wordlist_expression_s   *wordlist_expression;
+    struct token_s                      *wordlist_expression_newline;
+    struct expr_block_s                 *block;
+    struct token_s                      *end;
+    struct token_s                      *end_newline;
 };
 
 /*
@@ -136,12 +126,12 @@ struct expr_else_control_s {
 **   Rule: ELSE IF CONTROL
 */
 struct expr_else_if_control_s {
-    struct token_s                  *else_if_token;
-    struct expr_conditional_s       *conditional;
-    struct token_s                  *then;
-    struct token_s                  *newline;
-    struct expr_block_s             *block;
-    struct expr_else_control_s      *else_control;
+    struct token_s                      *else_if_token;
+    struct expr_wordlist_expression_s   *wordlist_expression;
+    struct token_s                      *then;
+    struct token_s                      *newline;
+    struct expr_block_s                 *block;
+    struct expr_else_if_control_s       *else_if_control;
 };
 
 /*
@@ -149,14 +139,26 @@ struct expr_else_if_control_s {
 **   Rule: IF CONTROL
 */
 struct expr_if_control_s {
-    struct token_s                  *if_token;
-    struct expr_conditional_s       *conditional;
-    struct token_s                  *then;
-    struct token_s                  *then_newline;
-    struct expr_block_s             *block;
-    struct expr_else_if_control_s   *else_if_control;
-    struct token_s                  *endif;
-    struct token_s                  *endif_newline;
+    struct token_s                      *if_token;
+    struct expr_wordlist_expression_s   *wordlist_expression;
+    struct token_s                      *then;
+    struct token_s                      *then_newline;
+    struct expr_block_s                 *block;
+    struct expr_else_if_control_s       *else_if_control;
+    struct expr_else_control_s          *else_control;
+    struct token_s                      *endif;
+    struct token_s                      *endif_newline;
+};
+
+/*
+** @DESCRIPTION
+**   Rule: IF CONTROL
+*/
+struct expr_if_inline_control_s {
+    struct token_s                      *if_token;
+    struct expr_wordlist_expression_s   *wordlist_expression;
+    struct expr_grouping_s              *grouping;
+    struct token_s                      *endif_newline;
 };
 
 /*
@@ -164,6 +166,7 @@ struct expr_if_control_s {
 **   Rule: CONTROL
 */
 struct expr_control_s {
+    struct expr_if_inline_control_s *if_inline_control;
     struct expr_if_control_s        *if_control;
     struct expr_while_control_s     *while_control;
     struct expr_foreach_control_s   *foreach_control;
@@ -175,7 +178,7 @@ struct expr_control_s {
 **   Rule: SEPARATOR
 */
 struct expr_separator_s {
-    struct token_s  *separator;
+    struct token_s *separator;
 };
 
 /*

@@ -29,8 +29,6 @@ static void simple_binary_exec(wordexp_t *we)
         exit(84);
     } else if (pid == 0) {
         execvp(we->we_wordv[0], we->we_wordv);
-        perror(we->we_wordv[0]);
-        wordfree(we);
         exit(84);
     }
     waitpid(pid, NULL, 0);
@@ -46,7 +44,7 @@ void simple_exec(struct sh *shell, wordexp_t *we)
         (*builtin)(shell, (const char *const *)we->we_wordv);
     } else if (1) {
         job_initialize(shell, we->we_wordv);
-        job_launch(shell, shell->job, false);
+        job_launch(shell, shell->job);
         job_wait_for(shell->job, shell->job);
     } else {
         simple_binary_exec(we);

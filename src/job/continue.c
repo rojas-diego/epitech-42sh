@@ -18,10 +18,10 @@ static void mark_job_as_running(struct job_s *job)
     job->notified = false;
 }
 
-void job_continue(struct sh *shell, struct job_s *job, bool foreground)
+void job_continue(struct sh *shell, struct job_s *job)
 {
     mark_job_as_running(job);
-    if (foreground) {
+    if (job->foreground) {
         job_put_in_foreground(shell, job, true);
     } else {
         job_put_in_background(job, true);
