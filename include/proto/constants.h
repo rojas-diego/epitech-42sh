@@ -44,4 +44,7 @@ extern const char *AST_NULL_COMMAND __attribute__((unused));
 extern const char *AST_REPEAT_TOO_FEW_ARGS __attribute__((unused));
 
 extern const char *AST_UNEXPECTED_TOKENS __attribute__((unused));
+
+extern const char *AST_AMBIGUOUS_REDIRECTION __attribute__((unused));
+
 #endif
