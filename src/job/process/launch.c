@@ -10,6 +10,9 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <errno.h>
+#include <string.h>
+
+#include "find_binary_in_path_env.h"
 
 #include "hasher/get_data.h"
 #include "types/builtins.h"
