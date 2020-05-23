@@ -133,11 +133,19 @@ function advanced_manipulations () {
 
 function AND_and_OR_tests () {
     $YELLOW ; echo "=----= && AND || TESTS =----=" ; $WHITE
+    _test 'ls && ls' "" cat repeat "AND simple test"
+    _test 'ls || ls' "" cat repeat "OR simple test"
+    _test 'ls || ls && ls' "" cat repeat "OR and AND advanced test 1"
+    _test 'ls || ls && ls && jfweiji || cat telpw && grep' "" cat repeat "OR and AND advanced test 2"
     display_test_result AND_and_OR_TESTS
 }
 
 function globbing () {
     $YELLOW ; echo "=----= GLOBBING =----=" ; $WHITE
+    _test 'ls ?ests' "" cat repeat "? globbing"
+    _test 'ls [a-z]ests' "" cat repeat "[] globbing"
+    _test 'ls [a-z]rew' "" cat repeat "error globbing"
+    _test 'cat *' "" cat repeat "* globbing"
     display_test_result GLOBBING
 }
 
@@ -249,6 +257,8 @@ function all () {
     _which
     _foreach
     _alias
+    globbing
+    AND_and_OR_tests
 
     NB_TEST_PASSED=$TOTAL_TESTS_PASSED
     NB_TEST_FAILED=$TOTAL_TESTS_FAILED
