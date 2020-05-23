@@ -6,9 +6,12 @@
 */
 
 #include <stdio.h>
-#include "proto/exec/magic/parse.h"
+#include <unistd.h>
+
 #include "parser_toolbox/string_split.h"
 #include "parser_toolbox/consts.h"
+
+#include "proto/exec/magic/parse.h"
 
 char **do_magic_parse(int fd)
 {
@@ -22,5 +25,7 @@ char **do_magic_parse(int fd)
     if (getdelim(&buffer, &n, 0, stream) < 0) {
         return (NULL);
     }
+    fclose(stream);
+    close(fd);
     return (ptb_string_split(buffer, PTB_WHITESPACES));
 }

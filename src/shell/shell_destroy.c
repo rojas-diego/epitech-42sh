@@ -5,6 +5,8 @@
 ** destroy
 */
 
+#include <unistd.h>
+
 #include "hasher/destroy.h"
 
 #include "types/shell.h"
@@ -20,6 +22,9 @@
 */
 void shell_destroy(struct sh *shell)
 {
+    if (shell->fd != STDIN_FILENO) {
+        close(shell->fd);
+    }
     hasher_destroy(shell->builtin, true, false);
     hasher_destroy(shell->alias, true, true);
     hasher_destroy(shell->bindkey, true, false);
