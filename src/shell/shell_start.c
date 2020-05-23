@@ -6,7 +6,6 @@
 */
 
 #include "proto/shell.h"
-#include "proto/shell/shlvl_update.h"
 #include "proto/prompt.h"
 
 /*
@@ -16,9 +15,6 @@
 */
 int shell_start(struct sh *shell)
 {
-    if (shlvl_update()) {
-        return (1);
-    }
     prompter(shell);
     return (0);
 }

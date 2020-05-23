@@ -12,6 +12,7 @@
 /* Includes */
 /**/
 
+#include <stdio.h>
 #include <stdbool.h>
 
 #include "mynode.h"
@@ -70,6 +71,7 @@ typedef struct sh {
     enum sh_error_e         error;
     struct job_s            *job;
     int                     fd;
+    FILE                    *stream;
     struct expr_program_s   *expression;
     struct debug_mode_s     debug;
 } sh_t;
