@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "proto/constants.h"
 #include "proto/grammar.h"
 #include "proto/expr.h"
 
@@ -29,7 +30,8 @@ static struct expr_program_s *expr_program(struct grammar_s *this)
     } if (grammar_match(this, 1, TOK_EOF)) {
         exp->eof = grammar_get_previous(this);
     } else if (this->index != this->token_count) {
-        this->error = true;
+        grammar_set_error(this, AST_UNEXPECTED_TOKENS);
+        free(exp);
         return NULL;
     }
     return exp;
