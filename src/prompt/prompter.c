@@ -61,6 +61,7 @@ static void prompt_execution(struct sh *shell)
 void prompter(struct sh *shell)
 {
     while (shell->active) {
+        shell->last_status = 0;
         prompt_shell(shell);
         if (!shell->active) {
             return;
