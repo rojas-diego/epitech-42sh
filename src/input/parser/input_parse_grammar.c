@@ -53,5 +53,7 @@ int input_parse_grammar(struct sh *shell)
     }
     for (; this.tokens[this.token_count]; this.token_count++);
     input_parse_grammar_debug(shell, &this);
+    if (this.error_message && !this.debug)
+        dprintf(2, "%s.\n", this.error_message);
     return (this.error);
 }
