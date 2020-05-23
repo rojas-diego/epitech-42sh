@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "proto/constants.h"
 #include "proto/grammar.h"
 #include "proto/expr.h"
 
@@ -32,14 +33,14 @@ static struct expr_repeat_control_s *expr_repeat_control(
     }
     exp->repeat = grammar_get_previous(this);
     if (!grammar_match(this, 1, TOK_WORD)) {
-        this->error = true;
+        grammar_set_error(this, AST_REPEAT_TOO_FEW_ARGS);
         free(exp);
         return NULL;
     }
     exp->word = grammar_get_previous(this);
     exp->grouping = expr_grouping_w(this);
     if (!exp->grouping) {
-        this->error = true;
+        grammar_set_error(this, AST_REPEAT_TOO_FEW_ARGS);
         free(exp);
         return NULL;
     }
