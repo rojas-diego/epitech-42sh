@@ -241,7 +241,6 @@ $(NAME):	$(OBJ)
 
 tests_run: IMPLICIT += --coverage
 tests_run: $(OBJ) $(OBJT)
-tests_run:
 	@ $(MAKE) -C ./lib/ -s
 	@ $(CC) $(OBJ) $(OBJT) -o $(TESTNAME) $(LDFLAGS) $(LDLIBS) $(CPPFLAGS) --coverage -lcriterion
 	@ ./$(TESTNAME)
