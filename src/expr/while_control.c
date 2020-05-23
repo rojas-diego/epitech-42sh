@@ -30,8 +30,8 @@ static struct expr_while_control_s *expr_while_control(struct grammar_s *this)
         return NULL;
     }
     exp->while_token = grammar_get_previous(this);
-    exp->conditional = expr_conditional_w(this);
-    if (!exp->conditional) {
+    exp->wordlist_expression = expr_wordlist_expression_w(this);
+    if (!exp->wordlist_expression) {
         free(exp);
         return NULL;
     }
@@ -39,7 +39,7 @@ static struct expr_while_control_s *expr_while_control(struct grammar_s *this)
         free(exp);
         return NULL;
     }
-    exp->conditional_newline = grammar_get_previous(this);
+    exp->wordlist_expression_newline = grammar_get_previous(this);
     exp->block = expr_block_w(this);
     if (!exp->block) {
         this->error = true;

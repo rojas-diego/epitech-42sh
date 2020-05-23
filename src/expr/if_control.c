@@ -28,8 +28,8 @@ static struct expr_if_control_s *expr_if_control(struct grammar_s *this)
         return NULL;
     }
     exp->if_token = grammar_get_previous(this);
-    exp->conditional = expr_conditional_w(this);
-    if (!exp->conditional) {
+    exp->wordlist_expression = expr_wordlist_expression_w(this);
+    if (!exp->wordlist_expression) {
         free(exp);
         return NULL;
     }
