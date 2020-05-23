@@ -19,9 +19,6 @@ int exec_rule_statement(
 )
 {
     exec_rule_debug(shell, "statement", true);
-    if (rule->subshell) {
-        return (exec_rule_subshell(shell, rule->subshell));
-    }
     if (rule->compound) {
         return (exec_rule_compound(shell, rule->compound));
     }

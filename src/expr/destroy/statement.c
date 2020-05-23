@@ -19,7 +19,6 @@ void expr_statement_destroy(struct expr_statement_s *this)
     if (!this) {
         return;
     }
-    expr_subshell_destroy(this->subshell);
     expr_compound_destroy(this->compound);
     expr_control_destroy(this->control);
     free(this);

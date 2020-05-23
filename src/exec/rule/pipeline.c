@@ -16,6 +16,7 @@
 #include "proto/job/destroy.h"
 #include "proto/job/launch.h"
 #include "proto/exec/rule/command.h"
+#include "proto/exec/rule/subshell.h"
 #include "proto/exec/rule/pipeline.h"
 
 #include "hasher/get_data.h"
@@ -119,7 +120,8 @@ int exec_rule_pipeline(
 
     exec_rule_debug(shell, "pipeline", true);
     for (; rule; rule = rule->pipeline) {
-        ret = exec_rule_command(shell, rule->command, job);
+        ret = rule->command ? exec_rule_command(shell, rule->command, job)
+            : exec_rule_subshell(shell, rule->subshell, job);
         if (ret) {
             job_destroy(job);
             return (ret);
