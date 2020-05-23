@@ -51,6 +51,7 @@ static struct expr_if_control_s *expr_if_control(struct grammar_s *this)
     exp->else_if_control = expr_else_if_control_w(this);
     if (!exp->else_if_control)
         this->index = save_index;
+    save_index = this->index;
     exp->else_control = expr_else_control_w(this);
     if (!exp->else_control)
         this->index = save_index;
