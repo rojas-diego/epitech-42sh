@@ -8,8 +8,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "parser_toolbox/sub_string.h"
-
 #include "types/exec/rule.h"
 
 #include "proto/exec/rule/command/add_word.h"
