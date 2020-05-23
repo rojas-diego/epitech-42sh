@@ -37,7 +37,6 @@ int exec_rule_command(
             if (exec_rule_command_add_redirection(job, rule->redirection, shell->rawinput)) {
                 return (EXEC_RULE_AMBIGUOUS_REDIRECTION);
             }
-        } else {
         }
     }
     job_process_append(job, process);

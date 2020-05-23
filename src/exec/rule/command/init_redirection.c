@@ -14,11 +14,25 @@
 
 #include "proto/exec/rule/command/init_redirection.h"
 
+static const size_t NB_REDIRECT_ERROR = 2;
+
+static const struct {
+    int err_nbr;
+    const char *status;
+} REDIRECT_ERROR[] = {
+    {ENOENT, "No such file or directory."},
+    {EACCES, "Permission denied."}
+};
+
 static void exec_do_redirect_error_handling(const char *path)
 {
-    dprintf(2, "%s: %s", path, "");
+    for (size_t i = 0; i < NB_REDIRECT_ERROR; ++i) {
+        if (errno == REDIRECT_ERROR[i].err_nbr) {
+            dprintf(2, "%s: %s\n", path, REDIRECT_ERROR[i].status);
+            break;
+        }
+    }
 }
-
 int exec_do_redirect_left(const char *path)
 {
     int fd = open(path, O_RDONLY);

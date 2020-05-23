@@ -7,6 +7,7 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
 #include "proto/exec/rule/debug.h"
 #include "types/exec/rule.h"
@@ -35,15 +36,26 @@ static _Bool job_process_is_last_is_builtin(struct sh *shell, struct job_s *job)
     return (false);
 }
 
-char *builtin_alias_replace_recursively(struct hasher_s *alias, const char *key)
+char *builtin_alias_replace_recursively(
+    struct hasher_s *alias,
+    char *key,
+    int depth
+)
 {
     char *data = (char *) hasher_get_data(alias, key);
 
-    if (data) {
-        return (builtin_alias_replace_recursively(alias, key));
+    if (data && depth < 100) {
+        return (builtin_alias_replace_recursively(alias, data, depth + 1));
     } else {
+        if (depth == 0) {
+            return (key);
+        }
+        if (depth >= 100) {
+            dprintf(2, "Alias loop.\n");
+            return ((char *) -1);
+        }
         data = strdup(key);
-        return (data ? data : (char *) -1);
+        return (data);
     }
 }
 
@@ -54,11 +66,15 @@ static int exec_replace_alias(struct sh *shell, struct job_s *job)
 
     for (; process; process = process->next) {
         data = builtin_alias_replace_recursively(
-            shell->alias, process->argv[0]
+            shell->alias, process->argv[0], 0
         );
-        if (data == (char *) -1) {
+        if (!data) {
             return (EXEC_RULE_ALLOCATION_FAIL);
-        } else if (data) {
+        }
+        if (data == (char *) -1) {
+            return (EXEC_RULE_ALIAS_LOOP);
+        }
+        if (data != process->argv[0]) {
             free(process->argv[0]);
             process->argv[0] = data;
         }
@@ -72,13 +88,14 @@ static int exec_rule_pipeline_launch_job(
     bool foreground
 )
 {
-    builtin_handler *builtin = (builtin_handler *) hasher_get_data(
-        shell->builtin, job->first_process->argv[0]
-    );
+    builtin_handler *builtin = NULL;
 
     if (exec_replace_alias(shell, job)) {
         return (EXEC_RULE_ALLOCATION_FAIL);
     }
+    builtin = (builtin_handler *) hasher_get_data(
+        shell->builtin, job->first_process->argv[0]
+    );
     if (!job->first_process->next && builtin && *builtin) {
         (*builtin)(shell, (const char * const *) job->first_process->argv);
     } else {

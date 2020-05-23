@@ -82,7 +82,7 @@ int builtin_alias_handler(
         }
         return (0);
     }
-    return (!argv[2] && insert_alias(shell, argv));
+    return (!argv[2] || insert_alias(shell, argv));
 }
 
 int builtin_unalias_handler(

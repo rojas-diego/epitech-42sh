@@ -248,7 +248,7 @@ $(NAME):	compiling
 
 %.o:		%.c
 		@ echo -e "." $<
-		@ $(CC) -o $@ -c $< $(CFLAGS) $(CPPFLAGS)
+		@ $(CC) -o $@ -c $< $(CFLAGS) $(CPPFLAGS) -fprofile-abs-path
 
 tests_run:	compiling
 		@ echo -e "===> Compiling unit_tests"
