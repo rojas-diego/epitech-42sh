@@ -55,19 +55,20 @@ int exec_do_redirect_double_left(const char *word)
     int fd[2];
     ssize_t ret = 1;
 
-    if (pipe(fd) == -1) {
+    if (pipe(fd) == -1)
         return (-1);
-    }
     write(1, "? ", 2);
-    ret = getline(&line, &len, stdin);
-    for (; ret > 0 && strcmp(line, word) != '\n';
-    ret = getline(&line, &len, stdin)) {
+    for (ret = getline(&line, &len, stdin); line && ret > 0
+    && strcmp(line, word) != '\n'; ret = getline(&line, &len, stdin)) {
         write(fd[1], line, (size_t) ret);
         write(1, "? ", 2);
     }
+    if (line == NULL)
+        return (-1);
     close(fd[1]);
     free(line);
-    return (ret < 0 ? -1 : fd[0]);
+    clearerr(stdin);
+    return (fd[0]);
 }
 
 int exec_do_redirect_right(const char *path)
