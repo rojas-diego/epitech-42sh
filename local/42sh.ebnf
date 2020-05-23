@@ -61,12 +61,12 @@ while_control       ::=     WHILE conditional NEWLINE [ block ] END NEWLINE
 repeat_control      ::=     REPEAT WORD grouping
                     ;
 
+conditional         ::=     LPARANTH wordlist_expression RPARANTH
+                    ;
+
 wordlist_expression ::=     LPARANTH wordlist RPARANTH
                     ;
 
 wordlist            ::=     WORD [ wordlist ]
-                    ;
-
-conditional         ::=     LPARANTH WORD RPARANTH
                     ;
 # ! Control Flow
