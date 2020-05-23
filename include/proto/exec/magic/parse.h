@@ -12,6 +12,8 @@
 
 char **do_magic_parse(int fd);
 
+void do_subshell(struct sh *shell, char *eval);
+
 char **do_subshelled_magic_quote(struct sh *shell, char *eval);
 
 #endif /* !PROTO_EXEC_MAGIC_PARSE_H_ */
