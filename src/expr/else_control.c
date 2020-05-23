@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "proto/constants.h"
 #include "proto/grammar.h"
 #include "proto/expr.h"
 
@@ -30,14 +31,14 @@ static struct expr_else_control_s *expr_else_control(struct grammar_s *this)
     }
     exp->else_token = grammar_get_previous(this);
     if (!grammar_match(this, 1, TOK_NEWLINE)) {
-        this->error = true;
+        grammar_set_error(this, AST_ELSE_MISSING_NEWLINE);
         free(exp);
         return NULL;
     }
     exp->newline = grammar_get_previous(this);
     exp->block = expr_block_w(this);
     if (!exp->block) {
-        this->error = true;
+        grammar_set_error(this, AST_EMPTY_ELSE);
         free(exp);
         return NULL;
     }
