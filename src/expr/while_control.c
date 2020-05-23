@@ -40,12 +40,10 @@ static struct expr_while_control_s *expr_while_control(struct grammar_s *this)
         return NULL;
     }
     exp->wordlist_expression_newline = grammar_get_previous(this);
+    save_index = this->index;
     exp->block = expr_block_w(this);
-    if (!exp->block) {
-        this->error = true;
-        free(exp);
-        return NULL;
-    }
+    if (!exp->block)
+        this->index = save_index;
     if (!grammar_match(this, 1, TOK_END)) {
         free(exp);
         return NULL;
