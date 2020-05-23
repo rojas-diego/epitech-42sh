@@ -160,6 +160,10 @@ function _which () {
 
 function _where () {
     $YELLOW ; echo "=----= WHERE =----=" ; $WHITE
+    _test 'unalias ls \n where ls' "" cat repeat "basic where"
+    _test 'where fewijpfow fpwokefew' "" cat repeat "where error handling"
+    _test 'unalias ls \n where ls' "" cat repeat "builtin where"
+    display_test_result _WHERE
 }
 
 function _if () {
@@ -212,6 +216,7 @@ personnals
 parenthesis
 _repeat
 _if
+_where
 
 NB_TEST_PASSED=$TOTAL_TESTS_PASSED
 NB_TEST_FAILED=$TOTAL_TESTS_FAILED
