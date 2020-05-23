@@ -201,6 +201,7 @@ builtin_cd
 line_formatting
 
 personnals
+parenthesis
 
 NB_TEST_PASSED=$TOTAL_TESTS_PASSED
 NB_TEST_FAILED=$TOTAL_TESTS_FAILED
