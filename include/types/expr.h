@@ -152,9 +152,21 @@ struct expr_if_control_s {
 
 /*
 ** @DESCRIPTION
+**   Rule: IF CONTROL
+*/
+struct expr_if_inline_control_s {
+    struct token_s                      *if_token;
+    struct expr_wordlist_expression_s   *wordlist_expression;
+    struct expr_grouping_s              *grouping;
+    struct token_s                      *endif_newline;
+};
+
+/*
+** @DESCRIPTION
 **   Rule: CONTROL
 */
 struct expr_control_s {
+    struct expr_if_inline_control_s *if_inline_control;
     struct expr_if_control_s        *if_control;
     struct expr_while_control_s     *while_control;
     struct expr_foreach_control_s   *foreach_control;
