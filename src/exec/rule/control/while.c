@@ -20,7 +20,9 @@ int exec_rule_control_while(
     exec_rule_debug(shell, "while", true);
     while (exec_rule_control_check_condition(
     shell, rule->wordlist_expression)) {
-        exec_rule_block(shell, rule->block);
+        if (rule->block) {
+            exec_rule_block(shell, rule->block);
+        }
     }
     exec_rule_debug(shell, "while", false);
     return (0);
