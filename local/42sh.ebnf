@@ -43,10 +43,10 @@ separator           ::=     NEWLINE | SEMI | EOF
 control             ::=     if_control | while_control | foreach_control | repeat_control
                     ;
 
-if_control          ::=     IF wordlist_expression THEN NEWLINE [ block ] [ else_if_control ] ENDIF NEWLINE
+if_control          ::=     IF wordlist_expression THEN NEWLINE [ block ] [ else_if_control ] [ else_control ] ENDIF NEWLINE
                     ;
 
-else_if_control     ::=     ELSE_IF wordlist_expression THEN NEWLINE [ block ] [ else_control ]
+else_if_control     ::=     ELSE_IF wordlist_expression THEN NEWLINE [ block ] [ else_if_control ]
                     ;
 
 else_control        ::=     ELSE NEWLINE [ block ]
