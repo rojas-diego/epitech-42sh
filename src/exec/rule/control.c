@@ -8,6 +8,7 @@
 #include "proto/exec/rule/debug.h"
 
 #include "proto/exec/rule/control/if.h"
+#include "proto/exec/rule/control/if_inline.h"
 #include "proto/exec/rule/control/while.h"
 #include "proto/exec/rule/control/foreach.h"
 #include "proto/exec/rule/control/repeat.h"
@@ -19,6 +20,9 @@ int exec_rule_control(
 )
 {
     exec_rule_debug(shell, "control", true);
+    if (rule->if_inline_control) {
+        exec_rule_control_if_inline(shell, rule->if_inline_control);
+    }
     if (rule->if_control) {
         exec_rule_control_if(shell, rule->if_control);
     }

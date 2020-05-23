@@ -9,7 +9,7 @@ program             ::=     [ block ] EOF
 block               ::=     statement [ block ]
                     ;
 
-statement           ::=     subshell | compound | control
+statement           ::=     compound | control
                     ;
 
 compound            ::=     [ & ] grouping ( jobs )* [ & ] separator
@@ -24,7 +24,7 @@ subshell            ::=     LPARANTH block RPARANTH
 grouping            ::=     pipeline ( ( AND_IF | OR_IF ) grouping )*
                     ;
 
-pipeline            ::=     command ( PIPE pipeline )*
+pipeline            ::=     ( subshell | command) ( PIPE pipeline )*
                     ;
 
 command             ::=     ( WORD | redirection ) [ command ]

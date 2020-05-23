@@ -93,61 +93,77 @@ function line_formatting () {
 
 function error_handling () {
     $YELLOW ; echo "=----= ERROR HANDLING =----=" ; $WHITE
-    _test './tests/binaries/bin_not_compatible' "" "" "cat" bin_not_compatible "Bin not compatible"
-    _test './tests/binaries/' "" "" "cat" div_zero "div_zero"
-    _test './tests/binaries/' "" "" "cat"  ""
-    _test './tests/binaries/' "" "" "cat"  ""
-    _test './tests/binaries/' "" "" "cat"  ""
-    _test './tests/binaries/' "" "" "cat"  ""
+    cp ./tests/binaries/bin_not_compatible.c ./tests/binaries/bin_not_compatible
+    chmod +x ./tests/binaries/bin_not_compatible
+    gcc ./tests/binaries/div_zero.c -o ./tests/binaries/div_zero
+    gcc ./tests/binaries/segfault.c -o ./tests/binaries/segfault
+    _test './tests/binaries/bin_not_compatible' "" "cat" bin_not_compatible "Bin not compatible"
+    _test './tests/binaries/div_zero' "" "cat" div_zero "DivZero with core dump"
+    _test './tests/binaries/segfault' "" "cat" segfault "SegFault with core dump"
+    _test './src' "" "" "cat" exec_directory "Exec a directory"
     display_test_result ERROR_HANDLING
 }
 
 function separator () {
     $YELLOW ; echo "=----= SEPARATOR =----=" ; $WHITE
+    _test '/bin/ls ; /bin/echo' "" "cat" separator_comma "Separator ';'"
+    display_test_result SEPARATOR
 }
 
 function simple_pipe () {
     $YELLOW ; echo "=----= SIMPLE PIPE =----=" ; $WHITE
+    _test '/bin/ls | /cat -e' "" "cat" simple_pipe "Simple pipe"
+    display_test_result SIMPLE_PIPE
 }
 
 function advanced_pipe () {
     $YELLOW ; echo "=----= ADVANCED PIPE =----=" ; $WHITE
+    display_test_result ADVANCED_PIPE
 }
 
 function redirections () {
     $YELLOW ; echo "=----= REDIRECTIONS =----=" ; $WHITE
+    display_test_result REDIRECTIONS
 }
 
 function advanced_manipulations () {
     $YELLOW ; echo "=----= ADVANCED MANIPULATIONS =----=" ; $WHITE
+    display_test_result ADVANCED_MANIPULATIONS
 }
 
 function AND_and_OR_tests () {
     $YELLOW ; echo "=----= && AND || TESTS =----=" ; $WHITE
+    display_test_result AND_and_OR_TESTS
 }
 
 function globbing () {
     $YELLOW ; echo "=----= GLOBBING =----=" ; $WHITE
+    display_test_result GLOBBING
 }
 
 function var_interpreter () {
     $YELLOW ; echo "=----= VAR INTERPRETER =----=" ; $WHITE
+    display_test_result GLOBBING
 }
 
 function inhibitor () {
     $YELLOW ; echo "=----= INHIBITOR =----=" ; $WHITE
+    display_test_result INHIBITOR
 }
 
 function magic_quote() {
     $YELLOW ; echo "=----= MAGIC QUOTE =----=" ; $WHITE
+    display_test_result MAGIC_QUOTE
 }
 
 function _alias () {
     $YELLOW ; echo "=----= ALIAS =----=" ; $WHITE
+    display_test_result ALIAS
 }
 
 function scripting () {
     $YELLOW ; echo "=----= SCRIPTING =----=" ; $WHITE
+    display_test_result SCRIPTING
 }
 
 function _foreach () {
@@ -156,22 +172,42 @@ function _foreach () {
 
 function _which () {
     $YELLOW ; echo "=----= WHICH =----=" ; $WHITE
+    _test 'unalias ls \n which ls' "" cat repeat "basic where"
+    _test 'which fewijpfow fpwokefew' "" cat repeat "where error handling"
+    _test 'unalias ls \n which ls' "" cat repeat "builtin where"
+    display_test_result _WHICH
 }
 
 function _where () {
     $YELLOW ; echo "=----= WHERE =----=" ; $WHITE
+    _test 'unalias ls \n where ls' "" cat repeat "basic where"
+    _test 'where fewijpfow fpwokefew' "" cat repeat "where error handling"
+    _test 'unalias ls \n where ls' "" cat repeat "builtin where"
+    display_test_result _WHERE
 }
 
 function _if () {
     $YELLOW ; echo "=----= IF =----=" ; $WHITE
+    _test 'if(1) ls' "" cat repeat "basic if"
+    _test 'if ($?) ls' "" cat repeat "if with variable"
+    _test 'if(0) ls' "" cat repeat "null if"
+    display_test_result _IF
 }
 
 function _repeat () {
     $YELLOW ; echo "=----= REPEAT =----=" ; $WHITE
+    _test 'repeat 4 ls' "" cat repeat "basic repeat"
+    _test 'repeat -1 ls' "" cat repeat "negative repeat"
+    _test 'repeat 0 ls' "" cat repeat "null repeat"
+    display_test_result _REPEAT
 }
 
 function parenthesis () {
     $YELLOW ; echo "=----= PARENTHESIS =----=" ; $WHITE
+    _test '(ls | cat)' "" cat parenthesis "basic parenthesis"
+    _test '(ls | cat) | grep test' "" cat parenthesis "parenthesis with something after"
+    _test 'ls | (grep toto | cat)' "" cat parenthesis "parenthesis at the end"
+    display_test_result PARENTHESIS
 }
 
 function personnals () {
@@ -190,14 +226,37 @@ function personnals () {
     display_test_result PERSONNALS
 }
 
-basic_test
-path_handling
-setenv_and_unsetenv
-builtin_cd
-line_formatting
+function all () {
+    basic_test
+    path_handling
+    setenv_and_unsetenv
+    builtin_cd
+    line_formatting
+    error_handling
+    separator
 
-personnals
+    personnals
+    parenthesis
+    _repeat
+    _if
+    _where
+    _which
 
-NB_TEST_PASSED=$TOTAL_TESTS_PASSED
-NB_TEST_FAILED=$TOTAL_TESTS_FAILED
-display_test_result TOTAL
+    NB_TEST_PASSED=$TOTAL_TESTS_PASSED
+    NB_TEST_FAILED=$TOTAL_TESTS_FAILED
+    display_test_result TOTAL
+}
+
+function clean () {
+    rm -f ./tests/binaries/bin_not_compatible
+    rm -f ./tests/binaries/divzero
+    rm -f ./tests/binaries/segfault
+    rm -f ./tests/ftests/*.ftest
+}
+
+if [ $1 ]
+then
+    $1
+else
+    all
+fi

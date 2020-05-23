@@ -197,6 +197,7 @@ SRC =		src/constants.c						\
 		src/exec/rule/control/foreach.c				\
 		src/exec/rule/control/while.c				\
 		src/exec/rule/control/repeat.c				\
+		src/exec/rule/control/if_inline.c				\
 		src/exec/rule/control/if.c				\
 
 SRCT =		tests/input/parser/test_input_parse_tokens.c		\
