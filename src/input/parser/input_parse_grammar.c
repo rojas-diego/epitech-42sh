@@ -20,9 +20,8 @@ static void input_parse_grammar_debug(struct sh *shell, struct grammar_s *this)
     expression = expr_program_w(this);
     if (this->error) {
         if (this->error_message) {
-            dprintf(2, "\033[1m\033[38;2;230;70;100mError: %s.\033[0m\n",
+            dprintf(2, "\n\033[1m\033[38;2;230;70;100mError: %s.\033[0m\n",
                     this->error_message);
-            free(this->error_message);
         } else {
             dprintf(2, "\n\033[1m\033[38;2;230;70;100mUnreso\
 lved Error.\033[0m\n");
