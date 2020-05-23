@@ -172,6 +172,10 @@ function _repeat () {
 
 function parenthesis () {
     $YELLOW ; echo "=----= PARENTHESIS =----=" ; $WHITE
+    _test '(ls | cat)' "" cat parenthesis "basic parenthesis"
+    _test '(ls | cat) | grep test' "" cat parenthesis "parenthesis with something after"
+    _test 'ls | (grep toto | cat)' "" cat parenthesis "parenthesis at the end"
+    display_test_result PARENTHESIS
 }
 
 function personnals () {
