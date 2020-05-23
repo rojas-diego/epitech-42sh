@@ -15,6 +15,22 @@ void exec_rule_job_display(struct sh *shell, struct job_s *job);
 
 #include <stdio.h>
 
+#include "hasher/get_data.h"
+#include "types/builtins.h"
+
+void exec_rule_pipeline_launch_job(struct sh *shell, struct job_s *job)
+{
+    builtin_handler *builtin = (builtin_handler *) hasher_get_data(
+        shell->builtin, job->first_process->argv[0]
+    );
+    if (builtin && *builtin) {
+        (*builtin)(shell, (const char *const *)job->first_process->argv);
+    } else {
+        shell->job = job;
+        job_launch(shell, job, true);
+    }
+}
+
 int exec_rule_pipeline(
     struct sh *shell,
     struct expr_pipeline_s *rule
@@ -30,17 +46,7 @@ int exec_rule_pipeline(
     }
     exec_rule_debug(shell, "job_launch", true);
     exec_rule_job_display(shell, job);
-    #include "hasher/get_data.h"
-    #include "types/builtins.h"
-    builtin_handler *builtin = (builtin_handler *) hasher_get_data(
-        shell->builtin, job->first_process->argv[0]
-    );
-    if (builtin && *builtin) {
-        (*builtin)(shell, (const char *const *)job->first_process->argv);
-    } else {
-        shell->job = job;
-        job_launch(shell, job, true);
-    }
+    exec_rule_pipeline_launch_job(shell, job);
     exec_rule_debug(shell, "job_launch", false);
     exec_rule_debug(shell, "pipeline", false);
     return (0);
