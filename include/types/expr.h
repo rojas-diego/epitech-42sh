@@ -206,6 +206,7 @@ struct expr_command_s {
 **   Rule: PIPELINE
 */
 struct expr_pipeline_s {
+    struct expr_subshell_s  *subshell;
     struct expr_command_s   *command;
     struct token_s          *pipe;
     struct expr_pipeline_s  *pipeline;
@@ -258,7 +259,6 @@ struct expr_compound_s {
 **   Rule: STATEMENT
 */
 struct expr_statement_s {
-    struct expr_subshell_s          *subshell;
     struct expr_compound_s          *compound;
     struct expr_control_s           *control;
 };

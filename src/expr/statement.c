@@ -23,11 +23,6 @@ static struct expr_statement_s *expr_statement(struct grammar_s *this)
     if (!exp)
         exit(84);
     memset(exp, 0, sizeof(struct expr_statement_s));
-    exp->subshell = expr_subshell_w(this);
-    if (!exp->subshell)
-        this->index = save_index;
-    else
-        return exp;
     exp->compound = expr_compound_w(this);
     if (!exp->compound)
         this->index = save_index;

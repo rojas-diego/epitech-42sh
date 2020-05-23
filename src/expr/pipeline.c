@@ -25,10 +25,14 @@ static struct expr_pipeline_s *expr_pipeline(struct grammar_s *this)
     if (!exp)
         exit(84);
     memset(exp, 0, sizeof(struct expr_pipeline_s));
-    exp->command = expr_command_w(this);
-    if (!exp->command) {
-        free(exp);
-        return NULL;
+    exp->subshell = expr_subshell_w(this);
+    if (!exp->subshell) {
+        this->index = save_index;
+        exp->command = expr_command_w(this);
+        if (!exp->command) {
+            free(exp);
+            return NULL;
+        }
     }
     if (!grammar_match(this, 1, TOK_PIPE))
         return exp;
