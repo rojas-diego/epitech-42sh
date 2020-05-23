@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "proto/constants.h"
 #include "proto/grammar.h"
 #include "proto/expr.h"
 
@@ -34,25 +35,25 @@ static struct expr_else_if_control_s *expr_else_if_control(
     exp->else_if_token = grammar_get_previous(this);
     exp->wordlist_expression = expr_wordlist_expression_w(this);
     if (!exp->wordlist_expression) {
-        this->error = true;
+        grammar_set_error(this, AST_INVALID_EXPRESSION);
         free(exp);
         return NULL;
     }
     if (!grammar_match(this, 1, TOK_THEN)) {
-        this->error = true;
+        grammar_set_error(this, AST_ELSE_IF_MISSING_THEN);
         free(exp);
         return NULL;
     }
     exp->then = grammar_get_previous(this);
     if (!grammar_match(this, 1, TOK_NEWLINE)) {
-        this->error = true;
+        grammar_set_error(this, AST_THEN_MISSING_NEWLINE);
         free(exp);
         return NULL;
     }
     exp->newline = grammar_get_previous(this);
     exp->block = expr_block_w(this);
     if (!exp->block) {
-        this->error = true;
+        grammar_set_error(this, AST_EMPTY_ELSE_IF);
         free(exp);
         return NULL;
     }
