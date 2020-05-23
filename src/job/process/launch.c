@@ -18,6 +18,7 @@
 #include "types/builtins.h"
 
 #include "proto/sighandler.h"
+#include "proto/exec/magic/parse.h"
 #include "proto/job/process/launch.h"
 
 extern char **environ;
@@ -84,6 +85,8 @@ static void process_launch_exec(
 
     if (builtin && *builtin) {
         exit((*builtin)(shell, (const char * const *) process->argv));
+    } else if (process->subshell) {
+        do_subshell(shell, process->subshell);
     } else {
         execve(strchr(process->argv[0], '/') ? process->argv[0]
             : find_binary_in_path_env(getenv("PATH"), process->argv[0]),

@@ -112,12 +112,23 @@ function separator () {
 
 function simple_pipe () {
     $YELLOW ; echo "=----= SIMPLE PIPE =----=" ; $WHITE
-    _test '/bin/ls | /cat -e' "" "cat" simple_pipe "Simple pipe"
+    gcc ./tests/binaries/big_file_gen.c -o ./tests/binaries/big_file_gen
+    ./tests/binaries/big_file_gen ./tests/binaries/big_file
+    _test '/bin/ls | /bin/cat -e' "" "cat" simple_pipe "Simple pipe"
+    _test '/bin/cat ./tests/binaries/big_file | wc' "" "cat" pipe_big_input "Pipe with big input"
+    _test '/bin/ls | cd ..\nls' "" "cat" pipe_with_builtin "Pipe with builtin"
     display_test_result SIMPLE_PIPE
 }
 
 function advanced_pipe () {
     $YELLOW ; echo "=----= ADVANCED PIPE =----=" ; $WHITE
+    lot_of_pipe=`cat ./tests/binaries/lot_of_pipe`
+    _test 'ouesh ouesh | /bin/cat -e' "" "cat" error_and_pipe_1 "Error and pipe 1"
+    _test '/bin/ls | ouesh ouesh' "" "cat" error_and_pipe_2 "Error and pipe 2"
+    _test '/bin/ls | ouesh ouesh | cat -e | defzrg | /ls | /bin/ls' "" "cat" multipipe_error "multipipe error"
+    _test '/bin/ls | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e' "" "cat" multi_pipe "Multi pipe"
+    _test "$lot_of_pipe" "" "cat" fd_max "Pipe fd max"
+    _test '|' "" "cat" only_a_pipe "Only a pipe"
     display_test_result ADVANCED_PIPE
 }
 
@@ -248,6 +259,8 @@ function all () {
     line_formatting
     error_handling
     separator
+    simple_pipe
+    advanced_pipe
 
     personnals
     parenthesis
@@ -270,6 +283,7 @@ function clean () {
     rm -f ./tests/binaries/divzero
     rm -f ./tests/binaries/segfault
     rm -f ./tests/ftests/*.ftest
+    rm -f ./tests/binaries/big_file
 }
 
 if [ $1 ]
