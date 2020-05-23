@@ -106,50 +106,63 @@ function error_handling () {
 
 function separator () {
     $YELLOW ; echo "=----= SEPARATOR =----=" ; $WHITE
+    _test '/bin/ls ; /bin/echo' "" "cat" separator_comma "Separator ';'"
+    display_test_result SEPARATOR
 }
 
 function simple_pipe () {
     $YELLOW ; echo "=----= SIMPLE PIPE =----=" ; $WHITE
+    display_test_result SIMPLE_PIPE
 }
 
 function advanced_pipe () {
     $YELLOW ; echo "=----= ADVANCED PIPE =----=" ; $WHITE
+    display_test_result ADVANCED_PIPE
 }
 
 function redirections () {
     $YELLOW ; echo "=----= REDIRECTIONS =----=" ; $WHITE
+    display_test_result REDIRECTIONS
 }
 
 function advanced_manipulations () {
     $YELLOW ; echo "=----= ADVANCED MANIPULATIONS =----=" ; $WHITE
+    display_test_result ADVANCED_MANIPULATIONS
 }
 
 function AND_and_OR_tests () {
     $YELLOW ; echo "=----= && AND || TESTS =----=" ; $WHITE
+    display_test_result AND_and_OR_TESTS
 }
 
 function globbing () {
     $YELLOW ; echo "=----= GLOBBING =----=" ; $WHITE
+    display_test_result GLOBBING
 }
 
 function var_interpreter () {
     $YELLOW ; echo "=----= VAR INTERPRETER =----=" ; $WHITE
+    display_test_result GLOBBING
 }
 
 function inhibitor () {
     $YELLOW ; echo "=----= INHIBITOR =----=" ; $WHITE
+    display_test_result INHIBITOR
 }
 
 function magic_quote() {
     $YELLOW ; echo "=----= MAGIC QUOTE =----=" ; $WHITE
+    display_test_result MAGIC_QUOTE
 }
 
 function _alias () {
     $YELLOW ; echo "=----= ALIAS =----=" ; $WHITE
+    display_test_result ALIAS
 }
 
 function scripting () {
     $YELLOW ; echo "=----= SCRIPTING =----=" ; $WHITE
+    display_test_result SCRIPTING
 }
 
 function _foreach () {
@@ -219,6 +232,7 @@ function all () {
     builtin_cd
     line_formatting
     error_handling
+    separator
 
     personnals
     parenthesis
