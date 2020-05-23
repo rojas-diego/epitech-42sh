@@ -112,12 +112,17 @@ function separator () {
 
 function simple_pipe () {
     $YELLOW ; echo "=----= SIMPLE PIPE =----=" ; $WHITE
-    _test '/bin/ls | /cat -e' "" "cat" simple_pipe "Simple pipe"
+    gcc ./tests/binaries/big_file_gen.c -o ./tests/binaries/big_file_gen
+    ./tests/binaries/big_file_gen ./tests/binaries/big_file
+    _test '/bin/ls | /bin/cat -e' "" "cat" simple_pipe "Simple pipe"
+    _test '/bin/cat ./tests/binaries/big_file | wc' "" "cat" pipe_big_input "Pipe with big input"
+    _test '/bin/ls | cd ..\nls' "" "cat" pipe_with_builtin "Pipe with builtin"
     display_test_result SIMPLE_PIPE
 }
 
 function advanced_pipe () {
     $YELLOW ; echo "=----= ADVANCED PIPE =----=" ; $WHITE
+    _test '/bin/ls | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e' "" "cat" advanced_pipe "Advanced pipe"
     display_test_result ADVANCED_PIPE
 }
 
@@ -234,6 +239,8 @@ function all () {
     line_formatting
     error_handling
     separator
+    simple_pipe
+    advanced_pipe
 
     personnals
     parenthesis
@@ -252,6 +259,7 @@ function clean () {
     rm -f ./tests/binaries/divzero
     rm -f ./tests/binaries/segfault
     rm -f ./tests/ftests/*.ftest
+    rm -f ./tests/binaries/big_file
 }
 
 if [ $1 ]
