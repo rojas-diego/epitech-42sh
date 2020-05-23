@@ -43,11 +43,11 @@ static const struct {
     {ETXTBSY, "ETXTBSY."}
 };
 
-static void process_launch_find_exec_error(void)
+static void process_launch_find_exec_error(const char *binary_name)
 {
     for (size_t i = 0; i < NB_EXEC_ERROR; ++i) {
         if (errno == EXEC_ERROR[i].err_nbr) {
-            printf("%s\n", EXEC_ERROR[i].status);
+            dprintf(2, "%s: %s\n", binary_name, EXEC_ERROR[i].status);
         }
     }
 }
@@ -81,7 +81,7 @@ static void process_launch_exec(
         exit((*builtin)(shell, (const char * const *) process->argv));
     } else {
         execvp(process->argv[0], process->argv);
-        process_launch_find_exec_error();
+        process_launch_find_exec_error(process->argv[0]);
     }
 }
 

@@ -47,24 +47,23 @@ static int job_process_update_record_process(
     int status
 )
 {
-    struct process_s *process;
-
-    for (process = job->first_process; process; process = process->next) {
-        if (process->pid != pid)
+    for (struct process_s *proc = job->first_process; proc; proc = proc->next) {
+        if (proc->pid != pid)
             continue;
-        process->status = status;
+        proc->status = status;
         if (WIFSTOPPED(status)) {
             fprintf(stderr, "\nSuspended\n");
-            process->stopped = true;
+            proc->stopped = true;
             return (1);
         }
-        process->completed = true;
+        proc->completed = true;
         if (!WIFSIGNALED(status))
             return (1);
         if (job->foreground)
             job_process_handle_status(status);
         else
-            job_format_info(job, "Terminated");
+            job_format_info(
+                job, ERROR_STATUS[WTERMSIG(status) - 1], WCOREDUMP(status));
         return (1);
     }
     return (0);
