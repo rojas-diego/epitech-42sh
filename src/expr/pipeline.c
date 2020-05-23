@@ -30,6 +30,8 @@ static struct expr_pipeline_s *expr_pipeline(struct grammar_s *this)
         this->index = save_index;
         exp->command = expr_command_w(this);
         if (!exp->command) {
+            if (do_ambiguous_redirection_check(exp->command))
+                grammar_set_error(this, AST_AMBIGUOUS_REDIRECTION);
             free(exp);
             return NULL;
         }

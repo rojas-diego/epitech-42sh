@@ -18,7 +18,7 @@ static void input_parse_grammar_debug(struct sh *shell, struct grammar_s *this)
     if (this->debug)
         dprintf(2, "\n=============== AST DEBUG MODE ===============\n");
     expression = expr_program_w(this);
-    if (this->error) {
+    if (this->error && this->debug) {
         if (this->error_message) {
             dprintf(2, "\n\033[1m\033[38;2;230;70;100mError: %s.\033[0m\n",
                     this->error_message);
@@ -53,5 +53,7 @@ int input_parse_grammar(struct sh *shell)
     }
     for (; this.tokens[this.token_count]; this.token_count++);
     input_parse_grammar_debug(shell, &this);
+    if (this.error_message && !this.debug)
+        dprintf(2, "%s.\n", this.error_message);
     return (this.error);
 }

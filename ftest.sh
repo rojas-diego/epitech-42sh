@@ -122,7 +122,13 @@ function simple_pipe () {
 
 function advanced_pipe () {
     $YELLOW ; echo "=----= ADVANCED PIPE =----=" ; $WHITE
-    _test '/bin/ls | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e' "" "cat" advanced_pipe "Advanced pipe"
+    lot_of_pipe=`cat ./tests/binaries/lot_of_pipe`
+    _test 'ouesh ouesh | /bin/cat -e' "" "cat" error_and_pipe_1 "Error and pipe 1"
+    _test '/bin/ls | ouesh ouesh' "" "cat" error_and_pipe_2 "Error and pipe 2"
+    _test '/bin/ls | ouesh ouesh | cat -e | defzrg | /ls | /bin/ls' "" "cat" multipipe_error "multipipe error"
+    _test '/bin/ls | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e | /bin/cat -e' "" "cat" multi_pipe "Multi pipe"
+    _test "$lot_of_pipe" "" "cat" fd_max "Pipe fd max"
+    _test '|' "" "cat" only_a_pipe "Only a pipe"
     display_test_result ADVANCED_PIPE
 }
 

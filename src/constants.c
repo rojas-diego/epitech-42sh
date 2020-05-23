@@ -39,3 +39,5 @@ const char *AST_NULL_COMMAND = "Invalid null command";
 const char *AST_REPEAT_TOO_FEW_ARGS = "repeat: Too few arguments";
 
 const char *AST_UNEXPECTED_TOKENS = "Unexpected tokens";
+
+const char *AST_AMBIGUOUS_REDIRECTION = "Ambiguous output redirect";

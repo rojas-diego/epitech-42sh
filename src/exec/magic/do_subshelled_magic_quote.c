@@ -19,6 +19,20 @@
 #include "proto/expr_destroy.h"
 #include "proto/input.h"
 
+void do_subshell(struct sh *shell, char *eval)
+{
+    shell->rawinput = eval;
+    shell->last_status = input_parse(shell);
+    if (shell->expression) {
+        exec_rule_program(shell, shell->expression);
+        expr_program_destroy(shell->expression);
+        shell->expression = NULL;
+    }
+    input_destroy(shell);
+    prompt_input_empty(shell);
+    exit(shell->last_status);
+}
+
 char **do_subshelled_magic_quote(struct sh *shell, char *eval)
 {
     pid_t pid;
@@ -34,17 +48,7 @@ char **do_subshelled_magic_quote(struct sh *shell, char *eval)
         close(fd[0]);
         dup2(fd[1], 1);
         close(fd[1]);
-        shell->rawinput = eval;
-        shell->last_status = input_parse(shell);
-        dprintf(2, "%d\n", shell->last_status);
-        if (shell->expression) {
-            exec_rule_program(shell, shell->expression);
-            expr_program_destroy(shell->expression);
-            shell->expression = NULL;
-        }
-        input_destroy(shell);
-        prompt_input_empty(shell);
-        exit(0);
+        do_subshell(shell, eval);
     }
     close(fd[1]);
     waitpid(pid, NULL, 0);

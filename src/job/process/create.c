@@ -26,6 +26,7 @@ struct process_s *process_create(void)
         .pid = 0,
         .completed = false,
         .stopped = false,
+        .subshell = NULL,
         .status = 0
     };
     return (process);

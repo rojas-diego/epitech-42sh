@@ -30,6 +30,7 @@ struct process_s
     pid_t pid;
     bool completed;
     bool stopped;
+    char *subshell;
     int status;
 };
 
