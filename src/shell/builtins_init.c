@@ -15,7 +15,7 @@
 #include "proto/shell/builtin_handlers.h"
 #include "proto/shell/builtins.h"
 
-static const int BUILTIN_COUNT = 18;
+static const int BUILTIN_COUNT = 22;
 
 static const struct {
     const char *key;
@@ -24,32 +24,36 @@ static const struct {
     {"which", &builtin_which_handler},
     {"where", &builtin_where_handler},
     {"unsetenv", &builtin_unsetenv_handler},
+    {"unset", &builtin_unset_handler},
     {"unalias", &builtin_unalias_handler},
     {"termname", &builtin_termname_handler},
     {"source", &builtin_source_handler},
     {"setenv", &builtin_setenv_handler},
+    {"set", &builtin_set_handler},
     {"jobs", &builtin_jobs_handler},
+    {"history", &builtin_history_handler},
     {"fg", &builtin_fg_handler},
     {"exit", &builtin_exit_handler},
     {"echo", &builtin_echo_handler},
+    {"debug", &builtin_debug_handler},
     {"cd", &builtin_change_directory_handler},
     {"builtins", &builtin_builtins_handler},
     {"bindkey", &builtin_bindkey_handler},
     {"bg", &builtin_bg_handler},
     {"alias", &builtin_alias_handler},
-    {"@", NULL},
+    {"@", &builtin_at_handler},
     {":", &builtin_null_command_handler},
 };
 
-struct hasher *shell_builtin_hash_create(void)
+struct hasher_s *shell_builtin_hash_create(void)
 {
-    struct hasher *hash = NULL;
+    struct hasher_s *hash = NULL;
 
     for (int i = 0; i < BUILTIN_COUNT; ++i) {
         if (hasher_insert_data(
             &hash,
             strdup(BUILTINS_DICT[i].key),
-            (void *) BUILTINS_DICT[i].func)
+            (void *) &BUILTINS_DICT[i].func)
         ) {
             return (NULL);
         }

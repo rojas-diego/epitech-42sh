@@ -23,7 +23,6 @@ char *extend_path(const char *path, const char *extend)
     );
 
     if (new_path == NULL) {
-        perror("malloc");
         return (NULL);
     }
     memcpy(new_path, path, path_len);

@@ -10,9 +10,11 @@
 
 #include <termios.h>
 #include <stdbool.h>
+#include <stddef.h>
 
-enum standard_io_s
+enum process_io_e
 {
+    IO_NOT = -1,
     IO_IN,
     IO_OUT,
     IO_ERR,
@@ -23,6 +25,8 @@ struct process_s
 {
     struct process_s *next;
     char **argv;
+    size_t argc;
+    size_t max_argc;
     pid_t pid;
     bool completed;
     bool stopped;

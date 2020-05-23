@@ -10,9 +10,9 @@
 /* */
 #include "hasher/override.h"
 
-struct hasher *hasher_override(struct hasher **hasher, struct hasher *to_insert)
+struct hasher_s *hasher_override(struct hasher_s **hasher, struct hasher_s *to_insert)
 {
-    struct hasher *overrided = NULL;
+    struct hasher_s *overrided = NULL;
 
     if (!(*hasher))
         return (NULL);
@@ -22,11 +22,11 @@ struct hasher *hasher_override(struct hasher **hasher, struct hasher *to_insert)
         *hasher = to_insert;
         return (overrided);
     }
-    for (struct hasher *hash = *hasher; hash->next; hash = hash->next) {
+    for (struct hasher_s *hash = *hasher; hash->next; hash = hash->next) {
         if (!(strcmp(to_insert->key, hash->next->key))) {
             overrided = hash->next;
             hash->next = to_insert;
-            to_insert->next = overrided;
+            to_insert->next = overrided->next;
             overrided->next = NULL;
             break;
         }

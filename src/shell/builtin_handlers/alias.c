@@ -22,7 +22,7 @@
 #include "types/shell.h"
 #include "proto/shell/builtin_handlers.h"
 
-char *alias_concat_argv(const char * const *argv)
+static char *alias_concat_argv(const char * const *argv)
 {
     size_t length = ptb_argv_length(argv);
     char *data = NULL;
@@ -50,8 +50,8 @@ char *alias_concat_argv(const char * const *argv)
 static int insert_alias(struct sh *shell, const char * const *argv)
 {
     char *data = NULL;
-    struct hasher *new = NULL;
-    struct hasher *overrided = NULL;
+    struct hasher_s *new = NULL;
+    struct hasher_s *overrided = NULL;
 
     data = alias_concat_argv(argv);
     if (data == NULL) {
@@ -76,13 +76,13 @@ int builtin_alias_handler(
 )
 {
     if (!argv[1]) {
-        for (struct hasher *alias = shell->alias; alias != NULL;
+        for (struct hasher_s *alias = shell->alias; alias != NULL;
         alias = alias->next) {
             dprintf(1, "%s\t%s\n", alias->key, (char *) alias->data);
         }
         return (0);
     }
-    return (insert_alias(shell, argv));
+    return (!argv[2] || insert_alias(shell, argv));
 }
 
 int builtin_unalias_handler(
@@ -90,7 +90,7 @@ int builtin_unalias_handler(
     const char * const *argv
 )
 {
-    struct hasher *poped = NULL;
+    struct hasher_s *poped = NULL;
 
     if (builtins_utils_too_few_arguments(argv, 1)) {
         return (1);

@@ -11,12 +11,12 @@
 #include "hasher/destroy.h"
 
 void hasher_destroy(
-    struct hasher *hasher,
+    struct hasher_s *hasher,
     _Bool destroy_key,
     _Bool destroy_data
 )
 {
-    for (struct hasher *keep = hasher; hasher; keep = hasher) {
+    for (struct hasher_s *keep = hasher; hasher; keep = hasher) {
         if (destroy_key) {
             free(hasher->key);
         }

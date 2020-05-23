@@ -11,7 +11,7 @@
 #include "hasher/type.h"
 
 void *hasher_replace_data(
-    struct hasher *hasher,
+    struct hasher_s *hasher,
     const char *current_data,
     char *new_data
 );

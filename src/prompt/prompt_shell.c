@@ -28,7 +28,11 @@ static void prompt_fetch(struct sh *shell)
     size_t length = 0;
     ssize_t response;
 
-    response = getline(&buffer, &length, stdin);
+    if (!shell->stream) {
+        shell->active = false;
+        return;
+    }
+    response = getdelim(&buffer, &length, EOF, shell->stream);
     if (response <= 0 || ptb_whitelist(buffer, PTB_WHITESPACES)) {
         if (response < 0) {
             shell->active = false;
@@ -36,8 +40,6 @@ static void prompt_fetch(struct sh *shell)
         if (buffer)
             free(buffer);
         buffer = NULL;
-    } else if (buffer[response - 1] == '\n') {
-        buffer[response - 1] = '\0';
     }
     shell->rawinput = buffer;
 }

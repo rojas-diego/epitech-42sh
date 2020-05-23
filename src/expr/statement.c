@@ -15,7 +15,7 @@
 ** @DESCRIPTION
 **   Rule for statement expression.
 */
-struct expr_statement_s *expr_statement(struct grammar_s *this)
+static struct expr_statement_s *expr_statement(struct grammar_s *this)
 {
     struct expr_statement_s *exp = malloc(sizeof(struct expr_statement_s));
     unsigned int save_index = this->index;
@@ -28,8 +28,8 @@ struct expr_statement_s *expr_statement(struct grammar_s *this)
         this->index = save_index;
     else
         return exp;
-    exp->compound_command = expr_compound_command_w(this);
-    if (!exp->compound_command)
+    exp->compound = expr_compound_w(this);
+    if (!exp->compound)
         this->index = save_index;
     else
         return exp;

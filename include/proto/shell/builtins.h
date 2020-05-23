@@ -10,6 +10,6 @@
 
 #include "hasher/type.h"
 
-struct hasher *shell_builtin_hash_create(void);
+struct hasher_s *shell_builtin_hash_create(void);
 
 #endif /* !SH_SHELL_BUILTINS_H_ */

@@ -13,11 +13,21 @@ TESTNAME =	unit_tests
 
 MAIN =		src/main.c						\
 
-SRC =		src/constants.c					\
-			src/check_debug_mode.c			\
+SRC =		src/constants.c						\
+		src/check_debug_mode.c					\
 									\
 		src/exec/get_argv.c					\
 		src/exec/simple_exec.c					\
+									\
+		src/exec/magic/parse.c					\
+		src/exec/magic/do_subshelled_magic_quote.c		\
+									\
+		src/shell/local_variables/display.c			\
+		src/shell/local_variables/assign_value.c		\
+		src/shell/local_variables/from_data.c			\
+		src/shell/local_variables/get_type.c			\
+		src/shell/local_variables/init.c			\
+		src/shell/local_variables/destroy.c			\
 									\
 		src/prompt/history/init.c				\
 		src/prompt/history/insert.c				\
@@ -25,7 +35,7 @@ SRC =		src/constants.c					\
 		src/prompt/history/replace.c				\
 									\
 		src/shell/shell_init.c					\
-		src/shell/shell_start.c				\
+		src/shell/shell_start.c					\
 		src/shell/shell_destroy.c				\
 		src/shell/term_init.c					\
 		src/shell/builtins_init.c				\
@@ -34,23 +44,28 @@ SRC =		src/constants.c					\
 		src/shell/shlvl_update.c				\
 									\
 		src/shell/builtin_handlers/builtins.c			\
-		src/shell/builtin_handlers/cd.c			\
+		src/shell/builtin_handlers/cd.c				\
+		src/shell/builtin_handlers/debug.c			\
 		src/shell/builtin_handlers/echo.c			\
 		src/shell/builtin_handlers/env.c			\
 		src/shell/builtin_handlers/exit.c			\
 		src/shell/builtin_handlers/alias.c			\
 		src/shell/builtin_handlers/bindkey.c			\
-		src/shell/builtin_handlers/fg.c			\
+		src/shell/builtin_handlers/fg.c				\
+		src/shell/builtin_handlers/history.c			\
 		src/shell/builtin_handlers/source.c			\
 		src/shell/builtin_handlers/termname.c			\
 		src/shell/builtin_handlers/null_command.c		\
 		src/shell/builtin_handlers/wait.c			\
 		src/shell/builtin_handlers/where.c			\
 		src/shell/builtin_handlers/which.c			\
-		src/shell/builtin_handlers/bg.c			\
+		src/shell/builtin_handlers/bg.c				\
 		src/shell/builtin_handlers/jobs.c			\
-		src/shell/builtin_handlers/too_many_arguments.c	\
+		src/shell/builtin_handlers/too_many_arguments.c		\
 		src/shell/builtin_handlers/too_few_arguments.c		\
+		src/shell/builtin_handlers/set.c			\
+		src/shell/builtin_handlers/unset.c			\
+		src/shell/builtin_handlers/at.c				\
 									\
 		src/input/executer/input_execute.c			\
 		src/input/parser/input_parse.c				\
@@ -61,25 +76,56 @@ SRC =		src/constants.c					\
 		src/token/token.c					\
 		src/token/token_validate.c				\
 		src/token/token_validate_token.c			\
-		src/token/token_validate_meta.c			\
+		src/token/token_validate_meta.c				\
 									\
 		src/grammar/grammar_advance.c				\
 		src/grammar/grammar_match.c				\
 		src/grammar/grammar_toolbox.c				\
 									\
-		src/expr/program.c \
-		src/expr/block.c \
-		src/expr/statement.c \
-		src/expr/compound_command.c \
-		src/expr/subshell.c \
-		src/expr/grouping.c \
-		src/expr/pipeline.c \
-		src/expr/command.c \
-		src/expr/redirection.c \
-		src/expr/separator.c \
-		src/expr/control.c \
-		src/expr/utility.c \
-							\
+		src/expr/program.c					\
+		src/expr/block.c					\
+		src/expr/statement.c					\
+		src/expr/jobs.c						\
+		src/expr/subshell.c					\
+		src/expr/grouping.c					\
+		src/expr/pipeline.c					\
+		src/expr/command.c					\
+		src/expr/redirection.c					\
+		src/expr/separator.c					\
+		src/expr/control.c					\
+		src/expr/compound.c					\
+		src/expr/if_inline_control.c				\
+		src/expr/if_control.c					\
+		src/expr/else_if_control.c				\
+		src/expr/else_control.c					\
+		src/expr/foreach_control.c				\
+		src/expr/while_control.c				\
+		src/expr/repeat_control.c				\
+		src/expr/wordlist_expression.c				\
+		src/expr/wordlist.c					\
+		src/expr/utility.c					\
+									\
+		src/expr/destroy/program.c				\
+		src/expr/destroy/block.c				\
+		src/expr/destroy/statement.c				\
+		src/expr/destroy/jobs.c					\
+		src/expr/destroy/subshell.c				\
+		src/expr/destroy/grouping.c				\
+		src/expr/destroy/pipeline.c				\
+		src/expr/destroy/command.c				\
+		src/expr/destroy/redirection.c				\
+		src/expr/destroy/separator.c				\
+		src/expr/destroy/control.c				\
+		src/expr/destroy/if_control.c				\
+		src/expr/destroy/else_if_control.c			\
+		src/expr/destroy/else_control.c				\
+		src/expr/destroy/foreach_control.c			\
+		src/expr/destroy/while_control.c			\
+		src/expr/destroy/repeat_control.c			\
+		src/expr/destroy/wordlist_expression.c			\
+		src/expr/destroy/wordlist.c				\
+		src/expr/destroy/compound.c				\
+									\
 		src/prompt/actions/arrows.c				\
 		src/prompt/actions/backspace.c				\
 		src/prompt/actions/delete.c				\
@@ -89,8 +135,8 @@ SRC =		src/constants.c					\
 		src/prompt/actions/interrupt.c				\
 		src/prompt/actions/tab.c				\
 		src/prompt/actions/cut_line.c				\
-		src/prompt/actions/clear_line.c			\
-		src/prompt/actions/clear_term.c			\
+		src/prompt/actions/clear_line.c				\
+		src/prompt/actions/clear_term.c				\
 									\
 		src/prompt/input/get_input.c				\
 		src/prompt/input/get_extended_input.c			\
@@ -111,26 +157,56 @@ SRC =		src/constants.c					\
 		src/prompt/set_raw_mode.c				\
 									\
 		src/job/process/launch.c				\
-		src/job/process/update_status.c			\
-		src/job/utils.c					\
+		src/job/process/update_status.c				\
+		src/job/process/create.c				\
+		src/job/process/append.c				\
+		src/job/utils.c						\
 		src/job/launch.c					\
 		src/job/put.c						\
 		src/job/sighandler.c					\
 		src/job/continue.c					\
 		src/job/free.c						\
+		src/job/destroy.c					\
 		src/job/format_info.c					\
 		src/job/wait_for.c					\
 		src/job/do_notification.c				\
 		src/job/initialize.c					\
+		src/job/create.c					\
+									\
+		src/exec/rule/debug.c					\
+		src/exec/rule/block.c					\
+		src/exec/rule/command.c					\
+		src/exec/rule/command/add_word.c			\
+		src/exec/rule/command/add_redirection.c			\
+		src/exec/rule/command/init_redirection.c		\
+		src/exec/rule/control.c					\
+		src/exec/rule/grouping.c				\
+		src/exec/rule/jobs.c					\
+		src/exec/rule/pipeline.c				\
+		src/exec/rule/program.c					\
+		src/exec/rule/compound.c				\
+		src/exec/rule/redirection.c				\
+		src/exec/rule/separator.c				\
+		src/exec/rule/statement.c				\
+		src/exec/rule/subshell.c				\
+		src/exec/rule/wordlist.c				\
+		src/exec/rule/wordlist_expression.c			\
+		src/exec/rule/control/check_condition.c			\
+		src/exec/rule/control/else.c				\
+		src/exec/rule/control/else_if.c				\
+		src/exec/rule/control/foreach.c				\
+		src/exec/rule/control/while.c				\
+		src/exec/rule/control/repeat.c				\
+		src/exec/rule/control/if.c				\
 
-SRCT =		tests/input/parser/test_input_parse.c			\
+SRCT =		tests/input/parser/test_input_parse_tokens.c		\
 		tests/grammar/test_grammar_match.c			\
 
 OBJ =		$(SRC:.c=.o)
 OBJM =		$(MAIN:.c=.o)
 OBJT =		$(SRCT:.c=.o)
 
-WARNINGS =	-pedantic -Wshadow -Wpointer-arith -Wcast-align	\
+WARNINGS =	-pedantic -Wshadow -Wpointer-arith -Wcast-align		\
 		-Wmissing-prototypes -Wmissing-declarations		\
 		-Wnested-externs -Wwrite-strings -Wconversion		\
 		-Wredundant-decls -Winline -Wno-long-long		\
@@ -152,6 +228,7 @@ LIBNAMES =	builtins						\
 		input_postprocessing					\
 		find_binary						\
 		hasher							\
+		myerror							\
 		parser_toolbox						\
 
 LIBFOLDER =	./lib
@@ -175,7 +252,7 @@ $(NAME):	compiling
 
 %.o:		%.c
 		@ echo -e "." $<
-		@ $(CC) -o $@ -c $< $(CFLAGS) $(CPPFLAGS)
+		@ $(CC) -o $@ -c $< $(CFLAGS) $(CPPFLAGS) -fprofile-abs-path
 
 tests_run:	compiling
 		@ echo -e "===> Compiling unit_tests"

@@ -29,6 +29,7 @@
 
 void grammar_program(struct grammar_s *this);
 bool grammar_match(struct grammar_s *this, unsigned long int count, ...);
+void grammar_set_error(struct grammar_s *this, char const *message);
 struct token_s *grammar_get_previous(struct grammar_s *this);
 struct token_s *grammar_peek(struct grammar_s *this);
 struct token_s *grammar_advance(struct grammar_s *this);

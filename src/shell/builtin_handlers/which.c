@@ -46,12 +46,12 @@ static int builtin_which(struct sh *shell, const char *name)
 
     str = (char *) hasher_get_data(shell->alias, name);
     if (str) {
-        dprintf(1, "%s is aliased to %s\n", name, str);
+        dprintf(1, "%s: \t aliased to ls --color=auto %s\n", name, str);
         return (0);
     }
     str = (char *) hasher_get_data(shell->builtin, name);
     if (str) {
-        dprintf(1, "%s is a shell built-in\n", name);
+        dprintf(1, "%s: shell built-in command.\n", name);
         return (0);
     }
     if (!builtin_which_display_all_match(name)) {

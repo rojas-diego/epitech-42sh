@@ -14,6 +14,19 @@
 #include "constants/prompt/builtins/private_bindkey.h"
 #include "proto/shell/builtin_handlers.h"
 
+#include "types/builtins/bindkey.h"
+#include "proto/shell/bindkey.h"
+
+void builtin_bindkey_bind(
+    __attribute__((unused)) struct sh *shell,
+    __attribute__((unused)) const char * const *argv
+);
+
+void builtin_bindkey_display_settings(
+    struct sh *shell,
+    __attribute__((unused)) const char * const *argv
+);
+
 void builtin_bindkey_list(
     __attribute__((unused)) struct sh *shell,
     __attribute__((unused)) const char * const *argv
@@ -27,7 +40,7 @@ void builtin_bindkey_help(
     __attribute__((unused)) const char * const *argv
 )
 {
-    printf(BUILTIN_BINDKEY_HELP);
+    printf("%s%s", BUILTIN_BINDKEY_HELP, BUILTIN_BINDKEY_HELP_PART_2);
 }
 
 void builtin_bindkey_display_settings(
@@ -35,15 +48,16 @@ void builtin_bindkey_display_settings(
     __attribute__((unused)) const char * const *argv
 )
 {
-    for (struct hasher *this = shell->bindkey; this; this = this->next) {
+    int i;
+
+    for (struct hasher_s *this = shell->bindkey; this; this = this->next) {
         printf("\"");
-        for (int i = 0; this->key[i]; i++) {
+        for (i = 0; this->key[i]; i++) {
             if (isprint(this->key[i]))
                 printf("%c", this->key[i]);
         }
-        printf("\"");
-        printf(" -> ");
-        printf("\n");
+        printf("\"%*s", 13 - i, "");
+        printf("->  %s\n", ((struct bindkey_s *) this->data)->name);
     }
 }
 

@@ -19,8 +19,7 @@
 ** @DESCRIPTION
 **  Defines all of the shell tokens.
 */
-typedef enum tokent_e
-{
+typedef enum tokent_e {
     TOK_NONE,
     TOK_EOF,
     TOK_WORD,
@@ -54,10 +53,10 @@ typedef enum tokent_e
     TOK_ENDSW,
     TOK_CONTINUE,
     TOK_FOREACH,
+    TOK_ENDIF,
     TOK_END,
     TOK_GOTO,
     TOK_IF,
-    TOK_ENDIF,
     TOK_ELSE_IF,
     TOK_ELSE,
     TOK_THEN,

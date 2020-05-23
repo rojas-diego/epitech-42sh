@@ -13,9 +13,9 @@
 
 /* No more, source .42shrc && .42sh_profile && .42sh_history */
 
-struct hasher *shell_alias_hash_create(void)
+struct hasher_s *shell_alias_hash_create(void)
 {
-    struct hasher *hash = NULL;
+    struct hasher_s *hash = NULL;
 
     return (hash);
 }

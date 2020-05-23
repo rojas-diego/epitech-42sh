@@ -9,13 +9,16 @@ program             ::=     [ block ] EOF
 block               ::=     statement [ block ]
                     ;
 
-statement           ::=     subshell | compound_command | control
+statement           ::=     subshell | compound | control
                     ;
 
-compound_command    ::=     [ grouping ] separator
+compound            ::=     [ & ] grouping ( jobs )* [ & ] separator
                     ;
 
-subshell            ::=     OPARANTH block CPARANTH
+jobs                ::=     & grouping [ jobs ]
+                    ;
+
+subshell            ::=     LPARANTH block RPARANTH
                     ;
 
 grouping            ::=     pipeline ( ( AND_IF | OR_IF ) grouping )*
@@ -24,7 +27,7 @@ grouping            ::=     pipeline ( ( AND_IF | OR_IF ) grouping )*
 pipeline            ::=     command ( PIPE pipeline )*
                     ;
 
-command             ::=     WORD [ redirection ] [ command ]
+command             ::=     ( WORD | redirection ) [ command ]
                     ;
 
 redirection         ::=     [ IO_NUMBER ] GREAT WORD
@@ -33,37 +36,37 @@ redirection         ::=     [ IO_NUMBER ] GREAT WORD
                     |       DLESS WORD
                     ;
 
-separator           ::=     NEWLINE | SEMI
+separator           ::=     NEWLINE | SEMI | EOF
                     ;
 
 # Control Flow !
-control             ::=     if_control | while_control | foreach_control | repeat_control
+control             ::=     if_inline_control | if_control | while_control | foreach_control | repeat_control
                     ;
 
-if_control          ::=     IF conditional THEN NEWLINE [ block ] [ else_if_control ] ENDIF NEWLINE
+if_inline_control   ::=     IF wordlist_expression grouping NEWLINE
                     ;
 
-else_if_control     ::=     ELSE_IF conditional NEWLINE [ block ] [ else_control ]
+if_control          ::=     IF wordlist_expression THEN NEWLINE block [ else_if_control ] [ else_control ] ENDIF NEWLINE
                     ;
 
-else_control        ::=     ELSE NEWLINE [ block ]
+else_if_control     ::=     ELSE_IF wordlist_expression THEN NEWLINE block [ else_if_control ]
                     ;
 
-foreach_control     ::=     FOREACH NAME wordlist_expression
+else_control        ::=     ELSE NEWLINE block
                     ;
 
-while_control       ::=     WHILE conditional NEWLINE block END NEWLINE
+foreach_control     ::=     FOREACH WORD wordlist_expression NEWLINE block END NEWLINE
+                    ;
+
+while_control       ::=     WHILE wordlist_expression NEWLINE block END NEWLINE
                     ;
 
 repeat_control      ::=     REPEAT WORD grouping
                     ;
 
-wordlist_expression ::=     OPARANTH wordlist CPARANTH
+wordlist_expression ::=     LPARANTH wordlist RPARANTH
                     ;
 
 wordlist            ::=     WORD [ wordlist ]
-                    ;
-
-conditional         ::=     OPARANTH WORD CPARANTH
                     ;
 # ! Control Flow

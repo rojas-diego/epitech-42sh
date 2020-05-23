@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "proto/constants.h"
 #include "proto/grammar.h"
 #include "proto/expr.h"
 
@@ -15,7 +16,7 @@
 ** @DESCRIPTION
 **   Rule for program expression.
 */
-struct expr_program_s *expr_program(struct grammar_s *this)
+static struct expr_program_s *expr_program(struct grammar_s *this)
 {
     struct expr_program_s *exp = malloc(sizeof(struct expr_program_s));
     unsigned int save_index = this->index;
@@ -28,8 +29,10 @@ struct expr_program_s *expr_program(struct grammar_s *this)
         this->index = save_index;
     } if (grammar_match(this, 1, TOK_EOF)) {
         exp->eof = grammar_get_previous(this);
-    } else {
-        this->error = true;
+    } else if (this->index != this->token_count) {
+        grammar_set_error(this, AST_UNEXPECTED_TOKENS);
+        free(exp);
+        return NULL;
     }
     return exp;
 }

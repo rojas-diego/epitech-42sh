@@ -17,6 +17,8 @@
 #include "proto/shell/bindkey.h"
 #include "constants/prompt/private_bindkey_init.h"
 
+#include "types/builtins/bindkey.h"
+
 static const int BINDKEY_COUNT = 19;
 
 /*
@@ -26,10 +28,7 @@ static const int BINDKEY_COUNT = 19;
 */
 static const struct {
     const char *key;
-    const struct {
-        prompt_action func;
-        const char *name;
-    } data;
+    struct bindkey_s data;
 } BINDKEY_DICT[] = {
     {"kdch1",   {&prompt_action_delete,      ""}},
     {"khome",   {&prompt_action_home,        ""}},
@@ -179,9 +178,9 @@ static const struct {
     // {end,     {&action_end_of_line,             "end-of-line"}},
 };
 
-struct hasher *shell_bindkey_hash_create(void)
+struct hasher_s *shell_bindkey_hash_create(void)
 {
-    struct hasher *hash = NULL;
+    struct hasher_s *hash = NULL;
     char *key = NULL;
 
     for (int i = 0; i < BINDKEY_COUNT; ++i) {
@@ -195,7 +194,7 @@ struct hasher *shell_bindkey_hash_create(void)
         if (hasher_insert_data(
             &hash,
             key,
-            (void *) BINDKEY_DICT[i].data.func
+            (void *) &BINDKEY_DICT[i].data
         )) {
             return (NULL);
         }

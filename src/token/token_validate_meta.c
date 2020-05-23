@@ -27,7 +27,7 @@ unsigned int token_validate_io_number(
     for (i = 0; string[i]; i++) {
         if (ptb_range('0', '9', string[i])) {
             continue;
-        } else if (ptb_includes(string[i + 1], "<>")) {
+        } else if (token_peek_characters(string + i, "<>")) {
             return (i + 1);
         } else {
             return 0;

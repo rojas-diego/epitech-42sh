@@ -15,7 +15,7 @@
 ** @DESCRIPTION
 **   Rule for separator expression.
 */
-struct expr_separator_s *expr_separator(struct grammar_s *this)
+static struct expr_separator_s *expr_separator(struct grammar_s *this)
 {
     struct expr_separator_s *exp = malloc(
         sizeof(struct expr_separator_s));
@@ -24,7 +24,7 @@ struct expr_separator_s *expr_separator(struct grammar_s *this)
     if (!exp)
         exit(84);
     memset(exp, 0, sizeof(struct expr_separator_s));
-    if (!grammar_match(this, 2, TOK_NEWLINE, TOK_SEMI)) {
+    if (!grammar_match(this, 3, TOK_NEWLINE, TOK_SEMI, TOK_EOF)) {
         free(exp);
         return NULL;
     }

@@ -10,8 +10,8 @@
 
 #include "hasher/type.h"
 
-struct hasher *hasher_filter(
-    struct hasher **hasher,
+struct hasher_s *hasher_filter(
+    struct hasher_s **hasher,
     const char *key,
     size_t len
 );

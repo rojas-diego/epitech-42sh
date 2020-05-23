@@ -44,7 +44,7 @@ static enum change_directory_e builtin_change_directory_to_home(void)
         return (CD_GETPWUID_FAIL);
     }
     if (chdir(home) == -1) {
-        perror("cd");
+        dprintf(2, "%s: Not a directory.\n", home);
         return (CD_CHDIR_FAIL);
     }
     return (builtin_change_directory_set_env("PWD"));
@@ -82,7 +82,7 @@ enum change_directory_e builtin_change_directory(const char *path)
     }
     builtin_change_directory_set_env("OLDPWD");
     if (chdir(path) == -1) {
-        perror("cd");
+        dprintf(2, "%s: Not a directory.\n", path);
         return (CD_CHDIR_FAIL);
     }
     builtin_change_directory_set_env("PWD");
