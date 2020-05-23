@@ -29,7 +29,7 @@ static struct expr_pipeline_s *expr_pipeline(struct grammar_s *this)
     if (!exp->subshell) {
         this->index = save_index;
         exp->command = expr_command_w(this);
-        if (!exp->command) {
+        if (!exp->command || do_ambiguous_redirection_check(exp->command)) {
             free(exp);
             return NULL;
         }
