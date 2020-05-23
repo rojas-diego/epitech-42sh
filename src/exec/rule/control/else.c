@@ -7,14 +7,16 @@
 
 #include "proto/exec/rule/debug.h"
 
+#include "proto/exec/rule/block.h"
 #include "proto/exec/rule/control/else.h"
 
 int exec_rule_control_else(
     struct sh *shell,
-    __attribute__((unused)) struct expr_else_control_s *rule
+    struct expr_else_control_s *rule
 )
 {
     exec_rule_debug(shell, "else", true);
+    exec_rule_block(shell, rule->block);
     exec_rule_debug(shell, "else", false);
     return (0);
 }

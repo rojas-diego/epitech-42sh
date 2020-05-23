@@ -19,15 +19,20 @@ void job_format_info_launch_background(struct job_s *job)
     fprintf(stdout, "\n");
 }
 
-void job_format_info(struct job_s *job, const char *status)
+
+void job_format_info(struct job_s *job, const char *status, _Bool dumped)
 {
     char state = '+';
 
+    if (job->foreground) {
+        return;
+    }
     fprintf(
-        stderr, "%*c %-30s%s\n",
+        stderr, "%*c %-30s%s%s\n",
         fprintf(stderr, "[%d]", job->launch_id) == 3 ? 2 : 1,
         state,
         status,
-        job->command
+        job->command,
+        dumped ? " (core dumped)" : ""
     );
 }

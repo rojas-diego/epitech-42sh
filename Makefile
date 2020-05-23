@@ -164,6 +164,7 @@ SRC =		src/constants.c					\
 		src/job/sighandler.c					\
 		src/job/continue.c					\
 		src/job/free.c						\
+		src/job/destroy.c						\
 		src/job/format_info.c					\
 		src/job/wait_for.c					\
 		src/job/do_notification.c				\
@@ -189,6 +190,7 @@ SRC =		src/constants.c					\
 		src/exec/rule/subshell.c				\
 		src/exec/rule/wordlist.c				\
 		src/exec/rule/wordlist_expression.c			\
+		src/exec/rule/control/check_condition.c				\
 		src/exec/rule/control/else.c				\
 		src/exec/rule/control/else_if.c			\
 		src/exec/rule/control/foreach.c			\

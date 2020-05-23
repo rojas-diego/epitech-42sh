@@ -12,4 +12,6 @@
 
 void exec_rule_debug(struct sh *shell, const char *rule, bool entering);
 
+void exec_rule_job_display(struct sh *shell, struct job_s *job);
+
 #endif /* !SH_SHELL_EXEC_RULE_DEEBUG_H_ */

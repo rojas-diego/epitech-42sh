@@ -24,7 +24,7 @@ struct job_s *job_create(int launch_id)
         .notified = false,
         .tmodes = {0},
         .io = {IO_IN, IO_OUT, IO_ERR},
-        .foreground = false,
+        .foreground = true,
         .launch_id = launch_id
     };
     return (job);

@@ -6,6 +6,7 @@
 */
 
 #include "proto/exec/rule/debug.h"
+#include "types/exec/rule.h"
 
 #include "proto/job/process/create.h"
 #include "proto/job/process/append.h"
@@ -23,23 +24,23 @@ int exec_rule_command(
 
     exec_rule_debug(shell, "command", true);
     if (!process) {
-        return (1);
+        return (EXEC_RULE_ALLOCATION_FAIL);
     }
     for (; rule; rule = rule->command) {
         if (rule->word) {
             exec_rule_debug(shell, "word", true);
             if (exec_rule_command_add_word(process, rule->word, shell->rawinput)) {
-                return (1);
+                return (EXEC_RULE_ALLOCATION_FAIL);
             }
             exec_rule_debug(shell, "word", false);
         } else if (rule->redirection) {
             if (exec_rule_command_add_redirection(job, rule->redirection, shell->rawinput)) {
-                return (1);
+                return (EXEC_RULE_AMBIGUOUS_REDIRECTION);
             }
         } else {
         }
     }
     job_process_append(job, process);
     exec_rule_debug(shell, "command", false);
-    return (0);
+    return (EXEC_RULE_SUCCESS);
 }
