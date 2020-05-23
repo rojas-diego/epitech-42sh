@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "proto/constants.h"
 #include "proto/grammar.h"
 #include "proto/expr.h"
 
@@ -34,7 +35,7 @@ static struct expr_pipeline_s *expr_pipeline(struct grammar_s *this)
     exp->pipe = grammar_get_previous(this);
     exp->pipeline = expr_pipeline(this);
     if (!exp->pipeline) {
-        this->error = true;
+        grammar_set_error(this, AST_NULL_COMMAND);
         free(exp);
         return NULL;
     }
