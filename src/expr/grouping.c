@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "proto/constants.h"
 #include "proto/grammar.h"
 #include "proto/expr.h"
 
@@ -34,7 +35,7 @@ static struct expr_grouping_s *expr_grouping(struct grammar_s *this)
     exp->conditional = grammar_get_previous(this);
     exp->grouping = expr_grouping_w(this);
     if (!exp->grouping) {
-        this->error = true;
+        grammar_set_error(this, AST_NULL_COMMAND);
         free(exp);
         return NULL;
     }
