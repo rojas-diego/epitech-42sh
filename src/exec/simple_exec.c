@@ -29,8 +29,6 @@ static void simple_binary_exec(wordexp_t *we)
         exit(84);
     } else if (pid == 0) {
         execvp(we->we_wordv[0], we->we_wordv);
-        perror(we->we_wordv[0]);
-        wordfree(we);
         exit(84);
     }
     waitpid(pid, NULL, 0);

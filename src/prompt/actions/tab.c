@@ -32,7 +32,6 @@ static void prompt_action_tab_extend_glob(
     char *str
 )
 {
-
     enum parser_toolbox_e ret;
     char **copy = NULL;
 
@@ -66,9 +65,9 @@ static void prompt_action_tab_extend_glob_from_env_path(
     if (wordexp(str, &we, 0))
         return;
     for (; *str != '*' && !is_path && path; path = path_iteration(path_env)) {
-        size_t l = strlen(path) + 2 + strlen(str);
-        char *tmp = malloc(l);
-        strncpy(tmp, path, l);
+        size_t len = strlen(path) + 2 + strlen(str);
+        char *tmp = malloc(len);
+        strncpy(tmp, path, len);
         strcat(tmp, "/");
         strcat(tmp, str);
         if (wordexp(tmp, &we, WRDE_APPEND)) {

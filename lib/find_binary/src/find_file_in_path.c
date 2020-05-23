@@ -37,7 +37,6 @@ static enum find_file_in_path_e find_file_in_path_handling(
         return (FFIP_FOUND);
     }
     if (stat(current_path, &sb) == -1) {
-        perror(current_path);
         return (FFIP_ERROR);
     }
     free(current_path);
