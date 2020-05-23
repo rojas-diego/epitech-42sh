@@ -158,7 +158,10 @@ function magic_quote() {
 
 function _alias () {
     $YELLOW ; echo "=----= ALIAS =----=" ; $WHITE
-    display_test_result ALIAS
+    _test 'alias lol ls \n lol' "" cat repeat "basic alias"
+    _test 'alias lol=ls \n lol' "" cat repeat "error alias 1"
+    _test 'alias lolle eqwo \n lollle' "" cat repeat "error alias 2"
+    display_test_result _ALIAS
 }
 
 function scripting () {
@@ -245,6 +248,7 @@ function all () {
     _where
     _which
     _foreach
+    _alias
 
     NB_TEST_PASSED=$TOTAL_TESTS_PASSED
     NB_TEST_FAILED=$TOTAL_TESTS_FAILED
