@@ -19,14 +19,20 @@ struct hasher_s *local_variables_init(void)
 {
     struct hasher_s *hasher = NULL;
     struct local_var_s *var = NULL;
+    char *str = getcwd(NULL, 0);
 
-    var = local_variable_from_data(hasher, "cwd", getcwd(NULL, 0));
-    if (var->data.string) {
-        hasher_insert_data_ordered(&hasher, strdup("cwd"), var);
+    if (str) {
+        var = local_variable_from_data(hasher, "cwd", str);
+        if (var->data.string) {
+            hasher_insert_data_ordered(&hasher, strdup("cwd"), var);
+        }
     }
-    var = local_variable_from_data(hasher, "term", getenv("TERM"));
-    if (var->data.string) {
-        hasher_insert_data_ordered(&hasher, strdup("term"), var);
+    str = getenv("TERM");
+        if (str) {
+        var = local_variable_from_data(hasher, "term", str);
+        if (var->data.string) {
+            hasher_insert_data_ordered(&hasher, strdup("term"), var);
+        }
     }
     return (hasher);
 }
