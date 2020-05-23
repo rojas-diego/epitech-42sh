@@ -19,7 +19,8 @@ void expr_pipeline_destroy(struct expr_pipeline_s *this)
     if (!this) {
         return;
     }
-    expr_command_destroy(this->command);
+    expr_subshell_destroy(this->subshell);
     expr_pipeline_destroy(this->pipeline);
+    expr_command_destroy(this->command);
     free(this);
 }
