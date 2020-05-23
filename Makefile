@@ -19,6 +19,8 @@ SRC =		src/constants.c					\
 		src/exec/get_argv.c					\
 		src/exec/simple_exec.c					\
 									\
+		src/exec/magic/parse.c					\
+									\
 		src/shell/local_variables/display.c			\
 		src/shell/local_variables/assign_value.c		\
 		src/shell/local_variables/from_data.c			\
