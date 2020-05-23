@@ -131,7 +131,7 @@ struct expr_else_if_control_s {
     struct token_s                      *then;
     struct token_s                      *newline;
     struct expr_block_s                 *block;
-    struct expr_else_control_s          *else_control;
+    struct expr_else_if_control_s       *else_if_control;
 };
 
 /*
@@ -145,6 +145,7 @@ struct expr_if_control_s {
     struct token_s                      *then_newline;
     struct expr_block_s                 *block;
     struct expr_else_if_control_s       *else_if_control;
+    struct expr_else_control_s          *else_control;
     struct token_s                      *endif;
     struct token_s                      *endif_newline;
 };
