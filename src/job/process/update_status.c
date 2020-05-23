@@ -62,7 +62,7 @@ static int job_process_update_record_process(
         if (!WIFSIGNALED(status))
             return (1);
         if (job->foreground)
-            fprintf(stderr, "Terminated\n");
+            job_process_handle_status(status);
         else
             job_format_info(job, "Terminated");
         return (1);
@@ -77,9 +77,6 @@ int job_process_update_status(struct job_s *first_job, pid_t pid, int status)
     }  else if (pid < 0) {
         perror("waitpid");
         return (-1);
-    }
-    if (status) {
-        job_process_handle_status(status);
     }
     for (struct job_s *job = first_job; job; job = job->next) {
         if (job_process_update_record_process(job, pid, status)) {

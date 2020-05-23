@@ -9,12 +9,48 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <errno.h>
 
 #include "hasher/get_data.h"
 #include "types/builtins.h"
 
 #include "proto/sighandler.h"
 #include "proto/job/process/launch.h"
+
+static const size_t NB_EXEC_ERROR = 18;
+
+static const struct {
+    int err_nbr;
+    char *status;
+} EXEC_ERROR[] = {
+    {E2BIG, "Argument list too long."},
+    {EACCES, "Permission denied."},
+    {EAGAIN, "EAGAIN."},
+    {EFAULT, "EFAULT."},
+    {EINVAL, "EINVAL."},
+    {EIO, "EIO."},
+    {EISDIR, "EISDIR."},
+    {ELIBBAD, "ELIBBAD."},
+    {ELOOP, "ELOOP."},
+    {EMFILE, "EMFILE."},
+    {ENAMETOOLONG, "File name too long."},
+    {ENFILE, "ENFILE."},
+    {ENOENT, "Command not found."},
+    {ENOEXEC, "Exec format error. Wrong Architecture."},
+    {ENOMEM, "ENOMEM."},
+    {ENOTDIR, "Not a directory."},
+    {EPERM, "EPERM."},
+    {ETXTBSY, "ETXTBSY."}
+};
+
+static void process_launch_find_exec_error(void)
+{
+    for (size_t i = 0; i < NB_EXEC_ERROR; ++i) {
+        if (errno == EXEC_ERROR[i].err_nbr) {
+            printf("%s\n", EXEC_ERROR[i].status);
+        }
+    }
+}
 
 static void process_launch_init_pipes(int fds[IO_COUNT])
 {
@@ -45,6 +81,7 @@ static void process_launch_exec(
         exit((*builtin)(shell, (const char * const *) process->argv));
     } else {
         execvp(process->argv[0], process->argv);
+        process_launch_find_exec_error();
     }
 }
 
