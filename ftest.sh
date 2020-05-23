@@ -154,6 +154,9 @@ function scripting () {
 
 function _foreach () {
     $YELLOW ; echo "=----= FOREACH =----=" ; $WHITE
+    _test 'foreach f (1 543 5) \n echo $f \n end' "" cat repeat "basic foreach"
+    _test 'foreach f (1) \n if($f) ls \n end' "" cat repeat "combined with if foreach"
+    display_test_result _FOREACH
 }
 
 function _which () {
@@ -226,6 +229,7 @@ function all () {
     _if
     _where
     _which
+    _foreach
 
     NB_TEST_PASSED=$TOTAL_TESTS_PASSED
     NB_TEST_FAILED=$TOTAL_TESTS_FAILED
