@@ -10,15 +10,10 @@
 #include "types/token.h"
 
 #include "types/exec/rule.h"
+#include "proto/exec/rule/command/init_redirection.h"
 #include "proto/exec/rule/command/add_redirection.h"
 
-const size_t PROCESS_ARGV_DEFAULT_SIZE = 32;
-
-int exec_do_redirect_right(const char *path);
-int exec_do_redirect_double_right(const char *path);
-int exec_do_redirect_double_left(const char *word);
-int exec_do_redirect_left(const char *path);
-char *token_get_string(const struct token_s *this, const char *rawinput);
+static const size_t PROCESS_ARGV_DEFAULT_SIZE = 32;
 
 int exec_rule_command_add_redirection(
     struct job_s *job,

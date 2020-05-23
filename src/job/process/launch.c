@@ -26,7 +26,7 @@ static const size_t NB_EXEC_ERROR = 18;
 
 static const struct {
     int err_nbr;
-    char *status;
+    const char *status;
 } EXEC_ERROR[] = {
     {E2BIG, "Argument list too long."},
     {EACCES, "Permission denied."},

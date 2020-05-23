@@ -10,8 +10,9 @@
 #include <stdlib.h>
 #include <fcntl.h>
 #include <string.h>
-
 #include <errno.h>
+
+#include "proto/exec/rule/command/init_redirection.h"
 
 static void exec_do_redirect_error_handling(const char *path)
 {
@@ -25,7 +26,7 @@ int exec_do_redirect_left(const char *path)
 
     if (fd == -1 || pipe(piped_fd) == -1) {
         exec_do_redirect_error_handling(path);
-        return (1);
+        return (-1);
     }
     dup2(fd, piped_fd[0]);
     close(fd);

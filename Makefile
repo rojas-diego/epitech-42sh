@@ -120,7 +120,6 @@ SRC =		src/constants.c					\
 		src/expr/destroy/repeat_control.c			\
 		src/expr/destroy/wordlist_expression.c			\
 		src/expr/destroy/wordlist.c				\
-		src/expr/destroy/conditional.c				\
 		src/expr/destroy/compound.c				\
 									\
 		src/prompt/actions/arrows.c				\
@@ -176,7 +175,6 @@ SRC =		src/constants.c					\
 		src/exec/rule/command/add_word.c			\
 		src/exec/rule/command/add_redirection.c		\
 		src/exec/rule/command/init_redirection.c	\
-		src/exec/rule/conditional.c				\
 		src/exec/rule/control.c				\
 		src/exec/rule/grouping.c				\
 		src/exec/rule/jobs.c					\

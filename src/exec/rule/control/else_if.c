@@ -20,7 +20,8 @@ int exec_rule_control_else_if(
 {
     exec_rule_debug(shell, "else_if", true);
     for (; rule; rule = NULL) {
-        if (exec_rule_control_check_condition(shell, rule->conditional->word)) {
+        if (exec_rule_control_check_condition(
+        shell, rule->wordlist_expression)) {
             exec_rule_block(shell, rule->block);
             break;
         } else if (rule->else_control) {

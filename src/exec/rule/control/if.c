@@ -20,7 +20,7 @@ int exec_rule_control_if(
 )
 {
     _Bool condition = exec_rule_control_check_condition(
-        shell, rule->conditional->word
+        shell, rule->wordlist_expression
     );
 
     exec_rule_debug(shell, "if", true);
