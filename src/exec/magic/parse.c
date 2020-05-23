@@ -10,6 +10,7 @@
 
 #include "parser_toolbox/string_split.h"
 #include "parser_toolbox/consts.h"
+#include "parser_toolbox/unquote.h"
 
 #include "proto/exec/magic/parse.h"
 

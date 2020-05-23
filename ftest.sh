@@ -112,6 +112,7 @@ function separator () {
 
 function simple_pipe () {
     $YELLOW ; echo "=----= SIMPLE PIPE =----=" ; $WHITE
+    _test '/bin/ls | /cat -e' "" "cat" simple_pipe "Simple pipe"
     display_test_result SIMPLE_PIPE
 }
 
@@ -257,4 +258,9 @@ function clean () {
     rm -f ./tests/ftests/*.ftest
 }
 
-$1
+if [ $1 ]
+then
+    $1
+else
+    all
+fi
