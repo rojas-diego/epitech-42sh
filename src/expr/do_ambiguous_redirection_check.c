@@ -5,6 +5,9 @@
 ** do_ambiguous_redirection_check
 */
 
+#include <stdlib.h>
+#include <string.h>
+
 #include "types/grammar.h"
 #include "types/expr.h"
 #include "proto/expr.h"
@@ -19,7 +22,7 @@ int do_ambiguous_redirection_check(struct expr_command_s *this)
     char *str = NULL;
 
     for (; last->command; last = last->command);
-    str = strndup(rawinput + this->start, last->end - this->start);
-    free(str);
+    //str = strndup(rawinput + this->start, last->end - this->start);
+    //free(str);
     return (0);
 }
