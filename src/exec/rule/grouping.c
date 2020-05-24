@@ -32,7 +32,6 @@ int exec_rule_grouping(
     exec_rule_debug(shell, "grouping", true);
     for (; rule && rule->conditional; rule = rule ? rule->grouping : NULL) {
         last_status = exec_rule_pipeline(shell, rule->pipeline, foreground);
-        printf("STATUS %d\n", last_status);
         if (rule->conditional->type == TOK_AND_IF) {
             if (last_status) {
                 rule = exec_rule_grouping_skip_until_next_or_if(rule);
