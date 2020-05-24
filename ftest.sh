@@ -283,7 +283,8 @@ function total () {
     $RED
     echo -ne "\tTest failed: $TOTAL_TESTS_FAILED\n"
     $WHITE
-    percentage=$((TOTAL_TESTS_PASSED + TOTAL_TESTS_FAILED * 100 / TOTAL_TESTS_PASSED))
+    nb_test=$((TOTAL_TESTS_PASSED + TOTAL_TESTS_FAILED))
+    percentage=$((TOTAL_TESTS_PASSED * 100 / nb_test))
     for i in {1..10}
     do
         if [ $i -lt $((percentage / 10)) ]
