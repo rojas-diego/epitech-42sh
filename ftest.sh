@@ -136,7 +136,7 @@ function advanced_pipe () {
 function redirections () {
     $PURPLE ; echo "=----= REDIRECTIONS =----=" ; $WHITE
     _test 'ls > tests/binaries/redirection_test \ncat tests/binaries/redirection_test' "" cat redirections_simple_right "simple right redirection"
-    _test 'ls > tests/binaries/redirection_test\ls >> tests/binaries/redirection_test\nnls >> tests/binaries/redirection_test\n \ncat tests/binaries/redirection_test' "" cat redirections_double_right "double right redirection"
+    _test 'ls > tests/binaries/redirection_test\nls >> tests/binaries/redirection_test\nls >> tests/binaries/redirection_test\n \ncat tests/binaries/redirection_test' "" cat redirections_double_right "double right redirection"
     _test 'cat < tests/binaries/div_zero.c' "" cat redirections_simple_left "simple left redirection"
     _test 'cat < tests/binaries/div_zero.c > tests/binaries/left_and_right\ncat tests/binaries/left_and_right' "" cat redirections_simple_left_then_right "simple left then right redirection"
     display_test_result REDIRECTIONS
