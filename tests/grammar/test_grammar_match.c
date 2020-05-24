@@ -16,9 +16,8 @@ Test(grammar_match, variadic_test)
 
     this.index = 0;
     this.tokens = malloc(sizeof(struct token_s *) * 3);
-    for (unsigned long int i = 0; i < 3; i++) {
+    for (unsigned long int i = 0; i < 3; i++)
         this.tokens[i] = malloc(sizeof(struct token_s));
-    }
     this.tokens[0]->type = TOK_WORD;
     this.tokens[1]->type = TOK_PIPE;
     this.tokens[2]->type = TOK_NEWLINE;
