@@ -31,9 +31,12 @@ int exec_rule_command(
         return (EXEC_RULE_ALLOCATION_FAIL);
     }
     for (; rule; rule = rule->command) {
-        if (rule->redirection) {
-            exec_rule_command_add_redirection(
-                job, rule->redirection, shell->rawinput);
+        if (!rule->redirection) {
+            continue;
+        }
+        if (exec_rule_command_add_redirection(
+        job, rule->redirection, shell->rawinput)) {
+            return (EXEC_RULE_REDIRECTION_FAIL);
         }
     }
     job_process_append(job, process);

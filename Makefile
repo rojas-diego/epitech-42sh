@@ -55,6 +55,7 @@ SRC_SHELL = src/shell/constants.c 				\
 	src/shell/builtin_handlers/at.c				\
 
 SRC_EXEC = src/exec/get_argv.c					\
+	src/exec/builtins.c							\
 	src/exec/simple_exec.c						\
 	src/exec/magic/parse.c						\
 	src/exec/rule/debug.c						\

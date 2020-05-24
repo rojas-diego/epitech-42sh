@@ -15,6 +15,12 @@
 #include "proto/job/format_info.h"
 #include "proto/job/wait_for.h"
 
+int job_handle_if_builtin(
+    struct sh *shell,
+    struct job_s *job,
+    struct process_s *process
+);
+
 static void job_launch_process_clear_pipe(
     int pipe_fd[2],
     int fildes[IO_COUNT]
@@ -90,10 +96,11 @@ void job_launch(struct sh *shell, struct job_s *job)
             if (pipe(pipe_fd) < 0)
                 exit(1);
             fildes[IO_OUT] = pipe_fd[1];
-            fildes[IO_ERR] = IO_ERR;
         } else {
             fildes[IO_OUT] = job->io[IO_OUT];
             fildes[IO_ERR] = job->io[IO_ERR];
+            if (job_handle_if_builtin(shell, job, process))
+                break;
         }
         job_launch_handle_parent(job, process, shell->atty,
             job_launch_process_fork(shell, job, process, fildes));

@@ -19,7 +19,7 @@
 int do_ambiguous_redirection_check(struct expr_command_s *this)
 {
     struct expr_command_s *last = this;
-    char *str = NULL;
+    //char *str = NULL;
 
     for (; last && last->command; last = last->command);
     return (0);
