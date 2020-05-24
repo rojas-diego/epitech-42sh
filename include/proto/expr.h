@@ -61,7 +61,7 @@ struct expr_if_inline_control_s *expr_if_inline_control_w(
 
 int do_ambiguous_redirection_check(
     struct grammar_s *grammar,
-    struct expr_command_s *this
+    struct expr_pipeline_s *this
 );
 
 #endif

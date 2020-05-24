@@ -12,6 +12,23 @@
 #include "proto/grammar.h"
 #include "proto/expr.h"
 
+static int check_pipeline(
+    struct grammar_s *this,
+    struct expr_grouping_s *exp
+)
+{
+    int ret = do_ambiguous_redirection_check(this, exp->pipeline);
+
+    if (ret == 1) {
+        grammar_set_error(this, AST_AMBIGUOUS_REDIRECTION);
+        return (1);
+    } else if (ret == 2) {
+        grammar_set_error(this, AST_AMBIGUOUS_REDIRECTION2);
+        return (1);
+    }
+    return (0);
+}
+
 /*
 ** @DESCRIPTION
 **   Rule for grouping expression.
@@ -26,7 +43,7 @@ static struct expr_grouping_s *expr_grouping(struct grammar_s *this)
         exit(84);
     memset(exp, 0, sizeof(struct expr_grouping_s));
     exp->pipeline = expr_pipeline_w(this);
-    if (!exp->pipeline)
+    if (!exp->pipeline || check_pipeline(this, exp))
         return (expr_free(exp));
     if (!grammar_match(this, 2, TOK_AND_IF, TOK_OR_IF))
         return exp;
