@@ -267,7 +267,7 @@ clean:
 	@ echo "===> Cleaning..."
 	@ $(RM) $(OBJ) $(OBJM) $(OBJT) *.gcno *.gcda
 	@ find . -name "*.gc*" -type f -delete
-	@-rm gcovr/*.html
+	@ rm gcovr/*.html -rf
 
 fclean:		clean
 	@ echo "===> File cleaning..."
