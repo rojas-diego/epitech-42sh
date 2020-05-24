@@ -28,6 +28,7 @@ function display_test_result() {
     TOTAL_TESTS_FAILED=$(($NB_TEST_FAILED + TOTAL_TESTS_FAILED))
     NB_TEST_PASSED=0
     NB_TEST_FAILED=0
+    echo
 }
 
 function _test () {
@@ -99,6 +100,7 @@ function error_handling () {
     $PURPLE ; echo "=----= ERROR HANDLING =----=" ; $WHITE
     gcc tests/binaries/src/bin_not_compatible.c -o tests/binaries/temp
     tac tests/binaries/temp > tests/binaries/bin_not_compatible
+    chmod +x tests/binaries/bin_not_compatible
     gcc ./tests/binaries/src/div_zero.c -o ./tests/binaries/div_zero
     gcc ./tests/binaries/src/segfault.c -o ./tests/binaries/segfault
     _test './tests/binaries/bin_not_compatible' "" "cat" bin_not_compatible "Bin not compatible"
