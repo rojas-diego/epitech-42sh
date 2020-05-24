@@ -21,7 +21,8 @@ int builtin_history_handler(
     size_t i = 0;
 
     (void)argv;
-    for (struct dnode_s *curr = dnode_goto_end(shell->history.list); curr; curr = curr->prev) {
+    for (struct dnode_s *curr = dnode_goto_end(shell->history.list);
+        curr; curr = curr->prev) {
         printf("%5lu\t%s\n", i, (char *) curr->data);
         ++i;
     }

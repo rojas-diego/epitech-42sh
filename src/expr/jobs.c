@@ -19,8 +19,7 @@ static struct expr_jobs_s *expr_jobs(
     struct grammar_s *this
 )
 {
-    struct expr_jobs_s *exp = malloc(
-        sizeof(struct expr_jobs_s));
+    struct expr_jobs_s *exp = malloc(sizeof(struct expr_jobs_s));
     unsigned int save_index = this->index;
 
     if (!exp)
@@ -38,8 +37,7 @@ static struct expr_jobs_s *expr_jobs(
     }
     save_index = this->index;
     exp->jobs = expr_jobs_w(this);
-    if (!exp->jobs)
-        this->index = save_index;
+    this->index = exp->jobs ? this->index : save_index;
     return exp;
 }
 

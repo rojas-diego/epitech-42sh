@@ -50,7 +50,9 @@ struct expr_else_control_s *expr_else_control_w(struct grammar_s *this);
 struct expr_while_control_s *expr_while_control_w(struct grammar_s *this);
 struct expr_foreach_control_s *expr_foreach_control_w(struct grammar_s *this);
 struct expr_repeat_control_s *expr_repeat_control_w(struct grammar_s *this);
-struct expr_wordlist_expression_s *expr_wordlist_expression_w(struct grammar_s *this);
+struct expr_wordlist_expression_s *expr_wordlist_expression_w(
+    struct grammar_s *this
+);
 struct expr_wordlist_s *expr_wordlist_w(struct grammar_s *this);
 struct expr_compound_s *expr_compound_w(struct grammar_s *this);
 struct expr_if_inline_control_s *expr_if_inline_control_w(

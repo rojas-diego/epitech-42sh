@@ -66,7 +66,7 @@ void builtin_bindkey_bind(
     __attribute__((unused)) const char * const *argv
 )
 {
-    //hasher_insert_data_ordered(shell->bindkey, );
+    return;
 }
 
 int builtin_bindkey_handler(struct sh *shell, const char * const *argv)

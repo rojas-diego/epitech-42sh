@@ -27,7 +27,7 @@ void token_validate_inhibitors(char const *string, unsigned int *i, bool *adv)
     }
     *adv = true;
     if (!string[*i + 1])
-        return; // Raise an error.
+        return;
     else
         (*i)++;
 }

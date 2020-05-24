@@ -85,13 +85,6 @@ static void prompt_action_tab_extend_glob_from_env_path(
     wordfree(&we);
 }
 
-/*
-//if (!str[1]) { || ptb_includes('/', str)
-//    prompt_action_tab_extend_glob(shell, str);
-// } else {
-//     prompt_action_tab_extend_glob_from_env_path(shell, str);
-// }
-*/
 void prompt_action_tab(struct sh *shell)
 {
     char save = shell->prompt.input[shell->prompt.cursor];

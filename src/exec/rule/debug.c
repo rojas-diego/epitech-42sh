@@ -34,7 +34,6 @@ void exec_rule_job_display(struct sh *shell, struct job_s *job)
     exec_rule_debug(shell, "Job", false);
 }
 
-
 void exec_rule_debug(struct sh *shell, const char *rule, bool entering)
 {
     if (!shell->debug_mode) {
