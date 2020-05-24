@@ -18,8 +18,11 @@ function display_test_result() {
     $YELLOW ; echo "$1 result:" ; $WHITE
     $GREEN
     echo -ne "\tTest passed: $NB_TEST_PASSED\n"
-    $RED
-    echo -ne "\tTest failed: $NB_TEST_FAILED\n"
+    if [ $NB_TEST_FAILED -ne 0 ]
+    then
+        $RED
+        echo -ne "\tTest failed: $NB_TEST_FAILED\n"
+    fi
     $WHITE
     TOTAL_TESTS_PASSED=$(($NB_TEST_PASSED + TOTAL_TESTS_PASSED))
     TOTAL_TESTS_FAILED=$(($NB_TEST_FAILED + TOTAL_TESTS_FAILED))
@@ -183,6 +186,8 @@ function inhibitor () {
 function magic_quote() {
     $PURPLE ; echo "=----= MAGIC QUOTE =----=" ; $WHITE
     _test 'echo `python -c "print 'A'*10"`' "" cat python_script "Python script"
+    _test 'echo `echo $PATH`' "" cat variable_in_back_quote "Variable in back quote"
+    _test 'echo `tac src/main.c | cat -e`' "" cat pipe_in_back_quote "Pipe in back quote"
     display_test_result MAGIC_QUOTE
 }
 
