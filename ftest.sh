@@ -185,7 +185,7 @@ function inhibitor () {
 
 function magic_quote() {
     $PURPLE ; echo "=----= MAGIC QUOTE =----=" ; $WHITE
-    _test 'echo `python -c "print 'A'*10"`' "" cat python_script "Python script"
+    _test 'echo `python -c "print '"'A'"'*10"`' "" cat python_script "Python script"
     _test 'echo `echo $PATH`' "" cat variable_in_back_quote "Variable in back quote"
     _test 'echo `tac src/main.c | cat -e`' "" cat pipe_in_back_quote "Pipe in back quote"
     display_test_result MAGIC_QUOTE
