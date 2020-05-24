@@ -201,6 +201,7 @@ SRCT = tests/input/parser/test_input_parse_tokens_simple.c 	\
 	tests/input/parser/test_input_parse_tokens_batch_1.c 	\
 	tests/input/parser/test_input_parse_tokens_quotes.c 	\
 	tests/grammar/test_grammar_match.c						\
+	tests/grammar/test_grammar.c							\
 
 OBJ =		$(SRC_SHELL:.c=.o) $(SRC_EXEC:.c=.o) $(SRC_PROMPT:.c=.o) $(SRC_INPUT:.c=.o) $(SRC_TOKEN:.c=.o) $(SRC_GRAMMAR:.c=.o) $(SRC_EXPR:.c=.o) $(SRC_JOB:.c=.o)
 OBJM =		$(MAIN:.c=.o)
