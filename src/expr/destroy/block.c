@@ -23,5 +23,3 @@ void expr_block_destroy(struct expr_block_s *this)
     expr_block_destroy(this->block);
     free(this);
 }
-
-
