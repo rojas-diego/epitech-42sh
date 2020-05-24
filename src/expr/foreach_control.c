@@ -11,30 +11,12 @@
 #include "proto/grammar.h"
 #include "proto/expr.h"
 
-/*
-** @DESCRIPTION
-**   Rule for foreach_control expression.
-*/
-static struct expr_foreach_control_s *expr_foreach_control(
-    struct grammar_s *this
+static struct expr_foreach_control_s *expr_foreach_control_n(
+    struct grammar_s *this,
+    struct expr_foreach_control_s *exp,
+    unsigned int save_index
 )
 {
-    struct expr_foreach_control_s *exp = malloc(
-        sizeof(struct expr_foreach_control_s));
-    unsigned int save_index = this->index;
-
-    if (!exp)
-        exit(84);
-    memset(exp, 0, sizeof(struct expr_foreach_control_s));
-    if (!grammar_match(this, 1, TOK_FOREACH))
-        return (expr_free(exp));
-    exp->foreach = grammar_get_previous(this);
-    if (!grammar_match(this, 1, TOK_WORD))
-        return (expr_free(exp));
-    exp->word = grammar_get_previous(this);
-    exp->wordlist_expression = expr_wordlist_expression_w(this);
-    if (!exp->wordlist_expression)
-        return (expr_free(exp));
     if (!grammar_match(this, 1, TOK_NEWLINE))
         return (expr_free(exp));
     exp->newline = grammar_get_previous(this);
@@ -51,6 +33,31 @@ static struct expr_foreach_control_s *expr_foreach_control(
         return (expr_free(exp));
     exp->newline = grammar_get_previous(this);
     return exp;
+}
+
+/*
+** @DESCRIPTION
+**   Rule for foreach_control expression.
+*/
+static struct expr_foreach_control_s *expr_foreach_control(
+    struct grammar_s *this
+)
+{
+    struct expr_foreach_control_s *exp = calloc(1, sizeof(*exp));
+    unsigned int save_index = this->index;
+
+    if (!exp)
+        exit(84);
+    if (!grammar_match(this, 1, TOK_FOREACH))
+        return (expr_free(exp));
+    exp->foreach = grammar_get_previous(this);
+    if (!grammar_match(this, 1, TOK_WORD))
+        return (expr_free(exp));
+    exp->word = grammar_get_previous(this);
+    exp->wordlist_expression = expr_wordlist_expression_w(this);
+    if (!exp->wordlist_expression)
+        return (expr_free(exp));
+    return expr_foreach_control_n(this, exp, save_index);
 }
 
 struct expr_foreach_control_s *expr_foreach_control_w(struct grammar_s *this)
