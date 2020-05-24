@@ -45,7 +45,8 @@ extern const char *AST_REPEAT_TOO_FEW_ARGS __attribute__((unused));
 
 extern const char *AST_UNEXPECTED_TOKENS __attribute__((unused));
 
-extern const char *AST_AMBIGUOUS_REDIRECTION __attribute__((unused));
+extern const char *AST_AMBIGUOUS_REDIRECTION1 __attribute__((unused));
+extern const char *AST_AMBIGUOUS_REDIRECTION2 __attribute__((unused));
 
 const char *AST_MISSING_REDIRECT_NAME __attribute__((unused));
 
