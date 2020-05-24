@@ -19,6 +19,6 @@ void expr_subshell_destroy(struct expr_subshell_s *this)
     if (!this) {
         return;
     }
-    expr_block_destroy(this->block);
+    expr_grouping_destroy(this->grouping);
     free(this);
 }

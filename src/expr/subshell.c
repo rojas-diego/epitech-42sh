@@ -27,8 +27,8 @@ static struct expr_subshell_s *expr_subshell(struct grammar_s *this)
     if (!grammar_match(this, 1, TOK_LPARANTH))
         return (expr_free(exp));
     exp->lparanth = grammar_get_previous(this);
-    exp->block = expr_block_w(this);
-    if (!exp->block)
+    exp->grouping = expr_grouping_w(this);
+    if (!exp->grouping)
         return (expr_free(exp));
     if (!grammar_match(this, 1, TOK_RPARANTH))
         return (expr_free(exp));
