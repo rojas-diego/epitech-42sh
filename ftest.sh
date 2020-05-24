@@ -265,7 +265,9 @@ function personnals () {
 function randoms_tests () {
     $PURPLE ; echo "=----= RANDOMS_TESTS =----=" ; $WHITE
     _test 'cd ; </etc/hosts od -c | grep xx | wc >> /tmp/z -l ; cd - && echo "OK"' "" cat subject_test "subject test"
-    _test '' "" cat subject_test "big multiple test"
+    _test 'jfeaoj && ls || cat test' "" cat big_multiple_test1 "big multiple test1"
+    _test 'ls ; cat < | ls || grep' "" cat big_multiple_test2 "big multiple test2"
+    _test '                  ls;                       ls | grep sr || echo FAILED' "" cat big_multiple_test3 "big multiple test3"
     display_test_result RANDOMS_TESTS
 }
 
