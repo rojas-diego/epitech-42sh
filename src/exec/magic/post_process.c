@@ -80,7 +80,7 @@ char **do_post_process_word(
         strs = do_subshelled_magic_quote(shell, *substr);
         return (strs);
     }
-    ipp_quote_cleanup(substr);
+    ipp_quote_cleanup(*substr);
     if (magic_env_var_replace(shell, substr)) {
         *substr = NULL;
         return (NULL);
@@ -91,19 +91,19 @@ char **do_post_process_word(
 int do_post_process(
     struct sh *shell,
     struct process_s *proc,
-    struct expr_wordlist_s *words
+    char **words
 )
 {
     char *substr = NULL;
     char **post_processed = NULL;
 
-    for (; words; words = words->wordlist) {
-        if (!words->word)
+    for (size_t i = 0; words && words[i]; ++i) {
+        if (!words[i])
             continue;
-        substr = token_get_string(words->word, shell->rawinput);
+        substr = words[i];
         post_processed = do_post_process_word(shell, proc, &substr);
-        for (size_t i = 0; post_processed[i]; ++i) {
-            tmp_exec_rule_command_add_word(proc, post_processed[i]);
+        for (size_t j = 0; post_processed && post_processed[j]; ++j) {
+            tmp_exec_rule_command_add_word(proc, post_processed[j]);
         }
         if (!post_processed) {
             if (!substr)
