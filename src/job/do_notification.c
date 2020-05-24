@@ -14,22 +14,22 @@
 #include "proto/job/process/update_status.h"
 #include "proto/job/do_notification.h"
 
-static void job_update_status(struct job_s *first_job)
+static void job_update_status(struct sh *shell, struct job_s *first_job)
 {
     int status;
     pid_t pid;
 
     do {
         pid = waitpid(WAIT_ANY, &status, WUNTRACED | WNOHANG);
-    } while (!job_process_update_status(first_job, pid, status));
+    } while (!job_process_update_status(shell, first_job, pid, status));
 }
 
-void job_do_notification(struct job_s **first_job)
+void job_do_notification(struct sh *shell, struct job_s **first_job)
 {
     struct job_s *job_last = NULL;
     struct job_s *job_next;
 
-    job_update_status(*first_job);
+    job_update_status(shell, *first_job);
     for (struct job_s *job = *first_job; job; job = job_next) {
         job_next = job->next;
         if (job_is_completed(job)) {

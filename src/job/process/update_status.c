@@ -13,7 +13,7 @@
 #include "proto/job/format_info.h"
 #include "proto/job/process/update_status.h"
 
-static const char *ERROR_STATUS[] = {
+static const char *ABLE[] = {
     "Hangup",
     "",
     "Quit",
@@ -34,7 +34,7 @@ static const char *ERROR_STATUS[] = {
 
 static void job_process_handle_status(int status)
 {
-    dprintf(2, "%s", ERROR_STATUS[WTERMSIG(status) - 1]);
+    dprintf(2, "%s", ABLE[WTERMSIG(status) - 1]);
     if (WCOREDUMP(status)) {
         dprintf(2, " (core dumped)");
     }
@@ -42,6 +42,7 @@ static void job_process_handle_status(int status)
 }
 
 static int job_process_update_record_process(
+    struct sh *shell,
     struct job_s *job,
     pid_t pid,
     int status
@@ -57,19 +58,25 @@ static int job_process_update_record_process(
             return (1);
         }
         proc->completed = true;
+        shell->last_status = status % 255;
         if (!WIFSIGNALED(status))
             return (1);
-        if (job->foreground)
+        if (job->foreground) {
             job_process_handle_status(status);
-        else
-            job_format_info(
-                job, ERROR_STATUS[WTERMSIG(status) - 1], WCOREDUMP(status));
+            shell->last_status = status;
+        } else
+            job_format_info(job, ABLE[WTERMSIG(status) - 1], WCOREDUMP(status));
         return (1);
     }
     return (0);
 }
 
-int job_process_update_status(struct job_s *first_job, pid_t pid, int status)
+int job_process_update_status(
+    struct sh *shell,
+    struct job_s *first_job,
+    pid_t pid,
+    int status
+)
 {
     if (pid == 0 || (pid < 0 && errno == ECHILD)) {
         return (-1);
@@ -78,7 +85,7 @@ int job_process_update_status(struct job_s *first_job, pid_t pid, int status)
         return (-1);
     }
     for (struct job_s *job = first_job; job; job = job->next) {
-        if (job_process_update_record_process(job, pid, status)) {
+        if (job_process_update_record_process(shell, job, pid, status)) {
             return (0);
         }
     }
