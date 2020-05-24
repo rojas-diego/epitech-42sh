@@ -32,7 +32,7 @@ static char *env_var_getenv(struct sh *shell, char *str)
 
     temp = temp ? temp : strchr(str, '\'');
     if (temp)
-        str[temp] = 0;
+        *temp = 0;
     if (*str == '{') {
         ptb_unquote(str);
     }
