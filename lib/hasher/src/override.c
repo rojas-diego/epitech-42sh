@@ -10,7 +10,10 @@
 /* */
 #include "hasher/override.h"
 
-struct hasher_s *hasher_override(struct hasher_s **hasher, struct hasher_s *to_insert)
+struct hasher_s *hasher_override(
+    struct hasher_s **hasher,
+    struct hasher_s *to_insert
+)
 {
     struct hasher_s *overrided = NULL;
 

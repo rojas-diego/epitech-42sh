@@ -73,7 +73,7 @@ int job_process_update_status(struct job_s *first_job, pid_t pid, int status)
 {
     if (pid == 0 || (pid < 0 && errno == ECHILD)) {
         return (-1);
-    }  else if (pid < 0) {
+    } else if (pid < 0) {
         perror("waitpid");
         return (-1);
     }
