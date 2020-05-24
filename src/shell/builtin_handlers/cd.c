@@ -14,6 +14,5 @@ int builtin_change_directory_handler(
     const char * const *argv
 )
 {
-    builtin_change_directory(argv[1]);
-    return (0);
+    return (builtin_change_directory(argv[1]));
 }
