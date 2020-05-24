@@ -10,7 +10,7 @@
 
 #include "parser_toolbox/str_join.h"
 
-char *ptb_str_join(char **word_array, char const *str)
+char *ptb_str_join(const char *const *word_array, char const *str)
 {
     char *new = NULL;
     size_t nb_words = 0;

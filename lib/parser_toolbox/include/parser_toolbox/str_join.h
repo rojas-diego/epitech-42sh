@@ -8,6 +8,6 @@
 #ifndef PARSER_TOOLBOX_STR_JOIN_H_
 #define PARSER_TOOLBOX_STR_JOIN_H_
 
-char *ptb_str_join(char **word_array, char const *str);
+char *ptb_str_join(const char *const *word_array, char const *str);
 
 #endif /* !PARSER_TOOLBOX_STR_JOIN_H_ */
