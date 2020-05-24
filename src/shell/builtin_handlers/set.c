@@ -77,7 +77,8 @@ int builtin_set_handler(struct sh *shell, const char * const *argv)
     if (argc == 2) {
         return (builtin_set_error_handling(&shell->local_var, argv[1]));
     } else if (argc == 4) {
-        return (builtin_set_error_handling(&shell->local_var, ptb_str_join(&argv[1], NULL)));
+        return (builtin_set_error_handling(&shell->local_var,
+                            ptb_str_join(&argv[1], NULL)));
     }
     return (0);
 }

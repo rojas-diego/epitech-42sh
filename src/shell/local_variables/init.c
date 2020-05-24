@@ -15,7 +15,8 @@
 #include "proto/shell/local_variables.h"
 #include "types/local_variables.h"
 
-static void local_variables_add(struct hasher_s **hasher, char *value, char *name)
+static void local_variables_add(struct hasher_s **hasher,
+                                char *value, char *name)
 {
     struct local_var_s *var = NULL;
 
