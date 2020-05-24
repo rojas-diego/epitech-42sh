@@ -12,16 +12,18 @@
 #include <string.h>
 #include <errno.h>
 
+#include "parser_toolbox/isdir.h"
 #include "proto/exec/rule/command/init_redirection.h"
 
-static const size_t NB_REDIRECT_ERROR = 2;
+static const size_t NB_REDIRECT_ERROR = 3;
 
 static const struct {
     int err_nbr;
     const char *status;
 } REDIRECT_ERROR[] = {
     {ENOENT, "No such file or directory."},
-    {EACCES, "Permission denied."}
+    {EACCES, "Permission denied."},
+    {EISDIR, "Is a directory"}
 };
 
 static void exec_do_redirect_error_handling(const char *path)

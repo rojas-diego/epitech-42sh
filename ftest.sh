@@ -120,7 +120,9 @@ function simple_pipe () {
     ./tests/binaries/big_file_gen ./tests/binaries/big_file
     _test '/bin/ls | /bin/cat -e' "" "cat" simple_pipe "Simple pipe"
     _test '/bin/cat ./tests/binaries/big_file | wc' "" "cat" pipe_big_input "Pipe with big input"
-    _test '/bin/ls | cd ..\nls' "" "cat" pipe_with_builtin "Pipe with builtin"
+    _test '/bin/ls | cd ..\nls' "" "cat" pipe_with_builtin_end "Pipe with builtin end"
+    _test 'cd .. | /bin/ls\n/bin/ls' "" "cat" pipe_with_builtin_start "Pipe with builtin start"
+    _test '/bin/ls | cd .. | /bin/ls\nls' "" "cat" pipe_with_builtin_middle "Pipe with builtin middle"
     display_test_result SIMPLE_PIPE
 }
 
@@ -142,6 +144,9 @@ function redirections () {
     _test 'ls > tests/binaries/redirection_test\nls >> tests/binaries/redirection_test\nls >> tests/binaries/redirection_test\n \ncat tests/binaries/redirection_test' "" cat redirections_double_right "double right redirection"
     _test 'cat < tests/binaries/div_zero.c' "" cat redirections_simple_left "simple left redirection"
     _test 'cat < tests/binaries/div_zero.c > tests/binaries/left_and_right\ncat tests/binaries/left_and_right' "" cat redirections_simple_left_then_right "simple left then right redirection"
+    _test 'cat < MASHALLA' "" "cat" bad_redirection_left "Bad redirection left"
+    _test 'ls > tests/' "" "cat" bad_redirection_right_directory "Bad redirection right (directory)"
+    _test 'ls >' "" "cat" missing_name_redirect "Missing name for redirect"
     display_test_result REDIRECTIONS
 }
 
