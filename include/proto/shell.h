@@ -34,5 +34,6 @@ int shell_struct_initialise(
 );
 int shell_start(struct sh *shell);
 void shell_destroy(struct sh *shell);
+char *do_shell_getenv(struct sh *shell, char const *name);
 
 #endif

@@ -97,16 +97,9 @@ static int exec_rule_pipeline_launch_job(
     builtin = (builtin_handler *) hasher_get_data(
         shell->builtin, job->first_process->argv[0]
     );
-    if (!job->first_process->next && builtin && *builtin) {
-        shell->last_status = (*builtin)(shell, (const char * const *)
-            job->first_process->argv);
-    } else {
-        shell->job = job;
-        if (job_process_is_last_is_builtin(shell, job)) {
-        }
-        job->foreground = foreground;
-        job_launch(shell, job);
-    }
+    shell->job = job;
+    job->foreground = foreground;
+    job_launch(shell, job);
     return (EXEC_RULE_SUCCESS);
 }
 

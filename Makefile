@@ -16,6 +16,7 @@ MAIN =		src/main.c						\
 # SOURCES
 SRC_SHELL = src/shell/constants.c				\
 	src/shell/check_debug_mode.c				\
+	src/shell/do_getenv.c				\
 	src/shell/local_variables/display.c			\
 	src/shell/local_variables/assign_value.c	\
 	src/shell/local_variables/from_data.c		\

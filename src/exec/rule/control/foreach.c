@@ -36,8 +36,9 @@ int exec_rule_control_foreach(
     struct local_var_s *var = NULL;
 
     if (!process || do_post_process(
-    shell, process, rule->wordlist_expression->wordlist))
+    shell, process, rule->wordlist_expression->wordlist)) {
         return (1);
+    }
     exec_rule_debug(shell, "foreach", true);
     for (size_t i = 0; i < process->argc; ++i) {
         var = local_variable_from_data(
