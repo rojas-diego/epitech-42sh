@@ -167,16 +167,20 @@ function globbing () {
 
 function var_interpreter () {
     $YELLOW ; echo "=----= VAR INTERPRETER =----=" ; $WHITE
+    _test 'echo $PATH' "" cat display_path "Display path"
+    _test 'echo $INVALID' "" cat bad_var "Bad var"
     display_test_result GLOBBING
 }
 
 function inhibitor () {
     $YELLOW ; echo "=----= INHIBITOR =----=" ; $WHITE
+    _test 'echo \"' "" cat echo_quote "Echo quote"
     display_test_result INHIBITOR
 }
 
 function magic_quote() {
     $YELLOW ; echo "=----= MAGIC QUOTE =----=" ; $WHITE
+    _test 'echo `python -c "print 'A'*10"`' "" cat python_script "Python script"
     display_test_result MAGIC_QUOTE
 }
 
