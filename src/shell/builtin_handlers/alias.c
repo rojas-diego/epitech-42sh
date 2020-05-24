@@ -40,9 +40,7 @@ static int insert_alias(struct sh *shell, const char * const *argv)
         return (1);
     }
     overrided = hasher_override(&shell->alias, new);
-    if (overrided) {
-        hasher_destroy(overrided, true, true);
-    } else {
+    if (!overrided) {
         hasher_insert_ordered(&shell->alias, new);
     }
     return (0);
@@ -79,7 +77,7 @@ int builtin_unalias_handler(
     for (size_t i = 1; argv[i]; ++i) {
         poped = hasher_pop(&shell->alias, argv[i]);
         if (poped) {
-            hasher_destroy(poped, true, true);
+            hasher_destroy(poped, false, false);
         }
     }
     return (0);
