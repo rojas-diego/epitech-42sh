@@ -29,11 +29,12 @@ static const char ENV_VAR_SEP[] = " \t\n\r\f\v\"'/";
 static char *env_var_getenv(struct sh *shell, char *str)
 {
     char *temp = NULL;
-    struct local_var_s *var = hasher_get_data(shell->local_var, str);
+    struct local_var_s *var = NULL;
 
     if (*str == '{') {
         ptb_unquote(str);
     }
+    var = hasher_get_data(shell->local_var, str);
     if (!ptb_blacklist(str, "\\/=&'()[]|{}")) {
         return ((char *) -1);
     }
