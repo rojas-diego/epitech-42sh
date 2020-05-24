@@ -11,8 +11,14 @@
 
 void ptb_unquote(char *str)
 {
-    size_t len = strlen(str) - 2;
+    size_t len = strlen(str);
 
-    strncpy(str, str + 1, len);
+    if (len < 2) {
+        return;
+    }
+    len -= 2;
+    for (size_t i = 0; i < len; ++i) {
+        str[i] = str[i + 1];
+    }
     str[len] = '\0';
 }

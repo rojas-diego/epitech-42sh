@@ -13,6 +13,7 @@
 #include "proto/exec/rule/command/add_word.h"
 #include "proto/exec/rule/command/add_redirection.h"
 #include "proto/exec/rule/command.h"
+#include "proto/exec/magic/parse.h"
 
 int exec_rule_command(
     struct sh *shell,
@@ -26,17 +27,13 @@ int exec_rule_command(
     if (!process) {
         return (EXEC_RULE_ALLOCATION_FAIL);
     }
+    if (do_post_process_command(shell, process, rule)) {
+        return (EXEC_RULE_ALLOCATION_FAIL);
+    }
     for (; rule; rule = rule->command) {
-        if (rule->word) {
-            exec_rule_debug(shell, "word", true);
-            if (exec_rule_command_add_word(process, rule->word, shell->rawinput)) {
-                return (EXEC_RULE_ALLOCATION_FAIL);
-            }
-            exec_rule_debug(shell, "word", false);
-        } else if (rule->redirection) {
-            if (exec_rule_command_add_redirection(job, rule->redirection, shell->rawinput)) {
-                return (EXEC_RULE_AMBIGUOUS_REDIRECTION);
-            }
+        if (rule->redirection) {
+            exec_rule_command_add_redirection(
+                job, rule->redirection, shell->rawinput);
         }
     }
     job_process_append(job, process);

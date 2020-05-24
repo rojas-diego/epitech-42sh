@@ -29,6 +29,9 @@ int exec_rule_command_add_word(
     if (process->argc + 1 >= process->max_argc) {
         process->max_argc *= 2;
         process->argv = realloc(process->argv, process->max_argc);
+        if (!process->argv) {
+            return (EXEC_RULE_ALLOCATION_FAIL);
+        }
         memset(process->argv + process->argc + 1, 0, process->argc + 1);
     }
     process->argv[process->argc++] = substr;

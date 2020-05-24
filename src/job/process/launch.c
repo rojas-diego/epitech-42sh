@@ -85,8 +85,6 @@ static void process_launch_exec(
 
     if (builtin && *builtin) {
         exit((*builtin)(shell, (const char * const *) process->argv));
-    } else if (process->subshell) {
-        do_subshell(shell, process->subshell);
     } else {
         execve(strchr(process->argv[0], '/') ? process->argv[0]
             : find_binary_in_path_env(getenv("PATH"), process->argv[0]),
@@ -117,5 +115,8 @@ void process_launch(
         term_set_signal_handling(SIG_DFL);
     }
     process_launch_init_pipes(fds);
+    if (process->subshell) {
+        do_subshell(shell, process->subshell);
+    }
     process_launch_exec(shell, process);
 }

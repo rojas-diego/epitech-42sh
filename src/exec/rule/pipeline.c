@@ -134,5 +134,5 @@ int exec_rule_pipeline(
     }
     exec_rule_debug(shell, "job_launch", false);
     exec_rule_debug(shell, "pipeline", false);
-    return (EXEC_RULE_SUCCESS);
+    return (shell->last_status);
 }

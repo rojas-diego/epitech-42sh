@@ -20,6 +20,8 @@ SRC =		src/constants.c						\
 		src/exec/simple_exec.c					\
 									\
 		src/exec/magic/parse.c					\
+		src/exec/magic/env_var_replace.c		\
+		src/exec/magic/post_process.c					\
 		src/exec/magic/do_subshelled_magic_quote.c		\
 									\
 		src/shell/local_variables/display.c			\

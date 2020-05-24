@@ -30,7 +30,7 @@ int exec_rule_grouping(
     int last_status = 0;
 
     exec_rule_debug(shell, "grouping", true);
-    for (; rule->conditional; rule = rule->grouping) {
+    for (; rule && rule->conditional; rule = rule->grouping) {
         last_status = exec_rule_pipeline(shell, rule->pipeline, foreground);
         if (rule->conditional->type == TOK_AND_IF) {
             if (last_status) {
