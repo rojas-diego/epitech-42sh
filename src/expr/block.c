@@ -23,7 +23,6 @@ static struct expr_block_s *expr_block(struct grammar_s *this)
     if (!exp)
         exit(84);
     memset(exp, 0, sizeof(struct expr_block_s));
-    while (grammar_match(this, 2, TOK_NEWLINE, TOK_SEMI));
     save_index = this->index;
     exp->statement = expr_statement_w(this);
     if (!exp->statement) {

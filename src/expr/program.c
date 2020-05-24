@@ -33,6 +33,8 @@ static struct expr_program_s *expr_program(struct grammar_s *this)
     if (!exp)
         exit(84);
     memset(exp, 0, sizeof(struct expr_program_s));
+    while (grammar_match(this, 2, TOK_NEWLINE, TOK_SEMI));
+    save_index = this->index;
     exp->block = expr_block_w(this);
     if (!exp->block) {
         this->index = save_index;
