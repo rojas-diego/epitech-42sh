@@ -21,7 +21,7 @@ int do_ambiguous_redirection_check(struct expr_command_s *this)
     struct expr_command_s *last = this;
     char *str = NULL;
 
-    for (; last->command; last = last->command);
+    for (; last && last->command; last = last->command);
     //str = strndup(rawinput + this->start, last->end - this->start);
     //free(str);
     return (0);
