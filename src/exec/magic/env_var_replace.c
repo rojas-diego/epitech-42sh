@@ -109,7 +109,6 @@ int magic_env_var_replace(struct sh *shell, char **str)
         i += var_name_length;
         if (asprintf(str, "%s%s%s", save, env_var, save + i) < 0)
             return (1);
-        free(save);
         save = *str;
     }
     return (0);

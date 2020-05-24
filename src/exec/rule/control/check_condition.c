@@ -69,8 +69,12 @@ int exec_rule_control_check_condition(
     char *str = strndup(shell->rawinput + w->lparanth->end, w->rparanth->start -
         w->lparanth->end);
     char *cpy = str;
-    long int a = do_equality(&str, &error);
+    long int a = 0;
 
+    if (magic_env_var_replace(shell, &str)) {
+        return (-1);
+    }
+    a = do_equality(&str, &error);
     exec_rule_debug(shell, "check_condition", true);
     if (error || !ptb_whitelist(str, PTB_WHITESPACES)) {
         free(cpy);
