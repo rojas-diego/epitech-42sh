@@ -185,7 +185,7 @@ function inhibitor () {
 
 function magic_quote() {
     $PURPLE ; echo "=----= MAGIC QUOTE =----=" ; $WHITE
-    _test 'echo `python -c "print 'A'*10"`' "" cat python_script "Python script"
+    _test 'echo `python -c "print '"'A'"'*10"`' "" cat python_script "Python script"
     _test 'echo `echo $PATH`' "" cat variable_in_back_quote "Variable in back quote"
     _test 'echo `tac src/main.c | cat -e`' "" cat pipe_in_back_quote "Pipe in back quote"
     display_test_result MAGIC_QUOTE
@@ -273,6 +273,10 @@ function randoms_tests () {
     _test 'jfeaoj && ls || cat test' "" cat big_multiple_test1 "big multiple test1"
     _test 'ls ; cat < | ls || grep' "" cat big_multiple_test2 "big multiple test2"
     _test '                  ls;                       ls | grep sr || echo FAILED' "" cat big_multiple_test3 "big multiple test3"
+    _test '|' "" cat big_multiple_test4 "big multiple test4"
+    _test '&' "" cat big_multiple_test5 "big multiple test5"
+    _test '&& ||' "" cat big_multiple_test6 "big multiple test6"
+    _test 'ls&&ls' "" cat big_multiple_test7 "big multiple test7"
     display_test_result RANDOMS_TESTS
 }
 
