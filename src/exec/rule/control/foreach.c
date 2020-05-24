@@ -22,7 +22,7 @@ int exec_rule_control_foreach(
 )
 {
     char *substr = token_get_string(rule->word, shell->rawinput);
-    char *words[] = {"1", "2"};//
+    char *words[] = {"1", "2"};
     size_t len = 2;
 
     exec_rule_debug(shell, "foreach", true);
