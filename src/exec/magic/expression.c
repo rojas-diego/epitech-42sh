@@ -135,13 +135,9 @@ long int do_equality(char **str, int *error)
 {
     long int result = do_comparaison(str, error);
 
-    for (char c; (
-        (
-            (peek(str) == '>' || peek(str) == '<') && ptb_includes(rpeek(str), " =")
-        ) || (
-                (peek(str) == '=' || peek(str) == '!') && rpeek(str) == '='
-        )
-    );) {
+    for (char c; (((peek(str) == '>' || peek(str) == '<') && ptb_includes(rpeek(
+    str), " =")) || ((peek(str) == '=' || peek(str) == '!') && rpeek(str) == '='
+    ));) {
         c = get(str);
         if (c == '<') {
             if (peek(str) == '=' && get(str))
