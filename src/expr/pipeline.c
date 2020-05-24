@@ -20,7 +20,7 @@ static int expr_pipeline_sub_test(
 {
     this->index = save_index;
     exp->command = expr_command_w(this);
-    if (do_ambiguous_redirection_check(exp->command)) {
+    if (do_ambiguous_redirection_check(this, exp->command)) {
         grammar_set_error(this, AST_AMBIGUOUS_REDIRECTION);
         return (1);
     }

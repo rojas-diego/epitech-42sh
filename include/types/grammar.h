@@ -39,6 +39,7 @@ struct grammar_s {
     unsigned int    depth;
     char const      *error_message;
     unsigned int    callindex;
+    char            *rawinput;
 };
 
 /**/
