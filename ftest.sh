@@ -93,8 +93,8 @@ function line_formatting () {
 
 function error_handling () {
     $YELLOW ; echo "=----= ERROR HANDLING =----=" ; $WHITE
-    cp ./tests/binaries/bin_not_compatible.c ./tests/binaries/bin_not_compatible
-    chmod +x ./tests/binaries/bin_not_compatible
+    gcc tests/binaries/bin_not_compatible.c -o tests/binaries/temp
+    tac tests/binaries/temp > tests/binaries/bin_not_compatible
     gcc ./tests/binaries/div_zero.c -o ./tests/binaries/div_zero
     gcc ./tests/binaries/segfault.c -o ./tests/binaries/segfault
     _test './tests/binaries/bin_not_compatible' "" "cat" bin_not_compatible "Bin not compatible"
@@ -142,6 +142,7 @@ function redirections () {
 
 function advanced_manipulations () {
     $YELLOW ; echo "=----= ADVANCED MANIPULATIONS =----=" ; $WHITE
+    _test './42sh\nls' "" "cat" running_42sh_in_42sh "Running 42sh inside 42sh"
     display_test_result ADVANCED_MANIPULATIONS
 }
 
