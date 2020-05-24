@@ -117,6 +117,7 @@ function simple_pipe () {
     _test '/bin/ls | /bin/cat -e' "" "cat" simple_pipe "Simple pipe"
     _test '/bin/cat ./tests/binaries/big_file | wc' "" "cat" pipe_big_input "Pipe with big input"
     _test '/bin/ls | cd ..\nls' "" "cat" pipe_with_builtin "Pipe with builtin"
+    _test '|' "" "cat" first_pipe "First pipe"
     display_test_result SIMPLE_PIPE
 }
 
