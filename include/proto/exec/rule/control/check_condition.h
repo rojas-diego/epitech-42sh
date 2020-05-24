@@ -11,7 +11,7 @@
 #include "types/shell.h"
 #include "types/expr.h"
 
-_Bool exec_rule_control_check_condition(
+int exec_rule_control_check_condition(
     struct sh *shell,
     struct expr_wordlist_expression_s *word
 );

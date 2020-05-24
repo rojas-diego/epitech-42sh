@@ -93,33 +93,13 @@ static size_t env_var_replace_find_env(
     return (length);
 }
 
-static int env_var_replace_put_home(char **str)
-{
-    const char *home = NULL;
-    char *save = *str;
-
-    if (save[0] != '~') {
-        return (0);
-    }
-    home = builtin_get_user_home();
-    if (home == NULL) {
-        return (0);
-    }
-    if (asprintf(str, "%s%s", home, save + 1) < 0) {
-        return (1);
-    }
-    free(save);
-    return (0);
-}
-
 int magic_env_var_replace(struct sh *shell, char **str)
 {
-    int ret = env_var_replace_put_home(str);
     char *save = *str;
     char *env_var = NULL;
     size_t var_name_length = 0;
 
-    for (size_t i = 0; !ret && save[i] != '\0'; ++i) {
+    for (size_t i = 0; save[i] != '\0'; ++i) {
         if (save[i] != '$' || (i != 0 && save[i - 1] == '\\'))
             continue;
         var_name_length = env_var_replace_find_env(shell, &env_var, save + ++i);
@@ -131,5 +111,5 @@ int magic_env_var_replace(struct sh *shell, char **str)
         free(save);
         save = *str;
     }
-    return (ret);
+    return (0);
 }

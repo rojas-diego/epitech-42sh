@@ -52,12 +52,12 @@ static void replace_add_data(struct process_s *process, char *data)
     char **strs = ptb_string_split(data, " ");
     size_t length = ptb_argv_length((const char * const *) strs)
         + ptb_argv_length((const char * const *) process->argv) + 1;
-    char **new = calloc(length, sizeof(char *));
+    char **new = calloc(length + 1, sizeof(char *));
     char **old = process->argv;
 
     process->argv = new;
     process->argc = 0;
-    for (size_t i = 0; strs[i]; ++i) {
+    for (size_t i = 0; strs[i]; ++i) { 
         process->argv[process->argc++] = strs[i];
     }
     for (size_t i = 1; old[i]; ++i) {
@@ -93,7 +93,7 @@ static int exec_rule_pipeline_launch_job(
     bool foreground
 )
 {
-    __attribute__((unused)) builtin_handler *builtin;
+    __attribute__((unused)) builtin_handler *builtin = NULL;
 
     if (exec_replace_alias(shell, job)) {
         return (EXEC_RULE_ALLOCATION_FAIL);

@@ -17,10 +17,12 @@ int exec_rule_control_if_inline(
     struct expr_if_inline_control_s *rule
 )
 {
-    _Bool condition = exec_rule_control_check_condition(
+    int condition = exec_rule_control_check_condition(
         shell, rule->wordlist_expression
     );
 
+    if (condition == -1)
+        return (1);
     exec_rule_debug(shell, "if_inline", true);
     if (condition) {
         exec_rule_grouping(shell, rule->grouping, true);

@@ -19,10 +19,12 @@ int exec_rule_control_if(
     struct expr_if_control_s *rule
 )
 {
-    _Bool condition = exec_rule_control_check_condition(
+    int condition = exec_rule_control_check_condition(
         shell, rule->wordlist_expression
     );
 
+    if (condition == -1)
+        return (1);
     exec_rule_debug(shell, "if", true);
     if (condition) {
         exec_rule_block(shell, rule->block);
