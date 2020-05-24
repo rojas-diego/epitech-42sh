@@ -71,6 +71,8 @@ static int exec_replace_alias(struct sh *shell, struct job_s *job)
     char *data = NULL;
 
     for (; process; process = process->next) {
+        if (process->subshell)
+            continue;
         data = builtin_alias_replace_recursively(
             shell->alias, process->argv[0], 0
         );
@@ -93,14 +95,9 @@ static int exec_rule_pipeline_launch_job(
     bool foreground
 )
 {
-    __attribute__((unused)) builtin_handler *builtin = NULL;
-
     if (exec_replace_alias(shell, job)) {
         return (EXEC_RULE_ALLOCATION_FAIL);
     }
-    builtin = (builtin_handler *) hasher_get_data(
-        shell->builtin, job->first_process->argv[0]
-    );
     shell->job = job;
     job->foreground = foreground;
     job_launch(shell, job);

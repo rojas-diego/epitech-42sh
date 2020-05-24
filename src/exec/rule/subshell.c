@@ -25,9 +25,11 @@ int exec_rule_subshell(
     unsigned int save = rule->lparanth->end;
 
     exec_rule_debug(shell, "subshell", true);
-    rule->lparanth->end = rule->rparanth->end;
-    token_get_string(rule->lparanth, shell->rawinput);
+    rule->lparanth->end = rule->rparanth->end - 1;
+    ++rule->lparanth->start;
+    process->subshell = token_get_string(rule->lparanth, shell->rawinput);
     rule->lparanth->end = save;
+    --rule->lparanth->start;
     job_process_append(job, process);
     exec_rule_debug(shell, "subshell", false);
     return (0);

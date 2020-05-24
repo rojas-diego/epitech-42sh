@@ -25,11 +25,7 @@ void do_subshell(struct sh *shell, char *eval)
     shell->last_status = input_parse(shell);
     if (shell->expression) {
         exec_rule_program(shell, shell->expression);
-        expr_program_destroy(shell->expression);
-        shell->expression = NULL;
     }
-    input_destroy(shell);
-    prompt_input_empty(shell);
     exit(shell->last_status);
 }
 
