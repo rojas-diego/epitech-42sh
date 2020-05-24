@@ -14,25 +14,34 @@
 
 #include "proto/exec/rule/debug.h"
 
+#include "proto/job/process/create.h"
 #include "proto/exec/rule/block.h"
 #include "proto/exec/rule/control/foreach.h"
 #include "hasher/insert_data.h"
 #include "hasher/pop.h"
+
+int do_post_process(
+    struct sh *shell,
+    struct process_s *proc,
+    struct expr_wordlist_s *words
+);
 
 int exec_rule_control_foreach(
     struct sh *shell,
     struct expr_foreach_control_s *rule
 )
 {
+    struct process_s *process = process_create();
     char *substr = token_get_string(rule->word, shell->rawinput);
-    char *words[] = {"1", "2"};
     struct local_var_s *var = NULL;
-    size_t len = 2;
 
-    printf("SALUT\n");
+    if (!process || do_post_process(
+    shell, process, rule->wordlist_expression->wordlist))
+        return (1);
     exec_rule_debug(shell, "foreach", true);
-    for (size_t i = 0; i < len; ++i) {
-        var = local_variable_from_data(shell->local_var, substr, words[i]);
+    for (size_t i = 0; i < process->argc; ++i) {
+        var = local_variable_from_data(
+            shell->local_var, substr, process->argv[i]);
         hasher_insert_data_ordered(&shell->local_var, strdup(substr), var);
         exec_rule_block(shell, rule->block);
     }

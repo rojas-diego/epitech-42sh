@@ -96,6 +96,8 @@ int do_post_process(
     char **post_processed = NULL;
 
     for (; words; words = words->wordlist) {
+        if (!words->word)
+            continue;
         substr = token_get_string(words->word, shell->rawinput);
         post_processed = do_post_process_word(shell, proc, &substr);
         for (size_t i = 0; post_processed[i]; ++i) {

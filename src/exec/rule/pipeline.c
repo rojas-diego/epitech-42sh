@@ -98,7 +98,8 @@ static int exec_rule_pipeline_launch_job(
         shell->builtin, job->first_process->argv[0]
     );
     if (!job->first_process->next && builtin && *builtin) {
-        (*builtin)(shell, (const char * const *) job->first_process->argv);
+        shell->last_status = (*builtin)(shell, (const char * const *)
+            job->first_process->argv);
     } else {
         shell->job = job;
         if (job_process_is_last_is_builtin(shell, job)) {
