@@ -11,7 +11,7 @@
 
 Test(grammar_match, variadic_test)
 {
-    struct grammar_s this;
+    struct grammar_s this = {0};
     bool ret;
 
     this.index = 0;

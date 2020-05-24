@@ -11,6 +11,7 @@ vgcore.*
 .42sh_history
 .42sh_profile
 *.ftest
+gcovr/**
 
 # Coverage
 *.gcno
