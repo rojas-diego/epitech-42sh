@@ -45,7 +45,8 @@ Test(input_parse_grammar, control_flow)
     struct sh shell = MOCK_SH;
     struct expr_if_control_s *expression = NULL;
 
-    shell.rawinput = strdup("if (1 && 1) then\nls\nelse if (0) then\nls\nendif\n");
+    shell.rawinput =
+        strdup("if (1 && 1) then\nls\nelse if (0) then\nls\nendif\n");
     input_parse_tokens(&shell);
     input_parse_grammar(&shell);
     expression = shell.expression->block->statement->control->if_control;
@@ -62,4 +63,18 @@ Test(input_parse_grammar, bad_control_flow)
     input_parse_tokens(&shell);
     input_parse_grammar(&shell);
     cr_assert_null(expression);
+}
+
+Test(input_parse_grammar, control_flow_else)
+{
+    struct sh shell = MOCK_SH;
+    struct expr_if_control_s *expression = NULL;
+
+    shell.rawinput =
+        strdup("if (1 && 1) then\nls\nelse if (0) then\nls\nelse\nls\nendif\n");
+    input_parse_tokens(&shell);
+    input_parse_grammar(&shell);
+    expression = shell.expression->block->statement->control->if_control;
+    cr_assert_not_null(shell.expression);
+    cr_assert_not_null(expression);
 }
