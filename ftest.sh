@@ -278,6 +278,7 @@ function randoms_tests () {
     _test '&& ||' "" cat big_multiple_test6 "big multiple test6"
     _test 'ls&&ls' "" cat big_multiple_test7 "big multiple test7"
     _test 'zbeub || zbeub || ls | cat | grep sr' "" cat big_multiple_test8 "big multiple test8"
+    _test 'mkdir test; cd test ; ls -a ; ls | cat | wc -c > tutu ; cat tutu' "" cat minishell2_subject_test "minishell 2 subject test"
     display_test_result RANDOMS_TESTS
 }
 
