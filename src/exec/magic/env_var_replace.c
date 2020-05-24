@@ -13,6 +13,7 @@
 #include <stdio.h>
 /* size_t */
 #include <stddef.h>
+#include <string.h>
 
 #include "parser_toolbox/includes.h"
 #include "parser_toolbox/unquote.h"
@@ -23,16 +24,13 @@
 #include "hasher/get_data.h"
 #include "types/local_variables.h"
 
-static const char ENV_VAR_SEP[] = " \t\n\r\f\v";
+static const char ENV_VAR_SEP[] = " \t\n\r\f\v\"'";
 
 static char *env_var_getenv(struct sh *shell, char *str)
 {
-    char *temp = strchr(str, '"');
+    char *temp = NULL;
     struct local_var_s *var = hasher_get_data(shell->local_var, str);
 
-    temp = temp ? temp : strchr(str, '\'');
-    if (temp)
-        *temp = 0;
     if (*str == '{') {
         ptb_unquote(str);
     }

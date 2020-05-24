@@ -24,9 +24,8 @@ int exec_rule_command(
     struct process_s *process = process_create();
 
     exec_rule_debug(shell, "command", true);
-    if (!process) {
+    if (!process)
         return (EXEC_RULE_ALLOCATION_FAIL);
-    }
     if (do_post_process_command(shell, process, rule)) {
         return (EXEC_RULE_ALLOCATION_FAIL);
     }
