@@ -45,6 +45,8 @@ static struct expr_foreach_control_s *expr_foreach_control(
     if (!grammar_match(this, 1, TOK_END))
         return (expr_free(exp));
     exp->end = grammar_get_previous(this);
+    if (this->tokens[this->index]->type == TOK_EOF)
+        return exp;
     if (!grammar_match(this, 1, TOK_NEWLINE))
         return (expr_free(exp));
     exp->newline = grammar_get_previous(this);
