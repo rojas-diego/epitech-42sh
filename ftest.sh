@@ -167,6 +167,8 @@ function globbing () {
 
 function var_interpreter () {
     $YELLOW ; echo "=----= VAR INTERPRETER =----=" ; $WHITE
+    _test 'echo $PATH' "" cat display_path "Display path"
+    _test 'echo $INVALID' "" cat bad_var "Bad var"
     display_test_result GLOBBING
 }
 
