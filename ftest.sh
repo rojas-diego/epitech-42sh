@@ -161,7 +161,7 @@ function globbing () {
     _test 'ls ?ests' "" cat globbing "? globbing"
     _test 'ls [a-z]ests' "" cat globbing "[] globbing"
     _test 'ls [a-z]rew' "" cat globbing "error globbing"
-    _test 'cat *' "" cat globbing "* globbing"
+    _test 'ls *' "" cat globbing "'*' globbing"
     display_test_result GLOBBING
 }
 
