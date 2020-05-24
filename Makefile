@@ -108,6 +108,7 @@ SRC =		src/constants.c						\
 		src/expr/utility.c					\
 		src/expr/do_ambiguous_redirection_check.c \
 									\
+		src/expr/destroy/expr_free.c				\
 		src/expr/destroy/program.c				\
 		src/expr/destroy/block.c				\
 		src/expr/destroy/statement.c				\

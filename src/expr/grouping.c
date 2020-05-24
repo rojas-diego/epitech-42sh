@@ -26,18 +26,15 @@ static struct expr_grouping_s *expr_grouping(struct grammar_s *this)
         exit(84);
     memset(exp, 0, sizeof(struct expr_grouping_s));
     exp->pipeline = expr_pipeline_w(this);
-    if (!exp->pipeline) {
-        free(exp);
-        return NULL;
-    }
+    if (!exp->pipeline)
+        return (expr_free(exp));
     if (!grammar_match(this, 2, TOK_AND_IF, TOK_OR_IF))
         return exp;
     exp->conditional = grammar_get_previous(this);
     exp->grouping = expr_grouping_w(this);
     if (!exp->grouping) {
         grammar_set_error(this, AST_NULL_COMMAND);
-        free(exp);
-        return NULL;
+        return (expr_free(exp));
     }
     return exp;
 }

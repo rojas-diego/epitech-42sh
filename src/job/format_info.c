@@ -19,7 +19,6 @@ void job_format_info_launch_background(struct job_s *job)
     fprintf(stdout, "\n");
 }
 
-
 void job_format_info(struct job_s *job, const char *status, _Bool dumped)
 {
     char state = '+';

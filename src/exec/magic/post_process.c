@@ -21,28 +21,6 @@
 #include "proto/exec/rule/command/add_word.h"
 #include "proto/exec/magic/parse.h"
 
-/*int do_merge(struct process_s *proc, char **to_merge, size_t index)
-{
-    size_t length = ptb_argv_length(to_merge);
-    char **tmp = malloc(sizeof(char *) * (proc->argc - index + 1));
-
-    if (!tmp)
-        return (1);
-    for (size_t i = index + 1; i < proc->argc; tmp[i - index - 1] = proc->argv[i]);
-    tmp[proc->argc - index] = NULL;
-    while (proc->argc + length >= proc->max_argc) {
-        proc->max_argc *= 2;
-        proc->argv = realloc(proc->argv, proc->max_argc);
-        if (!proc->argv)
-            return (1);
-        memset(proc->argv + proc->argc + 1, 0, proc->argc + 1);
-    }
-    for (size_t i = 0; i < length; ++i)
-        proc->argv[proc->argc++] = to_merge[i];
-    for (size_t i = -1; tmp[++i]; proc->argv[proc->argc++] = tmp[i]);
-    return (0);
-}*/
-
 static int tmp_exec_rule_command_add_word(
     struct process_s *process,
     char *word

@@ -33,6 +33,7 @@ static void exec_do_redirect_error_handling(const char *path)
         }
     }
 }
+
 int exec_do_redirect_left(const char *path)
 {
     int fd = open(path, O_RDONLY);

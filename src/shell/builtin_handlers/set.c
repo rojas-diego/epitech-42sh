@@ -7,6 +7,7 @@
 
 #include <string.h>
 #include <stdlib.h>
+#include <ctype.h>
 
 #include "builtins.h"
 #include "types/shell.h"
@@ -43,9 +44,30 @@ static _Bool builtin_set_variable(
     return (0);
 }
 
+static _Bool builtin_set_error_handling(
+    struct hasher_s **hasher,
+    const char *const *argv,
+    size_t *i
+)
+{
+    if (!isalpha(argv[*i][0])) {
+        dprintf(2, "set: Variable name must begin with a letter.\n");
+        return (1);
+    }
+    for (size_t j = 0; argv[*i][j] && argv[*i][j] != '='; ++j) {
+        if (!isalnum(argv[*i][j])) {
+            dprintf(2, "set: Variable name must"
+            " contain alphanumeric characters.\n");
+            return (1);
+        }
+    }
+    return (builtin_set_variable(hasher, argv, i));
+}
+
 int builtin_set_handler(struct sh *shell, const char * const *argv)
 {
     size_t argc = ptb_argv_length(argv);
+    int status = 0;
 
     if (argc == 1) {
         local_variables_display(
@@ -55,7 +77,7 @@ int builtin_set_handler(struct sh *shell, const char * const *argv)
         return (0);
     }
     for (size_t i = 1; i < argc; ++i) {
-        builtin_set_variable(&shell->local_var, argv, &i);
+        status |= builtin_set_error_handling(&shell->local_var, argv, &i);
     }
-    return (0);
+    return (status);
 }

@@ -9,6 +9,7 @@
 #define PROTO_EXEC_MAGIC_PARSE_H_
 
 #include "types/shell.h"
+#include "types/expr.h"
 
 char **do_magic_parse(int fd);
 

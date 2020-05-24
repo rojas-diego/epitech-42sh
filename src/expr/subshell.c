@@ -24,20 +24,14 @@ static struct expr_subshell_s *expr_subshell(struct grammar_s *this)
     if (!exp)
         exit(84);
     memset(exp, 0, sizeof(struct expr_subshell_s));
-    if (!grammar_match(this, 1, TOK_LPARANTH)) {
-        free(exp);
-        return NULL;
-    }
+    if (!grammar_match(this, 1, TOK_LPARANTH))
+        return (expr_free(exp));
     exp->lparanth = grammar_get_previous(this);
     exp->block = expr_block_w(this);
-    if (!exp->block) {
-        free(exp);
-        return NULL;
-    }
-    if (!grammar_match(this, 1, TOK_RPARANTH)) {
-        free(exp);
-        return NULL;
-    }
+    if (!exp->block)
+        return (expr_free(exp));
+    if (!grammar_match(this, 1, TOK_RPARANTH))
+        return (expr_free(exp));
     exp->rparanth = grammar_get_previous(this);
     return exp;
 }

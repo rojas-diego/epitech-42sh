@@ -26,15 +26,11 @@ static struct expr_redirection_s *expr_redirection(struct grammar_s *this)
     memset(exp, 0, sizeof(struct expr_redirection_s));
     if (grammar_match(this, 1, TOK_IONUMBER))
         exp->io_number = grammar_get_previous(this);
-    if (!grammar_match(this, 4, TOK_GREAT, TOK_DGREAT, TOK_LESS, TOK_DLESS)) {
-        free(exp);
-        return NULL;
-    }
+    if (!grammar_match(this, 4, TOK_GREAT, TOK_DGREAT, TOK_LESS, TOK_DLESS))
+        return (expr_free(exp));
     exp->redirection = grammar_get_previous(this);
-    if (!grammar_match(this, 1, TOK_WORD)) {
-        free(exp);
-        return NULL;
-    }
+    if (!grammar_match(this, 1, TOK_WORD))
+        return (expr_free(exp));
     exp->word = grammar_get_previous(this);
     return exp;
 }

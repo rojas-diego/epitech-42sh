@@ -34,9 +34,8 @@ static char *alias_concat_argv(const char * const *argv)
     asprintf(&data, "(%s", argv[2]);
     for (size_t i = 4; i < length - 1; ++i) {
         save = data;
-        if (asprintf(&data, "%s %s", save, argv[i]) < 0) {
+        if (asprintf(&data, "%s %s", save, argv[i]) < 0)
             return (NULL);
-        }
         free(save);
     }
     save = data;

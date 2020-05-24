@@ -19,7 +19,7 @@ void local_variables_display(
 struct local_var_s *local_variable_from_data(
     struct hasher_s *hasher,
     char const *key,
-    char *data
+    char const *data
 );
 void local_variable_assign_value(struct local_var_s *var, char const *data);
 enum var_type_e local_variable_get_type(char const *data);

@@ -19,19 +19,28 @@
 #include "parser_toolbox/blacklist.h"
 #include "proto/exec/magic/parse.h"
 #include "types/shell.h"
+#include "hasher/get_data.h"
+#include "types/local_variables.h"
 
 static const char ENV_VAR_SEP[] = " \t\n\r\f\v";
 
 static char *env_var_getenv(struct sh *shell, char *str)
 {
-    char *var = NULL;
-    //char *hasher_get_data(shell->local_var, str)
-    //asprintf(&var, "%d", data->nb);
+    char *temp = NULL;
+    struct local_var_s *var = hasher_get_data(shell->local_var, str);
+
     if (*str == '{') {
 
     }
     if (!ptb_blacklist(str, "\\/=&\"'()[]|{}")) {
         return ((char *) -1);
+    }
+    if (var && var->type == STRING) {
+        return (var->data.string);
+    }
+    if (var) {
+        asprintf(&temp, "%d", var->data.nb);
+        return (temp);
     }
     return (getenv(str));
 }

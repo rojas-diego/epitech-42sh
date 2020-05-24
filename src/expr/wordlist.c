@@ -27,10 +27,8 @@ static struct expr_wordlist_s *expr_wordlist(
     if (!exp)
         exit(84);
     memset(exp, 0, sizeof(struct expr_wordlist_s));
-    if (!grammar_match(this, 1, TOK_WORD)) {
-        free(exp);
-        return NULL;
-    }
+    if (!grammar_match(this, 1, TOK_WORD))
+        return (expr_free(exp));
     exp->wordlist = expr_wordlist_w(this);
     return exp;
 }
