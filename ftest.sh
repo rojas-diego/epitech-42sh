@@ -33,6 +33,7 @@ function display_test_result() {
 
 function _test () {
     echo -ne "$1" | $2 ./42sh 2>&1 | $3 | cat > $TESTS_PATH/$4_42sh.ftest
+    #$RED; echo "status:$?" ; $WHITE
     echo -ne "$1" | $2 tcsh 2>&1 | $3 | cat > $TESTS_PATH/$4_tcsh.ftest
     difference=`diff $TESTS_PATH/$4_42sh.ftest $TESTS_PATH/$4_tcsh.ftest`
     result=$?
@@ -176,10 +177,10 @@ function AND_and_OR_tests () {
 
 function globbing () {
     $PURPLE ; echo "=----= GLOBBING =----=" ; $WHITE
-    _test 'ls ?ests' "" cat globbing "? globbing"
-    _test 'ls [a-z]ests' "" cat globbing "[] globbing"
-    _test 'ls [a-z]rew' "" cat globbing "error globbing"
-    _test 'ls *' "" cat globbing "'*' globbing"
+    _test 'ls ?ests' "" cat globbing1 "? globbing"
+    _test 'ls [a-z]ests' "" cat globbing2 "[] globbing"
+    _test 'ls [a-z]rew' "" cat globbing3 "error globbing"
+    _test 'ls *' "" cat globbing4 "'*' globbing"
     display_test_result GLOBBING
 }
 
@@ -192,8 +193,8 @@ function var_interpreter () {
 
 function inhibitor () {
     $PURPLE ; echo "=----= INHIBITOR =----=" ; $WHITE
-    _test 'echo \"' "" cat echo_quote "Echo quote"
-    _test 'echo \' "" cat echo_quote "Echo single \\"
+    _test 'echo \"' "" cat echo_quote1 "Echo quote"
+    _test 'echo \' "" cat echo_quote2 "Echo single \\"
     display_test_result INHIBITOR
 }
 
@@ -210,7 +211,7 @@ function _alias () {
     _test 'alias lol ls \n lol' "" cat _alias1 "basic alias"
     _test 'alias lol=ls \n lol' "" cat _alias2 "error alias 1"
     _test 'alias lolle eqwo \n lollle' "" cat _alias3 "error alias 2"
-    _test 'alias a b\nalias b a\nb\na' "" cat _alias4 "alias loop"
+    _test 'alias a b\nalias b a\nb' "" cat _alias4 "alias loop"
     display_test_result _ALIAS
 }
 
@@ -221,48 +222,48 @@ function scripting () {
 
 function _foreach () {
     $PURPLE ; echo "=----= FOREACH =----=" ; $WHITE
-    _test 'foreach f (1 543 5) \n echo $f \n end' "" cat _foreach "basic foreach"
-    _test 'foreach f (1) \n if($f) ls \n end' "" cat _foreach "combined with if foreach"
+    _test 'foreach f (1 543 5) \n echo $f \n end' "" cat _foreach1 "basic foreach"
+    _test 'foreach f (1) \n if($f) ls \n end' "" cat _foreach2 "combined with if foreach"
     display_test_result _FOREACH
 }
 
 function _which () {
     $PURPLE ; echo "=----= WHICH =----=" ; $WHITE
-    _test 'unalias ls \n which ls' "" cat _which "basic where"
-    _test 'which fewijpfow fpwokefew' "" cat _which "where error handling"
-    _test 'unalias ls \n which ls' "" cat _which "builtin where"
+    _test 'unalias ls \n which ls' "" cat _which1 "basic where"
+    _test 'which fewijpfow fpwokefew' "" cat _which2 "where error handling"
+    _test 'unalias ls \n which ls' "" cat _which3 "builtin where"
     display_test_result _WHICH
 }
 
 function _where () {
     $PURPLE ; echo "=----= WHERE =----=" ; $WHITE
-    _test 'unalias ls \n where ls' "" cat _where "basic where"
-    _test 'where fewijpfow fpwokefew' "" cat _where "where error handling"
-    _test 'unalias ls \n where ls' "" cat _where "builtin where"
+    _test 'unalias ls \n where ls' "" cat _where1 "basic where"
+    _test 'where fewijpfow fpwokefew' "" cat _where2 "where error handling"
+    _test 'unalias ls \n where ls' "" cat _where3 "builtin where"
     display_test_result _WHERE
 }
 
 function _if () {
     $PURPLE ; echo "=----= IF =----=" ; $WHITE
-    _test 'if(1) ls' "" cat _if "basic if"
-    _test 'if ($?) ls' "" cat _if "if with variable"
-    _test 'if(0) ls' "" cat _if "null if"
+    _test 'if(1) ls' "" cat _if1 "basic if"
+    _test 'if ($?) ls' "" cat _if2 "if with variable"
+    _test 'if(0) ls' "" cat _if3 "null if"
     display_test_result _IF
 }
 
 function _repeat () {
     $PURPLE ; echo "=----= REPEAT =----=" ; $WHITE
-    _test 'repeat 4 ls' "" cat repeat "basic repeat"
-    _test 'repeat -1 ls' "" cat repeat "negative repeat"
-    _test 'repeat 0 ls' "" cat repeat "null repeat"
+    _test 'repeat 4 ls' "" cat repeat1 "basic repeat"
+    _test 'repeat -1 ls' "" cat repeat2 "negative repeat"
+    _test 'repeat 0 ls' "" cat repeat3 "null repeat"
     display_test_result _REPEAT
 }
 
 function parenthesis () {
     $PURPLE ; echo "=----= PARENTHESIS =----=" ; $WHITE
-    _test '(ls | cat)' "" cat parenthesis "basic parenthesis"
-    _test '(ls | cat) | grep test' "" cat parenthesis "parenthesis with something after"
-    _test 'ls | (grep toto | cat)' "" cat parenthesis "parenthesis at the end"
+    _test '(ls | cat)' "" cat parenthesis1 "basic parenthesis"
+    _test '(ls | cat) | grep test' "" cat parenthesis2 "parenthesis with something after"
+    _test 'ls | (grep toto | cat)' "" cat parenthesis3 "parenthesis at the end"
     display_test_result PARENTHESIS
 }
 
@@ -275,7 +276,7 @@ function personnals () {
     _test 'unsetenv PATH\nsetenv | /usr/bin/grep PATH' "" cat unsetenv "Basic test unsetenv"
     _test 'alias this_is_an_alias b && alias | grep this_is_an_alias' "" cat alias "Basic test alias"
     _test 'repeat 5 /bin/ls' "env -i" cat repeat "Basic test repeat"
-    _test 'if (1) /bin/ls' "env -i" cat if "Basic test if"
+    _test 'if (1) /bin/ls' "env -i" cat if10 "Basic test if"
     _test 'foreach f (1 2 3)\necho 1 + $f\nend\n' "" cat foreach "Basic test foreach"
     _test '/bin/ls > ls_output\n/bin/cat ls_output\n/usr/bin/rm ls_output' "" cat simple_right_redir "Basic test simple right redir"
     _test '/bin/ls >> ls_output\n/bin/ls >> ls_output\n/bin/cat ls_output\n/usr/bin/rm ls_output' "" cat double_right_redir "Basic test double right redir"

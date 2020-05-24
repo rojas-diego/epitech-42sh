@@ -91,7 +91,8 @@ static void process_launch_exec(
         if (strchr(process->argv[0], '/')) {
             execve(process->argv[0], process->argv, environ);
         } else {
-            fullpath = find_binary_in_path_env(do_shell_getenv(shell, "PATH"), process->argv[0]);
+            fullpath = find_binary_in_path_env(
+                do_shell_getenv(shell, "PATH"), process->argv[0]);
             execve(fullpath ? fullpath : process->argv[0],
                 process->argv, environ
             );
