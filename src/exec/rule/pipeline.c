@@ -77,7 +77,7 @@ static int exec_replace_alias(struct sh *shell, struct job_s *job)
             continue;
         }
         data = builtin_alias_replace_recursively(
-            gshell->alias, process->argv[0], 0
+            shell->alias, process->argv[0], 0
         );
         if (!data)
             return (EXEC_RULE_ALLOCATION_FAIL);
