@@ -260,6 +260,13 @@ function personnals () {
     display_test_result PERSONNALS
 }
 
+function randoms_tests () {
+    $YELLOW ; echo "=----= RANDOMS_TESTS =----=" ; $WHITE
+    _test 'cd ; </etc/hosts od -c | grep xx | wc >> /tmp/z -l ; cd - && echo "OK"' "" cat subject_test "subject test"
+    _test '' "" cat subject_test "big multiple test"
+    display_test_result RANDOMS_TESTS
+}
+
 function all () {
     basic_test
     path_handling
@@ -282,6 +289,7 @@ function all () {
     globbing
     AND_and_OR_tests
     redirections
+    randoms_tests
 
     NB_TEST_PASSED=$TOTAL_TESTS_PASSED
     NB_TEST_FAILED=$TOTAL_TESTS_FAILED
