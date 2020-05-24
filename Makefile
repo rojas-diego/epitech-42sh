@@ -193,8 +193,10 @@ SRC_JOB = src/job/process/launch.c				\
 	src/job/initialize.c						\
 	src/job/create.c							\
 
-SRCT = tests/input/parser/test_input_parse_tokens.c		\
-	tests/grammar/test_grammar_match.c					\
+SRCT = tests/input/parser/test_input_parse_tokens_simple.c 	\
+	tests/input/parser/test_input_parse_tokens_batch_1.c 	\
+	tests/input/parser/test_input_parse_tokens_quotes.c 	\
+	tests/grammar/test_grammar_match.c						\
 
 OBJ =		$(SRC_SHELL:.c=.o) $(SRC_EXEC:.c=.o) $(SRC_PROMPT:.c=.o) $(SRC_INPUT:.c=.o) $(SRC_TOKEN:.c=.o) $(SRC_GRAMMAR:.c=.o) $(SRC_EXPR:.c=.o) $(SRC_JOB:.c=.o)
 OBJM =		$(MAIN:.c=.o)
@@ -244,7 +246,7 @@ tests_run: $(OBJ) $(OBJT)
 	@ $(MAKE) -C ./lib/ -s
 	@ $(CC) $(OBJ) $(OBJT) -o $(TESTNAME) $(LDFLAGS) $(LDLIBS) $(CPPFLAGS) --coverage -lcriterion
 	@ ./$(TESTNAME)
-	@ gcovr -r . --html --html-details -o gcovr.html
+	@ gcovr -e tests/ -r . --html --html-details -o gcovr.html
 	@ mkdir -p gcovr/
 	@ mv *.html gcovr/
 
@@ -262,6 +264,7 @@ clean:
 	@ echo "===> Cleaning..."
 	@ $(RM) $(OBJ) $(OBJM) $(OBJT) *.gcno *.gcda
 	@ find . -name "*.gc*" -type f -delete
+	@ rm gcovr/*.html
 
 fclean:		clean
 	@ echo "===> File cleaning..."
