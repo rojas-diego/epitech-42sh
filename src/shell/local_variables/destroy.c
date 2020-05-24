@@ -19,7 +19,7 @@ void local_variables_destroy(struct hasher_s *hasher)
 
     for (struct hasher_s *curr = hasher; curr; curr = curr->next) {
         var = curr->data;
-        if (var->type == STRING) {
+        if (var && var->type == STRING) {
             free(var->data.string);
         }
     }
