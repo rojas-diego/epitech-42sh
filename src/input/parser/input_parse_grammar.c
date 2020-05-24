@@ -45,6 +45,7 @@ int input_parse_grammar(struct sh *shell)
 {
     struct grammar_s this = {0};
 
+    this.rawinput = shell->rawinput;
     this.debug = shell->debug_mode;
     this.tokens = (struct token_s **)node_to_table(shell->tokens);
     if (this.tokens == NULL) {

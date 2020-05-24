@@ -59,6 +59,9 @@ struct expr_compound_s *expr_compound_w(struct grammar_s *this);
 struct expr_if_inline_control_s *expr_if_inline_control_w(
     struct grammar_s *this);
 
-int do_ambiguous_redirection_check(struct expr_command_s *this);
+int do_ambiguous_redirection_check(
+    struct grammar_s *grammar,
+    struct expr_command_s *this
+);
 
 #endif
