@@ -97,6 +97,7 @@ static int exec_rule_pipeline_launch_job(
     builtin = (builtin_handler *) hasher_get_data(
         shell->builtin, job->first_process->argv[0]
     );
+    shell->job = job;
     job->foreground = foreground;
     job_launch(shell, job);
     return (EXEC_RULE_SUCCESS);
