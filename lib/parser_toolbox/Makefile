@@ -42,7 +42,7 @@ OBJ =		$(SRC:.c=.o)
 
 CFLAGS =	-Wall -Wextra
 
-CPPFLAGS =	-I include/
+CPPFLAGS =	-I include/ -g
 
 TFLAGS =	--coverage -lcriterion
 

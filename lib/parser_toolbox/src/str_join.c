@@ -20,7 +20,7 @@ char *ptb_str_join(const char *const *word_array, char const *str)
         return (NULL);
     for (; word_array[nb_words]; nb_words++)
         len += strlen(word_array[nb_words]);
-    len += (str ? strlen(str) : 0) * (nb_words - 1);
+    len += ((str ? strlen(str) : 0) * (nb_words - 1));
     new = malloc(sizeof(char) * (len + 1));
     len = 0;
     for (size_t i = 0; word_array[i]; i++) {
@@ -29,5 +29,6 @@ char *ptb_str_join(const char *const *word_array, char const *str)
         for (size_t j = 0; str && str[j] && word_array[i + 1]; j++, len++)
             new[len] = str[j];
     }
+    new[len] = 0;
     return (new);
 }

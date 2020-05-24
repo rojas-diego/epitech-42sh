@@ -83,15 +83,19 @@ static void process_launch_exec(
     builtin_handler *builtin = (builtin_handler *) hasher_get_data(
         shell->builtin, process->argv[0]
     );
+    char *fullpath = NULL;
 
     if (builtin && *builtin) {
         exit((*builtin)(shell, (const char * const *) process->argv));
     } else {
-        execve(strchr(process->argv[0], '/') ? process->argv[0]
-            : find_binary_in_path_env(
-                do_shell_getenv(shell, "PATH"), process->argv[0]),
-            process->argv, environ
-        );
+        if (strchr(process->argv[0], '/')) {
+            execve(process->argv[0], process->argv, environ);
+        } else {
+            fullpath = find_binary_in_path_env(do_shell_getenv(shell, "PATH"), process->argv[0]);
+            execve(fullpath ? fullpath : process->argv[0],
+                process->argv, environ
+            );
+        }
         process_launch_find_exec_error(process->argv[0]);
     }
 }
