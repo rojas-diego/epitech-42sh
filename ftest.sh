@@ -117,7 +117,6 @@ function simple_pipe () {
     _test '/bin/ls | /bin/cat -e' "" "cat" simple_pipe "Simple pipe"
     _test '/bin/cat ./tests/binaries/big_file | wc' "" "cat" pipe_big_input "Pipe with big input"
     _test '/bin/ls | cd ..\nls' "" "cat" pipe_with_builtin "Pipe with builtin"
-    _test '|' "" "cat" first_pipe "First pipe"
     display_test_result SIMPLE_PIPE
 }
 
@@ -173,11 +172,13 @@ function var_interpreter () {
 
 function inhibitor () {
     $YELLOW ; echo "=----= INHIBITOR =----=" ; $WHITE
+    _test 'echo \"' "" cat echo_quote "Echo quote"
     display_test_result INHIBITOR
 }
 
 function magic_quote() {
     $YELLOW ; echo "=----= MAGIC QUOTE =----=" ; $WHITE
+    _test 'echo `python -c "print 'A'*10"`' "" cat python_script "Python script"
     display_test_result MAGIC_QUOTE
 }
 
