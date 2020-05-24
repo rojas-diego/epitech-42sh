@@ -25,4 +25,16 @@ int do_post_process(
     struct expr_wordlist_s *words
 );
 
+int do_post_process_command(
+    struct sh *shell,
+    struct process_s *proc,
+    struct expr_command_s *command
+);
+
+int do_post_process(
+    struct sh *shell,
+    struct process_s *proc,
+    struct expr_wordlist_s *words
+);
+
 #endif /* !PROTO_EXEC_MAGIC_PARSE_H_ */

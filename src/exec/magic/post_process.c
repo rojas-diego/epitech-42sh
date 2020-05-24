@@ -16,6 +16,7 @@
 #include "parser_toolbox/string_split.h"
 #include "parser_toolbox/consts.h"
 #include "parser_toolbox/unquote.h"
+#include "parser_toolbox/blacklist.h"
 
 #include "proto/token/get_string.h"
 #include "proto/exec/rule/command/add_word.h"
@@ -39,20 +40,24 @@ static int tmp_exec_rule_command_add_word(
 }
 
 char **do_post_process_glob(
-    struct sh *shell,
+    struct process_s *proc,
     char **substr
 )
 {
     wordexp_t we = {0};
     char **strs = NULL;
 
-    if (wordexp(*substr, &we, 0)) {
+    if (wordexp(*substr, &we, 0))
+        return (NULL);
+    if (we.we_wordc == 1 && !strcmp(we.we_wordv[0], *substr)
+    && !ptb_blacklist(we.we_wordv[0], "*[]?")) {
+        *substr = NULL;
+        dprintf(2, "%s: No match.\n", proc->argv[0]);
+        wordfree(&we);
         return (NULL);
     }
     strs = calloc(we.we_wordc + 1, sizeof(char *));
-    if (!strs)
-        return (NULL);
-    for (size_t i = 0; i < we.we_wordc; ++i) {
+    for (size_t i = 0; strs && i < we.we_wordc; ++i) {
         strs[i] = strdup(we.we_wordv[i]);
         if (!strs[i])
             return (NULL);
@@ -63,6 +68,7 @@ char **do_post_process_glob(
 
 char **do_post_process_word(
     struct sh *shell,
+    struct process_s *proc,
     char **substr
 )
 {
@@ -77,7 +83,7 @@ char **do_post_process_word(
         *substr = NULL;
         return (NULL);
     }
-    return (do_post_process_glob(shell, substr));
+    return (do_post_process_glob(proc, substr));
 }
 
 int do_post_process(
@@ -91,7 +97,7 @@ int do_post_process(
 
     for (; words; words = words->wordlist) {
         substr = token_get_string(words->word, shell->rawinput);
-        post_processed = do_post_process_word(shell, &substr);
+        post_processed = do_post_process_word(shell, proc, &substr);
         for (size_t i = 0; post_processed[i]; ++i) {
             tmp_exec_rule_command_add_word(proc, post_processed[i]);
         }
@@ -117,7 +123,7 @@ int do_post_process_command(
         if (command->redirection)
             continue;
         substr = token_get_string(command->word, shell->rawinput);
-        post_processed = do_post_process_word(shell, &substr);
+        post_processed = do_post_process_word(shell, proc, &substr);
         for (size_t i = 0; post_processed && post_processed[i]; ++i) {
             tmp_exec_rule_command_add_word(proc, post_processed[i]);
         }
