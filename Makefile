@@ -70,6 +70,7 @@ SRC_EXEC = src/exec/get_argv.c					\
 	src/exec/rule/grouping.c					\
 	src/exec/rule/jobs.c						\
 	src/exec/rule/pipeline.c					\
+	src/exec/rule/sub_pipeline.c					\
 	src/exec/rule/program.c						\
 	src/exec/rule/compound.c					\
 	src/exec/rule/redirection.c					\

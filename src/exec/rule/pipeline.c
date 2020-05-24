@@ -24,6 +24,12 @@
 #include "hasher/get_data.h"
 #include "types/builtins.h"
 
+void follow_alias(
+    struct process_s **process,
+    struct process_s **save,
+    char *data
+);
+
 char *builtin_alias_replace_recursively(
     struct hasher_s *alias,
     char *key,
@@ -47,7 +53,7 @@ char *builtin_alias_replace_recursively(
     }
 }
 
-static void replace_add_data(struct process_s *process, char *data)
+void replace_add_data(struct process_s *process, char *data)
 {
     char **strs = ptb_string_split(data, " ");
     size_t length = ptb_argv_length((const char * const *) strs)
@@ -83,13 +89,7 @@ static int exec_replace_alias(struct sh *shell, struct job_s *job)
             return (EXEC_RULE_ALLOCATION_FAIL);
         if (data == (char *) -1)
             return (EXEC_RULE_ALIAS_LOOP);
-        if (data != process->argv[0]) {
-            replace_add_data(process, data);
-            process = save;
-        } else {
-            save = process;
-            process = process->next;
-        }
+        follow_alias(&process, &save, data);
     }
     return (EXEC_RULE_SUCCESS);
 }
