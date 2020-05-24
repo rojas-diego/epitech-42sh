@@ -20,6 +20,7 @@
 #include "proto/sighandler.h"
 #include "proto/exec/magic/parse.h"
 #include "proto/job/process/launch.h"
+#include "proto/shell.h"
 
 extern char **environ;
 
@@ -87,7 +88,8 @@ static void process_launch_exec(
         exit((*builtin)(shell, (const char * const *) process->argv));
     } else {
         execve(strchr(process->argv[0], '/') ? process->argv[0]
-            : find_binary_in_path_env(getenv("PATH"), process->argv[0]),
+            : find_binary_in_path_env(
+                do_shell_getenv(shell, "PATH"), process->argv[0]),
             process->argv, environ
         );
         process_launch_find_exec_error(process->argv[0]);

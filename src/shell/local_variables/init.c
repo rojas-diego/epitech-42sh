@@ -15,24 +15,24 @@
 #include "proto/shell/local_variables.h"
 #include "types/local_variables.h"
 
+static void local_variables_add(struct hasher_s **hasher, char *value, char *name)
+{
+    struct local_var_s *var = NULL;
+
+    if (value) {
+        var = local_variable_from_data(*hasher, name, value);
+        if (var->data.string) {
+            hasher_insert_data_ordered(hasher, strdup(name), var);
+        }
+    }
+}
+
 struct hasher_s *local_variables_init(void)
 {
     struct hasher_s *hasher = NULL;
-    struct local_var_s *var = NULL;
-    char *str = getcwd(NULL, 0);
 
-    if (str) {
-        var = local_variable_from_data(hasher, "cwd", str);
-        if (var->data.string) {
-            hasher_insert_data_ordered(&hasher, strdup("cwd"), var);
-        }
-    }
-    str = getenv("TERM");
-        if (str) {
-        var = local_variable_from_data(hasher, "term", str);
-        if (var->data.string) {
-            hasher_insert_data_ordered(&hasher, strdup("term"), var);
-        }
-    }
+    local_variables_add(&hasher, getcwd(NULL, 0), "cwd");
+    local_variables_add(&hasher, getenv("TERM"), "term");
+    local_variables_add(&hasher, getenv("PATH"), "path");
     return (hasher);
 }
