@@ -45,9 +45,11 @@ void exec_rule_debug(struct sh *shell, const char *rule, bool entering)
         dprintf(2, "│  ");
     }
     if (entering) {
-        dprintf(2, "┌─o \033[1m\033[38;2;150;150;220m%s\033[0m\n", rule);
+        dprintf(2, "┌─o"
+            " \033[1m\033[38;2;150;150;220m%s\033[0m\n", rule);
     } else {
         shell->debug.depth -= 1;
-        dprintf(2, "└─o \033[1m\033[38;2;150;150;220m%s\033[0m\n", rule);
+        dprintf(2, "└─o"
+            " \033[1m\033[38;2;150;150;220m%s\033[0m\n", rule);
     }
 }
