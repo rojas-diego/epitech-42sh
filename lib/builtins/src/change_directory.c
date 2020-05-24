@@ -13,6 +13,8 @@
 #include <string.h>
 /* getenv */
 #include <stdlib.h>
+/* errno */
+#include <errno.h>
 
 #include "builtin/get_user_home.h"
 
@@ -82,7 +84,7 @@ enum change_directory_e builtin_change_directory(const char *path)
     }
     builtin_change_directory_set_env("OLDPWD");
     if (chdir(path) == -1) {
-        dprintf(2, "%s: Not a directory.\n", path);
+        dprintf(2, "%s: %s.\n", path, strerror(errno));
         return (CD_CHDIR_FAIL);
     }
     builtin_change_directory_set_env("PWD");
