@@ -51,6 +51,8 @@ static struct expr_while_control_s *expr_while_control(struct grammar_s *this)
     if (!grammar_match(this, 1, TOK_END))
         return (expr_free(exp));
     exp->end = grammar_get_previous(this);
+    if (this->tokens[this->index]->type == TOK_EOF)
+        return exp;
     if (!grammar_match(this, 1, TOK_NEWLINE))
         return (expr_free(exp));
     exp->end_newline = grammar_get_previous(this);

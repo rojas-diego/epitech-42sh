@@ -21,6 +21,9 @@ void local_variables_display(
     printf("_\t%s\n", list->next ? (char *) list->next->data : "");
     for (struct hasher_s *curr = hasher; curr; curr = curr->next) {
         var = curr->data;
+        if (!var) {
+            continue;
+        }
         printf("%s\t", curr->key);
         if (var->type == STRING) {
             printf("%s\n", var->data.string);

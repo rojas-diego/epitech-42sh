@@ -49,6 +49,8 @@ static struct expr_if_control_s *expr_if_control(struct grammar_s *this)
     if (!grammar_match(this, 1, TOK_ENDIF))
         return (expr_free(exp));
     exp->endif = grammar_get_previous(this);
+    if (this->tokens[this->index]->type == TOK_EOF)
+        return exp;
     if (!grammar_match(this, 1, TOK_NEWLINE))
         return (expr_free(exp));
     exp->endif_newline = grammar_get_previous(this);
