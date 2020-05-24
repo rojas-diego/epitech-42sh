@@ -29,7 +29,7 @@ static struct expr_block_s *expr_block(struct grammar_s *this)
         this->index = save_index;
         return (expr_free(exp));
     }
-    while (grammar_match(this, 1, TOK_NEWLINE, TOK_SEMI));
+    while (grammar_match(this, 2, TOK_NEWLINE, TOK_SEMI));
     save_index = this->index;
     exp->block = expr_block_w(this);
     if (!exp->block)
