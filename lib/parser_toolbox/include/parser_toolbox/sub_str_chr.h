@@ -8,6 +8,9 @@
 #ifndef PARSER_TOOLBOX_SUB_STR_CHR_H_
 #define PARSER_TOOLBOX_SUB_STR_CHR_H_
 
+#include <stdbool.h>
+#include <stddef.h>
+
 bool ptb_sub_str_chr(
     char *str,
     size_t start,
