@@ -277,6 +277,7 @@ function randoms_tests () {
     _test '&' "" cat big_multiple_test5 "big multiple test5"
     _test '&& ||' "" cat big_multiple_test6 "big multiple test6"
     _test 'ls&&ls' "" cat big_multiple_test7 "big multiple test7"
+    _test 'zbeub || zbeub || ls | cat | grep sr' "" cat big_multiple_test8 "big multiple test8"
     display_test_result RANDOMS_TESTS
 }
 
