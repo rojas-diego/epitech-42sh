@@ -260,6 +260,15 @@ function personnals () {
     display_test_result PERSONNALS
 }
 
+function total () {
+    $YELLOW ; echo "TOTAL" ; $WHITE
+    $GREEN
+    echo -ne "\tTest passed: $TOTAL_TESTS_PASSED\n"
+    $RED
+    echo -ne "\tTest failed: $TOTAL_TESTS_FAILED\n"
+    $WHITE
+}
+
 function all () {
     basic_test
     path_handling
@@ -283,9 +292,7 @@ function all () {
     AND_and_OR_tests
     redirections
 
-    NB_TEST_PASSED=$TOTAL_TESTS_PASSED
-    NB_TEST_FAILED=$TOTAL_TESTS_FAILED
-    display_test_result TOTAL
+    total
 }
 
 function clean () {
