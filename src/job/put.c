@@ -14,11 +14,11 @@
 
 void job_put_in_background(struct job_s *job, bool does_continue)
 {
-   if (does_continue) {
-       if (kill(-job->pgid, SIGCONT) < 0) {
-           perror("kill (SIGCONT)");
-       }
-   }
+    if (does_continue) {
+        if (kill(-job->pgid, SIGCONT) < 0) {
+            perror("kill (SIGCONT)");
+        }
+    }
 }
 
 void job_put_in_foreground(
