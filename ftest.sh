@@ -175,6 +175,7 @@ function var_interpreter () {
 function inhibitor () {
     $YELLOW ; echo "=----= INHIBITOR =----=" ; $WHITE
     _test 'echo \"' "" cat echo_quote "Echo quote"
+    _test 'echo \' "" cat echo_quote "Echo single \\"
     display_test_result INHIBITOR
 }
 
