@@ -5,8 +5,7 @@
 ** replace
 */
 
-#define _GNU_SOURCE
-#include <stdio.h>
+#include "gnu_source.h"
 #include <string.h>
 
 #include "parser_toolbox/consts.h"

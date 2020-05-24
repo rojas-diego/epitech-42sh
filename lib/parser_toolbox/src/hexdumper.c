@@ -8,8 +8,6 @@
 #include <stdio.h>
 #include <ctype.h>
 
-typedef unsigned long int size_t;
-
 static const char HEXA_STR[] = "0123456789abcdef";
 
 void ptb_hexdumper(const void *mem, size_t size)
