@@ -30,10 +30,11 @@ static _Bool history_can_replace(struct history_s *history, char **str, int i)
     char *substring = NULL;
 
     if ((*str)[i] == '!' && (!i || strchr(PTB_WHITESPACES, (*str)[i - 1]))) {
-        substring = ptb_sub_string(*str, i + 1, i + word_len(&(*str)[i + 1]));
-        if (!substring) {
+        if ((*str)[i + 1] == '=')
             return (0);
-        }
+        substring = ptb_sub_string(*str, i + 1, i + word_len(&(*str)[i + 1]));
+        if (!substring)
+            return (0);
         len = strlen(substring) + 1 + i;
         node = dnode_find_after(history->list, substring, &ptb_ncmp_string);
         if (!node) {

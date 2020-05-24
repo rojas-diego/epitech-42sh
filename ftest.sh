@@ -207,9 +207,10 @@ function magic_quote() {
 
 function _alias () {
     $PURPLE ; echo "=----= ALIAS =----=" ; $WHITE
-    _test 'alias lol ls \n lol' "" cat _alias "basic alias"
-    _test 'alias lol=ls \n lol' "" cat _alias "error alias 1"
-    _test 'alias lolle eqwo \n lollle' "" cat _alias "error alias 2"
+    _test 'alias lol ls \n lol' "" cat _alias1 "basic alias"
+    _test 'alias lol=ls \n lol' "" cat _alias2 "error alias 1"
+    _test 'alias lolle eqwo \n lollle' "" cat _alias3 "error alias 2"
+    _test 'alias a b\nalias b a\nb\na' "" cat _alias4 "alias loop"
     display_test_result _ALIAS
 }
 
