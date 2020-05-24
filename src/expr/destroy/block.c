@@ -5,9 +5,7 @@
 ** expr_block
 */
 
-/* free */
 #include <stdlib.h>
-
 #include "proto/expr_destroy.h"
 
 /*
