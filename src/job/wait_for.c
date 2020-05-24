@@ -11,9 +11,6 @@
 #include "proto/job/wait_for.h"
 #include "proto/job/process/update_status.h"
 
-/* Check for processes that have status information available,
-   blocking until all processes in the given job have reported.  */
-
 void job_wait_for(struct sh *shell, struct job_s *first_job, struct job_s *job)
 {
     int status;
