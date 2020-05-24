@@ -21,6 +21,7 @@
 #include "parser_toolbox/cmp_string.h"
 #include "parser_toolbox/string_split.h"
 #include "parser_toolbox/str_join.h"
+#include "parser_toolbox/sub_str_chr.h"
 
 /**/
 /* Constants */

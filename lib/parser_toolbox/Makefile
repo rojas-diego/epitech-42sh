@@ -34,6 +34,7 @@ SRC =		src/add_char.c		\
 		src/string_split.c		\
 		src/unquote.c		\
 		src/str_join.c		\
+		src/sub_str_chr.c	\
 
 SRCT = tests/	\
 

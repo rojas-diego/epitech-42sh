@@ -147,6 +147,7 @@ function redirections () {
     _test 'cat < MASHALLA' "" "cat" bad_redirection_left "Bad redirection left"
     _test 'ls > tests/' "" "cat" bad_redirection_right_directory "Bad redirection right (directory)"
     _test 'ls >' "" "cat" missing_name_redirect "Missing name for redirect"
+    _test 'cat < cat < Makefile' "" "cat" ambiguous_redirect "Ambiguous input redirect"
     display_test_result REDIRECTIONS
 }
 
