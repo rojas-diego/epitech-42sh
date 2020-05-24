@@ -31,13 +31,10 @@ static struct expr_pipeline_s *expr_pipeline(struct grammar_s *this)
         exp->command = expr_command_w(this);
         if (do_ambiguous_redirection_check(exp->command)) {
             grammar_set_error(this, AST_AMBIGUOUS_REDIRECTION);
-            free(exp);
-            return NULL;
+            return (expr_free(exp));
         }
-        if (!exp->command) {
-            free(exp);
-            return NULL;
-        }
+        if (!exp->command)
+            return (expr_free(exp));
     }
     if (!grammar_match(this, 1, TOK_PIPE))
         return exp;
@@ -45,8 +42,7 @@ static struct expr_pipeline_s *expr_pipeline(struct grammar_s *this)
     exp->pipeline = expr_pipeline(this);
     if (!exp->pipeline) {
         grammar_set_error(this, AST_NULL_COMMAND);
-        free(exp);
-        return NULL;
+        return (expr_free(exp));
     }
     return exp;
 }

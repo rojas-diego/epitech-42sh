@@ -27,22 +27,18 @@ static struct expr_repeat_control_s *expr_repeat_control(
     if (!exp)
         exit(84);
     memset(exp, 0, sizeof(struct expr_repeat_control_s));
-    if (!grammar_match(this, 1, TOK_REPEAT)) {
-        free(exp);
-        return NULL;
-    }
+    if (!grammar_match(this, 1, TOK_REPEAT))
+        return (expr_free(exp));
     exp->repeat = grammar_get_previous(this);
     if (!grammar_match(this, 1, TOK_WORD)) {
         grammar_set_error(this, AST_REPEAT_TOO_FEW_ARGS);
-        free(exp);
-        return NULL;
+        return (expr_free(exp));
     }
     exp->word = grammar_get_previous(this);
     exp->grouping = expr_grouping_w(this);
     if (!exp->grouping) {
         grammar_set_error(this, AST_REPEAT_TOO_FEW_ARGS);
-        free(exp);
-        return NULL;
+        return (expr_free(exp));
     }
     return exp;
 }

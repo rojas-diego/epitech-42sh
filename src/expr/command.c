@@ -26,18 +26,15 @@ static struct expr_command_s *expr_command(struct grammar_s *this)
     memset(exp, 0, sizeof(struct expr_command_s));
     if (!grammar_match(this, 1, TOK_WORD)) {
         exp->redirection = expr_redirection_w(this);
-        if (!exp->redirection) {
-            free(exp);
-            return NULL;
-        }
-    } else {
+        if (!exp->redirection)
+            return (expr_free(exp));
+    } else
         exp->word = grammar_get_previous(this);
-    }
     save_index = this->index;
     exp->command = expr_command_w(this);
     if (!exp->command)
         this->index = save_index;
-    return exp;
+    return (exp);
 }
 
 struct expr_command_s *expr_command_w(struct grammar_s *this)
@@ -47,5 +44,5 @@ struct expr_command_s *expr_command_w(struct grammar_s *this)
     expr_print(this, "Command");
     exp = expr_command(this);
     expr_print_debug(this, exp);
-    return exp;
+    return (exp);
 }

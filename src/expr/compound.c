@@ -26,10 +26,8 @@ static struct expr_compound_s *expr_compound(struct grammar_s *this)
     if (grammar_match(this, 1, TOK_AMPERSAND))
         exp->ampersand_start = grammar_get_previous(this);
     exp->grouping = expr_grouping_w(this);
-    if (!exp->grouping) {
-        free(exp);
-        return NULL;
-    }
+    if (!exp->grouping)
+        return (expr_free(exp));
     save_index = this->index;
     exp->jobs = expr_jobs_w(this);
     if (!exp->jobs)

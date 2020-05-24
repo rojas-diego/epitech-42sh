@@ -28,15 +28,14 @@ static struct expr_block_s *expr_block(struct grammar_s *this)
     exp->statement = expr_statement_w(this);
     if (!exp->statement) {
         this->index = save_index;
-        free(exp);
-        return NULL;
+        return (expr_free(exp));
     }
     while (grammar_match(this, 1, TOK_NEWLINE));
     save_index = this->index;
     exp->block = expr_block_w(this);
     if (!exp->block)
         this->index = save_index;
-    return exp;
+    return (exp);
 }
 
 struct expr_block_s *expr_block_w(struct grammar_s *this)
@@ -46,5 +45,5 @@ struct expr_block_s *expr_block_w(struct grammar_s *this)
     expr_print(this, "Block");
     exp = expr_block(this);
     expr_print_debug(this, exp);
-    return exp;
+    return (exp);
 }

@@ -23,31 +23,21 @@ static struct expr_if_control_s *expr_if_control(struct grammar_s *this)
     if (!exp)
         exit(84);
     memset(exp, 0, sizeof(struct expr_if_control_s));
-    if (!grammar_match(this, 1, TOK_IF)) {
-        free(exp);
-        return NULL;
-    }
+    if (!grammar_match(this, 1, TOK_IF))
+        return (expr_free(exp));
     exp->if_token = grammar_get_previous(this);
     exp->wordlist_expression = expr_wordlist_expression_w(this);
-    if (!exp->wordlist_expression) {
-        free(exp);
-        return NULL;
-    }
-    if (!grammar_match(this, 1, TOK_THEN)) {
-        free(exp);
-        return NULL;
-    }
+    if (!exp->wordlist_expression)
+        return (expr_free(exp));
+    if (!grammar_match(this, 1, TOK_THEN))
+        return (expr_free(exp));
     exp->then = grammar_get_previous(this);
-    if (!grammar_match(this, 1, TOK_NEWLINE)) {
-        free(exp);
-        return NULL;
-    }
+    if (!grammar_match(this, 1, TOK_NEWLINE))
+        return (expr_free(exp));
     exp->then_newline = grammar_get_previous(this);
     exp->block = expr_block_w(this);
-    if (!exp->block) {
-        free(exp);
-        return NULL;
-    }
+    if (!exp->block)
+        return (expr_free(exp));
     save_index = this->index;
     exp->else_if_control = expr_else_if_control_w(this);
     if (!exp->else_if_control)
@@ -56,15 +46,11 @@ static struct expr_if_control_s *expr_if_control(struct grammar_s *this)
     exp->else_control = expr_else_control_w(this);
     if (!exp->else_control)
         this->index = save_index;
-    if (!grammar_match(this, 1, TOK_ENDIF)) {
-        free(exp);
-        return NULL;
-    }
+    if (!grammar_match(this, 1, TOK_ENDIF))
+        return (expr_free(exp));
     exp->endif = grammar_get_previous(this);
-    if (!grammar_match(this, 1, TOK_NEWLINE)) {
-        free(exp);
-        return NULL;
-    }
+    if (!grammar_match(this, 1, TOK_NEWLINE))
+        return (expr_free(exp));
     exp->endif_newline = grammar_get_previous(this);
     return exp;
 }

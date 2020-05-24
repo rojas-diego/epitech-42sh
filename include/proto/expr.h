@@ -28,6 +28,7 @@
 /* Function prototypes */
 /**/
 
+void *expr_free(void *expr);
 void expr_print_padding(unsigned int depth);
 void expr_print(struct grammar_s *this, char const *name);
 void expr_print_debug(struct grammar_s *this, void *ptr);

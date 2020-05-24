@@ -25,22 +25,18 @@ static struct expr_else_control_s *expr_else_control(struct grammar_s *this)
     if (!exp)
         exit(84);
     memset(exp, 0, sizeof(struct expr_else_control_s));
-    if (!grammar_match(this, 1, TOK_ELSE)) {
-        free(exp);
-        return NULL;
-    }
+    if (!grammar_match(this, 1, TOK_ELSE))
+        return (expr_free(exp));
     exp->else_token = grammar_get_previous(this);
     if (!grammar_match(this, 1, TOK_NEWLINE)) {
         grammar_set_error(this, AST_ELSE_MISSING_NEWLINE);
-        free(exp);
-        return NULL;
+        return (expr_free(exp));
     }
     exp->newline = grammar_get_previous(this);
     exp->block = expr_block_w(this);
     if (!exp->block) {
         grammar_set_error(this, AST_EMPTY_ELSE);
-        free(exp);
-        return NULL;
+        return (expr_free(exp));
     }
     return exp;
 }
