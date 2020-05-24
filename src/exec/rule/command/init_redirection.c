@@ -23,7 +23,7 @@ static const struct {
 } REDIRECT_ERROR[] = {
     {ENOENT, "No such file or directory."},
     {EACCES, "Permission denied."},
-    {EISDIR, "Is a directory"}
+    {EISDIR, "Is a directory."}
 };
 
 static void exec_do_redirect_error_handling(const char *path)
