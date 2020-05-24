@@ -72,17 +72,17 @@ static int exec_replace_alias(struct sh *shell, struct job_s *job)
     struct process_s *save = process;
 
     for (; process;) {
-        if (process->subshell)
+        if (process->subshell) {
+            process = process->next;
             continue;
+        }
         data = builtin_alias_replace_recursively(
-            shell->alias, process->argv[0], 0
+            gshell->alias, process->argv[0], 0
         );
-        if (!data) {
+        if (!data)
             return (EXEC_RULE_ALLOCATION_FAIL);
-        }
-        if (data == (char *) -1) {
+        if (data == (char *) -1)
             return (EXEC_RULE_ALIAS_LOOP);
-        }
         if (data != process->argv[0]) {
             replace_add_data(process, data);
             process = save;
