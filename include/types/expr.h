@@ -228,7 +228,7 @@ struct expr_grouping_s {
 */
 struct expr_subshell_s {
     struct token_s          *lparanth;
-    struct expr_block_s     *block;
+    struct expr_grouping_s  *grouping;
     struct token_s          *rparanth;
 };
 
