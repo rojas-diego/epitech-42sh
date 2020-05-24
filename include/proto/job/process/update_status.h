@@ -10,8 +10,14 @@
 
 #include <sys/types.h>
 
+#include "types/shell.h"
 #include "types/job.h"
 
-int job_process_update_status(struct job_s *first_job, pid_t pid, int status);
+int job_process_update_status(
+    struct sh *shell,
+    struct job_s *first_job,
+    pid_t pid,
+    int status
+);
 
 #endif /* !SH_PROTO_JOB_PROCESS_UPDATE_STATUS_H_ */

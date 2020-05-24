@@ -76,7 +76,7 @@ void prompter(struct sh *shell)
             prompt_execution(shell);
         input_destroy(shell);
         prompt_input_empty(shell);
-        job_do_notification(&(shell->job));
+        job_do_notification(shell, &(shell->job));
         shell->error = 0;
     }
 }

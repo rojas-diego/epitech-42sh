@@ -20,6 +20,7 @@
 #include "parser_toolbox/word_array_chr.h"
 #include "parser_toolbox/cmp_string.h"
 #include "parser_toolbox/string_split.h"
+#include "parser_toolbox/str_join.h"
 
 /**/
 /* Constants */

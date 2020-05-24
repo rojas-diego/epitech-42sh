@@ -8,8 +8,9 @@
 #ifndef SH_PROTO_JOB_WAIT_FOR_H_
 #define SH_PROTO_JOB_WAIT_FOR_H_
 
+#include "types/shell.h"
 #include "types/job.h"
 
-void job_wait_for(struct job_s *first_job, struct job_s *job);
+void job_wait_for(struct sh *shell, struct job_s *first_job, struct job_s *job);
 
 #endif /* !SH_PROTO_JOB_WAIT_FOR_H_ */
