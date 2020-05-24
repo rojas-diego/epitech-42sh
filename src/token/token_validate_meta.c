@@ -52,6 +52,7 @@ unsigned int token_validate_word(
 
     for (i = 0; string[i]; i++) {
         token_validate_dquotes(string, &i, &adv);
+        token_validate_bquotes(string, &i, &adv);
         token_validate_squotes(string, &i, &adv);
         token_validate_inhibitors(string, &i, &adv);
         if (adv)

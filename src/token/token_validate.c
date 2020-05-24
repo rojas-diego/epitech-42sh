@@ -56,9 +56,27 @@ void token_validate_squotes(char const *string, unsigned int *i, bool *adv)
 
 /*
 ** @DESCRIPTION
+**   This function skips the single quotes from the string.
+*/
+void token_validate_bquotes(char const *string, unsigned int *i, bool *adv)
+{
+    if (string[*i] != '`') {
+        *adv = false;
+        return;
+    }
+    *adv = true;
+    (*i)++;
+    for (; string[*i]; (*i)++) {
+        if (string[*i] == '`')
+            return;
+    }
+    my_error(ERR_WRITE, 84);
+    (*i)--;
+}
+
+/*
+** @DESCRIPTION
 **   This function skips the double quotes from the string.
-** @TODO
-**   Raise an error if there is an unmatched quote.
 */
 void token_validate_dquotes(char const *string, unsigned int *i, bool *adv)
 {
