@@ -18,6 +18,8 @@
 #include "parser_toolbox/consts.h"
 #include "parser_toolbox/whitelist.h"
 
+int magic_env_var_replace(struct sh *shell, char **str);
+
 static char peek(char **str)
 {
     return (**str);
