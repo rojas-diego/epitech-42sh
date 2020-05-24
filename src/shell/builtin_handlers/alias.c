@@ -22,29 +22,8 @@
 #include "types/shell.h"
 #include "proto/shell/builtin_handlers.h"
 
-static char *alias_concat_argv(const char * const *argv)
-{
-    size_t length = ptb_argv_length(argv);
-    char *data = NULL;
-    char *save = NULL;
 
-    if (length == 3) {
-        return (strdup(argv[2]));
-    }
-    asprintf(&data, "(%s", argv[2]);
-    for (size_t i = 4; i < length - 1; ++i) {
-        save = data;
-        if (asprintf(&data, "%s %s", save, argv[i]) < 0)
-            return (NULL);
-        free(save);
-    }
-    save = data;
-    if (asprintf(&data, "%s %s)", save, argv[length - 1]) < 0) {
-        return (NULL);
-    }
-    free(save);
-    return (data);
-}
+#include "parser_toolbox/str_join.h"
 
 static int insert_alias(struct sh *shell, const char * const *argv)
 {
@@ -52,7 +31,7 @@ static int insert_alias(struct sh *shell, const char * const *argv)
     struct hasher_s *new = NULL;
     struct hasher_s *overrided = NULL;
 
-    data = alias_concat_argv(argv);
+    data = ptb_str_join(argv + 2, " ");
     if (data == NULL) {
         return (1);
     }

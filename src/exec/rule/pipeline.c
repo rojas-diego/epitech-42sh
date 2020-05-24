@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+#include <unistd.h>
 
 #include "proto/exec/rule/debug.h"
 #include "types/exec/rule.h"
@@ -18,24 +19,10 @@
 #include "proto/exec/rule/command.h"
 #include "proto/exec/rule/subshell.h"
 #include "proto/exec/rule/pipeline.h"
-
+#include "parser_toolbox/string_split.h"
+#include "parser_toolbox/argv_length.h"
 #include "hasher/get_data.h"
 #include "types/builtins.h"
-
-static _Bool job_process_is_last_is_builtin(struct sh *shell, struct job_s *job)
-{
-    struct process_s *process = job->first_process;
-    builtin_handler *func = NULL;
-
-    for (; process->next; process = process->next);
-    func = (builtin_handler *) hasher_get_data(
-        shell->builtin, process->argv[0]
-    );
-    if (func && *func) {
-        return (true);
-    }
-    return (false);
-}
 
 char *builtin_alias_replace_recursively(
     struct hasher_s *alias,
@@ -60,6 +47,24 @@ char *builtin_alias_replace_recursively(
     }
 }
 
+static void replace_add_data(struct process_s *process, char *data)
+{
+    char **strs = ptb_string_split(data, " ");
+    size_t length = ptb_argv_length((const char * const *) strs)
+        + ptb_argv_length((const char * const *) process->argv) + 1;
+    char **new = calloc(length, sizeof(char *));
+    char **old = process->argv;
+
+    process->argv = new;
+    process->argc = 0;
+    for (size_t i = 0; strs[i]; ++i) {
+        process->argv[process->argc++] = strs[i];
+    }
+    for (size_t i = 1; old[i]; ++i) {
+        process->argv[process->argc++] = old[i];
+    }
+}
+
 static int exec_replace_alias(struct sh *shell, struct job_s *job)
 {
     struct process_s *process = job->first_process;
@@ -76,8 +81,7 @@ static int exec_replace_alias(struct sh *shell, struct job_s *job)
             return (EXEC_RULE_ALIAS_LOOP);
         }
         if (data != process->argv[0]) {
-            free(process->argv[0]);
-            process->argv[0] = data;
+            replace_add_data(process, data);
         }
     }
     return (EXEC_RULE_SUCCESS);
@@ -89,7 +93,7 @@ static int exec_rule_pipeline_launch_job(
     bool foreground
 )
 {
-    builtin_handler *builtin = NULL;
+    __attribute__((unused)) builtin_handler *builtin;
 
     if (exec_replace_alias(shell, job)) {
         return (EXEC_RULE_ALLOCATION_FAIL);
