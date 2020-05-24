@@ -11,6 +11,7 @@
 #include "proto/token.h"
 #include "proto/grammar.h"
 #include "proto/input/parser.h"
+#include "types/expr.h"
 #include "tests/mock_types.h"
 
 Test(input_parse_grammar, simple_command)
@@ -34,8 +35,12 @@ Test(input_parse_grammar, advanced_command)
 Test(input_parse_grammar, control_flow)
 {
     struct sh shell = MOCK_SH;
+    struct expr_if_control_s *expression = NULL;
 
-    shell.rawinput = strdup("if (1) then\nls\nelse if then (0)\nls\nendif\n");
+    shell.rawinput = strdup("if (1 && 1) then\nls\nelse if (0) then\nls\nendif\n");
     input_parse_tokens(&shell);
     input_parse_grammar(&shell);
+    expression = shell.expression->block->statement->control->if_control;
+    cr_assert_not_null(shell.expression);
+    cr_assert_not_null(expression);
 }
