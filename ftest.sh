@@ -161,10 +161,11 @@ function advanced_manipulations () {
 
 function AND_and_OR_tests () {
     $PURPLE ; echo "=----= && AND || TESTS =----=" ; $WHITE
-    _test 'ls && ls' "" cat AND_and_OR "AND simple test"
-    _test 'ls || ls' "" cat AND_and_OR "OR simple test"
-    _test 'ls || ls && ls' "" cat AND_and_OR "OR and AND advanced test 1"
-    _test 'ls || ls && ls && jfweiji || cat telpw && grep' "" cat AND_and_OR "OR and AND advanced test 2"
+    _test 'ls && ls' "" cat AND_and_OR1 "AND simple test"
+    _test 'ls || ls' "" cat AND_and_OR2 "OR simple test"
+    _test 'ls || ls && ls' "" cat AND_and_OR3 "OR and AND advanced test 1"
+    _test 'ls || ls && ls && jfweiji || cat telpw && grep' "" cat AND_and_OR4 "OR and AND advanced test 2"
+    _test 'ls aerz || echo && ls' "" "cat" AND_and_OR5 "OR and AND 5"
     display_test_result AND_and_OR_TESTS
 }
 
