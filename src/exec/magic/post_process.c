@@ -21,6 +21,7 @@
 #include "proto/token/get_string.h"
 #include "proto/exec/rule/command/add_word.h"
 #include "proto/exec/magic/parse.h"
+#include "postprocess/quote_cleanup.h"
 
 static int tmp_exec_rule_command_add_word(
     struct process_s *process,
@@ -79,6 +80,7 @@ char **do_post_process_word(
         strs = do_subshelled_magic_quote(shell, *substr);
         return (strs);
     }
+    ipp_quote_cleanup(substr);
     if (magic_env_var_replace(shell, substr)) {
         *substr = NULL;
         return (NULL);
