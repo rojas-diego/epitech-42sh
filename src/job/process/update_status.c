@@ -63,7 +63,6 @@ static int job_process_update_record_process(
             return (1);
         if (job->foreground) {
             job_process_handle_status(status);
-            shell->last_status = status;
         } else
             job_format_info(job, ABLE[WTERMSIG(status) - 1], WCOREDUMP(status));
         return (1);
