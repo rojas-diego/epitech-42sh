@@ -18,8 +18,11 @@ function display_test_result() {
     $YELLOW ; echo "$1 result:" ; $WHITE
     $GREEN
     echo -ne "\tTest passed: $NB_TEST_PASSED\n"
-    $RED
-    echo -ne "\tTest failed: $NB_TEST_FAILED\n"
+    if [ $NB_TEST_FAILED -ne 0 ]
+    then
+        $RED
+        echo -ne "\tTest failed: $NB_TEST_FAILED\n"
+    fi
     $WHITE
     TOTAL_TESTS_PASSED=$(($NB_TEST_PASSED + TOTAL_TESTS_PASSED))
     TOTAL_TESTS_FAILED=$(($NB_TEST_FAILED + TOTAL_TESTS_FAILED))
