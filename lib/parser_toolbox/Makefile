@@ -33,6 +33,7 @@ SRC =		src/add_char.c		\
 		src/cmp_string.c		\
 		src/string_split.c		\
 		src/unquote.c		\
+		src/str_join.c		\
 
 SRCT = tests/	\
 
