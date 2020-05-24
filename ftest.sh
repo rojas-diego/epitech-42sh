@@ -166,6 +166,11 @@ function AND_and_OR_tests () {
     _test 'ls || ls && ls' "" cat AND_and_OR3 "OR and AND advanced test 1"
     _test 'ls || ls && ls && jfweiji || cat telpw && grep' "" cat AND_and_OR4 "OR and AND advanced test 2"
     _test 'ls aerz || echo && ls' "" "cat" AND_and_OR5 "OR and AND 5"
+    _test 'ls && ls && ls && ls || ls || ls && ls' "" "cat" AND_and_OR6 "OR and AND 6"
+    _test 'ls || ls && ls || ls' "" "cat" AND_and_OR7 "OR and AND 7"
+    _test 'ls aef || ls && ls azer' "" "cat" AND_and_OR8 "OR and AND 8"
+    _test 'true && false || true && true' "" "cat" AND_and_OR9 "OR and AND 9"
+    _test 'false || true && true' "" "cat" AND_and_OR10 "OR and AND 10"
     display_test_result AND_and_OR_TESTS
 }
 

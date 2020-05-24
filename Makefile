@@ -14,8 +14,8 @@ TESTNAME =	unit_tests
 MAIN =		src/main.c						\
 
 # SOURCES
-SRC_SHELL = src/shell/constants.c 				\
-	src/shell/check_debug_mode.c 				\
+SRC_SHELL = src/shell/constants.c				\
+	src/shell/check_debug_mode.c				\
 	src/shell/local_variables/display.c			\
 	src/shell/local_variables/assign_value.c	\
 	src/shell/local_variables/from_data.c		\
@@ -53,6 +53,7 @@ SRC_SHELL = src/shell/constants.c 				\
 	src/shell/builtin_handlers/set.c			\
 	src/shell/builtin_handlers/unset.c			\
 	src/shell/builtin_handlers/at.c				\
+	src/shell/builtin_handlers/pop.c				\
 
 SRC_EXEC = src/exec/get_argv.c					\
 	src/exec/builtins.c							\

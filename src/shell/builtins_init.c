@@ -15,7 +15,7 @@
 #include "proto/shell/builtin_handlers.h"
 #include "proto/shell/builtins.h"
 
-static const int BUILTIN_COUNT = 22;
+static const int BUILTIN_COUNT = 23;
 
 static const struct {
     const char *key;
@@ -30,6 +30,7 @@ static const struct {
     {"source", &builtin_source_handler},
     {"setenv", &builtin_setenv_handler},
     {"set", &builtin_set_handler},
+    {"pop", &builtin_pop_handler},
     {"jobs", &builtin_jobs_handler},
     {"history", &builtin_history_handler},
     {"fg", &builtin_fg_handler},

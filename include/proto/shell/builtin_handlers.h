@@ -71,4 +71,9 @@ int builtin_debug_handler(struct sh *shell, const char * const *argv);
 
 int builtin_history_handler(struct sh *shell, const char * const *argv);
 
+int builtin_pop_handler(
+    __attribute__((unused)) struct sh *shell,
+    __attribute__((unused)) const char * const *argv
+);
+
 #endif /* !SH_SHELL_BUILTIN_HANDLERS_H_ */
