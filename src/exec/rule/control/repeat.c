@@ -28,7 +28,7 @@ int exec_rule_control_repeat(
     if (substr == NULL) {
         return (EXEC_RULE_ALLOCATION_FAIL);
     }
-    if (!ptb_whitelist_digit(substr)) {
+    if (!ptb_whitelist_digit(substr + (*substr == '-'))) {
         dprintf(2, "repeat: Badly formed number.\n");
         return (EXEC_RULE_REPEAT_BADLY_FORMED_NUMBER);
     }
