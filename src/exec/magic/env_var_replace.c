@@ -24,7 +24,7 @@
 #include "hasher/get_data.h"
 #include "types/local_variables.h"
 
-static const char ENV_VAR_SEP[] = " \t\n\r\f\v\"'";
+static const char ENV_VAR_SEP[] = " \t\n\r\f\v\"'/";
 
 static char *env_var_getenv(struct sh *shell, char *str)
 {
