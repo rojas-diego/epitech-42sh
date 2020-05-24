@@ -93,10 +93,10 @@ function line_formatting () {
 
 function error_handling () {
     $YELLOW ; echo "=----= ERROR HANDLING =----=" ; $WHITE
-    gcc tests/binaries/bin_not_compatible.c -o tests/binaries/temp
+    gcc tests/binaries/src/bin_not_compatible.c -o tests/binaries/temp
     tac tests/binaries/temp > tests/binaries/bin_not_compatible
-    gcc ./tests/binaries/div_zero.c -o ./tests/binaries/div_zero
-    gcc ./tests/binaries/segfault.c -o ./tests/binaries/segfault
+    gcc ./tests/binaries/src/div_zero.c -o ./tests/binaries/div_zero
+    gcc ./tests/binaries/src/segfault.c -o ./tests/binaries/segfault
     _test './tests/binaries/bin_not_compatible' "" "cat" bin_not_compatible "Bin not compatible"
     _test './tests/binaries/div_zero' "" "cat" div_zero "DivZero with core dump"
     _test './tests/binaries/segfault' "" "cat" segfault "SegFault with core dump"
@@ -112,7 +112,7 @@ function separator () {
 
 function simple_pipe () {
     $YELLOW ; echo "=----= SIMPLE PIPE =----=" ; $WHITE
-    gcc ./tests/binaries/big_file_gen.c -o ./tests/binaries/big_file_gen
+    gcc ./tests/binaries/src/big_file_gen.c -o ./tests/binaries/big_file_gen
     ./tests/binaries/big_file_gen ./tests/binaries/big_file
     _test '/bin/ls | /bin/cat -e' "" "cat" simple_pipe "Simple pipe"
     _test '/bin/cat ./tests/binaries/big_file | wc' "" "cat" pipe_big_input "Pipe with big input"
@@ -289,11 +289,8 @@ function all () {
 }
 
 function clean () {
-    rm -f ./tests/binaries/bin_not_compatible
-    rm -f ./tests/binaries/divzero
-    rm -f ./tests/binaries/segfault
+    rm -f ./tests/binaries/*
     rm -f ./tests/ftests/*.ftest
-    rm -f ./tests/binaries/big_file
 }
 
 if [ $1 ]
