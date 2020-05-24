@@ -10,6 +10,6 @@
 
 #include "types/job.h"
 
-void job_do_notification(struct job_s **first_job);
+void job_do_notification(struct sh *shell, struct job_s **first_job);
 
 #endif /* !SH_PROTO_JOB_DO_NOTIFICATION_H_ */

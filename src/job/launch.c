@@ -71,7 +71,7 @@ static void job_launch_handle_launched_processes(
 )
 {
     if (!shell->atty) {
-        job_wait_for(shell->job, job);
+        job_wait_for(shell, shell->job, job);
     } else if (job->foreground) {
         job_put_in_foreground(shell, job, false);
     } else {

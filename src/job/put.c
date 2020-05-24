@@ -34,7 +34,7 @@ void job_put_in_foreground(
             perror("kill (SIGCONT)");
         }
     }
-    job_wait_for(shell->job, job);
+    job_wait_for(shell, shell->job, job);
     tcsetpgrp(shell->fd, shell->pgid);
     tcgetattr(shell->fd, &job->tmodes);
     tcsetattr(shell->fd, TCSADRAIN, &shell->prompt.orig_term);
