@@ -21,6 +21,24 @@ static struct expr_grouping_s *exec_rule_grouping_skip_until_next_or_if(
     return (rule->conditional ? rule : NULL);
 }
 
+static int exec_rule_grouping_sub_test(
+    struct sh *shell,
+    struct expr_grouping_s *rule,
+    int last_status
+)
+{
+    if (rule->conditional->type == TOK_OR_IF) {
+        if (!last_status) {
+            exec_rule_debug(shell, "grouping", false);
+            return (1);
+        }
+    } else {
+        exec_rule_debug(shell, "grouping", false);
+        return (1);
+    }
+    return (0);
+}
+
 int exec_rule_grouping(
     struct sh *shell,
     struct expr_grouping_s *rule,
@@ -37,13 +55,7 @@ int exec_rule_grouping(
                 rule = exec_rule_grouping_skip_until_next_or_if(rule);
                 continue;
             }
-        } else if (rule->conditional->type == TOK_OR_IF) {
-            if (!last_status) {
-                exec_rule_debug(shell, "grouping", false);
-                return (1);
-            }
-        } else {
-            exec_rule_debug(shell, "grouping", false);
+        } else if (exec_rule_grouping_sub_test(shell, rule, last_status)) {
             return (1);
         }
     }
