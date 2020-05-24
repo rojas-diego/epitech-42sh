@@ -52,6 +52,32 @@ static void prompt_action_tab_extend_glob(
     }
 }
 
+static void prompt_action_tab_extend_glob_from_env_path_loop(
+    wordexp_t *we,
+    char const *str,
+    char const *path
+)
+{
+    size_t len = 0;
+    char *tmp = NULL;
+
+    len = strlen(path) + 2 + strlen(str);
+    tmp = malloc(len);
+    strncpy(tmp, path, len);
+    strcat(tmp, "/");
+    strcat(tmp, str);
+    if (wordexp(tmp, we, WRDE_APPEND)) {
+        free(tmp);
+        return;
+    }
+    if (ptb_isdir(we->we_wordv[we->we_wordc - 1]) == PTB_FAILURE) {
+        we->we_wordc -= 1;
+        free(we->we_wordv[we->we_wordc]);
+        we->we_wordv[we->we_wordc] = NULL;
+    }
+    free(tmp);
+}
+
 static void prompt_action_tab_extend_glob_from_env_path(
     struct sh *shell,
     char *str
@@ -65,21 +91,7 @@ static void prompt_action_tab_extend_glob_from_env_path(
     if (wordexp(str, &we, 0))
         return;
     for (; *str != '*' && !is_path && path; path = path_iteration(path_env)) {
-        size_t len = strlen(path) + 2 + strlen(str);
-        char *tmp = malloc(len);
-        strncpy(tmp, path, len);
-        strcat(tmp, "/");
-        strcat(tmp, str);
-        if (wordexp(tmp, &we, WRDE_APPEND)) {
-            free(tmp);
-            return;
-        }
-        if (ptb_isdir(we.we_wordv[we.we_wordc - 1]) == PTB_FAILURE) {
-            we.we_wordc -= 1;
-            free(we.we_wordv[we.we_wordc]);
-            we.we_wordv[we.we_wordc] = NULL;
-        }
-        free(tmp);
+        prompt_action_tab_extend_glob_from_env_path_loop(&we, str, path);
     }
     prompt_action_tab_extend_glob(shell, &we, str);
     wordfree(&we);
