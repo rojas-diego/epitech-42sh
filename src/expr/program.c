@@ -14,7 +14,6 @@
 
 static void set_program_error(struct grammar_s *this)
 {
-    printf("");
     if (this->tokens[this->index]->type == TOK_OR_IF
         || this->tokens[this->index]->type == TOK_PIPE)
         grammar_set_error(this, AST_NULL_COMMAND);
