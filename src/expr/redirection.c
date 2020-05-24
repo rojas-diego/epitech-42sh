@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "proto/constants.h"
 #include "proto/grammar.h"
 #include "proto/expr.h"
 
@@ -29,8 +30,10 @@ static struct expr_redirection_s *expr_redirection(struct grammar_s *this)
     if (!grammar_match(this, 4, TOK_GREAT, TOK_DGREAT, TOK_LESS, TOK_DLESS))
         return (expr_free(exp));
     exp->redirection = grammar_get_previous(this);
-    if (!grammar_match(this, 1, TOK_WORD))
+    if (!grammar_match(this, 1, TOK_WORD)) {
+        grammar_set_error(this, AST_MISSING_REDIRECT_NAME);
         return (expr_free(exp));
+    }
     exp->word = grammar_get_previous(this);
     return exp;
 }

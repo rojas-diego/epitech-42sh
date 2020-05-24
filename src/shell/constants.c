@@ -41,3 +41,5 @@ const char *AST_REPEAT_TOO_FEW_ARGS = "repeat: Too few arguments";
 const char *AST_UNEXPECTED_TOKENS = "Unexpected tokens";
 
 const char *AST_AMBIGUOUS_REDIRECTION = "Ambiguous output redirect";
+
+const char *AST_MISSING_REDIRECT_NAME = "Missing name for redirect";
