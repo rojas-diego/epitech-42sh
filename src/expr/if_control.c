@@ -11,6 +11,34 @@
 #include "proto/grammar.h"
 #include "proto/expr.h"
 
+static struct expr_if_control_s *expr_if_control_n(
+    struct grammar_s *this,
+    struct expr_if_control_s *exp,
+    unsigned int save_index
+)
+{
+    exp->block = expr_block_w(this);
+    if (!exp->block)
+        return (expr_free(exp));
+    save_index = this->index;
+    exp->else_if_control = expr_else_if_control_w(this);
+    if (!exp->else_if_control)
+        this->index = save_index;
+    save_index = this->index;
+    exp->else_control = expr_else_control_w(this);
+    if (!exp->else_control)
+        this->index = save_index;
+    if (!grammar_match(this, 1, TOK_ENDIF))
+        return (expr_free(exp));
+    exp->endif = grammar_get_previous(this);
+    if (this->tokens[this->index]->type == TOK_EOF)
+        return exp;
+    if (!grammar_match(this, 1, TOK_NEWLINE))
+        return (expr_free(exp));
+    exp->endif_newline = grammar_get_previous(this);
+    return exp;
+}
+
 /*
 ** @DESCRIPTION
 **   Rule for if_control expression.
@@ -35,26 +63,7 @@ static struct expr_if_control_s *expr_if_control(struct grammar_s *this)
     if (!grammar_match(this, 1, TOK_NEWLINE))
         return (expr_free(exp));
     exp->then_newline = grammar_get_previous(this);
-    exp->block = expr_block_w(this);
-    if (!exp->block)
-        return (expr_free(exp));
-    save_index = this->index;
-    exp->else_if_control = expr_else_if_control_w(this);
-    if (!exp->else_if_control)
-        this->index = save_index;
-    save_index = this->index;
-    exp->else_control = expr_else_control_w(this);
-    if (!exp->else_control)
-        this->index = save_index;
-    if (!grammar_match(this, 1, TOK_ENDIF))
-        return (expr_free(exp));
-    exp->endif = grammar_get_previous(this);
-    if (this->tokens[this->index]->type == TOK_EOF)
-        return exp;
-    if (!grammar_match(this, 1, TOK_NEWLINE))
-        return (expr_free(exp));
-    exp->endif_newline = grammar_get_previous(this);
-    return exp;
+    return expr_if_control_n(this, exp, save_index);
 }
 
 struct expr_if_control_s *expr_if_control_w(struct grammar_s *this)
