@@ -45,7 +45,6 @@ static const char *TOK_NAMES[] = {
     "Right Brace",
     "Left Paranthesis",
     "Right Paranthesis",
-    "Bang",
     "Break",
     "Switch",
     "Case",

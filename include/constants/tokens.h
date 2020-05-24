@@ -41,7 +41,6 @@ static const char *TOKENS[] = {
     "}",        /* RBRACE */
     "(",        /* LBRACE */
     ")",        /* RBRACE */
-    "!",        /* BANG */
     "break",    /* BREAK */
     "switch",   /* SWITCH */
     "case",     /* CASE */

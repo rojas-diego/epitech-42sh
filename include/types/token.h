@@ -44,7 +44,6 @@ typedef enum tokent_e {
     TOK_RBRACE,
     TOK_LPARANTH,
     TOK_RPARANTH,
-    TOK_BANG,
     TOK_BREAK,
     TOK_SWITCH,
     TOK_CASE,
