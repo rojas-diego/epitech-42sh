@@ -20,7 +20,7 @@ static int check_pipeline(
     int ret = do_ambiguous_redirection_check(this, exp->pipeline);
 
     if (ret == 1) {
-        grammar_set_error(this, AST_AMBIGUOUS_REDIRECTION);
+        grammar_set_error(this, AST_AMBIGUOUS_REDIRECTION1);
         return (1);
     } else if (ret == 2) {
         grammar_set_error(this, AST_AMBIGUOUS_REDIRECTION2);
