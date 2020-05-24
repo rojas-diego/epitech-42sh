@@ -46,11 +46,11 @@ int do_ambiguous_redirection_check(
     if (red[0] > 1 || red[1] > 1 || (red[1] > 0 && this->pipeline))
         return ((red[1] > 1 || (red[1] > 0 && this->pipeline)) ? 2 : 1);
     red[0] = 1;
-    red[1] = 1;
+    red[1] = 0;
     for (this = this->pipeline; this; this = this->pipeline) {
         do_count_redirection_pipeline(this->command, red);
-        if (red[0] > 1 || red[1] > 1)
-            return ((red[1] > 1) ? 2 : 1);
+        if (red[0] > 1 || (red[1] > 0 && this->pipeline))
+            return ((red[1] > 0) ? 2 : 1);
     }
     return (0);
 }
