@@ -59,11 +59,9 @@ static void replace_add_data(struct process_s *process, char *data)
     process->argc = 0;
     for (size_t i = 0; strs[i]; ++i) {
         process->argv[process->argc++] = strs[i];
-        printf("%s\n", strs[i]);
     }
     for (size_t i = 1; old[i]; ++i) {
         process->argv[process->argc++] = old[i];
-        printf("%s\n", strs[i]);
     }
 }
 
