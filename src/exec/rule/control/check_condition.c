@@ -33,7 +33,7 @@ static char get(char **str)
     return (*(*str)++);
 }
 
-static long int do_number(char **str, int *error)
+static long int do_number(char **str, __attribute__((unused)) int *error)
 {
     long int result = get(str) - '0';
 
