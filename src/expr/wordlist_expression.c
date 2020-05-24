@@ -32,8 +32,8 @@ static struct expr_wordlist_expression_s *expr_wordlist_expression(
     exp->wordlist = expr_wordlist_w(this);
     if (!exp->wordlist)
         return (expr_free(exp));
-    if (!grammar_match(this, 1, TOK_RPARANTH))
-        return (expr_free(exp));
+    while (!grammar_match(this, 2, TOK_RPARANTH, TOK_EOF))
+        grammar_advance(this);
     exp->rparanth = grammar_get_previous(this);
     return exp;
 }
