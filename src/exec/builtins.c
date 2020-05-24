@@ -5,6 +5,8 @@
 ** exec builtins
 */
 
+#include <unistd.h>
+
 #include "types/shell.h"
 #include "types/builtins.h"
 #include "proto/exec/builtins.h"
@@ -19,11 +21,15 @@ int job_handle_if_builtin(
     builtin_handler *func = (builtin_handler *) hasher_get_data(
         shell->builtin, process->argv[0]
     );
+    int fd;
 
     if (func && *func) {
+        fd = dup(1);
+        dup2(job->io[IO_OUT], 1);
         shell->last_status = (*func)(
             shell, (const char * const *) process->argv
         );
+        dup2(fd, 1);
         return (true);
     }
     return (false);
