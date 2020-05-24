@@ -34,6 +34,6 @@ struct hasher_s *local_variables_init(void)
 
     local_variables_add(&hasher, getcwd(NULL, 0), "cwd");
     local_variables_add(&hasher, getenv("TERM"), "term");
-    local_variables_add(&hasher, getenv("PATH"), "path");
+    local_variables_add(&hasher, "/usr/bin:/bin", "path");
     return (hasher);
 }

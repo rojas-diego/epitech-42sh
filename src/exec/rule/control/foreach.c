@@ -38,7 +38,8 @@ int exec_rule_control_foreach(
     struct expr_wordlist_expression_s *w = rule->wordlist_expression;
 
     if (!process || do_post_process(shell, process, ptb_string_split(strndup(
-    shell->rawinput + w->lparanth->end, w->rparanth->start), PTB_WHITESPACES)))
+    shell->rawinput + w->lparanth->end, w->rparanth->start - w->lparanth->end),
+    PTB_WHITESPACES)))
         return (1);
     exec_rule_debug(shell, "foreach", true);
     for (size_t i = 0; i < process->argc; ++i) {
