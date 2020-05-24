@@ -24,6 +24,8 @@
 #include "hasher/get_data.h"
 #include "types/builtins.h"
 
+void replace_add_data(struct process_s *process, char *data);
+
 void follow_alias(
     struct process_s **process,
     struct process_s **save,
