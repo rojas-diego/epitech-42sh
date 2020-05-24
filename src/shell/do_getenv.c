@@ -27,7 +27,7 @@ char *do_shell_getenv(struct sh *shell, char const *name)
     struct local_var_s *var = NULL;
     char *var_path = NULL;
 
-    if (!value) {
+    if (!value || !*value) {
         var_path = strdup(name);
         my_strlwr(var_path);
         var = hasher_get_data(shell->local_var, var_path);
