@@ -12,6 +12,23 @@
 #include "proto/grammar.h"
 #include "proto/expr.h"
 
+static int expr_pipeline_sub_test(
+    struct grammar_s *this,
+    struct expr_pipeline_s *exp,
+    unsigned int save_index
+)
+{
+    this->index = save_index;
+    exp->command = expr_command_w(this);
+    if (do_ambiguous_redirection_check(exp->command)) {
+        grammar_set_error(this, AST_AMBIGUOUS_REDIRECTION);
+        return (1);
+    }
+    if (!exp->command)
+        return (1);
+    return (0);
+}
+
 /*
 ** @DESCRIPTION
 **   Rule for pipeline expression.
@@ -26,16 +43,8 @@ static struct expr_pipeline_s *expr_pipeline(struct grammar_s *this)
         exit(84);
     memset(exp, 0, sizeof(struct expr_pipeline_s));
     exp->subshell = expr_subshell_w(this);
-    if (!exp->subshell) {
-        this->index = save_index;
-        exp->command = expr_command_w(this);
-        if (do_ambiguous_redirection_check(exp->command)) {
-            grammar_set_error(this, AST_AMBIGUOUS_REDIRECTION);
-            return (expr_free(exp));
-        }
-        if (!exp->command)
-            return (expr_free(exp));
-    }
+    if (!exp->subshell && expr_pipeline_sub_test(this, exp, save_index))
+        return (expr_free(exp));
     if (!grammar_match(this, 1, TOK_PIPE))
         return exp;
     exp->pipe = grammar_get_previous(this);

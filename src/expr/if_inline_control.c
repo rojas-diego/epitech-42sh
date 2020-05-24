@@ -19,12 +19,11 @@ static struct expr_if_inline_control_s *expr_if_inline_control(
     struct grammar_s *this
 )
 {
-    struct expr_if_inline_control_s *exp = malloc(
-        sizeof(struct expr_if_inline_control_s));
+    struct expr_if_inline_control_s *exp = calloc(
+        1, sizeof(struct expr_if_inline_control_s));
 
     if (!exp)
         exit(84);
-    memset(exp, 0, sizeof(struct expr_if_inline_control_s));
     if (!grammar_match(this, 1, TOK_IF))
         return (expr_free(exp));
     exp->if_token = grammar_get_previous(this);

@@ -17,12 +17,11 @@
 */
 static struct expr_compound_s *expr_compound(struct grammar_s *this)
 {
-    struct expr_compound_s *exp = malloc(sizeof(struct expr_compound_s));
+    struct expr_compound_s *exp = calloc(1, sizeof(struct expr_compound_s));
     unsigned int save_index = this->index;
 
     if (!exp)
         exit(84);
-    memset(exp, 0, sizeof(struct expr_compound_s));
     if (grammar_match(this, 1, TOK_AMPERSAND))
         exp->ampersand_start = grammar_get_previous(this);
     exp->grouping = expr_grouping_w(this);
@@ -35,10 +34,8 @@ static struct expr_compound_s *expr_compound(struct grammar_s *this)
     if (grammar_match(this, 1, TOK_AMPERSAND))
         exp->ampersand_start = grammar_get_previous(this);
     exp->separator = expr_separator_w(this);
-    if (!exp->separator) {
-        free(exp);
-        return NULL;
-    }
+    if (!exp->separator)
+        return (expr_free(exp));
     return exp;
 }
 

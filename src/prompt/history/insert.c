@@ -41,9 +41,8 @@ void history_insert(struct history_s *history, char const *line)
         history->curr = NULL;
         return;
     }
-    if (new[len - 1] == '\n') {
+    if (new[len - 1] == '\n')
         new[len - 1] = 0;
-    }
     dnode_insert_data(&(history->list), new);
     history->curr = NULL;
     ++history->size;

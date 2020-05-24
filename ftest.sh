@@ -175,6 +175,7 @@ function var_interpreter () {
 function inhibitor () {
     $YELLOW ; echo "=----= INHIBITOR =----=" ; $WHITE
     _test 'echo \"' "" cat echo_quote "Echo quote"
+    _test 'echo \' "" cat echo_quote "Echo single \\"
     display_test_result INHIBITOR
 }
 
@@ -260,6 +261,13 @@ function personnals () {
     display_test_result PERSONNALS
 }
 
+function randoms_tests () {
+    $YELLOW ; echo "=----= RANDOMS_TESTS =----=" ; $WHITE
+    _test 'cd ; </etc/hosts od -c | grep xx | wc >> /tmp/z -l ; cd - && echo "OK"' "" cat subject_test "subject test"
+    _test '' "" cat subject_test "big multiple test"
+    display_test_result RANDOMS_TESTS
+}
+
 function total () {
     $YELLOW ; echo "TOTAL" ; $WHITE
     $GREEN
@@ -291,6 +299,7 @@ function all () {
     globbing
     AND_and_OR_tests
     redirections
+    randoms_tests
 
     total
 }
