@@ -10,7 +10,7 @@
 
 /* Structure Definitions */
 typedef enum {
-    err_write,
+    ERR_WRITE,
     err_read
 } my_error_mode_t;
 

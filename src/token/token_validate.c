@@ -50,7 +50,7 @@ void token_validate_squotes(char const *string, unsigned int *i, bool *adv)
         if (string[*i] == '\'')
             return;
     }
-    my_error(err_write, 84);
+    my_error(ERR_WRITE, 84);
     (*i)--;
 }
 
@@ -77,7 +77,7 @@ void token_validate_dquotes(char const *string, unsigned int *i, bool *adv)
         if (string[*i] == '\"')
             return;
     }
-    my_error(err_write, 84);
+    my_error(ERR_WRITE, 84);
     (*i)--;
 }
 
