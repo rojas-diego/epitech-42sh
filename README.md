@@ -1,6 +1,6 @@
 # 42SH
 
-## Description
+![mark](https://i.imgur.com/BpH0HnO.png)
 
 Basic shell based on TCSH.
 
@@ -20,3 +20,11 @@ $ ./42sh [--debug-mode]
 ## Features
 
 
+## Sources
+
+- [A complete guide to Recusrive Descent Parsing](https://craftinginterpreters.com/scanning.html)
+  This resources is the basis for the parsing and execution of every user input in the project.
+- [Bash grammar](https://pubs.opengroup.org/onlinepubs/9699919799.2016edition/utilities/V3_chap02.html#tag_18_10)
+  Consists in documentation regarding the Bash grammar and syntax. This resource was useful in understanding how shells work and was the basis for defining the 42sh   grammar
+- [GNU Documentation](https://www.gnu.org/software/libc/manual/html_node/index.html)
+  Probably the most comprehensive and extensive documentation source. Though dense, it provides examples and explanations on how to design primary shell features.
