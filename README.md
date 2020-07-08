@@ -42,10 +42,11 @@ if (0) then
 else if (0) then
     echo "2!"
 else
-    ls -l | grep . | grep a ; echo "Done!" > file
+    cd doesnt_exist || ls -l | grep . | grep a ; echo "Done!" > file
 endif
 
 ls &
+cat script.sh && ps
 repeat 10 echo "10"
 ```
 
