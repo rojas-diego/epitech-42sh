@@ -17,7 +17,40 @@ Then you can start the shell directly by using
 $ ./42sh [--debug-mode]
 ```
 
+## Requirements
+
+The objective was to produce a completely functional shell which could execute advanced commands and tasks.
+
+The main point of focuses were the following:
+
+- Basic command execution `ls`, `cd`, `make`.
+- Argument parsing `ls -l`
+- Redirections `ls >> file`, `ls < file`
+- Separators `ls ; cd ~`
+- Builtins `cd`, `echo`, `env`, `unsetenv`, `setenv`...
+- Pipes `ls | grep "include"`
+- Inhibitors `ls "this is a\" valid string"`
+- Globbing `ls *.a`
+- Job control
+- Subshells `(ls -l)`
+- Control statements `if`, `while`, `repeat`, `else if`, `else`, `foreach`
+
+In the end, the shell was expected to execute complete scripts like the following.
+```sh
+if (0) then
+    echo "1!"
+else if (0) then
+    echo "2!"
+else
+    ls -l | grep . | grep a ; echo "Done!" > file
+endif
+
+ls &
+repeat 10 echo "10"
+```
+
 ## Features
+
 
 
 ## Sources
