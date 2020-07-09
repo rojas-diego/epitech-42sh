@@ -11,3 +11,9 @@ unit_tests:
   script:
     - make tests_run
     - ./unit_tests
+    - gcovr -r .
+
+functional_tests:
+  script:
+    - make
+    - ./ftest.sh
