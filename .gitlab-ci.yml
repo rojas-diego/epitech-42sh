@@ -12,8 +12,14 @@ unit_tests:
     - make tests_run
     - ./unit_tests
     - gcovr -r .
+  only:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /^.*(\bRUN_UNIT_TESTS\b)?.*$/
 
 functional_tests:
   script:
     - make
     - ./ftest.sh
+  only:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /^.*(\bRUN_FUNCTIONAL_TESTS\b)?.*$/
