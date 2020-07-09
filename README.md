@@ -1,13 +1,12 @@
 # 42SH
+[![pipeline status](https://gitlab.com/rojasdiegopro/epitech-42sh/badges/master/pipeline.svg)](https://gitlab.com/rojasdiegopro/epitech-42sh/-/commits/master)
+[![coverage report](https://gitlab.com/rojasdiegopro/epitech-42sh/badges/master/coverage.svg)](https://gitlab.com/rojasdiegopro/epitech-42sh/-/commits/master)
 
 ![mark](https://i.imgur.com/BpH0HnO.png)
 
 Basic shell based on TCSH.
 
 42sh is the end-of-year project for students at Epitech during their first year. Please, while you can skim through the codebase as much as you want, don't use any of the code directly if this project was given to you. On the other hand you are free to use the `local/42sh.ebnf` file and apply it to your project.
-
-[![pipeline status](https://gitlab.com/rojasdiegopro/epitech-42sh/badges/master/pipeline.svg)](https://gitlab.com/rojasdiegopro/epitech-42sh/-/commits/master)
-[![coverage report](https://gitlab.com/rojasdiegopro/epitech-42sh/badges/master/coverage.svg)](https://gitlab.com/rojasdiegopro/epitech-42sh/-/commits/master)
 
 ## Usage
 
@@ -66,6 +65,35 @@ The pipeline can be found [here](.gitlab-ci.yml).
 It allows us to automatically run our [functional tests](ftest.sh) as well as our [unit tests](Makefile), upon pushing to the GitLab remote.
 
 ![UI in gitlab](https://i.imgur.com/a0dvGkt.png)
+
+### Recursive descent parsing
+
+We used recursive descent parsing to parse the user input. Our shell first tokenises the input and then parses it into a tree to be executed afterwards.
+Using the `debug-mode` you can visualise the parsing of your input and how it is executed.
+
+For example this command is parsed into a list of tokens as so
+```sh
+> ls | cat -e ; echo "2" 2> file
+Word(ls) Pipe(|) Word(cat) Word(-e) Semicolon(;) Word(echo) Word("2") IO Number(2) Great(>) Word(file) EOF()
+```
+
+The tree structure is defined in the [42sh Grammar](local/42sh.ebnf).
+
+### Job control
+
+This project implements basic job control features such as the `&` token. Commands which are ran along with this token will be executed in the background.
+You can also suspend a job using `Ctrl + Z` in your terminal.
+
+### Input processing
+
+Preprocessing and postprocessing of the input is capital to parse advanced commands containing inhibitors, magic quotes, globbing and other advanced shell features.
+
+### Shell shortcuts
+
+We implemented command history, line editing and aliases into our project.
+Older commands can be restablished by pressing the `Up Arrow` key.
+Aliases can be set and unset to allow for efficient mapping of favourite commands.
+Finally it has been made easy to edit your command on multiple line using the `ncurses` library.
 
 ## Sources
 
