@@ -6,6 +6,9 @@ Basic shell based on TCSH.
 
 42sh is the end-of-year project for students at Epitech during their first year. Please, while you can skim through the codebase as much as you want, don't use any of the code directly if this project was given to you. On the other hand you are free to use the `local/42sh.ebnf` file and apply it to your project.
 
+[![pipeline status](https://gitlab.com/rojasdiegopro/epitech-42sh/badges/master/pipeline.svg)](https://gitlab.com/rojasdiegopro/epitech-42sh/-/commits/master)
+[![coverage report](https://gitlab.com/rojasdiegopro/epitech-42sh/badges/master/coverage.svg)](https://gitlab.com/rojasdiegopro/epitech-42sh/-/commits/master)
+
 ## Usage
 
 After cloning the repository, build the executable as so
@@ -61,6 +64,8 @@ Post project completion, we used [GitLab](https://docs.gitlab.com/) to introduce
 The pipeline can be found [here](.gitlab-ci.yml).
 
 It allows us to automatically run our [functional tests](ftest.sh) as well as our [unit tests](Makefile), upon pushing to the GitLab remote.
+
+![UI in gitlab](https://i.imgur.com/a0dvGkt.png)
 
 ## Sources
 
