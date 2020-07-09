@@ -5,6 +5,7 @@
 ** main
 */
 
+/* This comment is to experiment the CI pipeline */
 #include "proto/shell.h"
 
 /*
