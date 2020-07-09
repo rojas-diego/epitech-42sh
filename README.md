@@ -34,6 +34,9 @@ The main point of focuses were the following:
 - Job control
 - Subshells `(ls -l)`
 - Control statements `if`, `while`, `repeat`, `else if`, `else`, `foreach`
+- Advanced manipulations and commands `cd ; </etc/hosts od -c | grep xx | wc >> /tmp/z -l ; cd - && echo “OK”`
+- Scripting `./ftest.sh`
+- Variables and state `var i`
 
 In the end, the shell was expected to execute complete scripts like the following.
 ```sh
@@ -52,13 +55,20 @@ repeat 10 echo "10"
 
 ## Features
 
+### CI Workflow
 
+Post project completion, we used [GitLab](https://docs.gitlab.com/) to introduce CI pipelines. They can be seen at the top of the repository.
+The pipeline can be found [here](.gitlab-ci.yml).
+
+It allows us to automatically run our [functional tests](ftest.sh) as well as our [unit tests](Makefile), upon pushing to the GitLab remote.
 
 ## Sources
 
-- [A complete guide to Recusrive Descent Parsing](https://craftinginterpreters.com/scanning.html)
+- [A complete guide to Recusrive Descent Parsing](https://craftinginterpreters.com/scanning.html).
   This resources is the basis for the parsing and execution of every user input in the project.
-- [Bash grammar](https://pubs.opengroup.org/onlinepubs/9699919799.2016edition/utilities/V3_chap02.html#tag_18_10)
+- [Bash grammar](https://pubs.opengroup.org/onlinepubs/9699919799.2016edition/utilities/V3_chap02.html#tag_18_10).
   Consists in documentation regarding the Bash grammar and syntax. This resource was useful in understanding how shells work and was the basis for defining the 42sh   grammar
-- [GNU Documentation](https://www.gnu.org/software/libc/manual/html_node/index.html)
+- [GNU Documentation](https://www.gnu.org/software/libc/manual/html_node/index.html).
   Probably the most comprehensive and extensive documentation source. Though dense, it provides examples and explanations on how to design primary shell features.
+- [Gitlab Docs](https://docs.gitlab.com/ee/ci/pipelines/).
+  Official documentation for CI development inside GitLab.
