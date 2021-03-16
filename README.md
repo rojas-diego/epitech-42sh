@@ -6,13 +6,13 @@
 
 Basic shell based on TCSH.
 
-42sh is the end-of-year project for students at Epitech during their first year. Please, while you can skim through the codebase as much as you want, don't use any of the code directly if this project was given to you. On the other hand you are free to use the `local/42sh.ebnf` file and apply it to your project.
+42sh is the end-of-first-year project for students at Epitech. While you can browse the code as much as you want, be careful about copying code from this repository if this project was assigned to you. On the other hand, you are completely free to apply the 42sh grammar we used to your own project (`local/42sh.ebnf`).
 
-This is a group project, please check the [Contributors](https://github.com/rojasdiegopro/epitech-42sh/graphs/contributors?type=a) section and pay my talented friends a visit.
+This is a group project, check the [Contributors](https://github.com/rojasdiegopro/epitech-42sh/graphs/contributors?type=a) tab and pay my talented friends a visit 😃.
 
 ## Usage
 
-After cloning the repository, build the executable as so
+After cloning the repository, build the executable using `make`
 ```
 $ make
 ```
@@ -23,9 +23,9 @@ $ ./42sh [--debug-mode]
 
 ## Requirements
 
-The objective was to produce a completely functional shell which could execute advanced commands and tasks.
+The goal was to produce a completely functional shell which could execute advanced commands and tasks.
 
-The main point of focuses were the following:
+The main features were:
 
 - Basic command execution `ls`, `cd`, `make`.
 - Argument parsing `ls -l`
@@ -41,6 +41,7 @@ The main point of focuses were the following:
 - Advanced manipulations and commands `cd ; </etc/hosts od -c | grep xx | wc >> /tmp/z -l ; cd - && echo “OK”`
 - Scripting `./ftest.sh`
 - Variables and state `var i`
+- Combination of all of the above
 
 In the end, the shell was expected to execute complete scripts like the following.
 ```sh
@@ -70,16 +71,16 @@ It allows us to automatically run our [functional tests](ftest.sh) as well as ou
 
 ### Recursive descent parsing
 
-We used recursive descent parsing to parse the user input. Our shell first tokenises the input and then parses it into a tree to be executed afterwards.
+We used recursive descent parsing to parse and execute the user input. Our shell first tokenises the input and then parses it into a tree to be executed afterwards.
 Using the `debug-mode` you can visualise the parsing of your input and how it is executed.
 
-For example this command is parsed into a list of tokens as so
+For example, this simple command is tokenised like so:
 ```sh
 > ls | cat -e ; echo "2" 2> file
 Word(ls) Pipe(|) Word(cat) Word(-e) Semicolon(;) Word(echo) Word("2") IO Number(2) Great(>) Word(file) EOF()
 ```
 
-The tree structure is defined in the [42sh Grammar](local/42sh.ebnf).
+The language structure is defined in the [42sh Grammar](local/42sh.ebnf).
 
 ### Job control
 
@@ -99,7 +100,7 @@ Finally it has been made easy to edit your command on multiple line using the `n
 
 ## Sources
 
-- [A complete guide to Recusrive Descent Parsing](https://craftinginterpreters.com/scanning.html).
+- [A complete guide to Recursive Descent Parsing](https://craftinginterpreters.com/scanning.html).
   This resources is the basis for the parsing and execution of every user input in the project.
 - [Bash grammar](https://pubs.opengroup.org/onlinepubs/9699919799.2016edition/utilities/V3_chap02.html#tag_18_10).
   Consists in documentation regarding the Bash grammar and syntax. This resource was useful in understanding how shells work and was the basis for defining the 42sh   grammar
